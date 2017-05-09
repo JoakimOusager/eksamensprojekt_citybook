@@ -1,0 +1,67 @@
+
+#loginBPBackground{
+    -fx-pref-height: 600px;
+    -fx-pref-width: 1200px;
+    -fx-background-image: url("bluredBackground.png");
+    -fx-background-repeat: no-repeat;
+
+}
+
+#loginBox{
+    -fx-background-color: white;
+    -fx-opacity: 75%;
+    -fx-max-height: 200px;
+    -fx-max-width: 300px;
+    -fx-background-radius: 5%;
+}
+
+#labelCreds{
+    -fx-font-size: 16px;
+}
+
+#creds{
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: black;
+    -fx-background-color: white;
+    -fx-font-size: 18px;
+    -fx-max-width: 175px;
+}
+
+#btnlogin{
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+#lock{
+    -fx-background-image: url("padlockblack.png");
+    -fx-background-size: 27px;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#key{
+    -fx-background-image: url("manlogin.png");
+    -fx-background-size: 38px;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 30px;
+    -fx-background-position: center;
+}
+
+#citybook{
+    -fx-background-image: url("Citybookpng.png");
+    -fx-background-size: 200px;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 200px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#head{
+    -fx-font-size: 30px;
+
+}
+#fields{
+    -fx-background-size: 300px;
+}

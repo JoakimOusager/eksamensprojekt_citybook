@@ -4,45 +4,44 @@ package gui;/**
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class main extends Application {
-    //public static BorderPane bpLogin = new BorderPane();
-
 
     @Override
     public void start(Stage primaryStage) {
 
+        //Det første pane som alt bliver tilføjet til
+        BorderPane loginBP = new BorderPane();
+        loginBP.getStylesheets().addAll("gui/assets/login.css");
+        loginBP.setId("loginBPBackground");
 
-        BorderPane login1 = new BorderPane();
-        login1.getStylesheets().addAll("gui/LogIn.css");
-        login1.setId("login1Background");
+        //Borderpane til implementering af Citybook logo
+        BorderPane citybook = new BorderPane();
+        citybook.getStylesheets().addAll("gui/assets/login.css");
+        citybook.setId("citybook");
 
+        //Label til Citybook header
+        Label head = new Label("Citybook");
+        head.getStylesheets().addAll("gui/assets/login.css");
+        head.setId("head");
 
-        GridPane loginBox = new GridPane();
-        loginBox.setVgap(5);
-        loginBox.setHgap(5);
-        loginBox.getStylesheets().addAll("gui/LogIn.css");
+        //Loginboxen som ligger i midten
+        BorderPane loginBox = new BorderPane();
+        loginBox.getStylesheets().addAll("gui/assets/login.css");
         loginBox.setId("loginBox");
 
-        Label head = new Label("Citybook");
-        head.setId("head");
-        head.getStylesheets().addAll("gui/LogIn.css");
 
         Label username = new Label("Username");
         username.setId("labelCreds");
         Label password= new Label("Password");
         password.setId("labelCreds");
 
+        //Textfields til login
         TextField usernamefield = new TextField();
         usernamefield.setPromptText("Username");
         usernamefield.setId("creds");
@@ -50,34 +49,56 @@ public class main extends Application {
         passwordfield.setPromptText("Password");
         passwordfield.setId("creds");
 
+        //Borderpane brugt til at implementere billede af lås
         BorderPane lock = new BorderPane();
-        lock.getStylesheets().addAll("gui/LogIn.css");
+        lock.getStylesheets().addAll("gui/assets/login.css");
         lock.setId("lock");
 
+        //Borderpane brugt til at implementere billede af nøgle
         BorderPane key = new BorderPane();
-        key.getStylesheets().addAll("gui/LogIn.css");
+        key.getStylesheets().addAll("gui/assets/login.css");
         key.setId("key");
 
-        Button btnlogin = new Button("login");
+        Button btnlogin = new Button("Login");
         btnlogin.setId("btnlogin");
 
-        VBox pic = new VBox();
-        pic.getChildren().addAll(lock,passwordfield);
+        CheckBox rememberMe = new CheckBox();
+        rememberMe.setId("rememberMe");
+        rememberMe.getStylesheets().addAll("gui/assets/login.css");
 
 
-        loginBox.add(key,7,20);
-        loginBox.add(lock,7,21);
-        loginBox.add(username,2,20);
-        loginBox.add(password,2,21);
-        loginBox.add(usernamefield,10,20);
-        loginBox.add(passwordfield,10,21);
-        loginBox.add(btnlogin,10,23);
 
-        login1.setCenter(loginBox);
-;
+        Label white = new Label();
 
 
-        Scene s1 = new Scene(login1);
+        GridPane fields = new GridPane();
+        fields.setVgap(1);
+        fields.setHgap(5);
+        fields.setId("fields");
+
+
+
+        //fields.add(citybook,4,10);
+        //fields.add(head,7,10);
+        //fields.add(rememberMe,15,10);
+        fields.add(key,10,1);
+        fields.add(lock,10,2);
+        //fields.add(username,2,1);
+        //fields.add(password,2,2);
+        fields.add(usernamefield,14,1);
+        fields.add(passwordfield,14,2);
+        fields.add(btnlogin,14,10);
+        fields.add(white,15,14);
+
+
+        loginBP.setCenter(loginBox);
+        loginBox.setTop(citybook);
+        loginBox.setCenter(fields);
+        //loginBP.setCenter(citybook);
+
+
+
+        Scene s1 = new Scene(loginBP);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         s1.setFill(Color.TRANSPARENT);
         primaryStage.setScene(s1);
