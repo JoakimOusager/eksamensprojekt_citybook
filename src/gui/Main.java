@@ -1,11 +1,11 @@
 package gui;/**
- * Created by Jarl on 05/05/2017.
+ * Created by Daniel on 11-05-2017.
  */
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class main extends Application {
+public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -14,5 +14,6 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        GUI.login(primaryStage);
     }
 }
