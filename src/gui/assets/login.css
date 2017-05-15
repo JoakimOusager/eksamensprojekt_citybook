@@ -41,7 +41,7 @@
     -fx-background-position: center;
 }
 
-#key{
+#manicon{
     -fx-background-image: url("manlogin.png");
     -fx-background-size: 38px;
     -fx-pref-height: 30px;
@@ -58,10 +58,57 @@
     -fx-background-position: center;
 }
 
-#head{
-    -fx-font-size: 30px;
+#leftside{
+    -fx-border-width: 1 1 1 1;
+    -fx-border-color: black;
+    -fx-border-radius: 5%;
 
 }
+
 #fields{
     -fx-background-size: 300px;
+}
+
+#whiteBackground{
+    -fx-max-width: 1150px;
+    -fx-max-height: 575px;
+    -fx-background-color: white;
+    -fx-opacity: 50%;
+    -fx-background-radius: 10px;
+}
+
+#buttonsleftside{
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-background-color: green;
+}
+
+#logout{
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-background-color: red;
+}
+
+#white{
+    -fx-pref-height: 100px;
+}
+
+#mActive{
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-border-color: deepskyblue;
+    -fx-border-width: 2px;
+    -fx-background-color: green;
+}
+
+#buttonReset{
+    -fx-text-fill: white;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 50px;
+    -fx-background-color: green;
+    -fx-border-color: green;
+    -fx-border-width: 2px;
 }
