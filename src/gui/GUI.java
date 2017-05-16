@@ -27,7 +27,11 @@ public class GUI extends Application {
     static Label white = new Label();
     static BorderPane BPBackground = new BorderPane();
     static BorderPane whiteBackground = new BorderPane();
-    static Scene s2 = new Scene(BPBackground);
+    static BorderPane loginBox = new BorderPane();
+
+    //De 2 forskellige scener
+    static Scene postLogin = new Scene(BPBackground);
+    public static Scene loginScene = new Scene(loginBP);
 
     //Buttons
     static Button aktiviteter = new Button("Aktiviteter");
@@ -36,6 +40,12 @@ public class GUI extends Application {
     static Button admin = new Button("Admin");
     static Button logout = new Button("Log out");
     static Button homepage = new Button("Hjem");
+
+    //Login fields
+    public static PasswordField passwordfield = new PasswordField();
+    public static TextField usernamefield = new TextField();
+    public static String username;
+    public static String password;
 
     @Override
     public void start(Stage primaryStage) {
@@ -54,16 +64,14 @@ public class GUI extends Application {
 
 
             //Loginboxen som ligger i midten
-            BorderPane loginBox = new BorderPane();
+
             loginBox.getStylesheets().addAll("gui/assets/login.css");
             loginBox.setId("loginBox");
 
 
             //Textfields til login
-            TextField usernamefield = new TextField();
             usernamefield.setPromptText("Username");
             usernamefield.setId("creds");
-            PasswordField passwordfield = new PasswordField();
             passwordfield.setPromptText("Password");
             passwordfield.setId("creds");
 
@@ -82,7 +90,9 @@ public class GUI extends Application {
             btnlogin.setId("btnlogin");
 
             btnlogin.setOnAction((ActionEvent event1) -> {
-                backgroundTemplate(primaryStage);
+                loginCreds();
+                sample.Controller.loginCreds(primaryStage);
+                //backgroundTemplate(primaryStage);
             });
 
 
@@ -109,13 +119,26 @@ public class GUI extends Application {
             loginBox.setCenter(fields);
 
 
-            Scene s1 = new Scene(loginBP);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
-            s1.setFill(Color.TRANSPARENT);
-            primaryStage.setScene(s1);
+            loginScene.setFill(Color.TRANSPARENT);
+            primaryStage.setScene(loginScene);
             primaryStage.show();
 
 
+        }
+
+        //Metode brugt til at reset Username og password field
+        public static void wrongCreds(){
+            usernamefield.setPromptText("Wrong username");
+            passwordfield.setPromptText("Wrong password");
+            usernamefield.clear();
+            passwordfield.clear();
+        }
+
+        //Brugt til at hente den data man skriver ind i fieldsene
+        public static void loginCreds(){
+            username = usernamefield.getText();
+            password = passwordfield.getText();
         }
 
         //Metode lavet for at kunne reset borderfarver på knapperne
@@ -141,9 +164,6 @@ public class GUI extends Application {
             admin.getStylesheets().addAll("gui/assets/login.css");
             admin.setId("buttonReset");
 
-            //knap lavet til at logge ud
-            logout.getStylesheets().addAll("gui/assets/login.css");
-            logout.setId("logout");
 
         }
 
@@ -160,7 +180,7 @@ public class GUI extends Application {
         whiteBackground.setId("whiteBackground");
 
         //VBox til alle knapperne der ligger i venstre side
-        leftside.setSpacing(10);
+        leftside.setSpacing(14.5);
         leftside.getStylesheets().addAll("gui/assets/login.css");
         leftside.setId("leftside");
 
@@ -208,17 +228,24 @@ public class GUI extends Application {
         logout.getStylesheets().addAll("gui/assets/login.css");
         logout.setId("logout");
         logout.setOnAction((ActionEvent event5) -> {
-            login(primaryStage);
+
+            primaryStage.setScene(loginScene);
+            primaryStage.centerOnScreen();
+
+            loginBox.setTop(citybook);
+
+            passwordfield.clear();
+            usernamefield.clear();
+            passwordfield.setPromptText("Username");
+            usernamefield.setPromptText("Password");
         });
 
 
         leftside.getChildren().addAll(homepage,aktiviteter, mål, virksomheder, admin, logout);
 
-
+        //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         white.getStylesheets().addAll("gui/assets/login.css");
         white.setId("white");
-
-
         bottom.setSpacing(10);
         bottom.getStylesheets().addAll("gui/assets/login.css");
         bottom.setId("bottom");
@@ -230,11 +257,12 @@ public class GUI extends Application {
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
-        //Scene s2 = new Scene(BPBackground);
-        primaryStage.setScene(s2);
+
+        primaryStage.setScene(postLogin);
         primaryStage.show();
     }
 
+    //postlogin screen
     public static void homepageScreen(Stage primaryStage){
 
         homepage.setId("mActive");
@@ -245,11 +273,12 @@ public class GUI extends Application {
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
-        primaryStage.setScene(s2);
+        primaryStage.setScene(postLogin);
         primaryStage.show();
 
     }
 
+    //Aktivitetsscreen
     public static void aktivitetScreen(Stage primaryStage){
 
         aktiviteter.setId("mActive");
@@ -260,11 +289,12 @@ public class GUI extends Application {
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
-        primaryStage.setScene(s2);
+        primaryStage.setScene(postLogin);
         primaryStage.show();
 
     }
 
+    //Målscreen
     public static void målScreen(Stage primaryStage){
 
 
@@ -276,10 +306,11 @@ public class GUI extends Application {
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
-        primaryStage.setScene(s2);
+        primaryStage.setScene(postLogin);
         primaryStage.show();
     }
 
+    //virksomheds screen
     public static void virksomhedsScreen(Stage primaryStage){
 
         virksomheder.setId("mActive");
@@ -290,11 +321,12 @@ public class GUI extends Application {
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
-        primaryStage.setScene(s2);
+        primaryStage.setScene(postLogin);
         primaryStage.show();
 
     }
 
+    //Adminscreen
     public static void adminScreen(Stage primaryStage){
 
         admin.setId("mActive");
@@ -305,7 +337,7 @@ public class GUI extends Application {
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
-        primaryStage.setScene(s2);
+        primaryStage.setScene(postLogin);
         primaryStage.show();
 
     }
