@@ -84,7 +84,7 @@
     -fx-background-color: green;
 }
 
-#logout{
+#logoutButton{
     -fx-text-fill: white;
     -fx-pref-width: 150px;
     -fx-pref-height: 50px;
