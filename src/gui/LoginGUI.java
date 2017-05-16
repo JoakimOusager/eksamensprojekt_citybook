@@ -25,6 +25,10 @@ import javafx.util.Duration;
 
 public class LoginGUI extends Application {
 
+    static boolean hasRunBefore = false;
+
+    static Scene loginScene;
+
     static BorderPane BPBackground = new BorderPane();
     static BorderPane whiteBackground = new BorderPane();
     static BorderPane citybookLogoPane = new BorderPane();
@@ -35,6 +39,7 @@ public class LoginGUI extends Application {
 
     }
     public static void login(Stage primaryStage){
+
 
         //Hvid background som ligger i midten
 
@@ -84,6 +89,8 @@ public class LoginGUI extends Application {
         Button btnlogin = new Button("Login");
         btnlogin.setId("btnlogin");
 
+
+
         btnlogin.setOnAction((ActionEvent event1) -> {
             FadeTransition ft = new FadeTransition(Duration.millis(1500), passwordfield);
             ft.setFromValue(1.0);
@@ -120,7 +127,17 @@ public class LoginGUI extends Application {
             //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
 
             //GUIController.loginCreds(primaryStage);
+
+            if (!hasRunBefore) {
+                HomeGUI.backgroundTemplate(primaryStage);
+                hasRunBefore = true;
+            } else {
+                primaryStage.setScene(HomeGUI.postLogin);
+            }
+
             //backgroundTemplate(primaryStage);
+
+
         });
 
 
@@ -146,7 +163,8 @@ public class LoginGUI extends Application {
         loginBox.setTop(citybookLogoPane);
         loginBox.setCenter(fields);
 
-        Scene loginScene = new Scene(loginBP);
+       loginScene = new Scene(loginBP);
+
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         loginScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loginScene);

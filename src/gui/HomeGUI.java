@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 public class HomeGUI extends Application {
 
@@ -68,6 +69,10 @@ public class HomeGUI extends Application {
         LoginGUI.whiteBackground.getStylesheets().addAll("gui/assets/login.css");
         LoginGUI.whiteBackground.setId("whiteBackground");
 
+        //Citybook logo - new stylesheet
+        LoginGUI.citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
+        LoginGUI.citybookLogoPane.setId("citybookLogoPane");
+
         //VBox til alle knapperne der ligger i venstre side
         menuVBox.setSpacing(14.5);
         menuVBox.getStylesheets().addAll("gui/assets/login.css");
@@ -117,7 +122,9 @@ public class HomeGUI extends Application {
         logoutButton.getStylesheets().addAll("gui/assets/login.css");
         logoutButton.setId("logoutButton");
         logoutButton.setOnAction((ActionEvent event5) -> {
-            LoginGUI.login(primaryStage);
+           // LoginGUI.BPBackground
+            primaryStage.setScene(LoginGUI.loginScene);
+            primaryStage.centerOnScreen();
 
         /*    primaryStage.setScene(loginScene);
             primaryStage.centerOnScreen();
