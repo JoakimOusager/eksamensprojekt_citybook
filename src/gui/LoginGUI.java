@@ -18,18 +18,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class LoginGUI {
+public class LoginGUI extends Application {
 
     static BorderPane BPBackground = new BorderPane();
+    static BorderPane whiteBackground = new BorderPane();
+    static BorderPane citybookLogoPane = new BorderPane();
     //Login fields
-    public static PasswordField passwordfield = new PasswordField();
-    public static TextField usernamefield = new TextField();
 
+    @Override
+    public void start(Stage primaryStage) {
 
+    }
     public static void login(Stage primaryStage){
 
         //Hvid background som ligger i midten
-        BorderPane whiteBackground = new BorderPane();
+
         whiteBackground.getStylesheets().addAll("gui/assets/login.css");
         whiteBackground.setId("whiteBackground");
 
@@ -54,6 +57,9 @@ public class LoginGUI {
         loginBox.setId("loginBox");
 
         //Textfields til login
+        PasswordField passwordfield = new PasswordField();
+        TextField usernamefield = new TextField();
+
         usernamefield.setPromptText("Username");
         usernamefield.setId("creds");
         passwordfield.setPromptText("Password");
@@ -76,7 +82,7 @@ public class LoginGUI {
         btnlogin.setOnAction((ActionEvent event1) -> {
 
             // if (boolean canLogin = GUIController.login() == true)
-            //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som admin, hvis man har rettigheder til det)
+            //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
 
             //GUIController.loginCreds(primaryStage);
             //backgroundTemplate(primaryStage);

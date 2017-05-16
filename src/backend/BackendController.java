@@ -1,4 +1,4 @@
-package backend;
+/*package backend;
 import dao.UserDAO;
 import gui.GUI;
 import javafx.application.Application;
@@ -44,5 +44,5 @@ public class BackendController extends Application {
         }
 
     }
-
+*/
 

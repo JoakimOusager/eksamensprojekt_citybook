@@ -1,6 +1,6 @@
 package dao;
 
-import gui.GUI;
+import gui.LoginGUI;
 
 import java.sql.*;
 
@@ -16,8 +16,8 @@ public class UserDAO {
     static final String PASS = "liverpool9";
 
 
-    static String sUsername = GUI.username;
-    static String sPassword = GUI.password;
+  /*  static String sUsername = LoginGUI.username;
+    static String sPassword = GUI.password; */
     static int admin = 1;
 
     public static boolean isValidUserCreds(String sUsername, String sPassword, int admin) {
