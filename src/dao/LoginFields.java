@@ -1,4 +1,4 @@
-package backend;
+package dao;
 
 /**
  * Created by Daniel on 15-05-2017.

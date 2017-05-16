@@ -1,5 +1,5 @@
-package sample;
-import backend.DB_login;
+/*package backend;
+import dao.UserDAO;
 import gui.GUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 import static gui.GUI.login;
 
 
-public class Controller extends Application {
+public class BackendController extends Application {
 
     public static boolean isValidUserCreds(String sUsername, String sPassword, int admin){
-        DB_login DB_user_Object = new DB_login();
+        UserDAO DB_user_Object = new UserDAO();
 
         return DB_user_Object.isValidUserCreds(sUsername, sPassword, admin);
     }
@@ -44,5 +44,5 @@ public class Controller extends Application {
         }
 
     }
-
+*/
 

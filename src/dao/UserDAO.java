@@ -1,10 +1,10 @@
-package backend;
+package dao;
 
-import gui.GUI;
+import gui.LoginGUI;
 
 import java.sql.*;
 
-public class DB_login {
+public class UserDAO {
 
     //JDBC Driver name and Database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -16,8 +16,8 @@ public class DB_login {
     static final String PASS = "liverpool9";
 
 
-    static String sUsername = GUI.username;
-    static String sPassword = GUI.password;
+  /*  static String sUsername = LoginGUI.username;
+    static String sPassword = GUI.password; */
     static int admin = 1;
 
     public static boolean isValidUserCreds(String sUsername, String sPassword, int admin) {
