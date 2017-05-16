@@ -86,6 +86,7 @@ public class LoginGUI extends Application {
 
             //GUIController.loginCreds(primaryStage);
             //backgroundTemplate(primaryStage);
+            HomeGUI.backgroundTemplate(primaryStage);
         });
 
 

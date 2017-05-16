@@ -117,6 +117,7 @@ public class HomeGUI extends Application {
         logoutButton.getStylesheets().addAll("gui/assets/login.css");
         logoutButton.setId("logoutButton");
         logoutButton.setOnAction((ActionEvent event5) -> {
+            LoginGUI.BPBackground.
             LoginGUI.login(primaryStage);
 
         /*    primaryStage.setScene(loginScene);
