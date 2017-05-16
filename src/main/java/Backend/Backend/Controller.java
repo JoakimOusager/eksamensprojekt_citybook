@@ -1,5 +1,5 @@
 package sample;
-import backend.DB_login;
+import DAO.DB_login;
 import gui.GUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
