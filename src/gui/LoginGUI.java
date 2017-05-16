@@ -19,41 +19,39 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class LoginGUI {
-    static BorderPane loginBP = new BorderPane();
-    static BorderPane citybookLogoPane = new BorderPane();
-    static HBox bottom = new HBox();
-    static Label white = new Label();
-    public static BorderPane BPBackground = new BorderPane();
-    static BorderPane whiteBackground = new BorderPane();
-    static BorderPane loginBox = new BorderPane();
 
-    static Scene loginScene = new Scene(loginBP);
-
+    static BorderPane BPBackground = new BorderPane();
     //Login fields
     public static PasswordField passwordfield = new PasswordField();
     public static TextField usernamefield = new TextField();
-    public static String username;
-    public static String password;
 
 
     public static void login(Stage primaryStage){
 
-        BPBackground.getStylesheets().addAll("gui/assets/login.css");
-        BPBackground.setId("loginBPBackground");
+        //Hvid background som ligger i midten
+        BorderPane whiteBackground = new BorderPane();
+        whiteBackground.getStylesheets().addAll("gui/assets/login.css");
+        whiteBackground.setId("whiteBackground");
+
 
         //Det første pane som alt bliver tilføjet til
+        BorderPane loginBP = new BorderPane();
         loginBP.getStylesheets().addAll("gui/assets/login.css");
         loginBP.setId("loginBPBackground");
 
+        BPBackground.getStylesheets().addAll("gui/assets/login.css");
+        BPBackground.setId("loginBPBackground");
+
+
         //Borderpane til implementering af Citybook logo
+        BorderPane citybookLogoPane = new BorderPane();
         citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
         citybookLogoPane.setId("citybookLogoPane");
 
         //Loginboxen som ligger i midten
-
+        BorderPane loginBox = new BorderPane();
         loginBox.getStylesheets().addAll("gui/assets/login.css");
         loginBox.setId("loginBox");
-
 
         //Textfields til login
         usernamefield.setPromptText("Username");
@@ -76,6 +74,9 @@ public class LoginGUI {
         btnlogin.setId("btnlogin");
 
         btnlogin.setOnAction((ActionEvent event1) -> {
+
+            // if (boolean canLogin = GUIController.login() == true)
+            //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som admin, hvis man har rettigheder til det)
 
             //GUIController.loginCreds(primaryStage);
             //backgroundTemplate(primaryStage);
@@ -104,7 +105,7 @@ public class LoginGUI {
         loginBox.setTop(citybookLogoPane);
         loginBox.setCenter(fields);
 
-
+        Scene loginScene = new Scene(loginBP);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         loginScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loginScene);

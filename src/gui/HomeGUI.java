@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class HomeGUI extends Application {
+public class HomeGUI {
 
     static VBox leftside = new VBox();
 
@@ -22,12 +22,10 @@ public class HomeGUI extends Application {
     static Button logout = new Button("Log out");
     static Button homepage = new Button("Hjem");
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) {
+
 
     }
 
