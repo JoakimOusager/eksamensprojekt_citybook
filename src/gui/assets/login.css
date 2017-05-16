@@ -49,7 +49,7 @@
     -fx-background-position: center;
 }
 
-#citybook{
+#citybookLogoPane{
     -fx-background-image: url("Citybookpng.png");
     -fx-background-size: 200px;
     -fx-pref-height: 100px;

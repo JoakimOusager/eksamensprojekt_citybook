@@ -1,10 +1,10 @@
-package backend;
+package dao;
 
 import gui.GUI;
 
 import java.sql.*;
 
-public class DB_login {
+public class UserDAO {
 
     //JDBC Driver name and Database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";

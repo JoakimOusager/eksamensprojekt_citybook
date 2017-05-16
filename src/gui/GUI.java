@@ -21,11 +21,12 @@ public class GUI extends Application {
 
     //Gjort static for at kunne genbruge dem uden parameter overførelse
     static BorderPane loginBP = new BorderPane();
-    static BorderPane citybook = new BorderPane();
+    static BorderPane citybookLogoPane = new BorderPane();
+
     static VBox leftside = new VBox();
     static HBox bottom = new HBox();
     static Label white = new Label();
-    static BorderPane BPBackground = new BorderPane();
+    public static BorderPane BPBackground = new BorderPane();
     static BorderPane whiteBackground = new BorderPane();
     static BorderPane loginBox = new BorderPane();
 
@@ -36,7 +37,7 @@ public class GUI extends Application {
     //Buttons
     static Button aktiviteter = new Button("Aktiviteter");
     static Button mål = new Button("Mål");
-    static Button virksomheder = new Button("Virkesomheder");
+    static Button virksomheder = new Button("Virksomheder");
     static Button admin = new Button("Admin");
     static Button logout = new Button("Log out");
     static Button homepage = new Button("Hjem");
@@ -49,7 +50,7 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        login(primaryStage);
+        LoginGUI.login(primaryStage);
     }
 
         public static void login(Stage primaryStage){
@@ -59,9 +60,8 @@ public class GUI extends Application {
             loginBP.setId("loginBPBackground");
 
             //Borderpane til implementering af Citybook logo
-            citybook.getStylesheets().addAll("gui/assets/login.css");
-            citybook.setId("citybook");
-
+            citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
+            citybookLogoPane.setId("citybookLogoPane");
 
             //Loginboxen som ligger i midten
 
@@ -90,8 +90,8 @@ public class GUI extends Application {
             btnlogin.setId("btnlogin");
 
             btnlogin.setOnAction((ActionEvent event1) -> {
-                loginCreds();
-                sample.Controller.loginCreds(primaryStage);
+
+                //GUIController.loginCreds(primaryStage);
                 //backgroundTemplate(primaryStage);
             });
 
@@ -115,7 +115,7 @@ public class GUI extends Application {
 
 
             loginBP.setCenter(loginBox);
-            loginBox.setTop(citybook);
+            loginBox.setTop(citybookLogoPane);
             loginBox.setCenter(fields);
 
 
@@ -232,7 +232,7 @@ public class GUI extends Application {
             primaryStage.setScene(loginScene);
             primaryStage.centerOnScreen();
 
-            loginBox.setTop(citybook);
+            loginBox.setTop(citybookLogoPane);
 
             passwordfield.clear();
             usernamefield.clear();
@@ -253,7 +253,7 @@ public class GUI extends Application {
 
 
         BPBackground.setCenter(whiteBackground);
-        whiteBackground.setTop(citybook);
+        whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
@@ -269,7 +269,7 @@ public class GUI extends Application {
         homepage.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
-        whiteBackground.setTop(citybook);
+        whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
@@ -285,7 +285,7 @@ public class GUI extends Application {
         aktiviteter.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
-        whiteBackground.setTop(citybook);
+        whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
@@ -302,7 +302,7 @@ public class GUI extends Application {
         mål.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
-        whiteBackground.setTop(citybook);
+        whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
@@ -317,7 +317,7 @@ public class GUI extends Application {
         virksomheder.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
-        whiteBackground.setTop(citybook);
+        whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
@@ -333,7 +333,7 @@ public class GUI extends Application {
         admin.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
-        whiteBackground.setTop(citybook);
+        whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(leftside);
         whiteBackground.setBottom(bottom);
 
