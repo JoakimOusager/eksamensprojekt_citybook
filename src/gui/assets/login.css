@@ -8,8 +8,9 @@
 }
 
 #loginBox{
-    -fx-background-color: white;
-    -fx-opacity: 75%;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 5%;
     -fx-max-height: 200px;
     -fx-max-width: 300px;
     -fx-background-radius: 5%;
@@ -21,10 +22,11 @@
 
 #creds{
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: black;
-    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-background-color: transparent;
     -fx-font-size: 18px;
     -fx-max-width: 175px;
+    -fx-text-fill: white;
 }
 
 #btnlogin{
@@ -62,7 +64,6 @@
     -fx-border-width: 1 1 1 1;
     -fx-border-color: black;
     -fx-border-radius: 5%;
-
 }
 
 #fields{
@@ -73,7 +74,6 @@
     -fx-max-width: 1150px;
     -fx-max-height: 575px;
     -fx-background-color: white;
-    -fx-opacity: 50%;
     -fx-background-radius: 10px;
 }
 

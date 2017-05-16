@@ -3,6 +3,8 @@ package gui;
  * Created by jarl on 16/05/2017.
  */
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -10,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -17,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class LoginGUI extends Application {
 
@@ -80,6 +85,36 @@ public class LoginGUI extends Application {
         btnlogin.setId("btnlogin");
 
         btnlogin.setOnAction((ActionEvent event1) -> {
+            FadeTransition ft = new FadeTransition(Duration.millis(1500), passwordfield);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.0);
+            ft.setAutoReverse(true);
+            ft.play();
+
+            FadeTransition ft2 = new FadeTransition(Duration.millis(1500), usernamefield);
+            ft2.setFromValue(1.0);
+            ft2.setToValue(0.0);
+            ft2.setAutoReverse(true);
+            ft2.play();
+
+            FadeTransition ft3 = new FadeTransition(Duration.millis(1500), btnlogin);
+            ft3.setFromValue(1.0);
+            ft3.setToValue(0.0);
+            ft3.setAutoReverse(true);
+            ft3.play();
+
+            FadeTransition ft4 = new FadeTransition(Duration.millis(1500), key);
+            ft4.setFromValue(1.0);
+            ft4.setToValue(0.0);
+            ft4.setAutoReverse(true);
+            ft4.play();
+
+            FadeTransition ft5 = new FadeTransition(Duration.millis(1500), lock);
+            ft5.setFromValue(1.0);
+            ft5.setToValue(0.0);
+            ft5.setAutoReverse(true);
+            ft5.play();
+
 
             // if (boolean canLogin = GUIController.login() == true)
             //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
