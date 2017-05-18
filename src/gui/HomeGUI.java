@@ -2,14 +2,15 @@ package gui;/**
  * Created by jarl on 16/05/2017.
  */
 
+import gui.Tableviews.methods.CompanyMethod;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 public class HomeGUI extends Application {
 
@@ -107,6 +108,7 @@ public class HomeGUI extends Application {
         companiesButton.setId("buttonsleftside");
         companiesButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
+            gui.Tableviews.methods.CompanyMethod.childrenPressed();
             virksomhedsScreen(primaryStage);
         });
 
@@ -216,10 +218,17 @@ public class HomeGUI extends Application {
         companiesButton.setId("mActive");
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
+        Label hello = new Label("HELLO");
+        hello.setId("hello");
+
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(menuVBox);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
+        LoginGUI.whiteBackground.setCenter(CompanyMethod.vboxCompany);
+
+
+
 
         primaryStage.setScene(postLogin);
         primaryStage.show();

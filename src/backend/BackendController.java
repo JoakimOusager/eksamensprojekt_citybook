@@ -1,10 +1,14 @@
 /*package backend;
-import dao.UserDAO;
-import gui.GUI;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-import static gui.GUI.login;
+import dao.LoginFields;
+import dao.UserDAO;
+import entities.User;
+import gui.HomeGUI;
+import gui.LoginGUI;
+import javafx.application.Application;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 public class BackendController extends Application {
@@ -18,14 +22,11 @@ public class BackendController extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        login(primaryStage);
+        loginCreds(primaryStage);
     }
 
 
         public static void loginCreds(Stage primaryStage){
-
-            String username = GUI.username;
-            String password = GUI.password;
 
 
             int admin1 = 0;
@@ -33,16 +34,16 @@ public class BackendController extends Application {
 
 
             if(isValidUserCreds(username,password,admin2)) {
-                GUI.backgroundTemplate(primaryStage);
+                HomeGUI.backgroundTemplate(primaryStage);
             }else if(isValidUserCreds(username,password,admin1)){
-                GUI.backgroundTemplate(primaryStage);
+                HomeGUI.backgroundTemplate(primaryStage);
             }else{
-                GUI.wrongCreds();
+                LoginGUI.wrongCreds(TextField usernamefield, PasswordField passwordfield);
 
             }
 
         }
 
-    }
-*/
+    }*/
+
 

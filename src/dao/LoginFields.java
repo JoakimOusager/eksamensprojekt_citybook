@@ -35,10 +35,7 @@ public class LoginFields {
     }
 
 
-    public LoginFields(String username, String password, boolean admin) {
-        this.username = username;
-        this.password = password;
-        this.admin = admin;
+    public LoginFields() {
     }
 
 }

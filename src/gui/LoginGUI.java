@@ -12,8 +12,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,9 +23,9 @@ public class LoginGUI extends Application {
     static Scene loginScene;
 
     static BorderPane BPBackground = new BorderPane();
-    static BorderPane whiteBackground = new BorderPane();
+    public static BorderPane whiteBackground = new BorderPane();
     static BorderPane citybookLogoPane = new BorderPane();
-    //Login fields
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -62,6 +60,7 @@ public class LoginGUI extends Application {
         loginBox.setId("loginBox");
 
         //Textfields til login
+        //Login fields
         PasswordField passwordfield = new PasswordField();
         TextField usernamefield = new TextField();
 
@@ -136,5 +135,12 @@ public class LoginGUI extends Application {
         primaryStage.show();
 
 
+    }
+
+    public static void wrongCreds(TextField usernamefield, PasswordField passwordfield){
+        usernamefield.setPromptText("Wrong username");
+        passwordfield.setPromptText("Wrong password");
+        usernamefield.clear();
+        passwordfield.clear();
     }
 }
