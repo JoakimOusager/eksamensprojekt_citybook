@@ -3,11 +3,11 @@ package gui;/**
  */
 
 import gui.Tableviews.methods.CompanyMethod;
+import gui.Tableviews.methods.UserMethod;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -108,8 +108,10 @@ public class HomeGUI extends Application {
         companiesButton.setId("buttonsleftside");
         companiesButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            gui.Tableviews.methods.CompanyMethod.childrenPressed();
             virksomhedsScreen(primaryStage);
+            //gui.Tableviews.methods.CompanyMethod.childrenPressed();
+                LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
+
         });
 
         //Knap lavet specifikt til admins
@@ -118,6 +120,15 @@ public class HomeGUI extends Application {
         adminButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
             adminScreen(primaryStage);
+            //gui.Tableviews.methods.UserMethod.childrenPressed();
+            LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
+
+            boolean alreadyExecuted = false;
+
+            if(alreadyExecuted = false) {
+
+                alreadyExecuted = true;
+            }
         });
 
         //knap lavet til at logge ud
@@ -218,17 +229,12 @@ public class HomeGUI extends Application {
         companiesButton.setId("mActive");
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
-        Label hello = new Label("HELLO");
-        hello.setId("hello");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
-        LoginGUI.whiteBackground.setCenter(CompanyMethod.vboxCompany);
-
-
-
+        LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
@@ -240,11 +246,20 @@ public class HomeGUI extends Application {
 
         adminButton.setId("mActive");
         adminButton.getStylesheets().addAll("gui/assets/login.css");
+        boolean alreadyExecuted = false;
+
+        if(alreadyExecuted = false) {
+            gui.Tableviews.methods.UserMethod.childrenPressed();
+            LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
+            alreadyExecuted = true;
+        }
+
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
+
 
         primaryStage.setScene(postLogin);
         primaryStage.show();

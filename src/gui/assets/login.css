@@ -113,7 +113,17 @@
     -fx-border-width: 2px;
 }
 
-#hello{
-    -fx-font-size: 100px;
-    -fx-text-fill: red;
+#hboxCompany{
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#whiteCompany{
+    -fx-pref-width: 100px;
+    -fx-background-repeat: no-repeat;
+}
+
+#tvCompany{
+    -fx-background-color: red;
+    -fx-background-repeat: no-repeat;
 }

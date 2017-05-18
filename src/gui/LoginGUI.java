@@ -93,6 +93,8 @@ public class LoginGUI extends Application {
             //GUIController.loginCreds(primaryStage);
 
             if (!hasRunBefore) {
+                gui.Tableviews.methods.CompanyMethod.childrenPressed();
+                gui.Tableviews.methods.UserMethod.childrenPressed();
                 HomeGUI.backgroundTemplate(primaryStage);
                 hasRunBefore = true;
             } else {
