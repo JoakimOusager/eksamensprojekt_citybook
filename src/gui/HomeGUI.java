@@ -7,11 +7,16 @@ import gui.Tableviews.methods.CompanyMethod;
 import gui.Tableviews.methods.UserMethod;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 public class HomeGUI extends Application {
 
@@ -19,6 +24,8 @@ public class HomeGUI extends Application {
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
+    static Rectangle rectangleEncapsulateMenuButtons = new Rectangle();
+    static StackPane combineMenu = new StackPane();
 
     //Buttons
     static Button activitiesButton = new Button("Aktiviteter");
@@ -27,7 +34,6 @@ public class HomeGUI extends Application {
     static Button adminButton = new Button("Admin");
     static Button logoutButton = new Button("Log out");
     static Button homepageButton = new Button("Hjem");
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -40,24 +46,23 @@ public class HomeGUI extends Application {
 
         //Knap lavet til startsiden
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
-        homepageButton.setId("buttonReset");
+        homepageButton.setId("buttonsleftside");
 
         //Knap lavet til aktivitets siden
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
-        activitiesButton.setId("buttonReset");
+        activitiesButton.setId("buttonsleftside");
 
         //Knap lavet til "goalsButton" siden
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
-        goalsButton.setId("buttonReset");
+        goalsButton.setId("buttonsleftside");
 
         //Knap lavet til virksomheds siden
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
-        companiesButton.setId("buttonReset");
+        companiesButton.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
         adminButton.getStylesheets().addAll("gui/assets/login.css");
-        adminButton.setId("buttonReset");
-
+        adminButton.setId("buttonsleftside");
 
     }
 
@@ -83,14 +88,26 @@ public class HomeGUI extends Application {
         //Knap lavet til startsiden
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
         homepageButton.setId("buttonsleftside");
+        homepageButton.setOnMouseEntered((MouseEvent e) -> {
+            homepageButton.setUnderline(true);
+        });
+        homepageButton.setOnMouseExited((MouseEvent e) -> {
+            homepageButton.setUnderline(false);
+        });
         homepageButton.setOnAction((ActionEvent event1) -> {
-            buttonReset();
+            //buttonReset();
             homepageScreen(primaryStage);
         });
 
         //Knap lavet til aktivitets siden
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
         activitiesButton.setId("buttonsleftside");
+        activitiesButton.setOnMouseEntered((MouseEvent e) -> {
+            activitiesButton.setUnderline(true);
+        });
+        activitiesButton.setOnMouseExited((MouseEvent e) -> {
+            activitiesButton.setUnderline(false);
+        });
         activitiesButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
             aktivitetScreen(primaryStage);
@@ -100,6 +117,12 @@ public class HomeGUI extends Application {
         //Knap lavet til "goalsButton" siden
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
         goalsButton.setId("buttonsleftside");
+        goalsButton.setOnMouseEntered((MouseEvent e) -> {
+            goalsButton.setUnderline(true);
+        });
+        goalsButton.setOnMouseExited((MouseEvent e) -> {
+            goalsButton.setUnderline(false);
+        });
         goalsButton.setOnAction((ActionEvent event2) -> {
             buttonReset();
             målScreen(primaryStage);
@@ -108,20 +131,31 @@ public class HomeGUI extends Application {
         //Knap lavet til virksomheds siden
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
         companiesButton.setId("buttonsleftside");
+        companiesButton.setOnMouseEntered((MouseEvent e) -> {
+            companiesButton.setUnderline(true);
+        });
+        companiesButton.setOnMouseExited((MouseEvent e) -> {
+            companiesButton.setUnderline(false);
+        });
         companiesButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
             virksomhedsScreen(primaryStage);
-                LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
 
+            LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
         });
 
         //Knap lavet specifikt til admins
         adminButton.getStylesheets().addAll("gui/assets/login.css");
         adminButton.setId("buttonsleftside");
+        adminButton.setOnMouseEntered((MouseEvent e) -> {
+            adminButton.setUnderline(true);
+        });
+        adminButton.setOnMouseExited((MouseEvent e) -> {
+            adminButton.setUnderline(false);
+        });
         adminButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
             adminScreen(primaryStage);
-            //gui.Tableviews.methods.UserMethod.childrenPressed();
             LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
 
             boolean alreadyExecuted = false;
@@ -136,7 +170,7 @@ public class HomeGUI extends Application {
         logoutButton.getStylesheets().addAll("gui/assets/login.css");
         logoutButton.setId("logoutButton");
         logoutButton.setOnAction((ActionEvent event5) -> {
-           // LoginGUI.BPBackground
+            // LoginGUI.BPBackground
             primaryStage.setScene(LoginGUI.loginScene);
             primaryStage.centerOnScreen();
 
@@ -151,8 +185,18 @@ public class HomeGUI extends Application {
             usernamefield.setPromptText("Password"); */
         });
 
+        //Setting up the rectangle
+        rectangleEncapsulateMenuButtons.setX(0);
+        rectangleEncapsulateMenuButtons.setY(0);
+        rectangleEncapsulateMenuButtons.setWidth(150);
+        rectangleEncapsulateMenuButtons.setHeight(245);
+        rectangleEncapsulateMenuButtons.setOpacity(0.2);
+        rectangleEncapsulateMenuButtons.setArcHeight(30);
+        rectangleEncapsulateMenuButtons.setArcWidth(30);
 
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton, adminButton, logoutButton);
+        menuVBox.setPadding(new Insets(10, 10, 10, 10));
+        combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -168,7 +212,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(menuVBox);
+        LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -184,7 +228,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(menuVBox);
+        LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI. whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);
@@ -200,7 +244,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(menuVBox);
+        LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);
@@ -217,7 +261,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(menuVBox);
+        LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);
@@ -230,11 +274,11 @@ public class HomeGUI extends Application {
         companiesButton.setId("mActive");
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
-
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(menuVBox);
+        LoginGUI. whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
+
         LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
 
         primaryStage.setScene(postLogin);
@@ -247,6 +291,7 @@ public class HomeGUI extends Application {
 
         adminButton.setId("mActive");
         adminButton.getStylesheets().addAll("gui/assets/login.css");
+
         boolean alreadyExecuted = false;
 
         if(alreadyExecuted = false) {
@@ -255,16 +300,13 @@ public class HomeGUI extends Application {
             alreadyExecuted = true;
         }
 
-
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(menuVBox);
+        LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
-
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
-
     }
 
 }

@@ -3,18 +3,23 @@ package gui;
  * Created by jarl on 16/05/2017.
  */
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class LoginGUI extends Application {
 
@@ -23,9 +28,9 @@ public class LoginGUI extends Application {
     static Scene loginScene;
 
     static BorderPane BPBackground = new BorderPane();
-    public static BorderPane whiteBackground = new BorderPane();
+    static BorderPane whiteBackground = new BorderPane();
     static BorderPane citybookLogoPane = new BorderPane();
-
+    //Login fields
 
     @Override
     public void start(Stage primaryStage) {
@@ -60,7 +65,6 @@ public class LoginGUI extends Application {
         loginBox.setId("loginBox");
 
         //Textfields til login
-        //Login fields
         PasswordField passwordfield = new PasswordField();
         TextField usernamefield = new TextField();
 
@@ -82,11 +86,19 @@ public class LoginGUI extends Application {
         //Login knap
         Button btnlogin = new Button("Login");
         btnlogin.setId("btnlogin");
+        //Remember me checkbox
+        CheckBox checkBoxRememberMe = new CheckBox("Remember Me");
+        checkBoxRememberMe.setId("checkBoxRememberMe");
+        checkBoxRememberMe.getStylesheets().addAll("gui/assets/login.css");
+        //We wanna keep these to close - therefor we are creating a horizontal box.
+        HBox rememberMePlusLogIn = new HBox();
+        rememberMePlusLogIn.setId("rememberMePlusLogIn");
+        rememberMePlusLogIn.getStylesheets().addAll("gui/assets/login.css");
+        rememberMePlusLogIn.getChildren().addAll(checkBoxRememberMe, btnlogin);
 
 
 
         btnlogin.setOnAction((ActionEvent event1) -> {
-
             // if (boolean canLogin = GUIController.login() == true)
             //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
 
@@ -122,7 +134,7 @@ public class LoginGUI extends Application {
         fields.add(lock, 10, 2);
         fields.add(usernamefield, 14, 1);
         fields.add(passwordfield, 14, 2);
-        fields.add(btnlogin, 14, 10);
+        fields.add(rememberMePlusLogIn, 14, 10);
         fields.add(white, 15, 14);
 
 
@@ -130,13 +142,12 @@ public class LoginGUI extends Application {
         loginBox.setTop(citybookLogoPane);
         loginBox.setCenter(fields);
 
-       loginScene = new Scene(loginBP);
+        loginScene = new Scene(loginBP);
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         loginScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loginScene);
         primaryStage.show();
-
 
     }
 
@@ -147,3 +158,4 @@ public class LoginGUI extends Application {
         passwordfield.clear();
     }
 }
+
