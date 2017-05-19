@@ -2,6 +2,7 @@ package gui;/**
  * Created by jarl on 16/05/2017.
  */
 
+import gui.Tableviews.methods.AktivitetMethod;
 import gui.Tableviews.methods.CompanyMethod;
 import gui.Tableviews.methods.UserMethod;
 import javafx.application.Application;
@@ -93,6 +94,7 @@ public class HomeGUI extends Application {
         activitiesButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
             aktivitetScreen(primaryStage);
+            LoginGUI.whiteBackground.setCenter(AktivitetMethod.hboxAktivitet);
         });
 
         //Knap lavet til "goalsButton" siden
