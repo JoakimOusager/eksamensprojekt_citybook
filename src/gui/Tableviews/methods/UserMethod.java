@@ -20,27 +20,29 @@ public class UserMethod {
 
 
     public static TableView<User> tvUser = new TableView<>();
-    public static TextField username, password ,email, startDate, userRank;
+    public static TextField ID, username, password ,email, startDate, userRank;
 
     // Get all the Users
     public static ObservableList<User> getUser() {
         ObservableList<User> user = FXCollections.observableArrayList();
-        user.add(new User("37144266", "Daniel", "Englandsvej", "2300", 1));
-        user.add(new User("Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
-        user.add(new User("Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
-        user.add(new User("Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
+        user.add(new User(1,"37144266", "Daniel", "Englandsvej", "2300", 1));
+        user.add(new User(2, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
+        user.add(new User(3, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
+        user.add(new User(4, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
         return user;
     }
 
     // Add children method
     public static void addChildrenButtonClicked() {
         User user = new User();
+        user.setID(Integer.parseInt(ID.getText()));
         user.setUsername(username.getText());
         user.setPassword(password.getText());
         user.setEmail(email.getText());
         user.setStartDate(startDate.getText());
         user.setUserRank(Integer.parseInt(userRank.getText()));
         tvUser.getItems().add(user);
+        ID.clear();
         username.clear();
         password.clear();
         email.clear();
@@ -57,6 +59,10 @@ public class UserMethod {
     }
     // The button 'Indregistrede børn' has been pressed in the menu.
     public static void childrenPressed() {
+
+        TableColumn<User, String> IDCol = new TableColumn<>("ID");
+        IDCol.setMinWidth(120);
+        IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
 
         TableColumn<User, String> usernameCol = new TableColumn<>("Username");
         usernameCol.setMinWidth(120);
@@ -94,15 +100,19 @@ public class UserMethod {
         //gp3.add(addUserbox2, 1, 0);
 
         // Buttons for adding and deleting Companies
-        Button addUserBtn = new Button("Tilføj firma");
+        Button addUserBtn = new Button("Tilføj Bruger");
         addUserBtn.setId("addEmployeeButton");
         addUserBtn.setOnAction(e2 -> addChildrenButtonClicked());
 
-        Button deleteUserBtn = new Button("Slet firma");
+        Button deleteUserBtn = new Button("Slet Bruger");
         deleteUserBtn.setId("deleteEmployeeButton");
         deleteUserBtn.setOnAction(e2 -> deleteChildrenButtonClicked());
 
         // TextFields for adding a child
+        ID = new TextField();
+        ID.setPromptText("ID");
+        ID.setMaxWidth(100);
+
         username = new TextField();
         username.setPromptText("Username");
         username.setMaxWidth(100);
@@ -128,7 +138,7 @@ public class UserMethod {
 
 
         // adding the TextFields to VBox 1 and VBox 2
-        addUserBox.getChildren().addAll(username, password, email, startDate, userRank,
+        addUserBox.getChildren().addAll(ID, username, password, email, startDate, userRank,
                 addUserBtn, deleteUserBtn);
         Label white = new Label();
         white.setId("whiteCompany");
@@ -141,7 +151,7 @@ public class UserMethod {
         tvUser.setId("tvUser");
         tvUser.getStylesheets().addAll("gui/assets/login.css");
 
-        tvUser.getColumns().addAll(usernameCol, passwordCol, emailCol, startDateCol, userRankCol);
+        tvUser.getColumns().addAll(IDCol, usernameCol, passwordCol, emailCol, startDateCol, userRankCol);
         hboxUser.setId("hboxUser");
         hboxUser.getStylesheets().addAll("gui/assets/login.css");
         hboxUser.getChildren().addAll(addUserbox2, tvUser, gp3);

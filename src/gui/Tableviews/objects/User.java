@@ -2,13 +2,16 @@ package gui.Tableviews.objects;
 
 public class User {
 
+
+    private int ID;
     private String username;
     private String password;
     private String email;
     private String startDate;
     private int userRank;
 
-    public User(String username, String password, String email, String startDate, int userRank) {
+    public User(int ID, String username, String password, String email, String startDate, int userRank) {
+        this.ID = ID;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -17,6 +20,7 @@ public class User {
     }
 
     public User() {
+        this.ID = 0;
         this.username = "";
         this.password = "";
         this.email = "";
@@ -24,7 +28,13 @@ public class User {
         this.userRank = 0;
     }
 
+    public int getID() {
+        return ID;
+    }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public String getUsername() {
         return username;
