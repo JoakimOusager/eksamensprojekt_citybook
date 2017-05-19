@@ -107,6 +107,7 @@ public class LoginGUI extends Application {
             if (!hasRunBefore) {
                 gui.Tableviews.methods.CompanyMethod.childrenPressed();
                 gui.Tableviews.methods.UserMethod.childrenPressed();
+                gui.Tableviews.methods.AktivitetMethod.childrenPressed();
                 HomeGUI.backgroundTemplate(primaryStage);
                 hasRunBefore = true;
             } else {
