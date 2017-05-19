@@ -109,7 +109,6 @@ public class HomeGUI extends Application {
         companiesButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
             virksomhedsScreen(primaryStage);
-            //gui.Tableviews.methods.CompanyMethod.childrenPressed();
                 LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
 
         });

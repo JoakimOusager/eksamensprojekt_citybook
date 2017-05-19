@@ -70,7 +70,7 @@ public class UserMethod {
 
         TableColumn<User, String> passwordCol = new TableColumn<>("Password");
         passwordCol.setMinWidth(120);
-        passwordCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
 
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
         emailCol.setMinWidth(120);
@@ -148,11 +148,11 @@ public class UserMethod {
 
         // Setting the values stores in the getEmployees method to the tableview.
         tvUser.setItems(getUser());
-        tvUser.setId("tvUser");
+        tvUser.setId("tvAktivitet");
         tvUser.getStylesheets().addAll("gui/assets/login.css");
 
         tvUser.getColumns().addAll(IDCol, usernameCol, passwordCol, emailCol, startDateCol, userRankCol);
-        hboxUser.setId("hboxUser");
+        hboxUser.setId("hboxAktivitet");
         hboxUser.getStylesheets().addAll("gui/assets/login.css");
         hboxUser.getChildren().addAll(addUserbox2, tvUser, gp3);
 

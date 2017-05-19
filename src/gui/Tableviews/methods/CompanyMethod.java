@@ -149,11 +149,11 @@ public class CompanyMethod {
 
             // Setting the values stores in the getEmployees method to the tableview.
             tvCompany.setItems(getCompany());
-            tvCompany.setId("tvUser");
+            tvCompany.setId("tvAktivitet");
             tvCompany.getStylesheets().addAll("gui/assets/login.css");
 
             tvCompany.getColumns().addAll(cvrNumberCol, contactPersonCol, adressCol, emailCol, zipCodeCol, phoneNumberCol);
-            hboxCompany.setId("hboxUser");
+            hboxCompany.setId("hboxAktivitet");
             hboxCompany.getStylesheets().addAll("gui/assets/login.css");
             hboxCompany.getChildren().addAll(addCompanyBox2,tvCompany, gp3);
 
