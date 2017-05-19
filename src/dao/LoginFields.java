@@ -1,4 +1,4 @@
-package dao;
+package backend;
 
 /**
  * Created by Daniel on 15-05-2017.
@@ -35,7 +35,10 @@ public class LoginFields {
     }
 
 
-    public LoginFields() {
+    public LoginFields(String username, String password, boolean admin) {
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
     }
 
 }
