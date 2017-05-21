@@ -311,16 +311,28 @@ public class HomeGUI extends Application {
         primaryStage.show();
     }
 
+    /*
+        Metode til at få Google Calendar integreret i vores program.
+        Vi har valgt Google Calendar fremfor selv at lave en kalender da,
+        da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
+    */
+
     public static void CalendarView(Stage primaryStage) {
-
-
         activitiesButton.setId("mActive");
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
 
+        /*
+            Vi opretter et WebView objekt, som indeholder en indebygget browser som er WebEngine.
+            På denne måde er det muligt at render HTML direkte i JavaFX.
+        */
 
         WebView calendar = new WebView();
         WebEngine webEngine = calendar.getEngine();
         webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
+
+        /*
+            Herefter bliver diverse Panes tilføjet til scenen sammen med vores WebView.
+        */
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
