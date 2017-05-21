@@ -76,6 +76,7 @@
     -fx-max-height: 500px;
     -fx-background-color: rgba(255, 255, 255, 0.2);
     -fx-background-radius: 10px;
+    -fx-padding: 20;
 }
 
 #buttonsleftside{
@@ -94,9 +95,7 @@
 }
 
 #white{
-    -fx-min-height: 50;
-    -fx-padding-left: 15%;
-    -fx-padding-right: 15%;
+    -fx-min-height: 20;
 }
 
 #mActive{
