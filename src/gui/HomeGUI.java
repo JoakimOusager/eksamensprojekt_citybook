@@ -116,7 +116,7 @@ public class HomeGUI extends Application {
         */
         activitiesButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
-            CalendarView(primaryStage)
+            CalendarView(primaryStage);
         });
 
         //Knap lavet til "goalsButton" siden
@@ -340,7 +340,6 @@ public class HomeGUI extends Application {
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI. whiteBackground.setLeft(combineMenu);
-        LoginGUI.whiteBackground.setBottom(bottom);
 
         LoginGUI.whiteBackground.setCenter(calendar);
         primaryStage.setScene(postLogin);

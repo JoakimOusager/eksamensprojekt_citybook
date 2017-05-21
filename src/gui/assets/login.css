@@ -94,7 +94,9 @@
 }
 
 #white{
-    -fx-min-height: 250;
+    -fx-min-height: 50;
+    -fx-padding-left: 15%;
+    -fx-padding-right: 15%;
 }
 
 #mActive{
