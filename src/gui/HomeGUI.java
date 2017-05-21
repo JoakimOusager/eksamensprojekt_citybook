@@ -110,11 +110,14 @@ public class HomeGUI extends Application {
         activitiesButton.setOnMouseExited((MouseEvent e) -> {
             activitiesButton.setUnderline(false);
         });
-        /*activitiesButton.setOnAction((ActionEvent event1) -> {
+        /*
+            Vi kalder på metoden CalendarView når knappen "Aktiviteter" bliver trykket på.
+            Knappen bliver også nulstillet, så vores CSS bliver nulstillet.
+        */
+        activitiesButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
-            CalendarView();
-        });*/
-        activitiesButton.setOnAction(event10 -> CalendarView(primaryStage));
+            CalendarView(primaryStage)
+        });
 
         //Knap lavet til "goalsButton" siden
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
@@ -322,7 +325,7 @@ public class HomeGUI extends Application {
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
 
         /*
-            Vi opretter et WebView objekt, som indeholder en indebygget browser som er WebEngine.
+            Vi opretter et WebView objekt, som indeholder en indbygget browser som er WebEngine.
             På denne måde er det muligt at render HTML direkte i JavaFX.
         */
 
