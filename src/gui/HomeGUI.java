@@ -15,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import sun.rmi.runtime.Log;
 
@@ -108,10 +110,13 @@ public class HomeGUI extends Application {
         activitiesButton.setOnMouseExited((MouseEvent e) -> {
             activitiesButton.setUnderline(false);
         });
+        /*
+            Vi kalder på metoden CalendarView når knappen "Aktiviteter" bliver trykket på.
+            Knappen bliver også nulstillet, så vores CSS bliver nulstillet.
+        */
         activitiesButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
-            aktivitetScreen(primaryStage);
-            LoginGUI.whiteBackground.setCenter(AktivitetMethod.hboxAktivitet);
+            CalendarView(primaryStage);
         });
 
         //Knap lavet til "goalsButton" siden
@@ -237,7 +242,7 @@ public class HomeGUI extends Application {
     }
 
     //Aktivitetsscreen
-    public static void aktivitetScreen(Stage primaryStage){
+   /* public static void aktivitetScreen(Stage primaryStage){
 
         activitiesButton.setId("mActive");
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
@@ -250,7 +255,7 @@ public class HomeGUI extends Application {
         primaryStage.setScene(postLogin);
         primaryStage.show();
 
-    }
+    } */
 
     //Målscreen
     public static void målScreen(Stage primaryStage){
@@ -305,6 +310,38 @@ public class HomeGUI extends Application {
         LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
 
+        primaryStage.setScene(postLogin);
+        primaryStage.show();
+    }
+
+    /*
+        Metode til at få Google Calendar integreret i vores program.
+        Vi har valgt Google Calendar fremfor selv at lave en kalender da,
+        da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
+    */
+
+    public static void CalendarView(Stage primaryStage) {
+        activitiesButton.setId("mActive");
+        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
+
+        /*
+            Vi opretter et WebView objekt, som indeholder en indbygget browser som er WebEngine.
+            På denne måde er det muligt at render HTML direkte i JavaFX.
+        */
+
+        WebView calendar = new WebView();
+        WebEngine webEngine = calendar.getEngine();
+        webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
+
+        /*
+            Herefter bliver diverse Panes tilføjet til scenen sammen med vores WebView.
+        */
+
+        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
+        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
+        LoginGUI. whiteBackground.setLeft(combineMenu);
+
+        LoginGUI.whiteBackground.setCenter(calendar);
         primaryStage.setScene(postLogin);
         primaryStage.show();
     }
