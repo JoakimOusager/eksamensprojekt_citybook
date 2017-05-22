@@ -1,6 +1,6 @@
 package gui.Tableviews.methods;
 
-import gui.Tableviews.objects.Aktivitet;
+import entities.Activity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,67 +10,71 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
+/*
 /**
  * Created by Daniel on 17-05-2017.
  */
-public class AktivitetMethod {
+
+/*
+public class ActivityMethod {
 
     public static HBox hboxAktivitet = new HBox();
 
 
-    public static TableView<Aktivitet> tvAktivitet = new TableView<>();
-    public static TextField comment,virksomhed, contact, date;
+    public static TableView<Activity> tvAktivitet = new TableView<>();
+    public static TextField comment, company, contact, time;
 
     // Get all the Users
-    public static ObservableList<Aktivitet> getAktivitet() {
-        ObservableList<Aktivitet> aktivitet = FXCollections.observableArrayList();
-        aktivitet.add(new Aktivitet("Daniel", "Englandsvej", "2300", "2109"));
-        aktivitet.add(new Aktivitet("Jarl", "Eriksen", "Blå", "Sanne Eriksen"));
-        aktivitet.add(new Aktivitet("Jarl", "Eriksen", "Blå", "Sanne Eriksen"));
-        aktivitet.add(new Aktivitet("Jarl", "Eriksen", "Blå", "Sanne Eriksen"));
+    public static ObservableList<Activity> getAktivitet() {
+        ObservableList<Activity> aktivitet = FXCollections.observableArrayList();
+        aktivitet.add(new Activity("Daniel", "Englandsvej", "2300", "2109"));
+        aktivitet.add(new Activity("Jarl", "Eriksen", "Blå", "Sanne Eriksen"));
+        aktivitet.add(new Activity"Jarl", "Eriksen", "Blå", "Sanne Eriksen"));
+        aktivitet.add(new Activity("Jarl", "Eriksen", "Blå", "Sanne Eriksen"));
+
+
+
         return aktivitet;
     }
 
-    // Add children method
-    public static void addChildrenButtonClicked() {
-        Aktivitet aktivitet = new Aktivitet();
-        aktivitet.setComment(comment.getText());
-        aktivitet.setVirksomhed(virksomhed.getText());
-        aktivitet.setContact(contact.getText());
-        aktivitet.setDate(date.getText());
+    // Add company method
+    public static void addCompany() {
+        Activity aktivitet = new Activity();
+        aktivitet.setComments(comment.getText());
+        aktivitet.setCompany(company.getText());
+        aktivitet.setTime(time.getText());
         tvAktivitet.getItems().add(aktivitet);
         comment.clear();
-        virksomhed.clear();
+        company.clear();
         contact.clear();
-        date.clear();
+        time.clear();
     }
     // Delete company method
-    public static void deleteChildrenButtonClicked() {
-        ObservableList<Aktivitet> aktivitetSelected,allAktivitet;
+    public static void deleteCompany() {
+        ObservableList<Activity> aktivitetSelected,allAktivitet;
         allAktivitet = tvAktivitet.getItems();
         aktivitetSelected = tvAktivitet.getSelectionModel().getSelectedItems();
 
         aktivitetSelected.forEach(allAktivitet::remove);
     }
     // The button 'Indregistrede børn' has been pressed in the menu.
-    public static void childrenPressed() {
+    public static void companyTableviewStart() {
 
-        TableColumn<Aktivitet, String> commentCol = new TableColumn<>("Kommentar");
+        TableColumn<Activity, String> commentCol = new TableColumn<>("Kommentar");
         commentCol.setMinWidth(180);
         commentCol.setCellValueFactory(new PropertyValueFactory<>("comment"));
 
-        TableColumn<Aktivitet, String> virksomhedCol = new TableColumn<>("Virksomhed");
+        TableColumn<Activity, String> virksomhedCol = new TableColumn<>("Virksomhed");
         virksomhedCol.setMinWidth(180);
-        virksomhedCol.setCellValueFactory(new PropertyValueFactory<>("virksomhed"));
+        virksomhedCol.setCellValueFactory(new PropertyValueFactory<>("company"));
 
         TableColumn<Aktivitet, String> contactCol = new TableColumn<>("Kontakt");
         contactCol.setMinWidth(180);
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
-        TableColumn<Aktivitet, String> dateCol = new TableColumn<>("Dato");
+        TableColumn<Activity, String> dateCol = new TableColumn<>("Dato");
         dateCol.setMinWidth(180);
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("time"));
 
 
         // GridPane for the whole adding and deleting employee area
@@ -90,34 +94,34 @@ public class AktivitetMethod {
         // Buttons for adding and deleting Companies
         Button addAktivitetBtn = new Button("Tilføj Aktivitet");
         addAktivitetBtn.setId("addEmployeeButton");
-        addAktivitetBtn.setOnAction(e2 -> addChildrenButtonClicked());
+        addAktivitetBtn.setOnAction(e2 -> addCompany());
 
         Button deleteAktivitetBtn = new Button("Slet aktivitet");
         deleteAktivitetBtn.setId("deleteEmployeeButton");
-        deleteAktivitetBtn.setOnAction(e2 -> deleteChildrenButtonClicked());
+        deleteAktivitetBtn.setOnAction(e2 -> deleteCompany());
 
         // TextFields for adding a child
         comment = new TextField();
         comment.setPromptText("Kommentar");
         comment.setMaxWidth(100);
 
-        virksomhed = new TextField();
-        virksomhed.setPromptText("Virksomhed");
-        virksomhed.setMaxWidth(100);
+        company = new TextField();
+        company.setPromptText("Virksomhed");
+        company.setMaxWidth(100);
 
         contact = new TextField();
         contact.setPromptText("Kontakt");
         contact.setMaxWidth(100);
 
-        date = new TextField();
-        date.setPromptText("Dato");
-        date.setMaxWidth(100);
+        time = new TextField();
+        time.setPromptText("Dato");
+        time.setMaxWidth(100);
 
           tvAktivitet.setEditable(true);
 
 
         // adding the TextFields to VBox 1 and VBox 2
-        addAktivitetBox.getChildren().addAll(comment, virksomhed, contact, date, addAktivitetBtn, deleteAktivitetBtn);
+        addAktivitetBox.getChildren().addAll(comment, company, contact, time, addAktivitetBtn, deleteAktivitetBtn);
         Label white = new Label();
         white.setId("whiteCompany");
         white.getStylesheets().addAll("gui/assets/login.css");
@@ -137,5 +141,7 @@ public class AktivitetMethod {
     }
 
 }
+
+*/
 
 

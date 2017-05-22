@@ -2,7 +2,7 @@ package gui;/**
  * Created by jarl on 16/05/2017.
  */
 
-import gui.Tableviews.methods.AktivitetMethod;
+//import gui.Tableviews.methods.ActivityMethod;
 import gui.Tableviews.methods.CompanyMethod;
 import gui.Tableviews.methods.UserMethod;
 import javafx.application.Application;
@@ -18,7 +18,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 public class HomeGUI extends Application {
 
@@ -116,7 +115,12 @@ public class HomeGUI extends Application {
         */
         activitiesButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
+
             CalendarView(primaryStage);
+
+   /*         aktivitetScreen(primaryStage);
+            LoginGUI.whiteBackground.setCenter(ActivityMethod.hboxAktivitet); */
+
         });
 
         //Knap lavet til "goalsButton" siden
@@ -300,7 +304,7 @@ public class HomeGUI extends Application {
         boolean alreadyExecuted = false;
 
         if(alreadyExecuted = false) {
-            gui.Tableviews.methods.UserMethod.childrenPressed();
+            gui.Tableviews.methods.UserMethod.userTableviewStart();
             LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
             alreadyExecuted = true;
         }

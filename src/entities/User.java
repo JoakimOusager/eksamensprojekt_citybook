@@ -1,18 +1,35 @@
 package entities;
 
+import javafx.scene.input.DataFormat;
+
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class User {
 
     private String username;
     private String password;
     private String email;
-    private Date startDate;
-    private int userRank;
+    private Timestamp startDate;
+    private int rank;
 
+    public User() {
+    }
+
+    // Constructoren som vi bruger til at tjekke login med
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    // Constructoren som databasen bruger, når den returnerer en bruger. Der er ingen grund til at have password med
+    // Men de andre fields kan bruges, ex. til at skrive "Hej Joakim" på loginskærmen, hvis det er Joakim som logger ind
+    public User(String username, String email, int userRank) {
+        this.username = username;
+        this.email = email;
+        this.rank = userRank;
     }
 
     public String getUsername() {
@@ -39,20 +56,21 @@ public class User {
         this.email = email;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public int getUserRank() {
-        return userRank;
+
+    public int getRank() {
+        return rank;
     }
 
-    public void setUserRank(int userRank) {
-        this.userRank = userRank;
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
 

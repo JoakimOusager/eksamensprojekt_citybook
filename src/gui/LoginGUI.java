@@ -3,23 +3,17 @@ package gui;
  * Created by jarl on 16/05/2017.
  */
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
+//import gui.Tableviews.methods.ActivityMethod;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 public class LoginGUI extends Application {
 
@@ -105,9 +99,9 @@ public class LoginGUI extends Application {
             //GUIController.loginCreds(primaryStage);
 
             if (!hasRunBefore) {
-                gui.Tableviews.methods.CompanyMethod.childrenPressed();
-                gui.Tableviews.methods.UserMethod.childrenPressed();
-                gui.Tableviews.methods.AktivitetMethod.childrenPressed();
+                gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
+                gui.Tableviews.methods.UserMethod.userTableviewStart();
+              //  ActivityMethod.companyTableviewStart();
                 HomeGUI.backgroundTemplate(primaryStage);
                 hasRunBefore = true;
             } else {
