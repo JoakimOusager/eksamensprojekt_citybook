@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Created by Daniel on 22-05-2017.
  */
 public class CheckBoxDAO {
-    static String fileName = "C:\\Users\\Daniel\\Desktop\\Citybookproject\\src\\dao\\usernameSave";
+    static String fileName = "src/dao/usernameSave";
 
     public static String getSavedUsername()throws Exception{
 

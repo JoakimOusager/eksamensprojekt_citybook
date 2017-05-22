@@ -79,9 +79,6 @@ public class DB_login {
     }
 
 
-<<<<<<< HEAD:src/DAO/DB_login.java
 }*/
-=======
-}
-*/
->>>>>>> master:src/DAO/LoginDAO.java
+
+
