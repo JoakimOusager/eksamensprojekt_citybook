@@ -3,6 +3,7 @@ package gui;
  * Created by jarl on 16/05/2017.
  */
 
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
 
 public class LoginGUI extends Application {
 
@@ -140,9 +142,9 @@ public class LoginGUI extends Application {
             }
 
             if (!hasRunBefore) {
-                gui.Tableviews.methods.CompanyMethod.childrenPressed();
-                gui.Tableviews.methods.UserMethod.childrenPressed();
-                gui.Tableviews.methods.AktivitetMethod.childrenPressed();
+                gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
+                gui.Tableviews.methods.UserMethod.userTableviewStart();
+              //  ActivityMethod.companyTableviewStart();
                 HomeGUI.backgroundTemplate(primaryStage);
                 hasRunBefore = true;
             } else {

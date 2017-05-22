@@ -1,6 +1,6 @@
 package dao;
 
-import gui.LoginGUI;
+import entities.User;
 
 import java.sql.*;
 
@@ -16,15 +16,12 @@ public class UserDAO {
     static final String PASS = "liverpool9";
 
 
-  /*  static String sUsername = LoginGUI.username;
-    static String sPassword = GUI.password; */
-    static int admin = 1;
 
-    public static boolean isValidUserCreds(String sUsername, String sPassword, int admin) {
-        boolean isValidUser = false;
+    public static User login(User user) {
 
         Connection conn = null;
         Statement stmt = null;
+        User foundUser;
 
 
         try {
@@ -39,15 +36,16 @@ public class UserDAO {
             String sql;
 
             sql = "SELECT * FROM login WHERE username = \"" +
-                    sUsername + "\" AND password = \"" + sPassword + "\" AND admin = \"" + admin + "\"";
-          //sql = "SELECT * FROM login";
-
-
+                    user.getUsername() + "\" AND password = \"" + user.getPassword()
+                    + "\" AND admin = \"" + user.getRank() + "\"";
             ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
-            while (rs.next()) {
-                isValidUser = true;
+            if (rs.next()) {
+                String userName = rs.getString("username");
+                String email = rs.getString("email");
+                String rank = rs.getString("rank");
+                foundUser = new User();
             }
 
             //STEP 6: Clean-up environment
@@ -75,7 +73,7 @@ public class UserDAO {
             }
 
         }
-        return isValidUser;
+        return user;
     }
 
 
