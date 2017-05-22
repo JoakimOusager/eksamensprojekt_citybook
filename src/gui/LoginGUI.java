@@ -3,23 +3,18 @@ package gui;
  * Created by jarl on 16/05/2017.
  */
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class LoginGUI extends Application {
 
@@ -30,14 +25,30 @@ public class LoginGUI extends Application {
     static BorderPane BPBackground = new BorderPane();
     static BorderPane whiteBackground = new BorderPane();
     static BorderPane citybookLogoPane = new BorderPane();
-    //Login fields
 
+    //Login fields
+    public static TextField usernamefield = new TextField();
+
+    public static boolean saveMe = false;
     @Override
     public void start(Stage primaryStage) {
 
     }
     public static void login(Stage primaryStage){
 
+        try {
+            LoginGUI.usernamefield.setText(dao.CheckBoxDAO.getSavedUsername());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try{
+            dao.CheckBoxDAO.setSavedUsername();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //Hvid background som ligger i midten
 
@@ -66,7 +77,10 @@ public class LoginGUI extends Application {
 
         //Textfields til login
         PasswordField passwordfield = new PasswordField();
-        TextField usernamefield = new TextField();
+
+
+        //TextField usernamefield = new TextField();
+
 
         usernamefield.setPromptText("Username");
         usernamefield.setId("creds");
@@ -86,10 +100,24 @@ public class LoginGUI extends Application {
         //Login knap
         Button btnlogin = new Button("Login");
         btnlogin.setId("btnlogin");
+
+
         //Remember me checkbox
         CheckBox checkBoxRememberMe = new CheckBox("Remember Me");
         checkBoxRememberMe.setId("checkBoxRememberMe");
         checkBoxRememberMe.getStylesheets().addAll("gui/assets/login.css");
+        checkBoxRememberMe.setOnAction(event -> {
+            saveMe = true;
+            try{
+                dao.CheckBoxDAO.setSavedUsername();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+
+
+
         //We wanna keep these to close - therefor we are creating a horizontal box.
         HBox rememberMePlusLogIn = new HBox();
         rememberMePlusLogIn.setId("rememberMePlusLogIn");
@@ -103,6 +131,13 @@ public class LoginGUI extends Application {
             //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
 
             //GUIController.loginCreds(primaryStage);
+
+
+            try{
+                dao.CheckBoxDAO.setSavedUsername();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             if (!hasRunBefore) {
                 gui.Tableviews.methods.CompanyMethod.childrenPressed();

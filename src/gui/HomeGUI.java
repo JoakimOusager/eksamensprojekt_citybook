@@ -16,7 +16,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 public class HomeGUI extends Application {
 
@@ -174,22 +173,13 @@ public class HomeGUI extends Application {
             primaryStage.setScene(LoginGUI.loginScene);
             primaryStage.centerOnScreen();
 
-        /*    primaryStage.setScene(loginScene);
-            primaryStage.centerOnScreen();
-
-            loginBox.setTop(citybookLogoPane);
-
-            passwordfield.clear();
-            usernamefield.clear();
-            passwordfield.setPromptText("Username");
-            usernamefield.setPromptText("Password"); */
         });
 
         //Setting up the rectangle
         rectangleEncapsulateMenuButtons.setX(0);
         rectangleEncapsulateMenuButtons.setY(0);
         rectangleEncapsulateMenuButtons.setWidth(150);
-        rectangleEncapsulateMenuButtons.setHeight(245);
+        rectangleEncapsulateMenuButtons.setHeight(300);
         rectangleEncapsulateMenuButtons.setOpacity(0.2);
         rectangleEncapsulateMenuButtons.setArcHeight(30);
         rectangleEncapsulateMenuButtons.setArcWidth(30);

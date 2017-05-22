@@ -73,7 +73,7 @@
 
 #whiteBackground{
     -fx-max-width: 1150px;
-    -fx-max-height: 575px;
+    -fx-max-height: 100px;
     -fx-background-color: rgba(255, 255, 255, 0.2);
     -fx-background-radius: 10px;
 }
@@ -118,4 +118,18 @@
     -fx-padding: 0 11 0 0;
     -fx-text-fill: white;
     -fx-max-height: 25;
+}
+
+#deleteEmployeeButton{
+    -fx-background-color: red;
+    -fx-pref-width: 100px;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#addEmployeeButton{
+    -fx-background-color: green;
+    -fx-pref-width: 100px;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
 }
