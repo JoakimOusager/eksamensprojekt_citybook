@@ -120,3 +120,17 @@
     -fx-text-fill: white;
     -fx-max-height: 25;
 }
+
+#deleteEmployeeButton{
+    -fx-background-color: red;
+    -fx-pref-width: 100px;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#addEmployeeButton{
+    -fx-background-color: green;
+    -fx-pref-width: 100px;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
