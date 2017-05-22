@@ -6,14 +6,15 @@ import java.sql.*;
 
 public class UserDAO {
 
+
     //JDBC Driver name and Database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/citybook?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/cbcrm?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
     //Database credentials
-    static final String USER = "citybook";
-    static final String PASS = "liverpool9";
+    static final String USER = "root";
+    static final String PASS = "root";
 
 
 
@@ -21,7 +22,7 @@ public class UserDAO {
 
         Connection conn = null;
         Statement stmt = null;
-        User foundUser;
+        User foundUser = null;
 
 
         try {
@@ -35,17 +36,17 @@ public class UserDAO {
             stmt = conn.createStatement();
             String sql;
 
-            sql = "SELECT * FROM login WHERE username = \"" +
+            sql = "SELECT * FROM user WHERE username = \"" +
                     user.getUsername() + "\" AND password = \"" + user.getPassword()
-                    + "\" AND admin = \"" + user.getRank() + "\"";
+                    +  "\"";
             ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
             if (rs.next()) {
-                String userName = rs.getString("username");
+                String username = rs.getString("username");
                 String email = rs.getString("email");
-                String rank = rs.getString("rank");
-                foundUser = new User();
+                int rank = rs.getInt("rank");
+                foundUser = new User(username, email, rank);
             }
 
             //STEP 6: Clean-up environment
@@ -73,7 +74,7 @@ public class UserDAO {
             }
 
         }
-        return user;
+        return foundUser;
     }
 
 

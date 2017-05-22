@@ -4,6 +4,8 @@ package gui;
  */
 
 
+import dao.UserDAO;
+import entities.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -16,6 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
+import static gui.HomeGUI.adminButton;
 
 
 public class LoginGUI extends Application {
@@ -129,28 +133,36 @@ public class LoginGUI extends Application {
 
 
         btnlogin.setOnAction((ActionEvent event1) -> {
-            // if (boolean canLogin = GUIController.login() == true)
-            //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
+            // Hvis brugeren ikke er admin, bliver adminknappen usynlig
 
-            //GUIController.loginCreds(primaryStage);
+            User foundUser = UserDAO.login(new User(usernamefield.getText(), passwordfield.getText()));
 
-
-            try{
-                dao.CheckBoxDAO.setSavedUsername();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (foundUser.getRank() == 0) {
+                adminButton.setVisible(false);
             }
 
-            if (!hasRunBefore) {
-                gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
-                gui.Tableviews.methods.UserMethod.userTableviewStart();
-              //  ActivityMethod.companyTableviewStart();
-                HomeGUI.backgroundTemplate(primaryStage);
-                hasRunBefore = true;
+            if (foundUser != null) {
+
+
+                try {
+                    dao.CheckBoxDAO.setSavedUsername();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (!hasRunBefore) {
+                    gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
+                    gui.Tableviews.methods.UserMethod.userTableviewStart();
+                    //  ActivityMethod.companyTableviewStart();
+                    HomeGUI.backgroundTemplate(primaryStage, foundUser);
+                    HomeGUI.homepageScreen(primaryStage);
+                    hasRunBefore = true;
+                } else {
+                    primaryStage.setScene(HomeGUI.postLogin);
+                }
             } else {
-                primaryStage.setScene(HomeGUI.postLogin);
+                wrongCreds(usernamefield, passwordfield);
             }
-
             //backgroundTemplate(primaryStage);
 
 
