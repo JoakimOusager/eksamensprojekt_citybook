@@ -8,6 +8,13 @@ public class Activity {
     private Date time;
     private String comments;
 
+    public Activity(User user, Company company, Date time, String comments) {
+        this.user = user;
+        this.company = company;
+        this.time = time;
+        this.comments = comments;
+    }
+
     public User getUser() {
         return user;
     }

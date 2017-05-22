@@ -1,6 +1,6 @@
 package gui.Tableviews.methods;
 
-import gui.Tableviews.objects.Company;
+import entities.Company;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -26,15 +26,15 @@ public class CompanyMethod {
         // Get all the children
         public static ObservableList<Company> getCompany() {
             ObservableList<Company> company = FXCollections.observableArrayList();
-            company.add(new Company("37144266", "Daniel", "Englandsvej", "2300", "daniel@boss.dk", "230000"));
+           /* company.add(new Company("37144266", "Daniel", "Englandsvej", "2300", "daniel@boss.dk", "230000"));
             company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));
             company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));
-            company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));
+            company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));*/
             return company;
         }
 
         // Add children method
-        public static void addChildrenButtonClicked() {
+        public static void addCompany() {
             Company company = new Company();
             company.setCvrNumber(cvrNumber.getText());
             company.setContactPerson(contactPerson.getText());
@@ -51,7 +51,7 @@ public class CompanyMethod {
             phoneNumber.clear();
         }
         // Delete company method
-        public static void deleteChildrenButtonClicked() {
+        public static void deleteCompany() {
             ObservableList<Company> companySelected, allCompanies;
             allCompanies = tvCompany.getItems();
             companySelected = tvCompany.getSelectionModel().getSelectedItems();
@@ -59,9 +59,7 @@ public class CompanyMethod {
             companySelected.forEach(allCompanies::remove);
         }
         // The button 'Indregistrede børn' has been pressed in the menu.
-        public static void childrenPressed() {
-
-
+        public static void companyTableviewStart() {
 
             TableColumn<Company, String> cvrNumberCol = new TableColumn<>("CVR-nummer");
             cvrNumberCol.setMinWidth(120);
@@ -104,11 +102,11 @@ public class CompanyMethod {
             // Buttons for adding and deleting Companies
             Button addCompanyBtn = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
-            addCompanyBtn.setOnAction(e2 -> addChildrenButtonClicked());
+            addCompanyBtn.setOnAction(e2 -> addCompany());
 
             Button deleteCompanyBtn = new Button("Slet firma");
             deleteCompanyBtn.setId("deleteEmployeeButton");
-            deleteCompanyBtn.setOnAction(e2 -> deleteChildrenButtonClicked());
+            deleteCompanyBtn.setOnAction(e2 -> deleteCompany());
 
             // TextFields for adding a child
             cvrNumber = new TextField();
