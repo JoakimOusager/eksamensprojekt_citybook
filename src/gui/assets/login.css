@@ -167,3 +167,25 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+#gridPaneGoals {
+    -fx-hgap: 30;
+    -fx-vgap: 30;
+}
+
+#bpGoalsScreen {
+    -fx-pref-height: 200;
+    -fx-pref-width: 500;
+    -fx-min-height: 100;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+}
+
+#labelMessage {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+#labelCount {
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}

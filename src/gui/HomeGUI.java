@@ -11,14 +11,12 @@ import gui.Tableviews.methods.UserMethod;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -334,6 +332,66 @@ public class HomeGUI extends Application {
     //Målscreen
     public static void målScreen(Stage primaryStage){
 
+        //total omsætning
+        BorderPane bpRevenueTotal = new BorderPane();
+        bpRevenueTotal.setId("bpGoalsScreen");
+        Label labelRevenueTotalMessage = new Label("Totalomsætning:");
+        labelRevenueTotalMessage.setId("labelMessage");
+        labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
+        Label labelRevenueTotalCount = new Label("test");
+        labelRevenueTotalCount.setId("labelCount");
+        //her skal der kaldes til en metode, der finder den totale omsætning frem.
+        bpRevenueTotal.setTop(labelRevenueTotalMessage);
+        bpRevenueTotal.setAlignment(labelRevenueTotalMessage, Pos.TOP_CENTER);
+        bpRevenueTotal.setCenter(labelRevenueTotalCount);
+
+
+
+        //højest omsætning på en måned
+        BorderPane bpHighestRevenueMonth = new BorderPane();
+        bpHighestRevenueMonth.setId("bpGoalsScreen");
+        Label labelHighestRevenueMonthMessage = new Label("I den bedste måned tjente du:");
+        labelHighestRevenueMonthMessage.setId("labelMessage");
+        Label labelHighestRevenueMonthCount = new Label("test");
+        labelHighestRevenueMonthCount.setId("labelCount");
+        //her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
+        bpHighestRevenueMonth.setTop(labelHighestRevenueMonthMessage);
+        bpHighestRevenueMonth.setAlignment(labelHighestRevenueMonthMessage, Pos.TOP_CENTER);
+        bpHighestRevenueMonth.setCenter(labelHighestRevenueMonthCount);
+
+        //dagens mål
+        BorderPane bpTodaysGoal = new BorderPane();
+        bpTodaysGoal.setId("bpGoalsScreen");
+        Label labelTodaysGoalMessage = new Label("Dagens mål:");
+        labelTodaysGoalMessage.setId("labelMessage");
+        Label labelTodaysGoalNumber = new Label("test");
+        labelTodaysGoalNumber.setId("labelCount");
+        //her skal der kaldes til en metode, der finder top fem frem.
+        bpTodaysGoal.setTop(labelTodaysGoalMessage);
+        bpTodaysGoal.setAlignment(labelTodaysGoalMessage, Pos.TOP_CENTER);
+        bpTodaysGoal.setCenter(labelTodaysGoalNumber);
+
+
+        //årets resultat for sælgeren
+        BorderPane bpRevenueThisYear = new BorderPane();
+        bpRevenueThisYear.setId("bpGoalsScreen");
+        Label labelRevenueThisYearMessage = new Label("Årets resultat:");
+        labelRevenueThisYearMessage.setId("labelMessage");
+        Label labelRevenueThisYearCount = new Label("test");
+        labelRevenueThisYearCount.setId("labelCount");
+        //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
+        bpRevenueThisYear.setTop(labelRevenueThisYearMessage);
+        bpRevenueThisYear.setAlignment(labelRevenueThisYearMessage, Pos.TOP_CENTER);
+        bpRevenueThisYear.setCenter(labelRevenueThisYearCount);
+
+        //nu skal de forskellige views samles
+        GridPane gridPaneGoals = new GridPane();
+        gridPaneGoals.setId("gridPaneGoals");
+        gridPaneGoals.setPadding(new Insets(0, 30, 10, 30));
+        gridPaneGoals.add(bpRevenueTotal, 0, 0);
+        gridPaneGoals.add(bpTodaysGoal, 0, 1);
+        gridPaneGoals.add(bpHighestRevenueMonth, 1, 0);
+        gridPaneGoals.add(bpRevenueThisYear, 1, 1);
 
         goalsButton.setId("mActive");
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
@@ -342,6 +400,7 @@ public class HomeGUI extends Application {
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
+        LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
