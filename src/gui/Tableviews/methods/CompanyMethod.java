@@ -26,7 +26,10 @@ public class CompanyMethod {
 
         // Get all the children
         public static ObservableList<Company> getCompany() {
+
             ObservableList<Company> company = FXCollections.observableArrayList(LogicController.getCompanies());
+
+            System.out.println(company);
             return company;
         }
 
@@ -45,14 +48,21 @@ public class CompanyMethod {
             email.clear();
             zipCode.clear();
             phoneNumber.clear();
+
+            LogicController.addCompany(company);
         }
         // Delete company method
         public static void deleteCompany() {
             ObservableList<Company> companySelected, allCompanies;
             allCompanies = tvCompany.getItems();
             companySelected = tvCompany.getSelectionModel().getSelectedItems();
+            for (Company com : companySelected) {
+                System.out.println("skrrt");
+                LogicController.deleteCompany(com);
+            }
 
             companySelected.forEach(allCompanies::remove);
+
         }
         // The button 'Indregistrede børn' has been pressed in the menu.
         public static void companyTableviewStart() {

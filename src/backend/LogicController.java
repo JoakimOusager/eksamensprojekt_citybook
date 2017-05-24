@@ -34,8 +34,9 @@ public class LogicController {
             e.printStackTrace();
         }
     }
+
     public static ArrayList<Company> getCompanies() {
-        ArrayList<Company> list = new ArrayList<Company>(CompanyDAO.getCompanies());
+        ArrayList<Company> list = new ArrayList<>(CompanyDAO.getCompanies());
         return list;
     }
 
@@ -44,10 +45,15 @@ public class LogicController {
 
     }
 
+    public static void addCompany(Company company) {
+        CompanyDAO.insertCompany(company);
 
+    }
 
+    public static void deleteCompany(Company company) {
+        CompanyDAO.deleteCompany(company);
 
-
+    }
 
 
 }
