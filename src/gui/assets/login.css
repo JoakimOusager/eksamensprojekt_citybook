@@ -138,3 +138,57 @@
 #welcomeLabel{
     -fx-font-size: 50px;
 }
+
+#dage{
+    -fx-font-size: 22px;
+    -fx-pref-height: 35px;
+    -fx-pref-width: 120px;
+    -fx-border-width: 1 1 1 1;
+    -fx-border-color: black;
+    -fx-background-position: center;
+}
+
+#emptyLabel{
+    -fx-pref-width: 75px;
+}
+
+#gemTimer{
+    -fx-background-color: green;
+    -fx-text-fill: white;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 35px;
+    -fx-border-radius: 30;
+}
+
+#datoTextfield{
+    -fx-font-size: 13px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 35px;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+    -fx-text-fill: black;
+    -fx-background-position: center;
+    -fx-text-alignment: center;
+}
+#gridPaneGoals {
+    -fx-hgap: 30;
+    -fx-vgap: 30;
+}
+
+#bpGoalsScreen {
+    -fx-pref-height: 200;
+    -fx-pref-width: 500;
+    -fx-min-height: 100;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+}
+
+#labelMessage {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+#labelCount {
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}

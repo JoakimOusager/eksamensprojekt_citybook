@@ -36,6 +36,7 @@ public class LoginGUI extends Application {
     //Login fields
     public static TextField usernamefield = new TextField();
 
+
     public static boolean saveMe = false;
     @Override
     public void start(Stage primaryStage) {
