@@ -4,6 +4,7 @@ package gui;/**
 
 //import gui.Tableviews.methods.ActivityMethod;
 
+import backend.Datepicker;
 import entities.User;
 import gui.Tableviews.methods.CompanyMethod;
 import gui.Tableviews.methods.UserMethod;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -21,6 +23,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class HomeGUI extends Application {
 
@@ -38,8 +44,34 @@ public class HomeGUI extends Application {
     static Button adminButton = new Button("Admin");
     static Button logoutButton = new Button("Log out");
     static Button homepageButton = new Button("Hjem");
+    static Button vagtplanButton = new Button("Vagtplan");
+    static Button vagtplansOverblikbtn = new Button("Vagtplanoverblik");
 
     static User loggedInUser;
+
+    //labels for vagtplan er gjort static for at labelens text ikke bliver reset ved scene skift
+    static Label datoFredag2 = new Label();
+    static Label datoTorsdag2 = new Label();
+    static Label datoOnsdag2 = new Label();
+    static Label datoTirsdag2 = new Label();
+    static Label datoMandag2 = new Label();
+    static Label datoFredag = new Label();
+    static Label datoTorsdag = new Label();
+    static Label datoOnsdag = new Label();
+    static Label datoTirsdag = new Label();
+    static Label datoMandag = new Label();
+
+    static Label timerMandag = new Label();
+    static Label timerTirsdag = new Label();
+    static Label timerOnsdag = new Label();
+    static Label timerTorsdag = new Label();
+    static Label timerFredag = new Label();
+
+    static Label totalTimer = new Label();
+
+    //Long tids variabler
+    static long diffMinutesStart;
+    static long diffMinutesEnd;
 
 
     @Override
@@ -161,6 +193,38 @@ public class HomeGUI extends Application {
             LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
         });
 
+        //Knap lavet specifikt til vagtplan
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("buttonsleftside");
+        vagtplanButton.setOnMouseEntered((MouseEvent e) -> {
+            vagtplanButton.setUnderline(true);
+        });
+        vagtplanButton.setOnMouseExited((MouseEvent e) -> {
+            vagtplanButton.setUnderline(false);
+        });
+        vagtplanButton.setOnAction((ActionEvent event3) -> {
+            buttonReset();
+            vagtplanScreen(primaryStage);
+
+        });
+
+        //Knap lavet specifikt til vagtplansoverblik
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("buttonsleftside");
+        vagtplansOverblikbtn.setOnMouseEntered((MouseEvent e) -> {
+            vagtplansOverblikbtn.setUnderline(true);
+        });
+        vagtplansOverblikbtn.setOnMouseExited((MouseEvent e) -> {
+            vagtplansOverblikbtn.setUnderline(false);
+        });
+        vagtplansOverblikbtn.setOnAction((ActionEvent event3) -> {
+            buttonReset();
+            virksomhedsScreen(primaryStage);
+
+        });
+
+
+
         //Knap lavet specifikt til admins
         adminButton.getStylesheets().addAll("gui/assets/login.css");
         adminButton.setId("buttonsleftside");
@@ -203,7 +267,8 @@ public class HomeGUI extends Application {
         rectangleEncapsulateMenuButtons.setArcWidth(30);
 
 
-        menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton, adminButton, logoutButton);
+        menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
+                vagtplanButton, vagtplansOverblikbtn, adminButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
         combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
@@ -231,8 +296,8 @@ public class HomeGUI extends Application {
 
     //postlogin screen
     public static void homepageScreen(Stage primaryStage){
-
-        Label welcome = new Label("Velkommen tilbage "+ loggedInUser.getUsername());
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(Calendar.getInstance().getTime());
+        Label welcome = new Label("Du er logget ind "+ timeStamp+"\nVelkommen tilbage "+ loggedInUser.getUsername());
         welcome.setId("welcomeLabel");
         welcome.getStylesheets().addAll("gui/assets/login.css");
 
@@ -285,15 +350,273 @@ public class HomeGUI extends Application {
     //virksomheds screen
     public static void virksomhedsScreen(Stage primaryStage){
 
-        companiesButton.setId("mActive");
-        companiesButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI. whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
 
-        LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
+
+        primaryStage.setScene(postLogin);
+        primaryStage.show();
+
+    }
+
+    public static void vagtplanScreen(Stage primaryStage){
+
+        companiesButton.setId("mActive");
+        companiesButton.getStylesheets().addAll("gui/assets/login.css");
+
+
+
+        //Bagrund for vagtplanen
+        GridPane gpvagtplan = new GridPane();
+        gpvagtplan.setHgap(15);
+        gpvagtplan.setVgap(15);
+
+        Label white = new Label();
+        white.setId("emptyLabel");
+        white.getStylesheets().addAll("gui/assets/login.css");
+
+        Label mandag = new Label("Mandag");
+        mandag.setId("dage");
+        mandag.getStylesheets().addAll("gui/assets/login.css");
+        Label tirsdag = new Label("Tirsdag");
+        tirsdag.setId("dage");
+        tirsdag.getStylesheets().addAll("gui/assets/login.css");
+        Label onsdag = new Label("Onsdag");
+        onsdag.setId("dage");
+        onsdag.getStylesheets().addAll("gui/assets/login.css");
+        Label torsdag = new Label("Torsdag");
+        torsdag.setId("dage");
+        torsdag.getStylesheets().addAll("gui/assets/login.css");
+        Label fredag = new Label("Fredag");
+        fredag.setId("dage");
+        fredag.getStylesheets().addAll("gui/assets/login.css");
+
+        Label ankomst = new Label("Ankomst");
+        ankomst.setId("dage");
+        ankomst.getStylesheets().addAll("gui/assets/login.css");
+        Label afgang = new Label("Afgang");
+        afgang.setId("dage");
+        afgang.getStylesheets().addAll("gui/assets/login.css");
+        Label timer = new Label("Timer");
+        timer.setId("dage");
+        timer.getStylesheets().addAll("gui/assets/login.css");
+        Label totalTimerLabel = new Label("Total Timer");
+        totalTimerLabel.setId("dage");
+        totalTimerLabel.getStylesheets().addAll("gui/assets/login.css");
+
+
+
+        datoMandag.setId("datoTextfield");
+        datoMandag.getStylesheets().addAll("gui/assets/login.css");
+
+        datoTirsdag.setId("datoTextfield");
+        datoTirsdag.getStylesheets().addAll("gui/assets/login.css");
+
+        datoOnsdag.setId("datoTextfield");
+        datoOnsdag.getStylesheets().addAll("gui/assets/login.css");
+
+        datoTorsdag.setId("datoTextfield");
+        datoTorsdag.getStylesheets().addAll("gui/assets/login.css");
+
+        datoFredag.setId("datoTextfield");
+        datoFredag.getStylesheets().addAll("gui/assets/login.css");
+
+
+        datoMandag2.setId("datoTextfield");
+        datoMandag2.getStylesheets().addAll("gui/assets/login.css");
+
+        datoTirsdag2.setId("datoTextfield");
+        datoTirsdag2.getStylesheets().addAll("gui/assets/login.css");
+
+        datoOnsdag2.setId("datoTextfield");
+        datoOnsdag2.getStylesheets().addAll("gui/assets/login.css");
+
+        datoTorsdag2.setId("datoTextfield");
+        datoTorsdag2.getStylesheets().addAll("gui/assets/login.css");
+
+
+        datoFredag2.setId("datoTextfield");
+        datoFredag2.getStylesheets().addAll("gui/assets/login.css");
+
+
+        timerMandag.setId("datoTextfield");
+        timerMandag.getStylesheets().addAll("gui/assets/login.css");
+
+        timerTirsdag.setId("datoTextfield");
+        timerTirsdag.getStylesheets().addAll("gui/assets/login.css");
+
+        timerOnsdag.setId("datoTextfield");
+        timerOnsdag.getStylesheets().addAll("gui/assets/login.css");
+
+        timerTorsdag.setId("datoTextfield");
+        timerTorsdag.getStylesheets().addAll("gui/assets/login.css");
+
+        timerFredag.setId("datoTextfield");
+        timerFredag.getStylesheets().addAll("gui/assets/login.css");
+
+        totalTimer.setId("datoTextfield");
+        totalTimer.getStylesheets().addAll("gui/assets/login.css");
+
+
+        Button startTimer = new Button("Start");
+        startTimer.setId("gemTimer");
+        startTimer.getStylesheets().addAll("gui/assets/login.css");
+        startTimer.setOnAction(event -> {
+
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            diffMinutesStart = backend.Datepicker.startDateStamp();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            Calendar cal = Calendar.getInstance();
+
+            switch (day){
+                case 2:
+                datoMandag.setText(dateFormat.format(cal.getTime()));
+                break;
+                case 3:
+                datoTirsdag.setText(dateFormat.format(cal.getTime()));
+                break;
+                case 4:
+                datoOnsdag.setText(dateFormat.format(cal.getTime()));
+                    datoTirsdag.setText(dateFormat.format(cal.getTime()));
+                break;
+                case 5:
+                datoTorsdag.setText(dateFormat.format(cal.getTime()));
+                break;
+                case 6:
+                datoFredag.setText(dateFormat.format(cal.getTime()));
+                break;
+            }
+        });
+
+        Button stopTimer = new Button("Stop");
+        stopTimer.setId("gemTimer");
+        stopTimer.getStylesheets().addAll("gui/assets/login.css");
+        stopTimer.setOnAction(event -> {
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            Calendar cal = Calendar.getInstance();
+            double timer1 = 0.0;
+            double timer3 = 0.0;
+            double timer5 = 0.0;
+            double timer7 = 0.0;
+            double timer9 = 0.0;
+
+            switch (day){
+                case 2:
+               diffMinutesEnd = backend.Datepicker.endDateStamp();
+                datoMandag2.setText(dateFormat.format(cal.getTime()));
+                    timer1 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer2 = String.valueOf(timer1);
+                    timerMandag.setText(timer2);
+                break;
+                case 3:
+                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                datoTirsdag2.setText(dateFormat.format(cal.getTime()));
+                    timer3 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    //String timer4 = String.valueOf(timer3);
+                    //timerTirsdag.setText(timer4);
+                break;
+                case 4:
+                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                datoOnsdag2.setText(dateFormat.format(cal.getTime()));
+                timer5 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                String timer6 = String.valueOf(timer5);
+                timerOnsdag.setText(timer6);
+                    datoTirsdag2.setText(dateFormat.format(cal.getTime()));
+                    timer3 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer4 = String.valueOf(timer3);
+                    timerTirsdag.setText(timer4);
+                break;
+                case 5:
+                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                datoTorsdag2.setText(dateFormat.format(cal.getTime()));
+                    timer7 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer8 = String.valueOf(timer7);
+                    timerTorsdag.setText(timer8);
+                break;
+                case 6:
+                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                datoFredag2.setText(dateFormat.format(cal.getTime()));
+                    timer9 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer10 = String.valueOf(timer9);
+                    timerFredag.setText(timer10);
+            }
+
+            double totalTimerDouble = Datepicker.ugentligeTimer(timer1, timer3, timer5, timer7, timer9);
+            String totalTimerString = String.valueOf(totalTimerDouble);
+            totalTimer.setText(totalTimerString);
+
+
+        });
+
+
+        //Label af dagenen
+        gpvagtplan.add(white,1,1);
+        gpvagtplan.add(mandag,2,1);
+        gpvagtplan.add(tirsdag,3,1);
+        gpvagtplan.add(onsdag,4,1);
+        gpvagtplan.add(torsdag,5,1);
+        gpvagtplan.add(fredag,6,1);
+
+        //Label af dato, timer og knap til at gemme
+        gpvagtplan.add(ankomst,1,2);
+        gpvagtplan.add(afgang,1,3);
+        gpvagtplan.add(timer,1,4);
+        gpvagtplan.add(totalTimerLabel,1,5);
+        gpvagtplan.add(startTimer,1,6);
+        gpvagtplan.add(stopTimer,1,7);
+
+        //Labels til alle dagene
+        gpvagtplan.add(datoMandag,2,2);
+        gpvagtplan.add(datoTirsdag,3,2);
+        gpvagtplan.add(datoOnsdag,4,2);
+        gpvagtplan.add(datoTorsdag,5,2);
+        gpvagtplan.add(datoFredag,6,2);
+
+        gpvagtplan.add(datoMandag2,2,3);
+        gpvagtplan.add(datoTirsdag2,3,3);
+        gpvagtplan.add(datoOnsdag2,4,3);
+        gpvagtplan.add(datoTorsdag2,5,3);
+        gpvagtplan.add(datoFredag2,6,3);
+
+        gpvagtplan.add(timerMandag,2,4);
+        gpvagtplan.add(timerTirsdag,3,4);
+        gpvagtplan.add(timerOnsdag,4,4);
+        gpvagtplan.add(timerTorsdag,5,4);
+        gpvagtplan.add(timerFredag,6,4);
+        gpvagtplan.add(totalTimer,6,5);
+
+        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
+        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
+        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setBottom(bottom);
+        LoginGUI.whiteBackground.setCenter(gpvagtplan);
+
+
+
+        primaryStage.setScene(postLogin);
+        primaryStage.show();
+
+    }
+
+    //virksomhedsoverbliks screen
+    public static void virksomhedsOverblikScreen(Stage primaryStage){
+
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+
+        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
+        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
+        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setBottom(bottom);
+
 
         primaryStage.setScene(postLogin);
         primaryStage.show();

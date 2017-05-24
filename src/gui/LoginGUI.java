@@ -35,6 +35,7 @@ public class LoginGUI extends Application {
     //Login fields
     public static TextField usernamefield = new TextField();
 
+
     public static boolean saveMe = false;
     @Override
     public void start(Stage primaryStage) {
@@ -132,14 +133,19 @@ public class LoginGUI extends Application {
 
 
 
-        btnlogin.setOnAction((ActionEvent event1) -> {
+        btnlogin.setOnAction((ActionEvent event1) ->  {
             // Hvis brugeren ikke er admin, bliver adminknappen usynlig
 
-            User foundUser = UserDAO.login(new User(usernamefield.getText(), passwordfield.getText()));
 
-            if (foundUser.getRank() == 0) {
-                adminButton.setVisible(false);
+            User foundUser = UserDAO.login(new User(usernamefield.getText(), passwordfield.getText()));
+            if(foundUser != null) {
+                if (foundUser.getRank() == 1) {
+                    adminButton.setVisible(true);
+                } else {
+                    adminButton.setVisible(false);
+                }
             }
+
 
             if (foundUser != null) {
 
