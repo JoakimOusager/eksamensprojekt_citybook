@@ -441,6 +441,7 @@ public class HomeGUI extends Application {
 
         Label mandag = new Label("Mandag");
         mandag.setId("dage");
+
         mandag.getStylesheets().addAll("gui/assets/login.css");
         Label tirsdag = new Label("Tirsdag");
         tirsdag.setId("dage");

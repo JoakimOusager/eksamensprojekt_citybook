@@ -161,11 +161,14 @@
 }
 
 #datoTextfield{
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
     -fx-pref-width: 120px;
     -fx-pref-height: 35px;
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+    -fx-text-fill: black;
+    -fx-background-position: center;
+    -fx-text-alignment: center;
 }
 #gridPaneGoals {
     -fx-hgap: 30;
