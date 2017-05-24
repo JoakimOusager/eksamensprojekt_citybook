@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Created by Daniel on 22-05-2017.
  */
 public class CheckBoxDAO {
-    static String fileName = "C:\\Users\\Daniel\\Desktop\\Citybookproject\\src\\dao\\usernameSave";
+    static String fileName = "src/dao/usernameSave";
 
     public static String getSavedUsername()throws Exception{
 
@@ -23,9 +23,9 @@ public class CheckBoxDAO {
     return username;
     }
 
-    public static void setSavedUsername()throws Exception{
-        String username;
-        username = LoginGUI.usernamefield.getText();
+    public static void setSavedUsername(String username, boolean saveMe)throws Exception{
+        /*String username;
+        username = LoginGUI.usernamefield.getText(); */
         PrintWriter output = new PrintWriter(fileName);
 
         if(!LoginGUI.saveMe) {

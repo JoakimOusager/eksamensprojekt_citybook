@@ -5,47 +5,33 @@ import entities.User;
 import java.sql.*;
 
 public class UserDAO {
-
-
-    //JDBC Driver name and Database URL
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/cbcrm?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
-
-    //Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
-
-
-
     public static User login(User user) {
+        User foundUser = null;
 
         Connection conn = null;
         Statement stmt = null;
-        User foundUser = null;
-
 
         try {
             //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER);
+            Class.forName(DAO.JDBC_DRIVER);
 
             //STEP 3: Open a connection
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
             String sql;
 
             sql = "SELECT * FROM user WHERE username = \"" +
-                    user.getUsername() + "\" AND password = \"" + user.getPassword()
+                    user.getUsername() + "\" AND user_password = \"" + user.getPassword()
                     +  "\"";
             ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
             if (rs.next()) {
                 String username = rs.getString("username");
-                String email = rs.getString("email");
-                int rank = rs.getInt("rank");
+                String email = rs.getString("user_email");
+                int rank = rs.getInt("user_rank");
                 foundUser = new User(username, email, rank);
             }
 
@@ -76,6 +62,8 @@ public class UserDAO {
         }
         return foundUser;
     }
+
+    //public static get
 
 
 }

@@ -4,6 +4,7 @@ package gui;
  */
 
 
+import backend.LogicController;
 import dao.UserDAO;
 import entities.User;
 import javafx.application.Application;
@@ -42,19 +43,8 @@ public class LoginGUI extends Application {
     }
     public static void login(Stage primaryStage){
 
-        try {
-            LoginGUI.usernamefield.setText(dao.CheckBoxDAO.getSavedUsername());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try{
-            dao.CheckBoxDAO.setSavedUsername();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        LoginGUI.usernamefield.setText(LogicController.getSavedUsername());
+        LogicController.setSavedUsername(usernamefield.getText(), saveMe);
 
         //Hvid background som ligger i midten
 
@@ -114,11 +104,7 @@ public class LoginGUI extends Application {
         checkBoxRememberMe.getStylesheets().addAll("gui/assets/login.css");
         checkBoxRememberMe.setOnAction(event -> {
             saveMe = true;
-            try{
-                dao.CheckBoxDAO.setSavedUsername();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                LogicController.setSavedUsername(usernamefield.getText(), saveMe);
         });
 
 
@@ -133,36 +119,27 @@ public class LoginGUI extends Application {
 
 
         btnlogin.setOnAction((ActionEvent event1) -> {
-            // Hvis brugeren ikke er admin, bliver adminknappen usynlig
+                    // Hvis brugeren ikke er admin, bliver adminknappen usynlig
+            User foundUser = LogicController.login(new User(usernamefield.getText(), passwordfield.getText()));
+                    if (foundUser != null) {
+                        if (foundUser.getRank() == 0) {
+                            adminButton.setVisible(false);
+                        }
+                            LogicController.setSavedUsername(usernamefield.getText(), saveMe);
+                        if (!hasRunBefore) {
+                            gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
+                            gui.Tableviews.methods.UserMethod.userTableviewStart();
+                            //  ActivityMethod.companyTableviewStart();
+                            HomeGUI.backgroundTemplate(primaryStage, foundUser);
+                            HomeGUI.homepageScreen(primaryStage);
+                            hasRunBefore = true;
+                        } else {
+                            primaryStage.setScene(HomeGUI.postLogin);
+                        }
+                    } else {
+                        wrongCreds(usernamefield, passwordfield);
+                    }
 
-            User foundUser = UserDAO.login(new User(usernamefield.getText(), passwordfield.getText()));
-
-            if (foundUser.getRank() == 0) {
-                adminButton.setVisible(false);
-            }
-
-            if (foundUser != null) {
-
-
-                try {
-                    dao.CheckBoxDAO.setSavedUsername();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if (!hasRunBefore) {
-                    gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
-                    gui.Tableviews.methods.UserMethod.userTableviewStart();
-                    //  ActivityMethod.companyTableviewStart();
-                    HomeGUI.backgroundTemplate(primaryStage, foundUser);
-                    HomeGUI.homepageScreen(primaryStage);
-                    hasRunBefore = true;
-                } else {
-                    primaryStage.setScene(HomeGUI.postLogin);
-                }
-            } else {
-                wrongCreds(usernamefield, passwordfield);
-            }
             //backgroundTemplate(primaryStage);
 
 
