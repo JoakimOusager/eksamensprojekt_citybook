@@ -4,6 +4,9 @@ package gui;
  */
 
 
+import backend.LogicController;
+import dao.UserDAO;
+import entities.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -16,6 +19,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
+import static gui.HomeGUI.adminButton;
 
 
 public class LoginGUI extends Application {
@@ -38,19 +43,8 @@ public class LoginGUI extends Application {
     }
     public static void login(Stage primaryStage){
 
-        try {
-            LoginGUI.usernamefield.setText(dao.CheckBoxDAO.getSavedUsername());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try{
-            dao.CheckBoxDAO.setSavedUsername();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        LoginGUI.usernamefield.setText(LogicController.getSavedUsername());
+        LogicController.setSavedUsername(usernamefield.getText(), saveMe);
 
         //Hvid background som ligger i midten
 
@@ -110,11 +104,7 @@ public class LoginGUI extends Application {
         checkBoxRememberMe.getStylesheets().addAll("gui/assets/login.css");
         checkBoxRememberMe.setOnAction(event -> {
             saveMe = true;
-            try{
-                dao.CheckBoxDAO.setSavedUsername();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                LogicController.setSavedUsername(usernamefield.getText(), saveMe);
         });
 
 
@@ -129,27 +119,26 @@ public class LoginGUI extends Application {
 
 
         btnlogin.setOnAction((ActionEvent event1) -> {
-            // if (boolean canLogin = GUIController.login() == true)
-            //       HomeGUI.start(stage, user); (giver user med som parameter, så man fx. logger ind som adminButton, hvis man har rettigheder til det)
-
-            //GUIController.loginCreds(primaryStage);
-
-
-            try{
-                dao.CheckBoxDAO.setSavedUsername();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (!hasRunBefore) {
-                gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
-                gui.Tableviews.methods.UserMethod.userTableviewStart();
-              //  ActivityMethod.companyTableviewStart();
-                HomeGUI.backgroundTemplate(primaryStage);
-                hasRunBefore = true;
-            } else {
-                primaryStage.setScene(HomeGUI.postLogin);
-            }
+                    // Hvis brugeren ikke er admin, bliver adminknappen usynlig
+            User foundUser = LogicController.login(new User(usernamefield.getText(), passwordfield.getText()));
+                    if (foundUser != null) {
+                        if (foundUser.getRank() == 0) {
+                            adminButton.setVisible(false);
+                        }
+                            LogicController.setSavedUsername(usernamefield.getText(), saveMe);
+                        if (!hasRunBefore) {
+                            gui.Tableviews.methods.CompanyMethod.companyTableviewStart();
+                            gui.Tableviews.methods.UserMethod.userTableviewStart();
+                            //  ActivityMethod.companyTableviewStart();
+                            HomeGUI.backgroundTemplate(primaryStage, foundUser);
+                            HomeGUI.homepageScreen(primaryStage);
+                            hasRunBefore = true;
+                        } else {
+                            primaryStage.setScene(HomeGUI.postLogin);
+                        }
+                    } else {
+                        wrongCreds(usernamefield, passwordfield);
+                    }
 
             //backgroundTemplate(primaryStage);
 

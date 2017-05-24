@@ -1,15 +1,70 @@
 package entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Company {
 
     private String cvrNumber;
-    private String contactPerson;
+    private String name;
     private String address;
     private String zipCode;
     private String email;
     private String phoneNumber;
+    private double revenue;
+    private String comments;
+    private Timestamp createdOn;
+    private ContactPerson contactPerson;
+    private User createdBy;
+
+    public Company(String cvrNumber, String name, String address, String zipCode, String email, String phoneNumber, String comments, double revenue, Timestamp createdOn, ContactPerson contactPerson, User createdBy) {
+        this.cvrNumber = cvrNumber;
+        this.name = name;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.comments = comments;
+        this.revenue = revenue;
+        this.createdOn = createdOn;
+        this.contactPerson = contactPerson;
+        this.createdBy = createdBy;
+    }
+
+    public Company() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public String getCvrNumber() {
         return cvrNumber;
@@ -19,11 +74,11 @@ public class Company {
         this.cvrNumber = cvrNumber;
     }
 
-    public String getContactPerson() {
+    public ContactPerson getContactPerson() {
         return contactPerson;
     }
 
-    public void setContactPerson(String contactPerson) {
+    public void setContactPerson(ContactPerson contactPerson) {
         this.contactPerson = contactPerson;
     }
 

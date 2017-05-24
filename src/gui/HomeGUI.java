@@ -3,6 +3,8 @@ package gui;/**
  */
 
 //import gui.Tableviews.methods.ActivityMethod;
+
+import entities.User;
 import gui.Tableviews.methods.CompanyMethod;
 import gui.Tableviews.methods.UserMethod;
 import javafx.application.Application;
@@ -10,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -35,6 +38,9 @@ public class HomeGUI extends Application {
     static Button adminButton = new Button("Admin");
     static Button logoutButton = new Button("Log out");
     static Button homepageButton = new Button("Hjem");
+
+    static User loggedInUser;
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -67,7 +73,9 @@ public class HomeGUI extends Application {
 
     }
 
-    public static void backgroundTemplate(Stage primaryStage){
+    public static void backgroundTemplate(Stage primaryStage, User foundUser){
+
+        loggedInUser = foundUser;
 
         //Skyline bagrund
         LoginGUI.BPBackground.getStylesheets().addAll("gui/assets/login.css");
@@ -194,6 +202,7 @@ public class HomeGUI extends Application {
         rectangleEncapsulateMenuButtons.setArcHeight(30);
         rectangleEncapsulateMenuButtons.setArcWidth(30);
 
+
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton, adminButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
         combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
@@ -223,6 +232,10 @@ public class HomeGUI extends Application {
     //postlogin screen
     public static void homepageScreen(Stage primaryStage){
 
+        Label welcome = new Label("Velkommen tilbage "+ loggedInUser.getUsername());
+        welcome.setId("welcomeLabel");
+        welcome.getStylesheets().addAll("gui/assets/login.css");
+
         homepageButton.setId("mActive");
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
 
@@ -230,6 +243,7 @@ public class HomeGUI extends Application {
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI.whiteBackground.setLeft(combineMenu);
         LoginGUI. whiteBackground.setBottom(bottom);
+        LoginGUI.whiteBackground.setCenter(welcome);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();

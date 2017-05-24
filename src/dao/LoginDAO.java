@@ -8,12 +8,12 @@ public class DB_login {
 
     //JDBC Driver name and Database URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/citybook?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/citybook?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
     //Database credentials
-    static final String USER = "citybook";
-    static final String PASS = "liverpool9";
+    static final String USER = "root";
+    static final String PASS = "root";
 
 
     static String sUsername = GUI.username;
@@ -78,6 +78,7 @@ public class DB_login {
         return isValidUser;
     }
 
+<<<<<<< HEAD:src/dao/LoginDAO.java
 
 }*/
 

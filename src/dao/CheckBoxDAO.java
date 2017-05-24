@@ -23,9 +23,9 @@ public class CheckBoxDAO {
     return username;
     }
 
-    public static void setSavedUsername()throws Exception{
-        String username;
-        username = LoginGUI.usernamefield.getText();
+    public static void setSavedUsername(String username, boolean saveMe)throws Exception{
+        /*String username;
+        username = LoginGUI.usernamefield.getText(); */
         PrintWriter output = new PrintWriter(fileName);
 
         if(!LoginGUI.saveMe) {
