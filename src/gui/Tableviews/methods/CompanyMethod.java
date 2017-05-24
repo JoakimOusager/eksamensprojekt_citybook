@@ -1,5 +1,6 @@
 package gui.Tableviews.methods;
 
+import backend.LogicController;
 import entities.Company;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Daniel on 17-05-2017.
  */
@@ -17,19 +21,15 @@ public class CompanyMethod {
 
     public static HBox hboxCompany = new HBox();
 
-
-
-
         public static TableView<Company> tvCompany = new TableView<>();
         public static TextField cvrNumber, contactPerson, address, email, zipCode, phoneNumber;
 
         // Get all the children
         public static ObservableList<Company> getCompany() {
-            ObservableList<Company> company = FXCollections.observableArrayList();
-           /* company.add(new Company("37144266", "Daniel", "Englandsvej", "2300", "daniel@boss.dk", "230000"));
-            company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));
-            company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));
-            company.add(new Company("Jarl", "Eriksen", "Blå", "Sanne Eriksen", "20769523", "Sauntevej 19"));*/
+
+            ObservableList<Company> company = FXCollections.observableArrayList(LogicController.getCompanies());
+
+            System.out.println(company);
             return company;
         }
 
@@ -37,7 +37,6 @@ public class CompanyMethod {
         public static void addCompany() {
             Company company = new Company();
             company.setCvrNumber(cvrNumber.getText());
-            company.setContactPerson(contactPerson.getText());
             company.setAddress(address.getText());
             company.setEmail(email.getText());
             company.setZipCode(zipCode.getText());
@@ -49,14 +48,21 @@ public class CompanyMethod {
             email.clear();
             zipCode.clear();
             phoneNumber.clear();
+
+            LogicController.addCompany(company);
         }
         // Delete company method
         public static void deleteCompany() {
             ObservableList<Company> companySelected, allCompanies;
             allCompanies = tvCompany.getItems();
             companySelected = tvCompany.getSelectionModel().getSelectedItems();
+            for (Company com : companySelected) {
+                System.out.println("skrrt");
+                LogicController.deleteCompany(com);
+            }
 
             companySelected.forEach(allCompanies::remove);
+
         }
         // The button 'Indregistrede børn' has been pressed in the menu.
         public static void companyTableviewStart() {
@@ -65,9 +71,13 @@ public class CompanyMethod {
             cvrNumberCol.setMinWidth(120);
             cvrNumberCol.setCellValueFactory(new PropertyValueFactory<>("cvrNumber"));
 
-            TableColumn<Company, String> contactPersonCol = new TableColumn<>("Kontaktperson");
+          /*  TableColumn<ContactPerson, String> contactPersonCol = new TableColumn<>("Kontaktperson");
             contactPersonCol.setMinWidth(120);
-            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("contactPerson"));
+            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("contactPerson")); */
+
+            TableColumn<Company, String> contactPersonCol = new TableColumn<>("Navn");
+            contactPersonCol.setMinWidth(120);
+            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
             TableColumn<Company, String> adressCol = new TableColumn<>("Adresse");
             adressCol.setMinWidth(120);

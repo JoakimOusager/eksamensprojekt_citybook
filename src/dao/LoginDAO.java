@@ -78,5 +78,8 @@ public class DB_login {
         return isValidUser;
     }
 
+<<<<<<< HEAD:src/dao/LoginDAO.java
+
 }*/
+
 
