@@ -2,13 +2,13 @@ package backend;
 
 import dao.CheckBoxDAO;
 import dao.CompanyDAO;
+import dao.ScheduleDAO;
 import dao.UserDAO;
 import entities.Company;
+import entities.ScheduleDays;
 import entities.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LogicController {
     public static User login (User loginUser) {
@@ -65,6 +65,13 @@ public class LogicController {
 
     public static void deleteCompany(Company company) {
         CompanyDAO.deleteCompany(company);
+
+    }
+
+    public static ArrayList<ScheduleDays> getSchedule(User user) {
+        ArrayList<ScheduleDays> schedule = new ArrayList<>(ScheduleDAO.getSchedule(user));
+
+        return schedule;
 
     }
 
