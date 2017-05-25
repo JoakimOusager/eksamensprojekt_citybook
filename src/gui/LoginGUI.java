@@ -5,7 +5,6 @@ package gui;
 
 
 import backend.LogicController;
-import dao.UserDAO;
 import entities.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -18,9 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
-
-import static gui.HomeGUI.adminButton;
+import static gui.HomeGUI.userButton;
 
 
 public class LoginGUI extends Application {
@@ -124,7 +121,7 @@ public class LoginGUI extends Application {
             User foundUser = LogicController.login(new User(usernamefield.getText(), passwordfield.getText()));
                     if (foundUser != null) {
                         if (foundUser.getRank() == 0) {
-                            adminButton.setVisible(false);
+                            userButton.setVisible(false);
                         }
                             LogicController.setSavedUsername(usernamefield.getText(), saveMe);
                         if (!hasRunBefore) {
@@ -171,7 +168,7 @@ public class LoginGUI extends Application {
 
         loginScene = new Scene(loginBP);
 
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        //primaryStage.initStyle(StageStyle.TRANSPARENT);
         loginScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loginScene);
         primaryStage.show();

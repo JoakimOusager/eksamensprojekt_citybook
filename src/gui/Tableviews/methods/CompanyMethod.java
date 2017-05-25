@@ -4,6 +4,8 @@ import backend.LogicController;
 import entities.Company;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Daniel on 17-05-2017.
@@ -22,7 +25,7 @@ public class CompanyMethod {
     public static HBox hboxCompany = new HBox();
 
         public static TableView<Company> tvCompany = new TableView<>();
-        public static TextField cvrNumber, contactPerson, address, email, zipCode, phoneNumber;
+        public static TextField cvrNumber, name, address, email, zipCode, phoneNumber;
 
         // Get all the children
         public static ObservableList<Company> getCompany() {
@@ -43,7 +46,7 @@ public class CompanyMethod {
             company.setPhoneNumber(phoneNumber.getText());
             tvCompany.getItems().add(company);
             cvrNumber.clear();
-            contactPerson.clear();
+            name.clear();
             address.clear();
             email.clear();
             zipCode.clear();
@@ -112,20 +115,43 @@ public class CompanyMethod {
             // Buttons for adding and deleting Companies
             Button addCompanyBtn = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
-            addCompanyBtn.setOnAction(e2 -> addCompany());
+           // addCompanyBtn.setOnAction(e2 -> addCompany());
+
+            addCompanyBtn.setOnAction(successBox ->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Citybook");
+                alert.setHeaderText("Bekræftelse");
+                alert.setContentText("Firmaet er nu blevet oprettet.");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    addCompany();
+                }
+            });
 
             Button deleteCompanyBtn = new Button("Slet firma");
             deleteCompanyBtn.setId("deleteEmployeeButton");
-            deleteCompanyBtn.setOnAction(e2 -> deleteCompany());
+
+            deleteCompanyBtn.setOnAction(alertBox ->{
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Citybook");
+                    alert.setHeaderText("Bekræftelse");
+                    alert.setContentText("Er du sikker på at du vil slette dette firma?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        deleteCompany();
+                }
+            });
 
             // TextFields for adding a child
             cvrNumber = new TextField();
             cvrNumber.setPromptText("CVR-nummer");
             cvrNumber.setMaxWidth(100);
 
-            contactPerson = new TextField();
-            contactPerson.setPromptText("Kontaktperson");
-            contactPerson.setMaxWidth(100);
+            name = new TextField();
+            name.setPromptText("Navn");
+            name.setMaxWidth(100);
 
             address = new TextField();
             address.setPromptText("Adresse");
@@ -147,7 +173,7 @@ public class CompanyMethod {
 
 
             // adding the TextFields to VBox 1 and VBox 2
-            addCompanyBox.getChildren().addAll(cvrNumber, contactPerson, address, email, zipCode, phoneNumber,
+            addCompanyBox.getChildren().addAll(cvrNumber, name, address, email, zipCode, phoneNumber,
                     addCompanyBtn, deleteCompanyBtn);
             Label white = new Label();
             white.setId("whiteCompany");

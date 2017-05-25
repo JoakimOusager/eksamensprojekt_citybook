@@ -1,8 +1,12 @@
 package gui.Tableviews.methods;
 
+import backend.LogicController;
+import entities.Company;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,6 +18,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 
 /**
@@ -29,7 +34,7 @@ public class UserMethod {
 
     // Get all the Users
     public static ObservableList<User> getUser() {
-        ObservableList<User> user = FXCollections.observableArrayList();
+        ObservableList<User> user = FXCollections.observableArrayList(LogicController.getUsers());
       /*  user.add(new User(1,"37144266", "Daniel", "Englandsvej", "2300", 1));
         user.add(new User(2, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
         user.add(new User(3, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
@@ -43,20 +48,24 @@ public class UserMethod {
         user.setUsername(username.getText());
         user.setPassword(password.getText());
         user.setEmail(email.getText());
-        user.setStartDate(Timestamp.valueOf(startDate.getText()));
         user.setRank(Integer.parseInt(userRank.getText()));
         tvUser.getItems().add(user);
         username.clear();
         password.clear();
         email.clear();
-        startDate.clear();
         userRank.clear();
+
+        LogicController.addUser(user);
     }
     // Delete company method
     public static void deleteUser() {
         ObservableList<User> userSelected, allUsers;
         allUsers = tvUser.getItems();
         userSelected = tvUser.getSelectionModel().getSelectedItems();
+        for (User user : userSelected) {
+            System.out.println("skrrt");
+            LogicController.deleteUser(user);
+        }
 
         userSelected.forEach(allUsers::remove);
     }
@@ -72,21 +81,21 @@ public class UserMethod {
         usernameCol.setMinWidth(120);
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
-        TableColumn<User, String> passwordCol = new TableColumn<>("Password");
-        passwordCol.setMinWidth(120);
-        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
-
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
         emailCol.setMinWidth(120);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         TableColumn<User, String> startDateCol = new TableColumn<>("Start time");
-        startDateCol.setMinWidth(120);
+        startDateCol.setMinWidth(135);
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+
+        TableColumn<User, String> totalRevenueCol = new TableColumn<>("Start time");
+        startDateCol.setMinWidth(135);
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 
         TableColumn<User, String> userRankCol = new TableColumn<>("User rank");
         userRankCol.setMinWidth(120);
-        userRankCol.setCellValueFactory(new PropertyValueFactory<>("userRank"));
+        userRankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
 
 
         // GridPane for the whole adding and deleting employee area
@@ -106,11 +115,34 @@ public class UserMethod {
         // Buttons for adding and deleting Companies
         Button addUserBtn = new Button("Tilføj Bruger");
         addUserBtn.setId("addEmployeeButton");
-        addUserBtn.setOnAction(e2 -> addUser());
+
+        addUserBtn.setOnAction(successBox ->{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Citybook");
+            alert.setHeaderText("Bekræftelse");
+            alert.setContentText("Brugeren er nu blevet oprettet.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                addUser();
+            }
+        });
 
         Button deleteUserBtn = new Button("Slet Bruger");
         deleteUserBtn.setId("deleteEmployeeButton");
-        deleteUserBtn.setOnAction(e2 -> deleteUser());
+
+
+        deleteUserBtn.setOnAction(alertBox ->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Citybook");
+                alert.setHeaderText("Bekræftelse");
+                alert.setContentText("Er du sikker på at du vil slette denne bruger?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    deleteUser();
+                }
+        });
 
         // TextFields for adding a child
        /* ID = new TextField();
@@ -129,10 +161,6 @@ public class UserMethod {
         email.setPromptText("Email");
         email.setMaxWidth(100);
 
-        startDate = new TextField();
-        startDate.setPromptText("Start dato");
-        startDate.setMaxWidth(100);
-
         userRank = new TextField();
         userRank.setPromptText("User rank");
         userRank.setMaxWidth(100);
@@ -142,7 +170,7 @@ public class UserMethod {
 
 
         // adding the TextFields to VBox 1 and VBox 2
-        addUserBox.getChildren().addAll(username, password, email, startDate, userRank,
+        addUserBox.getChildren().addAll(username, password, email, userRank,
                 addUserBtn, deleteUserBtn);
         Label white = new Label();
         white.setId("whiteCompany");
@@ -155,7 +183,7 @@ public class UserMethod {
         tvUser.setId("tvAktivitet");
         tvUser.getStylesheets().addAll("gui/assets/login.css");
 
-        tvUser.getColumns().addAll(usernameCol, passwordCol, emailCol, startDateCol, userRankCol);
+        tvUser.getColumns().addAll(usernameCol, emailCol, startDateCol, userRankCol);
         hboxUser.setId("hboxAktivitet");
         hboxUser.getStylesheets().addAll("gui/assets/login.css");
         hboxUser.getChildren().addAll(addUserbox2, tvUser, gp3);

@@ -31,6 +31,15 @@ public class User {
         this.email = email;
         this.rank = userRank;
     }
+    /*
+        Constructor vi bruger til at load brugere ind i vores tableview.
+     */
+    public User(String username, String email, int userRank, Timestamp startDate) {
+        this.username = username;
+        this.email = email;
+        this.startDate = startDate;
+        this.rank = userRank;
+    }
 
     public String getUsername() {
         return username;
