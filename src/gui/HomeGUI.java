@@ -6,6 +6,7 @@ package gui;/**
 
 import backend.Datepicker;
 import backend.LogicController;
+import entities.Company;
 import entities.ScheduleDays;
 import entities.User;
 import gui.Tableviews.methods.CompanyMethod;
@@ -328,7 +329,11 @@ public class HomeGUI extends Application {
         Label labelRevenueTotalMessage = new Label("Totalomsætning:");
         labelRevenueTotalMessage.setId("labelMessage");
         labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
-        Label labelRevenueTotalCount = new Label("test");
+        ArrayList<Company> totalRevenueList = new ArrayList(LogicController.getTotalRevenue());
+        double totalRevenue = totalRevenueList.get(0).getRevenue();
+        String totalRevenueString = String.valueOf(totalRevenue);
+
+        Label labelRevenueTotalCount = new Label(totalRevenueString + " kr");
         labelRevenueTotalCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den totale omsætning frem.
         bpRevenueTotal.setTop(labelRevenueTotalMessage);
@@ -340,9 +345,14 @@ public class HomeGUI extends Application {
         //højest omsætning på en måned
         BorderPane bpHighestRevenueMonth = new BorderPane();
         bpHighestRevenueMonth.setId("bpGoalsScreen");
-        Label labelHighestRevenueMonthMessage = new Label("I den bedste måned tjente du:");
+        Label labelHighestRevenueMonthMessage = new Label("Medarbejder med flest timer:");
         labelHighestRevenueMonthMessage.setId("labelMessage");
-        Label labelHighestRevenueMonthCount = new Label("test");
+
+        ArrayList<ScheduleDays> topHoursList = new ArrayList(LogicController.getTopHours());
+        double topHoursDouble = topHoursList.get(0).getTotalHours();
+        String topHoursString = String.valueOf(topHoursDouble);
+
+        Label labelHighestRevenueMonthCount = new Label(topHoursString + " timer");
         labelHighestRevenueMonthCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
         bpHighestRevenueMonth.setTop(labelHighestRevenueMonthMessage);
@@ -354,7 +364,7 @@ public class HomeGUI extends Application {
         bpTodaysGoal.setId("bpGoalsScreen");
         Label labelTodaysGoalMessage = new Label("Dagens mål:");
         labelTodaysGoalMessage.setId("labelMessage");
-        Label labelTodaysGoalNumber = new Label("test");
+        Label labelTodaysGoalNumber = new Label("24000 kr");
         labelTodaysGoalNumber.setId("labelCount");
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
@@ -365,9 +375,13 @@ public class HomeGUI extends Application {
         //årets resultat for sælgeren
         BorderPane bpRevenueThisYear = new BorderPane();
         bpRevenueThisYear.setId("bpGoalsScreen");
-        Label labelRevenueThisYearMessage = new Label("Årets resultat:");
+        ArrayList<ScheduleDays> maxHoursList = new ArrayList(LogicController.getMaxHours());
+        double maxHoursDouble = maxHoursList.get(0).getTotalHours();
+        String maxHoursString = String.valueOf(maxHoursDouble);
+
+        Label labelRevenueThisYearMessage = new Label("Total arbejdstimer:");
         labelRevenueThisYearMessage.setId("labelMessage");
-        Label labelRevenueThisYearCount = new Label("test");
+        Label labelRevenueThisYearCount = new Label(maxHoursString + " timer");
         labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         bpRevenueThisYear.setTop(labelRevenueThisYearMessage);
