@@ -17,6 +17,11 @@ public class LogicController {
 
     }
 
+    public static ArrayList<User> getUsers() {
+        ArrayList<User> userList = new ArrayList<>(UserDAO.getUsers());
+        return userList;
+    }
+
     public static String getSavedUsername() {
         String username = "";
         try {

@@ -1,5 +1,6 @@
 package gui.Tableviews.methods;
 
+import backend.LogicController;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +30,7 @@ public class UserMethod {
 
     // Get all the Users
     public static ObservableList<User> getUser() {
-        ObservableList<User> user = FXCollections.observableArrayList();
+        ObservableList<User> user = FXCollections.observableArrayList(LogicController.getUsers());
       /*  user.add(new User(1,"37144266", "Daniel", "Englandsvej", "2300", 1));
         user.add(new User(2, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
         user.add(new User(3, "Jarl", "Eriksen", "Blå", "Sanne Eriksen", 1));
@@ -72,10 +73,6 @@ public class UserMethod {
         usernameCol.setMinWidth(120);
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
-        TableColumn<User, String> passwordCol = new TableColumn<>("Password");
-        passwordCol.setMinWidth(120);
-        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
-
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
         emailCol.setMinWidth(120);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -86,7 +83,7 @@ public class UserMethod {
 
         TableColumn<User, String> userRankCol = new TableColumn<>("User rank");
         userRankCol.setMinWidth(120);
-        userRankCol.setCellValueFactory(new PropertyValueFactory<>("userRank"));
+        userRankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
 
 
         // GridPane for the whole adding and deleting employee area
@@ -155,7 +152,7 @@ public class UserMethod {
         tvUser.setId("tvAktivitet");
         tvUser.getStylesheets().addAll("gui/assets/login.css");
 
-        tvUser.getColumns().addAll(usernameCol, passwordCol, emailCol, startDateCol, userRankCol);
+        tvUser.getColumns().addAll(usernameCol, emailCol, startDateCol, userRankCol);
         hboxUser.setId("hboxAktivitet");
         hboxUser.getStylesheets().addAll("gui/assets/login.css");
         hboxUser.getChildren().addAll(addUserbox2, tvUser, gp3);
