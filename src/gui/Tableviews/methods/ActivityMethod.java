@@ -50,7 +50,7 @@ public class ActivityMethod {
         time.clear();
     }
     // Delete company method
-    public static void deleteCompany() {
+    public static void delete() {
         ObservableList<Activity> aktivitetSelected,allAktivitet;
         allAktivitet = tvAktivitet.getItems();
         aktivitetSelected = tvAktivitet.getSelectionModel().getSelectedItems();
@@ -98,7 +98,7 @@ public class ActivityMethod {
 
         Button deleteAktivitetBtn = new Button("Slet aktivitet");
         deleteAktivitetBtn.setId("deleteEmployeeButton");
-        deleteAktivitetBtn.setOnAction(e2 -> deleteCompany());
+        deleteAktivitetBtn.setOnAction(e2 -> delete());
 
         // TextFields for adding a child
         comment = new TextField();

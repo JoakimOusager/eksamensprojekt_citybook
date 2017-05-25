@@ -1,17 +1,14 @@
 package dao;
 
-
 import entities.Company;
+import entities.ScheduleDays;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class GoalDAO {
-
-    //@Override
-    static public ArrayList<Company> get() {
-        ArrayList<Company> list = new ArrayList<>();
+public class MaxHoursDAO {
+    static public ArrayList<ScheduleDays> get() {
+        ArrayList<ScheduleDays> list = new ArrayList<>();
 
         Connection conn = null;
         Statement stmt = null;
@@ -26,15 +23,15 @@ public class GoalDAO {
             //STEP 4: Execute a query
             stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT SUM(company_revenue) AS total_revenue FROM cbcrm.companies");
+            ResultSet rs = stmt.executeQuery("SELECT SUM(total_hours) AS total_hours FROM cbcrm.schedule");
 
             //STEP 5: Extract data from result set
             if (rs.next()) {
 
                 // Company detaljer
-                double revenue = rs.getDouble("total_revenue");
-                System.out.println(revenue);
-                list.add(new Company(revenue));
+                double hours = rs.getDouble("total_hours");
+                System.out.println(hours);
+                list.add(new ScheduleDays(hours));
             }
 
             //STEP 6: Clean-up environment
@@ -65,19 +62,4 @@ public class GoalDAO {
         // System.out.println(i);
         return list;
     }
-
-    /*@Override
-    public void update(Object element) {
-
-    }
-
-    @Override
-    public void insert(Object element) {
-
-    }
-
-    @Override
-    public void delete(Object element) {
-
-    }*/
 }

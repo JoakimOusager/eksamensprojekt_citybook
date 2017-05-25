@@ -5,6 +5,9 @@ package gui;/**
 //import gui.Tableviews.methods.ActivityMethod;
 
 import backend.Datepicker;
+import backend.LogicController;
+import entities.Company;
+import entities.ScheduleDays;
 import entities.User;
 import gui.Tableviews.methods.CompanyMethod;
 import gui.Tableviews.methods.UserMethod;
@@ -24,6 +27,7 @@ import javafx.stage.Stage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class HomeGUI extends Application {
@@ -70,6 +74,7 @@ public class HomeGUI extends Application {
     //Long tids variabler
     static long diffMinutesStart;
     static long diffMinutesEnd;
+
 
 
     @Override
@@ -338,7 +343,11 @@ public class HomeGUI extends Application {
         Label labelRevenueTotalMessage = new Label("Totalomsætning:");
         labelRevenueTotalMessage.setId("labelMessage");
         labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
-        Label labelRevenueTotalCount = new Label("test");
+        ArrayList<Company> totalRevenueList = new ArrayList(LogicController.getTotalRevenue());
+        double totalRevenue = totalRevenueList.get(0).getRevenue();
+        String totalRevenueString = String.valueOf(totalRevenue);
+
+        Label labelRevenueTotalCount = new Label(totalRevenueString + " kr");
         labelRevenueTotalCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den totale omsætning frem.
         bpRevenueTotal.setTop(labelRevenueTotalMessage);
@@ -350,9 +359,14 @@ public class HomeGUI extends Application {
         //højest omsætning på en måned
         BorderPane bpHighestRevenueMonth = new BorderPane();
         bpHighestRevenueMonth.setId("bpGoalsScreen");
-        Label labelHighestRevenueMonthMessage = new Label("I den bedste måned tjente du:");
+        Label labelHighestRevenueMonthMessage = new Label("Medarbejder med flest timer:");
         labelHighestRevenueMonthMessage.setId("labelMessage");
-        Label labelHighestRevenueMonthCount = new Label("test");
+
+        ArrayList<ScheduleDays> topHoursList = new ArrayList(LogicController.getTopHours());
+        double topHoursDouble = topHoursList.get(0).getTotalHours();
+        String topHoursString = String.valueOf(topHoursDouble);
+
+        Label labelHighestRevenueMonthCount = new Label(topHoursString + " timer");
         labelHighestRevenueMonthCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
         bpHighestRevenueMonth.setTop(labelHighestRevenueMonthMessage);
@@ -364,7 +378,7 @@ public class HomeGUI extends Application {
         bpTodaysGoal.setId("bpGoalsScreen");
         Label labelTodaysGoalMessage = new Label("Dagens mål:");
         labelTodaysGoalMessage.setId("labelMessage");
-        Label labelTodaysGoalNumber = new Label("test");
+        Label labelTodaysGoalNumber = new Label("24000 kr");
         labelTodaysGoalNumber.setId("labelCount");
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
@@ -375,9 +389,13 @@ public class HomeGUI extends Application {
         //årets resultat for sælgeren
         BorderPane bpRevenueThisYear = new BorderPane();
         bpRevenueThisYear.setId("bpGoalsScreen");
-        Label labelRevenueThisYearMessage = new Label("Årets resultat:");
+        ArrayList<ScheduleDays> maxHoursList = new ArrayList(LogicController.getMaxHours());
+        double maxHoursDouble = maxHoursList.get(0).getTotalHours();
+        String maxHoursString = String.valueOf(maxHoursDouble);
+
+        Label labelRevenueThisYearMessage = new Label("Total arbejdstimer:");
         labelRevenueThisYearMessage.setId("labelMessage");
-        Label labelRevenueThisYearCount = new Label("test");
+        Label labelRevenueThisYearCount = new Label(maxHoursString + " timer");
         labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         bpRevenueThisYear.setTop(labelRevenueThisYearMessage);
@@ -526,30 +544,91 @@ public class HomeGUI extends Application {
         Button startTimer = new Button("Start");
         startTimer.setId("gemTimer");
         startTimer.getStylesheets().addAll("gui/assets/login.css");
-        startTimer.setOnAction(event -> {
 
+
+        startTimer.setOnAction(event -> {
             Calendar calendar = Calendar.getInstance();
             int day = calendar.get(Calendar.DAY_OF_WEEK);
             diffMinutesStart = backend.Datepicker.startDateStamp();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Calendar cal = Calendar.getInstance();
 
+            //Variabler til brug af totalTid fra databasen
+            ArrayList<ScheduleDays> arraylistSchedule =
+                    new ArrayList<ScheduleDays>(LogicController.getSchedule(loggedInUser));
+            double mondayDB = arraylistSchedule.get(0).getMonday();
+            double tuesdayDB = arraylistSchedule.get(0).getTuesday();
+            double wednesdayDB = arraylistSchedule.get(0).getWednesday();
+            double thursdayDB = arraylistSchedule.get(0).getThursday();
+            double fridayDB = arraylistSchedule.get(0).getFriday();
+            double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
+
             switch (day){
                 case 2:
                 datoMandag.setText(dateFormat.format(cal.getTime()));
+
+                    mondayDB = 0.0;
+                    tuesdayDB = 0.0;
+                    wednesdayDB = 0.0;
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+
+                    timerMandag.setText(String.valueOf(mondayDB));
+                    timerTirsdag.setText(String.valueOf(tuesdayDB));
+                    timerOnsdag.setText(String.valueOf(wednesdayDB));
+                    timerTorsdag.setText(String.valueOf(thursdayDB));
+                    timerFredag.setText(String.valueOf(fridayDB));
+
+
                 break;
                 case 3:
                 datoTirsdag.setText(dateFormat.format(cal.getTime()));
+
+                    tuesdayDB = 0.0;
+                    wednesdayDB = 0.0;
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+                    timerMandag.setText(String.valueOf(mondayDB));
+                    timerTirsdag.setText(String.valueOf(tuesdayDB));
+                    timerOnsdag.setText(String.valueOf(wednesdayDB));
+                    timerTorsdag.setText(String.valueOf(thursdayDB));
+                    timerFredag.setText(String.valueOf(fridayDB));
+
+
                 break;
                 case 4:
                 datoOnsdag.setText(dateFormat.format(cal.getTime()));
-                    datoTirsdag.setText(dateFormat.format(cal.getTime()));
+
+                    wednesdayDB = 0.0;
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+                    timerMandag.setText(String.valueOf(mondayDB));
+                    timerTirsdag.setText(String.valueOf(tuesdayDB));
+                    timerOnsdag.setText(String.valueOf(wednesdayDB));
+                    timerTorsdag.setText(String.valueOf(thursdayDB));
+                    timerFredag.setText(String.valueOf(fridayDB));
+
+
                 break;
                 case 5:
                 datoTorsdag.setText(dateFormat.format(cal.getTime()));
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+                    timerMandag.setText(String.valueOf(mondayDB));
+                    timerTirsdag.setText(String.valueOf(tuesdayDB));
+                    timerOnsdag.setText(String.valueOf(wednesdayDB));
+                    timerTorsdag.setText(String.valueOf(thursdayDB));
+                    timerFredag.setText(String.valueOf(fridayDB));
+
                 break;
                 case 6:
-                datoFredag.setText(dateFormat.format(cal.getTime()));
+                    fridayDB = 0.0;
+                     datoFredag.setText(dateFormat.format(cal.getTime()));
+                    timerMandag.setText(String.valueOf(mondayDB));
+                    timerTirsdag.setText(String.valueOf(tuesdayDB));
+                    timerOnsdag.setText(String.valueOf(wednesdayDB));
+                    timerTorsdag.setText(String.valueOf(thursdayDB));
+                    timerFredag.setText(String.valueOf(fridayDB));
                 break;
             }
         });
@@ -562,55 +641,82 @@ public class HomeGUI extends Application {
             int day = calendar.get(Calendar.DAY_OF_WEEK);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Calendar cal = Calendar.getInstance();
-            double timer1 = 0.0;
-            double timer3 = 0.0;
-            double timer5 = 0.0;
-            double timer7 = 0.0;
-            double timer9 = 0.0;
+
+            //Variabler til brug af totalTid fra databasen
+            ArrayList<ScheduleDays> arraylistSchedule =
+                    new ArrayList<ScheduleDays>(LogicController.getSchedule(loggedInUser));
+            double mondayDB = arraylistSchedule.get(0).getMonday();
+            double tuesdayDB = arraylistSchedule.get(0).getTuesday();
+            double wednesdayDB = arraylistSchedule.get(0).getWednesday();
+            double thursdayDB = arraylistSchedule.get(0).getThursday();
+            double fridayDB = arraylistSchedule.get(0).getFriday();
+            double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
             switch (day){
                 case 2:
+                    mondayDB = 0.0;
+                    tuesdayDB = 0.0;
+                    wednesdayDB = 0.0;
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+
                diffMinutesEnd = backend.Datepicker.endDateStamp();
                 datoMandag2.setText(dateFormat.format(cal.getTime()));
-                    timer1 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                    String timer2 = String.valueOf(timer1);
+                    mondayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer2 = String.valueOf(mondayDB);
                     timerMandag.setText(timer2);
                 break;
                 case 3:
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+
+                    tuesdayDB = 0.0;
+                    wednesdayDB = 0.0;
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+
                 datoTirsdag2.setText(dateFormat.format(cal.getTime()));
-                    timer3 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                    //String timer4 = String.valueOf(timer3);
-                    //timerTirsdag.setText(timer4);
-                break;
-                case 4:
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
-                datoOnsdag2.setText(dateFormat.format(cal.getTime()));
-                timer5 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                String timer6 = String.valueOf(timer5);
-                timerOnsdag.setText(timer6);
-                    datoTirsdag2.setText(dateFormat.format(cal.getTime()));
-                    timer3 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                    String timer4 = String.valueOf(timer3);
+                    tuesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer4 = String.valueOf(tuesdayDB);
                     timerTirsdag.setText(timer4);
                 break;
+                case 4:
+
+                    wednesdayDB = 0.0;
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+
+                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                datoOnsdag2.setText(dateFormat.format(cal.getTime()));
+                wednesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                String timer6 = String.valueOf(wednesdayDB);
+                timerOnsdag.setText(timer6);
+                break;
                 case 5:
+                    thursdayDB = 0.0;
+                    fridayDB = 0.0;
+
                 diffMinutesEnd = backend.Datepicker.endDateStamp();
                 datoTorsdag2.setText(dateFormat.format(cal.getTime()));
-                    timer7 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                    String timer8 = String.valueOf(timer7);
+                    thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer8 = String.valueOf(thursdayDB);
                     timerTorsdag.setText(timer8);
                 break;
                 case 6:
+
+                    fridayDB = 0.0;
                 diffMinutesEnd = backend.Datepicker.endDateStamp();
                 datoFredag2.setText(dateFormat.format(cal.getTime()));
-                    timer9 = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                    String timer10 = String.valueOf(timer9);
+                    thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    String timer10 = String.valueOf(thursdayDB);
                     timerFredag.setText(timer10);
             }
 
-            double totalTimerDouble = Datepicker.ugentligeTimer(timer1, timer3, timer5, timer7, timer9);
-            String totalTimerString = String.valueOf(totalTimerDouble);
+            totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
+            System.out.println(mondayDB);
+            System.out.println(tuesdayDB);
+            System.out.println(wednesdayDB);
+            System.out.println(thursdayDB);
+            System.out.println(fridayDB);
+            String totalTimerString = String.valueOf(totalHoursDB);
             totalTimer.setText(totalTimerString);
 
 

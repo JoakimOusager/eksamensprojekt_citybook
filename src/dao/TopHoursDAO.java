@@ -1,17 +1,15 @@
 package dao;
 
-
-import entities.Company;
+import entities.ScheduleDays;
+import entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class GoalDAO {
+public class TopHoursDAO {
 
-    //@Override
-    static public ArrayList<Company> get() {
-        ArrayList<Company> list = new ArrayList<>();
+    public static ArrayList<ScheduleDays> get() {
+        ArrayList<ScheduleDays> list = new ArrayList<>();
 
         Connection conn = null;
         Statement stmt = null;
@@ -25,22 +23,25 @@ public class GoalDAO {
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
+            String sql;
 
-            ResultSet rs = stmt.executeQuery("SELECT SUM(company_revenue) AS total_revenue FROM cbcrm.companies");
+            sql = "SELECT MAX(total_hours) AS total_hours FROM cbcrm.schedule";
+            ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
-            if (rs.next()) {
+            while (rs.next()) {
 
                 // Company detaljer
-                double revenue = rs.getDouble("total_revenue");
-                System.out.println(revenue);
-                list.add(new Company(revenue));
+                double totalHours = rs.getDouble("total_hours");
+
+                list.add(new ScheduleDays(totalHours));
             }
 
             //STEP 6: Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
+
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
@@ -66,18 +67,4 @@ public class GoalDAO {
         return list;
     }
 
-    /*@Override
-    public void update(Object element) {
-
-    }
-
-    @Override
-    public void insert(Object element) {
-
-    }
-
-    @Override
-    public void delete(Object element) {
-
-    }*/
 }

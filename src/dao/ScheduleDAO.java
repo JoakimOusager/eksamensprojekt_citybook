@@ -1,21 +1,22 @@
 package dao;
 
-
-import entities.Company;
+import entities.ScheduleDays;
+import entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class GoalDAO {
+/**
+ * Created by Daniel on 25-05-2017.
+ */
+public class ScheduleDAO {
 
-    //@Override
-    static public ArrayList<Company> get() {
-        ArrayList<Company> list = new ArrayList<>();
+    public static ArrayList<ScheduleDays> getSchedule(User user) {
+        ArrayList<ScheduleDays> list = new ArrayList<ScheduleDays>();
 
         Connection conn = null;
         Statement stmt = null;
-
+        int i = 0;
         try {
             //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
@@ -25,16 +26,25 @@ public class GoalDAO {
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
+            String sql;
 
-            ResultSet rs = stmt.executeQuery("SELECT SUM(company_revenue) AS total_revenue FROM cbcrm.companies");
+                sql = "SELECT * FROM cbcrm.schedule WHERE username = '" + user.getUsername() + "' ";
+            ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
-            if (rs.next()) {
+            while (rs.next()) {
 
                 // Company detaljer
-                double revenue = rs.getDouble("total_revenue");
-                System.out.println(revenue);
-                list.add(new Company(revenue));
+                double monday = rs.getDouble("monday");
+                double tuesday = rs.getDouble("tuesday");
+                double wednesday = rs.getDouble("wednesday");
+                double thursday = rs.getDouble("thursday");
+                double friday = rs.getDouble("friday");
+                double totalHours = rs.getDouble("total_hours");
+
+                list.add(new ScheduleDays(monday, tuesday, wednesday, thursday, friday,
+                        totalHours));
+                i++;
             }
 
             //STEP 6: Clean-up environment
@@ -65,19 +75,4 @@ public class GoalDAO {
         // System.out.println(i);
         return list;
     }
-
-    /*@Override
-    public void update(Object element) {
-
-    }
-
-    @Override
-    public void insert(Object element) {
-
-    }
-
-    @Override
-    public void delete(Object element) {
-
-    }*/
 }

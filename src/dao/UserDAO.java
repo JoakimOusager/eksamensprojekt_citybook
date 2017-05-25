@@ -7,10 +7,12 @@ import entities.User;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDAO {
+public class UserDAO implements BaseDAO<User> {
+
     /*
         Vores metode der bestemmer om man kan logge ind eller ej
      */
+
     public static User login(User user) {
         /*
             foundUser er den variabel der indeholder en bruger hvis den indtastede bruger findes samt kodeordet er korrekt.
@@ -74,7 +76,7 @@ public class UserDAO {
         return foundUser;
     }
 
-    public static ArrayList<User> getUsers() {
+    public ArrayList<User> get() {
         ArrayList<User> userList = new ArrayList<>();
 
         Connection conn = null;
@@ -137,7 +139,9 @@ public class UserDAO {
         return userList;
     }
 
-    public static void addUser(User user) {
+    public void update(User user) {}
+
+    public void insert(User user) {
         Connection conn = null;
         Statement stmt = null;
 
@@ -183,7 +187,7 @@ public class UserDAO {
         }
     }
 
-    public static void deleteUser(User user) {
+    public void delete(User user) {
         Connection conn = null;
         Statement stmt = null;
 
