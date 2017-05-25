@@ -78,7 +78,7 @@ public class LogicController {
 
     public static ArrayList<ScheduleDays> getSchedule(User user) {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        ArrayList<ScheduleDays> schedule = new ArrayList<>(scheduleDAO.getSchedule(user));
+        ArrayList<ScheduleDays> schedule = new ArrayList<>(scheduleDAO.get(user));
 
         return schedule;
 

@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -317,21 +318,6 @@ public class HomeGUI extends Application {
 
     }
 
-    //Aktivitetsscreen
-   /* public static void aktivitetScreen(Stage primaryStage){
-
-        activitiesButton.setId("mActive");
-        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
-
-        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
-        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
-        LoginGUI.whiteBackground.setBottom(bottom);
-
-        primaryStage.setScene(postLogin);
-        primaryStage.show();
-
-    } */
 
     //Målscreen
     public static void målScreen(Stage primaryStage){
@@ -746,6 +732,37 @@ public class HomeGUI extends Application {
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gpvagtplan);
 
+
+
+        primaryStage.setScene(postLogin);
+        primaryStage.show();
+
+    }
+
+    public static void vagtplanOversigtScreen(Stage primaryStage){
+
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+
+
+        ComboBox person1 = new ComboBox();
+
+        BorderPane totalHoursPerson1 = new BorderPane();
+        totalHoursPerson1.setId("bpGoalsScreen");
+        Label labelRevenueThisYearMessage = new Label("Årets resultat:");
+        labelRevenueThisYearMessage.setId("labelMessage");
+        Label labelRevenueThisYearCount = new Label("test");
+        labelRevenueThisYearCount.setId("labelCount");
+        //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
+        totalHoursPerson1.setTop(labelRevenueThisYearMessage);
+        totalHoursPerson1.setAlignment(labelRevenueThisYearMessage, Pos.TOP_CENTER);
+        totalHoursPerson1.setCenter(labelRevenueThisYearCount);
+
+
+        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
+        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
+        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setBottom(bottom);
 
 
         primaryStage.setScene(postLogin);
