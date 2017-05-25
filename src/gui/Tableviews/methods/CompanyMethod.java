@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 /**
  * Created by Daniel on 17-05-2017.
  */
@@ -39,6 +38,7 @@ public class CompanyMethod {
         // Add children method
         public static void addCompany() {
             Company company = new Company();
+            company.setName(name.getText());
             company.setCvrNumber(cvrNumber.getText());
             company.setAddress(address.getText());
             company.setEmail(email.getText());
@@ -76,11 +76,11 @@ public class CompanyMethod {
 
           /*  TableColumn<ContactPerson, String> contactPersonCol = new TableColumn<>("Kontaktperson");
             contactPersonCol.setMinWidth(120);
-            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("contactPerson")); */
+            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("name")); */
 
-            TableColumn<Company, String> contactPersonCol = new TableColumn<>("Navn");
-            contactPersonCol.setMinWidth(120);
-            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            TableColumn<Company, String> namePersonCol = new TableColumn<>("Navn");
+            namePersonCol.setMinWidth(120);
+            namePersonCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
             TableColumn<Company, String> adressCol = new TableColumn<>("Adresse");
             adressCol.setMinWidth(120);
@@ -186,7 +186,7 @@ public class CompanyMethod {
             tvCompany.setId("tvAktivitet");
             tvCompany.getStylesheets().addAll("gui/assets/login.css");
 
-            tvCompany.getColumns().addAll(cvrNumberCol, contactPersonCol, adressCol, emailCol, zipCodeCol, phoneNumberCol);
+            tvCompany.getColumns().addAll(cvrNumberCol, namePersonCol, adressCol, emailCol, zipCodeCol, phoneNumberCol);
             hboxCompany.setId("hboxAktivitet");
             hboxCompany.getStylesheets().addAll("gui/assets/login.css");
             hboxCompany.getChildren().addAll(addCompanyBox2,tvCompany, gp3);
