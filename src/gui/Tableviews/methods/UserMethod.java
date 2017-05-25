@@ -1,6 +1,7 @@
 package gui.Tableviews.methods;
 
 import backend.LogicController;
+import entities.Company;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,10 @@ public class UserMethod {
         ObservableList<User> userSelected, allUsers;
         allUsers = tvUser.getItems();
         userSelected = tvUser.getSelectionModel().getSelectedItems();
+        for (User user : userSelected) {
+            System.out.println("skrrt");
+            LogicController.deleteUser(user);
+        }
 
         userSelected.forEach(allUsers::remove);
     }

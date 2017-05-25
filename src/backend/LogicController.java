@@ -22,6 +22,10 @@ public class LogicController {
         return userList;
     }
 
+    public static void deleteUser(User user) {
+        UserDAO.deleteUser(user);
+    }
+
     public static String getSavedUsername() {
         String username = "";
         try {
