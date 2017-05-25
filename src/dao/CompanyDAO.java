@@ -163,11 +163,10 @@ public class CompanyDAO {
                     "VALUES ( "+ company.getName() + ", " + company.getAddress() + ",  " + company.getZipCode() + ", " +  company.getCvrNumber() + ", " + company.getEmail()+ ", " +
                     " " + company.getPhoneNumber() + ", " + company.getRevenue() + "," + company.getComments() + "," + company.getCreatedOn() + "," + company.getCreatedBy() + ", "  +
                     "" + company.getContactPerson() + ",)";
-            ResultSet rs = stmt.executeQuery(sql);
+            stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
             //STEP 6: Clean-up environment
-            rs.close();
             stmt.close();
             conn.close();
         } catch (SQLException se) {
