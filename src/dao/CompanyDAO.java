@@ -111,7 +111,7 @@ public class CompanyDAO {
             stmt = conn.createStatement();
             String sql;
 
-            sql = "DELETE FROM companies WHERE company_cvr = " + company.getCvrNumber() + "";
+            sql = "DELETE FROM companies WHERE company_cvr = '" + company.getCvrNumber() + "'";
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -160,10 +160,11 @@ public class CompanyDAO {
             sql = "INSERT INTO companies (company_name, company_address, company_zipcode, company_cvr," +
                     " company_email, company_phone, company_revenue, company_comments, company_created_on, company_created_by," +
                     " company_contact_person)" +
-                    "VALUES ( "+ company.getName() + ", " + company.getAddress() + ",  " + company.getZipCode() + ", " +  company.getCvrNumber() + ", " + company.getEmail()+ ", " +
-                    " " + company.getPhoneNumber() + ", " + company.getRevenue() + "," + company.getComments() + "," + company.getCreatedOn() + "," + company.getCreatedBy() + ", "  +
-                    "" + company.getContactPerson() + ",)";
-            stmt.executeUpdate(sql);
+                    "VALUES ( '"+ company.getName() + "', " + company.getAddress() + ",  '" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
+                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + company.getCreatedOn() + "','" + company.getCreatedBy() + "', '"  +
+                    "'" + company.getContactPerson() + "'')";
+            System.out.println(sql);
+           // stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
             //STEP 6: Clean-up environment

@@ -11,9 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Daniel on 17-05-2017.
  */
@@ -22,7 +19,7 @@ public class CompanyMethod {
     public static HBox hboxCompany = new HBox();
 
         public static TableView<Company> tvCompany = new TableView<>();
-        public static TextField cvrNumber, contactPerson, address, email, zipCode, phoneNumber;
+        public static TextField cvrNumber, name, address, email, zipCode, phoneNumber;
 
         // Get all the children
         public static ObservableList<Company> getCompany() {
@@ -36,6 +33,7 @@ public class CompanyMethod {
         // Add children method
         public static void addCompany() {
             Company company = new Company();
+            company.setName(name.getText());
             company.setCvrNumber(cvrNumber.getText());
             company.setAddress(address.getText());
             company.setEmail(email.getText());
@@ -43,7 +41,7 @@ public class CompanyMethod {
             company.setPhoneNumber(phoneNumber.getText());
             tvCompany.getItems().add(company);
             cvrNumber.clear();
-            contactPerson.clear();
+            name.clear();
             address.clear();
             email.clear();
             zipCode.clear();
@@ -73,11 +71,11 @@ public class CompanyMethod {
 
           /*  TableColumn<ContactPerson, String> contactPersonCol = new TableColumn<>("Kontaktperson");
             contactPersonCol.setMinWidth(120);
-            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("contactPerson")); */
+            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("name")); */
 
-            TableColumn<Company, String> contactPersonCol = new TableColumn<>("Navn");
-            contactPersonCol.setMinWidth(120);
-            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            TableColumn<Company, String> namePersonCol = new TableColumn<>("Navn");
+            namePersonCol.setMinWidth(120);
+            namePersonCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
             TableColumn<Company, String> adressCol = new TableColumn<>("Adresse");
             adressCol.setMinWidth(120);
@@ -123,9 +121,9 @@ public class CompanyMethod {
             cvrNumber.setPromptText("CVR-nummer");
             cvrNumber.setMaxWidth(100);
 
-            contactPerson = new TextField();
-            contactPerson.setPromptText("Kontaktperson");
-            contactPerson.setMaxWidth(100);
+            name = new TextField();
+            name.setPromptText("Navn");
+            name.setMaxWidth(100);
 
             address = new TextField();
             address.setPromptText("Adresse");
@@ -147,7 +145,7 @@ public class CompanyMethod {
 
 
             // adding the TextFields to VBox 1 and VBox 2
-            addCompanyBox.getChildren().addAll(cvrNumber, contactPerson, address, email, zipCode, phoneNumber,
+            addCompanyBox.getChildren().addAll(cvrNumber, name, address, email, zipCode, phoneNumber,
                     addCompanyBtn, deleteCompanyBtn);
             Label white = new Label();
             white.setId("whiteCompany");
@@ -160,7 +158,7 @@ public class CompanyMethod {
             tvCompany.setId("tvAktivitet");
             tvCompany.getStylesheets().addAll("gui/assets/login.css");
 
-            tvCompany.getColumns().addAll(cvrNumberCol, contactPersonCol, adressCol, emailCol, zipCodeCol, phoneNumberCol);
+            tvCompany.getColumns().addAll(cvrNumberCol, namePersonCol, adressCol, emailCol, zipCodeCol, phoneNumberCol);
             hboxCompany.setId("hboxAktivitet");
             hboxCompany.getStylesheets().addAll("gui/assets/login.css");
             hboxCompany.getChildren().addAll(addCompanyBox2,tvCompany, gp3);
