@@ -6,7 +6,6 @@ import entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Joakim on 23/05/2017.
@@ -64,7 +63,6 @@ public class CompanyDAO {
                 list.add(new Company(cvr, name, address, zipcode, email, phone,
                         comments, revenue, createdOn, contactPerson, createdBy));
                 i++;
-                System.out.println(i);
             }
 
             //STEP 6: Clean-up environment

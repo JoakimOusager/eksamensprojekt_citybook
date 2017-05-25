@@ -34,7 +34,6 @@ public class CheckBoxDAO {
 
         }else{
             output.println(username);
-            System.out.println(username);
             output.close();
         }
     }

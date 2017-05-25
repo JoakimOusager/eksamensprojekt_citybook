@@ -697,11 +697,6 @@ public class HomeGUI extends Application {
             }
 
             totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
-            System.out.println(mondayDB);
-            System.out.println(tuesdayDB);
-            System.out.println(wednesdayDB);
-            System.out.println(thursdayDB);
-            System.out.println(fridayDB);
             String totalTimerString = String.valueOf(totalHoursDB);
             totalTimer.setText(totalTimerString);
 
