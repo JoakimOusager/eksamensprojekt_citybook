@@ -38,7 +38,7 @@ public class GUI extends Application {
     static Button activitiesButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
-    static Button adminButton = new Button("Admin");
+    static Button userButton = new Button("Admin");
     static Button logoutButton = new Button("Log out");
     static Button homepageButton = new Button("Hjem");
 
@@ -161,8 +161,8 @@ public class GUI extends Application {
             companiesButton.setId("buttonReset");
 
             //Knap lavet specifikt til admins
-            adminButton.getStylesheets().addAll("gui/assets/login.css");
-            adminButton.setId("buttonReset");
+            userButton.getStylesheets().addAll("gui/assets/login.css");
+            userButton.setId("buttonReset");
 
 
         }
@@ -217,9 +217,9 @@ public class GUI extends Application {
         });
 
         //Knap lavet specifikt til admins
-        adminButton.getStylesheets().addAll("gui/assets/login.css");
-        adminButton.setId("buttonsleftside");
-        adminButton.setOnAction((ActionEvent event4) -> {
+        userButton.getStylesheets().addAll("gui/assets/login.css");
+        userButton.setId("buttonsleftside");
+        userButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
             adminScreen(primaryStage);
         });
@@ -241,7 +241,7 @@ public class GUI extends Application {
         });
 
 
-        menuVBox.getChildren().addAll(homepageButton,activitiesButton, goalsButton, companiesButton, adminButton, logoutButton);
+        menuVBox.getChildren().addAll(homepageButton,activitiesButton, goalsButton, companiesButton, userButton, logoutButton);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         white.getStylesheets().addAll("gui/assets/login.css");
@@ -329,8 +329,8 @@ public class GUI extends Application {
     //Adminscreen
     public static void adminScreen(Stage primaryStage){
 
-        adminButton.setId("mActive");
-        adminButton.getStylesheets().addAll("gui/assets/login.css");
+        userButton.setId("mActive");
+        userButton.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);

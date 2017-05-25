@@ -39,7 +39,7 @@ public class HomeGUI extends Application {
     static Button activitiesButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
-    static Button adminButton = new Button("Admin");
+    static Button userButton = new Button("Brugere");
     static Button logoutButton = new Button("Log out");
     static Button homepageButton = new Button("Hjem");
     static Button vagtplanButton = new Button("Vagtplan");
@@ -98,8 +98,8 @@ public class HomeGUI extends Application {
         companiesButton.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
-        adminButton.getStylesheets().addAll("gui/assets/login.css");
-        adminButton.setId("buttonsleftside");
+        userButton.getStylesheets().addAll("gui/assets/login.css");
+        userButton.setId("buttonsleftside");
 
     }
 
@@ -224,15 +224,15 @@ public class HomeGUI extends Application {
 
 
         //Knap lavet specifikt til admins
-        adminButton.getStylesheets().addAll("gui/assets/login.css");
-        adminButton.setId("buttonsleftside");
-        adminButton.setOnMouseEntered((MouseEvent e) -> {
-            adminButton.setUnderline(true);
+        userButton.getStylesheets().addAll("gui/assets/login.css");
+        userButton.setId("buttonsleftside");
+        userButton.setOnMouseEntered((MouseEvent e) -> {
+            userButton.setUnderline(true);
         });
-        adminButton.setOnMouseExited((MouseEvent e) -> {
-            adminButton.setUnderline(false);
+        userButton.setOnMouseExited((MouseEvent e) -> {
+            userButton.setUnderline(false);
         });
-        adminButton.setOnAction((ActionEvent event4) -> {
+        userButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
             adminScreen(primaryStage);
             LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
@@ -266,7 +266,7 @@ public class HomeGUI extends Application {
 
 
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
-                vagtplanButton, vagtplansOverblikbtn, adminButton, logoutButton);
+                vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
         combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
@@ -686,8 +686,8 @@ public class HomeGUI extends Application {
     //Adminscreen
     public static void adminScreen(Stage primaryStage){
 
-        adminButton.setId("mActive");
-        adminButton.getStylesheets().addAll("gui/assets/login.css");
+        userButton.setId("mActive");
+        userButton.getStylesheets().addAll("gui/assets/login.css");
 
         boolean alreadyExecuted = false;
 
