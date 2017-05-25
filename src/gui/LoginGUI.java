@@ -168,7 +168,7 @@ public class LoginGUI extends Application {
 
         loginScene = new Scene(loginBP);
 
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        //primaryStage.initStyle(StageStyle.TRANSPARENT);
         loginScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loginScene);
         primaryStage.show();

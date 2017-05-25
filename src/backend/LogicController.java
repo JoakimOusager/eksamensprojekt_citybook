@@ -22,6 +22,10 @@ public class LogicController {
         return userList;
     }
 
+    public static void addUser(User user) {
+        UserDAO.addUser(user);
+    }
+
     public static void deleteUser(User user) {
         UserDAO.deleteUser(user);
     }
