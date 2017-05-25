@@ -12,6 +12,7 @@ public class ScheduleDays {
     private double wednesday;
     private double thursday;
     private double friday;
+
     private double totalHours;
 
     public ScheduleDays(String username, double monday, double tuesday,
@@ -25,6 +26,10 @@ public class ScheduleDays {
         this.totalHours = totalHours;
     }
 
+    public ScheduleDays(double totalHours) {
+        this.totalHours = totalHours;
+    }
+
     public ScheduleDays( double monday, double tuesday,
                         double wednesday, double thursday, double friday, double totalHours) {
         this.monday = monday;
@@ -35,7 +40,13 @@ public class ScheduleDays {
         this.totalHours = totalHours;
     }
 
+    public ScheduleDays(String username, double totalHours) {
+        this.username = username;
+        this.totalHours = totalHours;
+    }
+
     public ScheduleDays(){
+
     }
 
 

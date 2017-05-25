@@ -112,11 +112,15 @@ public class UserMethod {
         addUserbox2.setSpacing(10);
         //gp3.add(addUserbox2, 1, 0);
 
-        // Buttons for adding and deleting Companies
+        // Knappen Tilføj Bruger under fanen "Brugere"
         Button addUserBtn = new Button("Tilføj Bruger");
         addUserBtn.setId("addEmployeeButton");
 
+        /*
+            Alertbox der meddeler admin at brugeren er blevet oprettet
+         */
         addUserBtn.setOnAction(successBox ->{
+            addUser();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Citybook");
             alert.setHeaderText("Bekræftelse");
@@ -124,14 +128,16 @@ public class UserMethod {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                addUser();
+
             }
         });
-
+        // Knappen Slet Bruger under fanen "Brugere"
         Button deleteUserBtn = new Button("Slet Bruger");
         deleteUserBtn.setId("deleteEmployeeButton");
 
-
+        /*
+           Alertbox til at sikre os at admin gerne vil slette en bruger.
+         */
         deleteUserBtn.setOnAction(alertBox ->{
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
