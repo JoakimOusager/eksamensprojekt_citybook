@@ -29,7 +29,7 @@
 }
 
 #btnlogin{
-    -fx-background-color: green;
+    -fx-background-color: forestgreen;
     -fx-text-fill: white;
     -fx-max-height: 25;
 }
@@ -124,21 +124,21 @@
 }
 
 #addEmployeeButton{
-    -fx-background-color: green;
+    -fx-background-color: forestgreen;
     -fx-pref-width: 100px;
     -fx-text-fill: white;
     -fx-font-size: 12px;
 }
 
 #showMoreInformationAboutCompanyButton {
-    -fx-background-color: blue;
+    -fx-background-color: dodgerblue;
     -fx-pref-width: 100px;
     -fx-text-fill: white;
     -fx-font-size: 12px;
 }
 
 #saveEdits {
-    -fx-background-color: blue;
+    -fx-background-color: dodgerblue;
     -fx-pref-width: 150px;
     -fx-text-fill: white;
     -fx-font-size: 12px;
@@ -164,7 +164,7 @@
 }
 
 #gemTimer{
-    -fx-background-color: green;
+    -fx-background-color: forestgreen;
     -fx-text-fill: white;
     -fx-pref-width: 120px;
     -fx-pref-height: 35px;
