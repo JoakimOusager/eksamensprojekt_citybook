@@ -148,12 +148,12 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
                 diffMinutesEnd = backend.Datepicker.endDateStamp();
                 datoFredag2.setText(dateFormat.format(cal.getTime()));
-                thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
-                String timer10 = String.valueOf(thursdayDB);
+                fridayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                String timer10 = String.valueOf(fridayDB);
                 timerFredag.setText(timer10);
         }
 
-        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
+        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, mondayDB, mondayDB, thursdayDB, fridayDB);
         String totalTimerString = String.valueOf(totalHoursDB);
         totalTimer.setText(totalTimerString);
 

@@ -1,6 +1,7 @@
 package backend;
 
 import dao.*;
+import entities.Comment;
 import entities.Company;
 import entities.ScheduleDays;
 import entities.User;
@@ -71,6 +72,12 @@ public class LogicController {
 
     }
 
+    public static void addComment(Comment comment) {
+        CommentDAO commentDAO = new CommentDAO();
+        commentDAO.insert(comment);
+
+    }
+
     public static void deleteCompany(Company company) {
         CompanyDAO companyDAO = new CompanyDAO();
         companyDAO.delete(company);
@@ -126,6 +133,16 @@ public class LogicController {
 
     }
 
+    public static ArrayList<Comment> getComment() {
+        CommentDAO commentDAO = new CommentDAO();
+        ArrayList<Comment> list = new ArrayList<>(commentDAO.get());
+
+        return list;
+
+    }
+
+
+
     public static void comboboxLogic(ArrayList comboBoxArray2, ArrayList comboBoxArray1,
                                      ComboBox person1, Label personLabel1){
 
@@ -133,6 +150,7 @@ public class LogicController {
         comboboxObject.comboBoxAction(comboBoxArray2, comboBoxArray1,
                 person1, personLabel1);
     }
+
 
     public static void scheduleLogicStart(int day, DateFormat dateFormat, Calendar cal, double mondayDB,
                                           double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, Label datoMandag, Label datoTirsdag,

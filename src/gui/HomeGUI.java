@@ -5,6 +5,7 @@ package gui;/**
 //import gui.Tableviews.methods.ActivityMethod;
 
 import backend.LogicController;
+import entities.Comment;
 import entities.Company;
 import entities.ScheduleDays;
 import entities.User;
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -406,10 +408,12 @@ public class HomeGUI extends Application implements ActionListener {
 
         //dagens mål
         BorderPane bpTodaysGoal = new BorderPane();
+        ArrayList<Comment> comment = new ArrayList<Comment>(LogicController.getComment());
+        String commentString = comment.get(0).getComment();
         bpTodaysGoal.setId("bpGoalsScreen");
-        Label labelTodaysGoalMessage = new Label("Dagens mål:");
+        Label labelTodaysGoalMessage = new Label("Dagens kommentar:");
         labelTodaysGoalMessage.setId("labelMessage");
-        Label labelTodaysGoalNumber = new Label("24000 kr");
+        Label labelTodaysGoalNumber = new Label(commentString);
         labelTodaysGoalNumber.setId("labelCount");
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
@@ -812,6 +816,8 @@ public class HomeGUI extends Application implements ActionListener {
     public static void scheduleOverviewScreen(Stage primaryStage){
 
 
+        backend.LogicController.getComment();
+
         vagtplanButton.setId("mActive");
         vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
         ArrayList<ScheduleDays> maxHoursList = new ArrayList<>(LogicController.getUsernameHours());
@@ -881,14 +887,38 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursPerson2.setAlignment(personLabel2, Pos.BOTTOM_CENTER);
 
 
+        BorderPane commentBP = new BorderPane();
+        totalHoursPerson1.setId("bpGoalsScreen");
+        Label labelKommentar = new Label("Skriv en kommentar");
+        labelKommentar.setId("labelMessage");
+        TextField kommentar = new TextField();
+        kommentar.setId("kommentarTextfield");
+        kommentar.setPromptText("Skriv din kommentar");
+        //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
+        commentBP.setTop(labelKommentar);
+        commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
+        commentBP.setCenter(kommentar);
+
+
+
+
+        Button commitKommentar = new Button("Commit");
+        commitKommentar.setId("btncommit");
+        commitKommentar.getStylesheets().addAll("gui/assets/login.css");
+        commitKommentar.setOnAction(event -> {
+            backend.LogicController.addComment(new Comment(kommentar.getText()));
+        });
+
+
+
         //nu skal de forskellige views samles
         GridPane gridPaneGoals = new GridPane();
         gridPaneGoals.setId("gridPaneGoals");
         gridPaneGoals.setPadding(new Insets(0, 30, 10, 30));
         gridPaneGoals.add(totalHoursPerson1, 0, 0);
-        //gridPaneGoals.add(bpTodaysGoal, 0, 1);
+        gridPaneGoals.add(commentBP, 0, 1);
         gridPaneGoals.add(totalHoursPerson2, 1, 0);
-        //gridPaneGoals.add(bpRevenueThisYear, 1, 1);
+        gridPaneGoals.add(commitKommentar, 1, 1);
 
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
