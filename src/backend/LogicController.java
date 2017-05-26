@@ -105,6 +105,24 @@ public class LogicController {
 
     }
 
+    public static ArrayList<ScheduleDays> getUsernameHours() {
+        ComboboxDAO comboboxDAO = new ComboboxDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(comboboxDAO.get());
+        System.out.println(list.get(0));
+
+        return list;
+
+    }
+
+    public static ArrayList<ScheduleDays> getHoursUsername() {
+        TotalHoursUsernameDAO totalHoursUsernameDAO = new TotalHoursUsernameDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(totalHoursUsernameDAO.get());
+        System.out.println(list.get(0));
+
+        return list;
+
+    }
+
 
 }
 

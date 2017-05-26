@@ -1,7 +1,5 @@
 package dao;
 
-import entities.Company;
-import entities.ContactPerson;
 import entities.User;
 
 import java.sql.*;

@@ -26,12 +26,13 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class HomeGUI extends Application {
+public class HomeGUI extends Application implements ActionListener {
 
     // De skulle bruges ofte, så de er static
     static VBox menuVBox = new VBox();
@@ -223,7 +224,7 @@ public class HomeGUI extends Application {
         });
         vagtplansOverblikbtn.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            virksomhedsScreen(primaryStage);
+            vagtplanOversigtScreen(primaryStage);
 
         });
 
@@ -757,47 +758,105 @@ public class HomeGUI extends Application {
 
         vagtplanButton.setId("mActive");
         vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        ArrayList<ScheduleDays> maxHoursList = new ArrayList<ScheduleDays>(LogicController.getUsernameHours());
+        ArrayList<ScheduleDays> maxHoursList1 = new ArrayList<ScheduleDays>(LogicController.getHoursUsername());
+        ArrayList<Double> comboBoxArray1 = new ArrayList<>();
+        ArrayList<String> comboBoxArray2 = new ArrayList<>();
 
 
         ComboBox person1 = new ComboBox();
+        person1.setId("combobox");
+        person1.getStylesheets().addAll("gui/assets/login.css");
+        person1.setPromptText("Vælger bruger 1");
+
+        ComboBox person2 = new ComboBox();
+        person2.setId("combobox");
+        person2.getStylesheets().addAll("gui/assets/login.css");
+        person2.setPromptText("Vælger bruger 2");
+
+
+        Label personLabel1 = new Label("\"Antal timer person 1\"");
+        personLabel1.setId("personlabelCombobox");
+        personLabel1.getStylesheets().addAll("gui/assets/login.css");
+        Label personLabel2 = new Label("\"Antal timer person 2\"");
+        personLabel2.setId("personlabelCombobox");
+        personLabel2.getStylesheets().addAll("gui/assets/login.css");
+
+
+        for(int i = 0; i < maxHoursList.size();i++) {
+            comboBoxArray1.add(maxHoursList1.get(i).getTotalHours());
+            comboBoxArray2.add(maxHoursList.get(i).getUsername());
+            person1.getItems().add(comboBoxArray2.get(i));
+            person2.getItems().add(comboBoxArray2.get(i));
+        }
+        person1.setOnAction(event -> {
+            for(int i = 0; i<comboBoxArray2.size();i++){
+                if(person1.getValue().equals(comboBoxArray2.get(i))){
+                    personLabel1.setText(String.valueOf(comboBoxArray1.get(i)));
+                }
+            }
+
+        });
+
+        person2.setOnAction(event -> {
+            for(int i = 0; i<comboBoxArray2.size();i++){
+                if(person2.getValue().equals(comboBoxArray2.get(i))){
+                    personLabel2.setText(String.valueOf(comboBoxArray1.get(i)));
+                }
+            }
+
+        });
+
 
         BorderPane totalHoursPerson1 = new BorderPane();
         totalHoursPerson1.setId("bpGoalsScreen");
-        Label labelRevenueThisYearMessage = new Label("Årets resultat:");
-        labelRevenueThisYearMessage.setId("labelMessage");
+        Label labelTotalHoursMessage = new Label("Total antal timer:");
+        labelTotalHoursMessage.setId("labelMessage");
         Label labelRevenueThisYearCount = new Label("test");
         labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
-        totalHoursPerson1.setTop(labelRevenueThisYearMessage);
-        totalHoursPerson1.setAlignment(labelRevenueThisYearMessage, Pos.TOP_CENTER);
-        totalHoursPerson1.setCenter(labelRevenueThisYearCount);
+        totalHoursPerson1.setTop(labelTotalHoursMessage);
+        totalHoursPerson1.setAlignment(labelTotalHoursMessage, Pos.TOP_CENTER);
+        totalHoursPerson1.setCenter(person1);
+        totalHoursPerson1.setLeft(labelRevenueThisYearCount);
+        totalHoursPerson1.setBottom(personLabel1);
 
+        BorderPane totalHoursPerson2 = new BorderPane();
+        totalHoursPerson2.setId("bpGoalsScreen");
+        Label labelTotalHoursMessage2 = new Label("Total antal timer for:");
+        labelTotalHoursMessage2.setId("labelMessage");
+        Label labelTotalHours2 = new Label("1000000");
+        labelRevenueThisYearCount.setId("labelCount");
+        //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
+        totalHoursPerson2.setTop(labelTotalHoursMessage2);
+        totalHoursPerson2.setAlignment(labelTotalHoursMessage2, Pos.TOP_CENTER);
+        totalHoursPerson2.setCenter(person2);
+        totalHoursPerson2.setLeft(labelRevenueThisYearCount);
+        totalHoursPerson2.setBottom(personLabel2);
+
+
+        //nu skal de forskellige views samles
+        GridPane gridPaneGoals = new GridPane();
+        gridPaneGoals.setId("gridPaneGoals");
+        gridPaneGoals.setPadding(new Insets(0, 30, 10, 30));
+        gridPaneGoals.add(totalHoursPerson1, 0, 0);
+        //gridPaneGoals.add(bpTodaysGoal, 0, 1);
+        gridPaneGoals.add(totalHoursPerson2, 1, 0);
+        //gridPaneGoals.add(bpRevenueThisYear, 1, 1);
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI. whiteBackground.setLeft(combineMenu);
         LoginGUI.whiteBackground.setBottom(bottom);
+        LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
 
     }
-
-    //virksomhedsoverbliks screen
-    public static void virksomhedsOverblikScreen(Stage primaryStage){
-
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
-
-        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
-        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
-        LoginGUI.whiteBackground.setBottom(bottom);
-
-
-        primaryStage.setScene(postLogin);
-        primaryStage.show();
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e) {
 
     }
 
@@ -855,5 +914,6 @@ public class HomeGUI extends Application {
         primaryStage.setScene(postLogin);
         primaryStage.show();
     }
+
 
 }
