@@ -9,4 +9,5 @@ gen
 .idea/
 target/
 eksamensprojekt_citybook.iml
+.DS_Store
 
