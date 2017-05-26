@@ -36,8 +36,6 @@ public class HomeGUI extends Application {
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
-    static Rectangle rectangleEncapsulateMenuButtons = new Rectangle();
-    static StackPane combineMenu = new StackPane();
 
     //Buttons
     static Button activitiesButton = new Button("Aktiviteter");
@@ -259,21 +257,10 @@ public class HomeGUI extends Application {
             primaryStage.centerOnScreen();
 
         });
-
-        //Setting up the rectangle
-        rectangleEncapsulateMenuButtons.setX(0);
-        rectangleEncapsulateMenuButtons.setY(0);
-        rectangleEncapsulateMenuButtons.setWidth(150);
-        rectangleEncapsulateMenuButtons.setHeight(300);
-        rectangleEncapsulateMenuButtons.setOpacity(0.2);
-        rectangleEncapsulateMenuButtons.setArcHeight(30);
-        rectangleEncapsulateMenuButtons.setArcWidth(30);
-
-
+        menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
                 vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
-        combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -289,7 +276,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -309,7 +296,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI. whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(welcome);
 
@@ -416,7 +403,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
@@ -432,7 +419,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -761,7 +748,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gpvagtplan);
 
@@ -780,7 +767,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -805,7 +792,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);
@@ -837,7 +824,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
 
         LoginGUI.whiteBackground.setCenter(calendar);
         primaryStage.setScene(postLogin);
