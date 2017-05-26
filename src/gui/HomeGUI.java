@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -337,7 +338,7 @@ public class HomeGUI extends Application implements ActionListener {
         da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
     */
 
-    public static void CalendarView(Stage primaryStage) {
+     public static void CalendarView(Stage primaryStage) {
         activitiesButton.setId("mActive");
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
 
@@ -927,4 +928,5 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.setScene(postLogin);
         primaryStage.show();
     }
+
 }
