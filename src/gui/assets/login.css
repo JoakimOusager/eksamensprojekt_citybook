@@ -222,3 +222,15 @@
     -fx-min-width: 200px;
     -fx-text-fill: white;
 }
+
+#kommentarTextfield{
+    -fx-font-size: 20px;
+    -fx-min-width: 300px;
+    -fx-min-height: 100px;
+}
+
+#btncommit{
+    -fx-font-size: 70px;
+    -fx-min-height: 100px;
+    -fx-min-width: 400px;
+}
