@@ -860,27 +860,24 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursPerson1.setId("bpGoalsScreen");
         Label labelTotalHoursMessage = new Label("Total antal timer:");
         labelTotalHoursMessage.setId("labelMessage");
-        Label labelRevenueThisYearCount = new Label("test");
-        labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         totalHoursPerson1.setTop(labelTotalHoursMessage);
         totalHoursPerson1.setAlignment(labelTotalHoursMessage, Pos.TOP_CENTER);
         totalHoursPerson1.setCenter(person1);
-        totalHoursPerson1.setLeft(labelRevenueThisYearCount);
         totalHoursPerson1.setBottom(personLabel1);
+        totalHoursPerson1.setAlignment(personLabel1, Pos.BOTTOM_CENTER);
 
         BorderPane totalHoursPerson2 = new BorderPane();
         totalHoursPerson2.setId("bpGoalsScreen");
         Label labelTotalHoursMessage2 = new Label("Total antal timer for:");
         labelTotalHoursMessage2.setId("labelMessage");
         Label labelTotalHours2 = new Label("1000000");
-        labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         totalHoursPerson2.setTop(labelTotalHoursMessage2);
         totalHoursPerson2.setAlignment(labelTotalHoursMessage2, Pos.TOP_CENTER);
         totalHoursPerson2.setCenter(person2);
-        totalHoursPerson2.setLeft(labelRevenueThisYearCount);
         totalHoursPerson2.setBottom(personLabel2);
+        totalHoursPerson2.setAlignment(personLabel2, Pos.BOTTOM_CENTER);
 
 
         //nu skal de forskellige views samles
