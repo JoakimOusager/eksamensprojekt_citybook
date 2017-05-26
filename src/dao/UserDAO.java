@@ -5,6 +5,9 @@ import entities.User;
 import java.sql.*;
 import java.util.ArrayList;
 
+ /*
+        Klassen som håndterer alt database interaktion fra User table i databasen til programmet.
+ */
 public class UserDAO implements BaseDAO<User> {
 
     /*
@@ -74,27 +77,29 @@ public class UserDAO implements BaseDAO<User> {
         return foundUser;
     }
 
+    /*
+        Dette er vores metode til at hente brugere fra databasen.
+    */
     public ArrayList<User> get() {
         ArrayList<User> userList = new ArrayList<>();
 
         Connection conn = null;
         Statement stmt = null;
-        int i = 0;
         try {
-            //STEP 2: Register JDBC driver
+            // Registrér JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
 
-            //STEP 3: Open a connection
+            // Åben forbindelse til databasen.
             conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
 
-            //STEP 4: Execute a query
+            // Udfører en query.
             stmt = conn.createStatement();
             String sql;
 
             sql = "SELECT * FROM cbcrm.user";
             ResultSet rs = stmt.executeQuery(sql);
 
-            //STEP 5: Extract data from result set
+            // Henter dataen ud i vores variabler.
             while (rs.next()) {
 
                 // Company detaljer
@@ -104,14 +109,15 @@ public class UserDAO implements BaseDAO<User> {
                 Timestamp startDate = rs.getTimestamp("user_created_on");
 
                 userList.add(new User(username, email, rank, startDate));
-                i++;
                 System.out.println(i);
             }
 
-            //STEP 6: Clean-up environment
+            // Lukker forbindelserne.
             rs.close();
             stmt.close();
             conn.close();
+
+         // Nedenstående er hvordan vi håndterer vores exceptions.
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
@@ -124,7 +130,7 @@ public class UserDAO implements BaseDAO<User> {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
@@ -133,7 +139,6 @@ public class UserDAO implements BaseDAO<User> {
             }
 
         }
-        // System.out.println(i);
         return userList;
     }
 
