@@ -15,7 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import static gui.HomeGUI.userButton;
 
@@ -122,6 +121,8 @@ public class LoginGUI extends Application {
                     if (foundUser != null) {
                         if (foundUser.getRank() == 0) {
                             userButton.setVisible(false);
+                            HomeGUI getScheduleOverview = new HomeGUI();
+                            getScheduleOverview.vagtplansOverblikbtn.setVisible(false);
                         }
                             LogicController.setSavedUsername(usernamefield.getText(), saveMe);
                         if (!hasRunBefore) {

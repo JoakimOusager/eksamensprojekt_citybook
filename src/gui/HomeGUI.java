@@ -73,13 +73,13 @@ public class HomeGUI extends Application implements ActionListener {
     static Label datoTirsdag = new Label();
     static Label datoMandag = new Label();
 
-    static Label timerMandag = new Label();
-    static Label timerTirsdag = new Label();
-    static Label timerOnsdag = new Label();
-    static Label timerTorsdag = new Label();
-    static Label timerFredag = new Label();
+    static TextField timerMandag = new TextField();
+    static TextField timerTirsdag = new TextField();
+    static TextField timerOnsdag = new TextField();
+    static TextField timerTorsdag = new TextField();
+    static TextField timerFredag = new TextField();
 
-    static Label totalTimer = new Label();
+    static TextField totalTimer = new TextField();
 
     // Long tidsvariabler
     static long diffMinutesStart;
@@ -559,21 +559,44 @@ public class HomeGUI extends Application implements ActionListener {
 
         timerMandag.setId("datoTextfield");
         timerMandag.getStylesheets().addAll("gui/assets/login.css");
+        timerMandag.textProperty().addListener((observable, oldValue, newValue) -> {
+            timerMandag.setText(timerMandag.getText());
+        });
+
 
         timerTirsdag.setId("datoTextfield");
         timerTirsdag.getStylesheets().addAll("gui/assets/login.css");
+        timerTirsdag.textProperty().addListener((observable, oldValue, newValue) -> {
+            timerTirsdag.setText(timerTirsdag.getText());
+        });
 
         timerOnsdag.setId("datoTextfield");
         timerOnsdag.getStylesheets().addAll("gui/assets/login.css");
+        timerOnsdag.textProperty().addListener((observable, oldValue, newValue) -> {
+            timerOnsdag.setText(timerOnsdag.getText());
+        });
+
 
         timerTorsdag.setId("datoTextfield");
         timerTorsdag.getStylesheets().addAll("gui/assets/login.css");
+        timerTorsdag.textProperty().addListener((observable, oldValue, newValue) -> {
+            timerTorsdag.setText(timerTorsdag.getText());
+        });
+
 
         timerFredag.setId("datoTextfield");
         timerFredag.getStylesheets().addAll("gui/assets/login.css");
+        timerFredag.textProperty().addListener((observable, oldValue, newValue) -> {
+            timerFredag.setText(timerFredag.getText());
+        });
+
 
         totalTimer.setId("datoTextfield");
         totalTimer.getStylesheets().addAll("gui/assets/login.css");
+
+
+
+        Button updateHours = new Button("Update");
 
 
         Button startTimer = new Button("Start");
@@ -673,6 +696,8 @@ public class HomeGUI extends Application implements ActionListener {
             }*/
         });
 
+        ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule(loggedInUser));
+
         Button stopTimer = new Button("Stop");
         stopTimer.setId("gemTimer");
         stopTimer.getStylesheets().addAll("gui/assets/login.css");
@@ -683,8 +708,6 @@ public class HomeGUI extends Application implements ActionListener {
             Calendar cal = Calendar.getInstance();
 
             //Variabler til brug af totalTid fra databasen
-            ArrayList<ScheduleDays> arraylistSchedule =
-                    new ArrayList<>(LogicController.getSchedule(loggedInUser));
             double mondayDB = arraylistSchedule.get(0).getMonday();
             double tuesdayDB = arraylistSchedule.get(0).getTuesday();
             double wednesdayDB = arraylistSchedule.get(0).getWednesday();
@@ -697,6 +720,7 @@ public class HomeGUI extends Application implements ActionListener {
                     datoMandag2, datoTirsdag2, datoOnsdag2, datoTorsdag2, datoFredag2,
                     diffMinutesEnd, diffMinutesStart, totalTimer,
                     timerMandag, timerTirsdag, timerOnsdag, timerTorsdag, timerFredag);
+
 
             /*switch (day){
                 case 2:
@@ -762,6 +786,26 @@ public class HomeGUI extends Application implements ActionListener {
 
 
         });
+        updateHours.setOnAction(event -> {
+            double totalTimerDouble =
+                     Double.parseDouble(timerMandag.getText())
+                    + Double.parseDouble(timerTirsdag.getText())
+                    + Double.parseDouble(timerOnsdag.getText())
+                    + Double.parseDouble(timerTorsdag.getText())
+                    + Double.parseDouble(timerFredag.getText());
+            ScheduleDays timerUpdate = new ScheduleDays((Double.parseDouble(timerMandag.getText())),
+                    (Double.parseDouble(timerTirsdag.getText())),
+                    (Double.parseDouble(timerOnsdag.getText())),
+                    (Double.parseDouble(timerTorsdag.getText())),
+                    (Double.parseDouble(timerFredag.getText())),
+                    (totalTimerDouble));
+            LogicController.updateSchedule(timerUpdate, loggedInUser);
+            totalTimer.setText(String.valueOf(totalTimerDouble));
+            /*totalTimer.textProperty().addListener((observable, oldValue, newValue) -> {
+                totalTimer.setText(String.valueOf(totalTimerDouble));
+            });*/
+        });
+
 
 
         //Label af dagenen
@@ -779,6 +823,7 @@ public class HomeGUI extends Application implements ActionListener {
         gpvagtplan.add(totalTimerLabel,1,5);
         gpvagtplan.add(startTimer,1,6);
         gpvagtplan.add(stopTimer,1,7);
+        gpvagtplan.add(updateHours,1,8);
 
         //Labels til alle dagene
         gpvagtplan.add(datoMandag,2,2);

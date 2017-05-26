@@ -7,6 +7,7 @@ import entities.ScheduleDays;
 import entities.User;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public class LogicController {
     public static void updateCompanies() {
         CompanyDAO userDAO = new CompanyDAO();
 
+
+    }
+
+    public static void updateSchedule(ScheduleDays scheduleDays, User user){
+        ScheduleDAO scheduleDays1 = new ScheduleDAO();
+        scheduleDays1.update(scheduleDays, user);
 
     }
 
@@ -152,10 +159,12 @@ public class LogicController {
     }
 
 
+
+
     public static void scheduleLogicStart(int day, DateFormat dateFormat, Calendar cal, double mondayDB,
                                           double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, Label datoMandag, Label datoTirsdag,
-                                          Label datoOnsdag, Label datoTorsdag, Label datoFredag, Label timerMandag, Label timerTirsdag, Label timerOnsdag,
-                                          Label timerTorsdag, Label timerFredag){
+                                          Label datoOnsdag, Label datoTorsdag, Label datoFredag, TextField timerMandag, TextField timerTirsdag, TextField timerOnsdag,
+                                          TextField timerTorsdag, TextField timerFredag){
 
         backend.ScheduleLogic scheduleLogicObjectStart = new ScheduleLogic();
         scheduleLogicObjectStart.scheduleStart(day, dateFormat, cal, mondayDB,
@@ -167,8 +176,8 @@ public class LogicController {
     public static void scheduleLogicEnd(int day, DateFormat dateFormat, Calendar cal, double mondayDB,
                                         double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB,
                                         Label datoMandag2, Label datoTirsdag2, Label datoOnsdag2, Label datoTorsdag2, Label datoFredag2,
-                                        long diffMinutesEnd, long diffMinutesStart, Label totalTimer,
-                                        Label timerMandag, Label timerTirsdag, Label timerOnsdag, Label timerTorsdag, Label timerFredag){
+                                        long diffMinutesEnd, long diffMinutesStart, TextField totalTimer,
+                                        TextField timerMandag, TextField timerTirsdag, TextField timerOnsdag, TextField timerTorsdag, TextField timerFredag){
 
         backend.ScheduleLogic scheduleLogicObjectEnd = new ScheduleLogic();
         scheduleLogicObjectEnd.scheduleStop(day, dateFormat, cal, mondayDB,
