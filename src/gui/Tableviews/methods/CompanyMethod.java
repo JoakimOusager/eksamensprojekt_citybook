@@ -2,6 +2,7 @@ package gui.Tableviews.methods;
 
 import backend.LogicController;
 import entities.Company;
+import gui.HomeGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +45,7 @@ public class CompanyMethod {
             company.setEmail(email.getText());
             company.setZipCode(zipCode.getText());
             company.setPhoneNumber(phoneNumber.getText());
+            company.setCreatedBy(HomeGUI.loggedInUser);
             tvCompany.getItems().add(company);
             cvrNumber.clear();
             name.clear();

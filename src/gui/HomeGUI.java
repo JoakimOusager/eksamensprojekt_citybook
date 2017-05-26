@@ -51,7 +51,7 @@ public class HomeGUI extends Application {
     static Button vagtplanButton = new Button("Vagtplan");
     static Button vagtplansOverblikbtn = new Button("Vagtplanoverblik");
 
-    static User loggedInUser;
+    public static User loggedInUser;
 
     //labels for vagtplan er gjort static for at labelens text ikke bliver reset ved scene skift
     static Label datoFredag2 = new Label();
