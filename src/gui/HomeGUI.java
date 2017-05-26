@@ -146,6 +146,10 @@ public class HomeGUI extends Application implements ActionListener {
         LoginGUI.citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
         LoginGUI.citybookLogoPane.setId("citybookLogoPane");
 
+        /* //////////////////////////////////////////////////////////////////////////////////////////
+                                             SIDE MENU
+       ////////////////////////////////////////////////////////////////////////////////////////// */
+
         //VBox til alle knapperne der ligger i venstre side
         menuVBox.setSpacing(14.5);
         menuVBox.getStylesheets().addAll("gui/assets/login.css");
@@ -275,6 +279,10 @@ public class HomeGUI extends Application implements ActionListener {
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
                 vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
+
+        /* //////////////////////////////////////////////////////////////////////////////////////////
+                                           SLUT SIDE MENU
+       ////////////////////////////////////////////////////////////////////////////////////////// */
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -516,8 +524,6 @@ public class HomeGUI extends Application implements ActionListener {
         Label totalTimerLabel = new Label("Total Timer");
         totalTimerLabel.setId("dage");
         totalTimerLabel.getStylesheets().addAll("gui/assets/login.css");
-
-
 
         datoMandag.setId("datoTextfield");
         datoMandag.getStylesheets().addAll("gui/assets/login.css");
