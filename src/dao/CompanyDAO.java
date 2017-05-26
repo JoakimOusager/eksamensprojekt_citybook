@@ -192,5 +192,55 @@ public class CompanyDAO implements BaseDAO<Company> {
         }
     }
 
-    public void update(Company company) {}
+    public void update(Company company) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(DAO.JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
+
+            //STEP 4: Execute a query
+            stmt = conn.createStatement();
+            String sql;
+
+            sql = "UPDATE companies" +
+                    "SET company_name = '" + company.getName() + "',  company_address = '" +company.getAddress() +"'," +
+                    "company_zipcode = + '" + company.getZipCode() + "'," +
+                    "company_email =  '" + company.getEmail() + "'," +
+                    "company_phone =  '" + company.getPhoneNumber() + "'," +
+                    "company_revenue = '" + company.getRevenue() + "'," +
+                    "company_comments = '" + company.getComments() + "'" +
+                    "WHERE company_cvr = '" + company.getCvrNumber() + "'";
+            System.out.println(sql);
+            // stmt.executeUpdate(sql);
+
+            //STEP 5: Extract data from result set
+            //STEP 6: Clean-up environment
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+            }// nothing we can do
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
 }
