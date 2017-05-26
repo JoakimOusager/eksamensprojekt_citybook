@@ -100,18 +100,26 @@ public class UserMethod {
     */
     public static void userTableviewStart() {
 
+        /*
+            Vi opretter de kolonner som bliver vist i vores TableView for brugere.
+        */
+
+        // Kolonne for brugernavn
         TableColumn<User, String> usernameCol = new TableColumn<>("Username");
         usernameCol.setMinWidth(150);
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
+        // Kolonne for Email
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
         emailCol.setMinWidth(185);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
 
+        // Kolonne for Start dato // Timestamp
         TableColumn<User, String> startDateCol = new TableColumn<>("Start time");
         startDateCol.setMinWidth(185);
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 
+        // Bruger rang, 1 for admin, 0 for normal bruger.
         TableColumn<User, Number> userRankCol = new TableColumn<>("User rank");
         userRankCol.setMinWidth(5);
         userRankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
