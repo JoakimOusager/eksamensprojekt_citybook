@@ -1,5 +1,7 @@
 package entities;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.input.DataFormat;
 
 import java.sql.Date;
@@ -26,19 +28,21 @@ public class User {
 
     // Constructoren som databasen bruger, når den returnerer en bruger. Der er ingen grund til at have password med
     // Men de andre fields kan bruges, ex. til at skrive "Hej Joakim" på loginskærmen, hvis det er Joakim som logger ind
-    public User(String username, String email, int userRank) {
+    public User(String username, String email, int rank) {
         this.username = username;
         this.email = email;
-        this.rank = userRank;
+        this.rank = rank;
     }
+
     /*
         Constructor vi bruger til at load brugere ind i vores tableview.
      */
-    public User(String username, String email, int userRank, Timestamp startDate) {
+
+    public User(String username, String email, int rank, Timestamp startDate) {
         this.username = username;
         this.email = email;
         this.startDate = startDate;
-        this.rank = userRank;
+        this.rank = rank;
     }
 
     public String getUsername() {
@@ -72,7 +76,6 @@ public class User {
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
-
 
     public int getRank() {
         return rank;

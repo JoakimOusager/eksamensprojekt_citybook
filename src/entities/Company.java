@@ -11,6 +11,9 @@ public class Company {
     private String zipCode;
     private String email;
     private String phoneNumber;
+
+
+
     private double revenue;
     private String comments;
     private Timestamp createdOn;
@@ -29,6 +32,10 @@ public class Company {
         this.createdOn = createdOn;
         this.contactPerson = contactPerson;
         this.createdBy = createdBy;
+    }
+
+    public Company(double revenue) {
+        this.revenue = revenue;
     }
 
     public Company() {

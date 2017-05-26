@@ -51,6 +51,7 @@ public class CompanyMethod {
             email.clear();
             zipCode.clear();
             phoneNumber.clear();
+            tvCompany.refresh();
 
             LogicController.addCompany(company);
         }
@@ -126,6 +127,7 @@ public class CompanyMethod {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
                     addCompany();
+                    tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
                 }
             });
 

@@ -8,9 +8,19 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UserDAO implements BaseDAO<User> {
-    public static User login(User user) {
-        User foundUser = null;
 
+    /*
+        Vores metode der bestemmer om man kan logge ind eller ej
+     */
+
+    public static User login(User user) {
+        /*
+            foundUser er den variabel der indeholder en bruger hvis den indtastede bruger findes samt kodeordet er korrekt.
+          */
+        User foundUser = null;
+        /*
+            For at resette vores connection til databasen.
+         */
         Connection conn = null;
         Statement stmt = null;
 
@@ -272,5 +282,6 @@ public class UserDAO implements BaseDAO<User> {
 
 
     }
+
 
 }

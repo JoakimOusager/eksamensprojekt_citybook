@@ -12,6 +12,7 @@ import java.util.List;
  * Created by Joakim on 23/05/2017.
  */
 public class CompanyDAO implements BaseDAO<Company> {
+
     public ArrayList<Company> get() {
         ArrayList<Company> list = new ArrayList<Company>();
 

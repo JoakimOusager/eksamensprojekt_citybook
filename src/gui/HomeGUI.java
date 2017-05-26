@@ -6,6 +6,7 @@ package gui;/**
 
 import backend.Datepicker;
 import backend.LogicController;
+import entities.Company;
 import entities.ScheduleDays;
 import entities.User;
 import gui.Tableviews.methods.CompanyMethod;
@@ -31,14 +32,16 @@ import java.util.Calendar;
 
 public class HomeGUI extends Application {
 
-    // De skulle bruges ofte, så de er static
+    /*
+        VBox, HBox, Scene, Rektangel og vores StackPane skulle bruges ofte, derfor er de static.
+    */
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
-    static Rectangle rectangleEncapsulateMenuButtons = new Rectangle();
-    static StackPane combineMenu = new StackPane();
 
-    //Buttons
+    /*
+
+    */
     static Button activitiesButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
@@ -89,7 +92,7 @@ public class HomeGUI extends Application {
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
         homepageButton.setId("buttonsleftside");
 
-        //Knap lavet til aktivitets siden
+        //Knap lavet til aktivitetssiden
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
         activitiesButton.setId("buttonsleftside");
 
@@ -97,9 +100,17 @@ public class HomeGUI extends Application {
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
         goalsButton.setId("buttonsleftside");
 
-        //Knap lavet til virksomheds siden
+        //Knap lavet til virksomhedssiden
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
         companiesButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplanen
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplansoversigt
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -258,21 +269,10 @@ public class HomeGUI extends Application {
             primaryStage.centerOnScreen();
 
         });
-
-        //Setting up the rectangle
-        rectangleEncapsulateMenuButtons.setX(0);
-        rectangleEncapsulateMenuButtons.setY(0);
-        rectangleEncapsulateMenuButtons.setWidth(150);
-        rectangleEncapsulateMenuButtons.setHeight(300);
-        rectangleEncapsulateMenuButtons.setOpacity(0.2);
-        rectangleEncapsulateMenuButtons.setArcHeight(30);
-        rectangleEncapsulateMenuButtons.setArcWidth(30);
-
-
+        menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
                 vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
-        combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -288,7 +288,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -302,13 +302,13 @@ public class HomeGUI extends Application {
         Label welcome = new Label("Du er logget ind "+ timeStamp+"\nVelkommen tilbage "+ loggedInUser.getUsername());
         welcome.setId("welcomeLabel");
         welcome.getStylesheets().addAll("gui/assets/login.css");
-
+        buttonReset();
         homepageButton.setId("mActive");
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI. whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(welcome);
 
@@ -342,7 +342,11 @@ public class HomeGUI extends Application {
         Label labelRevenueTotalMessage = new Label("Totalomsætning:");
         labelRevenueTotalMessage.setId("labelMessage");
         labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
-        Label labelRevenueTotalCount = new Label("test");
+        ArrayList<Company> totalRevenueList = new ArrayList(LogicController.getTotalRevenue());
+        double totalRevenue = totalRevenueList.get(0).getRevenue();
+        String totalRevenueString = String.valueOf(totalRevenue);
+
+        Label labelRevenueTotalCount = new Label(totalRevenueString + " kr");
         labelRevenueTotalCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den totale omsætning frem.
         bpRevenueTotal.setTop(labelRevenueTotalMessage);
@@ -354,9 +358,14 @@ public class HomeGUI extends Application {
         //højest omsætning på en måned
         BorderPane bpHighestRevenueMonth = new BorderPane();
         bpHighestRevenueMonth.setId("bpGoalsScreen");
-        Label labelHighestRevenueMonthMessage = new Label("I den bedste måned tjente du:");
+        Label labelHighestRevenueMonthMessage = new Label("Medarbejder med flest timer:");
         labelHighestRevenueMonthMessage.setId("labelMessage");
-        Label labelHighestRevenueMonthCount = new Label("test");
+
+        ArrayList<ScheduleDays> topHoursList = new ArrayList(LogicController.getTopHours());
+        double topHoursDouble = topHoursList.get(0).getTotalHours();
+        String topHoursString = String.valueOf(topHoursDouble);
+
+        Label labelHighestRevenueMonthCount = new Label(topHoursString + " timer");
         labelHighestRevenueMonthCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
         bpHighestRevenueMonth.setTop(labelHighestRevenueMonthMessage);
@@ -368,7 +377,7 @@ public class HomeGUI extends Application {
         bpTodaysGoal.setId("bpGoalsScreen");
         Label labelTodaysGoalMessage = new Label("Dagens mål:");
         labelTodaysGoalMessage.setId("labelMessage");
-        Label labelTodaysGoalNumber = new Label("test");
+        Label labelTodaysGoalNumber = new Label("24000 kr");
         labelTodaysGoalNumber.setId("labelCount");
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
@@ -379,9 +388,13 @@ public class HomeGUI extends Application {
         //årets resultat for sælgeren
         BorderPane bpRevenueThisYear = new BorderPane();
         bpRevenueThisYear.setId("bpGoalsScreen");
-        Label labelRevenueThisYearMessage = new Label("Årets resultat:");
+        ArrayList<ScheduleDays> maxHoursList = new ArrayList(LogicController.getMaxHours());
+        double maxHoursDouble = maxHoursList.get(0).getTotalHours();
+        String maxHoursString = String.valueOf(maxHoursDouble);
+
+        Label labelRevenueThisYearMessage = new Label("Total arbejdstimer:");
         labelRevenueThisYearMessage.setId("labelMessage");
-        Label labelRevenueThisYearCount = new Label("test");
+        Label labelRevenueThisYearCount = new Label(maxHoursString + " timer");
         labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         bpRevenueThisYear.setTop(labelRevenueThisYearMessage);
@@ -402,7 +415,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
@@ -413,12 +426,12 @@ public class HomeGUI extends Application {
     //virksomheds screen
     public static void virksomhedsScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        companiesButton.setId("mActive");
+        companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -429,8 +442,8 @@ public class HomeGUI extends Application {
 
     public static void vagtplanScreen(Stage primaryStage){
 
-        companiesButton.setId("mActive");
-        companiesButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
 
 
 
@@ -747,7 +760,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gpvagtplan);
 
@@ -761,12 +774,12 @@ public class HomeGUI extends Application {
     //virksomhedsoverbliks screen
     public static void virksomhedsOverblikScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("mActive");
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -791,7 +804,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);
@@ -823,7 +836,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
 
         LoginGUI.whiteBackground.setCenter(calendar);
         primaryStage.setScene(postLogin);

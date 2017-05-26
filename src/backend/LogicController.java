@@ -1,9 +1,6 @@
 package backend;
 
-import dao.CheckBoxDAO;
-import dao.CompanyDAO;
-import dao.ScheduleDAO;
-import dao.UserDAO;
+import dao.*;
 import entities.Company;
 import entities.ScheduleDays;
 import entities.User;
@@ -81,6 +78,30 @@ public class LogicController {
         ArrayList<ScheduleDays> schedule = new ArrayList<>(scheduleDAO.getSchedule(user));
 
         return schedule;
+
+    }
+
+    public static ArrayList<Company> getTotalRevenue() {
+        GoalDAO goalDAO = new GoalDAO();
+        ArrayList<Company> list = new ArrayList<>(goalDAO.get());
+
+        return list;
+
+    }
+
+    public static ArrayList<ScheduleDays> getMaxHours() {
+        MaxHoursDAO maxHoursDAO = new MaxHoursDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(maxHoursDAO.get());
+
+        return list;
+
+    }
+
+    public static ArrayList<ScheduleDays> getTopHours() {
+        TopHoursDAO topHoursDAO = new TopHoursDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(topHoursDAO.get());
+
+        return list;
 
     }
 
