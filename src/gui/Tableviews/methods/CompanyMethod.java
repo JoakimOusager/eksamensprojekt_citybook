@@ -58,6 +58,9 @@ public class CompanyMethod {
             company.setCreatedBy(HomeGUI.loggedInUser);
 
             tvCompany.getItems().add(company);
+            contactPersonName.clear();
+            contactPersonEmail.clear();
+            contactPersonPhone.clear();
             cvrNumber.clear();
             name.clear();
             address.clear();
