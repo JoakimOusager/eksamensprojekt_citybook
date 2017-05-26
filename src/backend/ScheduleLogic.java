@@ -1,6 +1,7 @@
 package backend;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -14,8 +15,8 @@ public class ScheduleLogic {
 
     public void scheduleStart(int day, DateFormat dateFormat, Calendar cal, double mondayDB,
                               double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, Label datoMandag, Label datoTirsdag,
-                              Label datoOnsdag, Label datoTorsdag, Label datoFredag, Label timerMandag, Label timerTirsdag, Label timerOnsdag,
-                              Label timerTorsdag, Label timerFredag
+                              Label datoOnsdag, Label datoTorsdag, Label datoFredag, TextField timerMandag, TextField timerTirsdag, TextField timerOnsdag,
+                              TextField timerTorsdag, TextField timerFredag
                               ){
         switch (day){
             case 2:
@@ -91,9 +92,10 @@ public class ScheduleLogic {
 
     public void scheduleStop(int day, DateFormat dateFormat, Calendar cal, double mondayDB,
                              double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB,
-                                Label datoMandag2, Label datoTirsdag2, Label datoOnsdag2, Label datoTorsdag2, Label datoFredag2,
-                                  long diffMinutesEnd, long diffMinutesStart, Label totalTimer,
-                             Label timerMandag, Label timerTirsdag, Label timerOnsdag, Label timerTorsdag, Label timerFredag) {
+                             Label datoMandag2, Label datoTirsdag2, Label datoOnsdag2, Label datoTorsdag2, Label datoFredag2,
+                             long diffMinutesEnd, long diffMinutesStart, TextField totalTimer,
+                             TextField timerMandag, TextField timerTirsdag, TextField timerOnsdag, TextField timerTorsdag,
+                             TextField timerFredag) {
 
         switch (day) {
             case 2:
@@ -153,7 +155,7 @@ public class ScheduleLogic {
                 timerFredag.setText(timer10);
         }
 
-        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, mondayDB, mondayDB, thursdayDB, fridayDB);
+        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
         String totalTimerString = String.valueOf(totalHoursDB);
         totalTimer.setText(totalTimerString);
 
