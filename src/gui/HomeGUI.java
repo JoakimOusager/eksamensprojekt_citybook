@@ -51,7 +51,7 @@ public class HomeGUI extends Application {
     static Button vagtplanButton = new Button("Vagtplan");
     static Button vagtplansOverblikbtn = new Button("Vagtplanoverblik");
 
-    static User loggedInUser;
+    public static User loggedInUser;
 
     /*
         Alle labels for vagtplan er blevet gjort static, for at deres tekst ikke bliver fjernet ved scene skift.
@@ -239,7 +239,7 @@ public class HomeGUI extends Application {
         });
         vagtplansOverblikbtn.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            virksomhedsScreen(primaryStage);
+            virksomhedsOverblikScreen(primaryStage);
 
         });
 
@@ -805,12 +805,12 @@ public class HomeGUI extends Application {
 
         vagtplansOverblikbtn.setId("mActive");
         vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
-
+        Label test2 = new Label("fuck");
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
-
+        LoginGUI.whiteBackground.setCenter(test2);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
