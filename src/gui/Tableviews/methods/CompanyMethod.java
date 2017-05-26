@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,6 +149,21 @@ public class CompanyMethod {
                 }
             });
 
+            Button showMoreInformationAboutCompanyButton = new Button("Vis mere");
+            showMoreInformationAboutCompanyButton.setId("showMoreInformationAboutCompanyButton");
+
+            showMoreInformationAboutCompanyButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Stage showMoreInformationStage = new Stage();
+
+                    showMoreInformationStage.setX(200);
+                    showMoreInformationStage.setY(200);
+
+                    showMoreInformationStage.setResizable(false);
+                    showMoreInformationStage.show();
+                }
+            });
             // TextFields for adding a child
             cvrNumber = new TextField();
             cvrNumber.setPromptText("CVR-nummer");
@@ -178,7 +194,7 @@ public class CompanyMethod {
 
             // adding the TextFields to VBox 1 and VBox 2
             addCompanyBox.getChildren().addAll(cvrNumber, name, address, email, zipCode, phoneNumber,
-                    addCompanyBtn, deleteCompanyBtn);
+                    addCompanyBtn, deleteCompanyBtn, showMoreInformationAboutCompanyButton);
             Label white = new Label();
             white.setId("whiteCompany");
             white.getStylesheets().addAll("gui/assets/login.css");

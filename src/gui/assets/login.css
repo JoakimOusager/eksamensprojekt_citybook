@@ -130,6 +130,10 @@
     -fx-font-size: 12px;
 }
 
+#showMoreInformationAboutCompanyButton {
+
+}
+
 #welcomeLabel{
     -fx-font-size: 50px;
 }
