@@ -1,22 +1,20 @@
 package dao;
 
 import entities.ScheduleDays;
-import entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel on 25-05-2017.
+ * Created by Daniel on 26-05-2017.
  */
-public class ScheduleDAO{
-
-    public ArrayList<ScheduleDays> get(User user) {
-        ArrayList<ScheduleDays> list = new ArrayList<ScheduleDays>();
+public class ComboboxDAO {
+    static public ArrayList<ScheduleDays> get() {
+        ArrayList<ScheduleDays> list = new ArrayList<>();
 
         Connection conn = null;
         Statement stmt = null;
-        int i = 0;
+
         try {
             //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
@@ -26,25 +24,17 @@ public class ScheduleDAO{
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
-            String sql;
 
-                sql = "SELECT * FROM cbcrm.schedule WHERE username = '" + user.getUsername() + "' ";
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery("SELECT username, total_hours FROM cbcrm.schedule");
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
 
-                // Company detaljer
-                double monday = rs.getDouble("monday");
-                double tuesday = rs.getDouble("tuesday");
-                double wednesday = rs.getDouble("wednesday");
-                double thursday = rs.getDouble("thursday");
-                double friday = rs.getDouble("friday");
-                double totalHours = rs.getDouble("total_hours");
-
-                list.add(new ScheduleDays(monday, tuesday, wednesday, thursday, friday,
-                        totalHours));
-                i++;
+                // Username og hours detaljer
+                String username = rs.getString("username");
+               // double hours = rs.getDouble("total_hours");
+                list.add(new ScheduleDays(username));
+                //list.add(new ScheduleDays(hours));
             }
 
             //STEP 6: Clean-up environment
@@ -76,3 +66,4 @@ public class ScheduleDAO{
         return list;
     }
 }
+

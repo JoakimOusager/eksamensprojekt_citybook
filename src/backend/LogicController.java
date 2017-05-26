@@ -75,7 +75,7 @@ public class LogicController {
 
     public static ArrayList<ScheduleDays> getSchedule(User user) {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        ArrayList<ScheduleDays> schedule = new ArrayList<>(scheduleDAO.getSchedule(user));
+        ArrayList<ScheduleDays> schedule = new ArrayList<>(scheduleDAO.get(user));
 
         return schedule;
 
@@ -100,6 +100,24 @@ public class LogicController {
     public static ArrayList<ScheduleDays> getTopHours() {
         TopHoursDAO topHoursDAO = new TopHoursDAO();
         ArrayList<ScheduleDays> list = new ArrayList<>(topHoursDAO.get());
+
+        return list;
+
+    }
+
+    public static ArrayList<ScheduleDays> getUsernameHours() {
+        ComboboxDAO comboboxDAO = new ComboboxDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(comboboxDAO.get());
+        System.out.println(list.get(0));
+
+        return list;
+
+    }
+
+    public static ArrayList<ScheduleDays> getHoursUsername() {
+        TotalHoursUsernameDAO totalHoursUsernameDAO = new TotalHoursUsernameDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(totalHoursUsernameDAO.get());
+        System.out.println(list.get(0));
 
         return list;
 

@@ -7,7 +7,6 @@ import gui.HomeGUI;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Joakim on 23/05/2017.
@@ -64,6 +63,7 @@ public class CompanyDAO implements BaseDAO<Company> {
 
                 list.add(new Company(cvr, name, address, zipcode, email, phone,
                         comments, revenue, createdOn, contactPerson, createdBy));
+
             }
 
             //STEP 6: Clean-up environment

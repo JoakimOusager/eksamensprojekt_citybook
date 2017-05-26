@@ -188,3 +188,18 @@
     -fx-text-fill: white;
     -fx-font-size: 14;
 }
+#combobox{
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-background-position: center;
+}
+
+#personlabelCombobox{
+    -fx-font-size: 20px;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-alignment: baseline-center;
+    -fx-background-position: bottom;
+    -fx-min-height: 20px;
+    -fx-min-width: 200px;
+}

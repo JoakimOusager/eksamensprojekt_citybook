@@ -27,6 +27,7 @@ public class ScheduleDays {
     }
 
     public ScheduleDays(double totalHours) {
+
         this.totalHours = totalHours;
     }
 
@@ -45,9 +46,10 @@ public class ScheduleDays {
         this.totalHours = totalHours;
     }
 
-    public ScheduleDays(){
-
+    public ScheduleDays(String username){
+        this.username = username;
     }
+
 
 
     public String getUsername() {
