@@ -93,10 +93,6 @@
     -fx-background-radius: 30;
 }
 
-#white{
-    -fx-min-height: 200;
-}
-
 #mActive{
     -fx-text-fill: white;
     -fx-pref-width: 150px;
@@ -185,6 +181,7 @@
 #labelMessage {
     -fx-text-fill: white;
     -fx-font-size: 20;
+    -fx-padding: 10 0 0 0;
 }
 
 #labelCount {
