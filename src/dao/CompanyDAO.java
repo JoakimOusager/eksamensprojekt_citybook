@@ -3,6 +3,7 @@ package dao;
 import entities.Company;
 import entities.ContactPerson;
 import entities.User;
+import gui.HomeGUI;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -155,16 +156,32 @@ public class CompanyDAO implements BaseDAO<Company> {
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
+
+            // Statement som finder ud af hvilket id brugeren, som har logget ind har
+            String sqlUpdateCreatedBy;
+
+            sqlUpdateCreatedBy = "SELECT user_id FROM user WHERE username = '" + HomeGUI.loggedInUser.getUsername() + "'";
+            ResultSet rs = stmt.executeQuery(sqlUpdateCreatedBy);
+
+            int userId = 0;
+            while (rs.next()) {
+                userId = rs.getInt("user_id");
+            }
+
             String sql;
 
             sql = "INSERT INTO companies (company_name, company_address, company_zipcode, company_cvr," +
-                    " company_email, company_phone, company_revenue, company_comments, company_created_on, company_created_by," +
-                    " company_contact_person)" +
-                    "VALUES ( '"+ company.getName() + "', " + company.getAddress() + ",  '" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
-                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + company.getCreatedOn() + "','" + company.getCreatedBy() + "', '"  +
-                    "'" + company.getContactPerson() + "'')";
+                    " company_email, company_phone, company_revenue, company_comments, company_created_by" +
+                    ")" +
+                    "VALUES ( '" + company.getName() + "', '" + company.getAddress() + "' ,'" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
+                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + userId +  "')";
             System.out.println(sql);
-           // stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
+
+
+
+
+
 
             //STEP 5: Extract data from result set
             //STEP 6: Clean-up environment
@@ -243,4 +260,5 @@ public class CompanyDAO implements BaseDAO<Company> {
             }
         }
     }
+
 }
