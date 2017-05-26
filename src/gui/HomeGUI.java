@@ -858,27 +858,24 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursPerson1.setId("bpGoalsScreen");
         Label labelTotalHoursMessage = new Label("Total antal timer:");
         labelTotalHoursMessage.setId("labelMessage");
-        Label labelRevenueThisYearCount = new Label("test");
-        labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         totalHoursPerson1.setTop(labelTotalHoursMessage);
         totalHoursPerson1.setAlignment(labelTotalHoursMessage, Pos.TOP_CENTER);
         totalHoursPerson1.setCenter(person1);
-        totalHoursPerson1.setLeft(labelRevenueThisYearCount);
         totalHoursPerson1.setBottom(personLabel1);
+        totalHoursPerson1.setAlignment(personLabel1, Pos.BOTTOM_CENTER);
 
         BorderPane totalHoursPerson2 = new BorderPane();
         totalHoursPerson2.setId("bpGoalsScreen");
         Label labelTotalHoursMessage2 = new Label("Total antal timer for:");
         labelTotalHoursMessage2.setId("labelMessage");
         Label labelTotalHours2 = new Label("1000000");
-        labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         totalHoursPerson2.setTop(labelTotalHoursMessage2);
         totalHoursPerson2.setAlignment(labelTotalHoursMessage2, Pos.TOP_CENTER);
         totalHoursPerson2.setCenter(person2);
-        totalHoursPerson2.setLeft(labelRevenueThisYearCount);
         totalHoursPerson2.setBottom(personLabel2);
+        totalHoursPerson2.setAlignment(personLabel2, Pos.BOTTOM_CENTER);
 
 
         //nu skal de forskellige views samles
@@ -936,32 +933,5 @@ public class HomeGUI extends Application implements ActionListener {
         Vi har valgt Google Calendar fremfor selv at lave en kalender da,
         da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
     */
-
-    public static void CalendarView(Stage primaryStage) {
-        activitiesButton.setId("mActive");
-        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
-
-        /*
-            Vi opretter et WebView objekt, som indeholder en indbygget browser som er WebEngine.
-            På denne måde er det muligt at render HTML direkte i JavaFX.
-        */
-
-        WebView calendar = new WebView();
-        WebEngine webEngine = calendar.getEngine();
-        webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
-
-        /*
-            Herefter bliver diverse Panes tilføjet til scenen sammen med vores WebView.
-        */
-
-        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
-        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
-
-        LoginGUI.whiteBackground.setCenter(calendar);
-        primaryStage.setScene(postLogin);
-        primaryStage.show();
-    }
-
 
 }
