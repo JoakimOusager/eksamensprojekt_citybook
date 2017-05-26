@@ -2,6 +2,7 @@ package gui.Tableviews.methods;
 
 import backend.LogicController;
 import entities.Company;
+import gui.HomeGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +45,7 @@ public class CompanyMethod {
             company.setEmail(email.getText());
             company.setZipCode(zipCode.getText());
             company.setPhoneNumber(phoneNumber.getText());
+            company.setCreatedBy(HomeGUI.loggedInUser);
             tvCompany.getItems().add(company);
             cvrNumber.clear();
             name.clear();
@@ -51,6 +53,7 @@ public class CompanyMethod {
             email.clear();
             zipCode.clear();
             phoneNumber.clear();
+            tvCompany.refresh();
 
             LogicController.addCompany(company);
         }
@@ -115,9 +118,10 @@ public class CompanyMethod {
             // Buttons for adding and deleting Companies
             Button addCompanyBtn = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
-           // addCompanyBtn.setOnAction(e2 -> addCompany());
 
             addCompanyBtn.setOnAction(successBox ->{
+                addCompany();
+                tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
                 alert.setHeaderText("Bekræftelse");
@@ -125,7 +129,7 @@ public class CompanyMethod {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
-                    addCompany();
+
                 }
             });
 

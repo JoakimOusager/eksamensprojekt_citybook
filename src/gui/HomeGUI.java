@@ -34,14 +34,16 @@ import java.util.Calendar;
 
 public class HomeGUI extends Application implements ActionListener {
 
-    // De skulle bruges ofte, så de er static
+    /*
+        VBox, HBox, Scene, Rektangel og vores StackPane skulle bruges ofte, derfor er de static.
+    */
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
-    static Rectangle rectangleEncapsulateMenuButtons = new Rectangle();
-    static StackPane combineMenu = new StackPane();
 
-    //Buttons
+    /*
+        Knapper til vores side menu.
+    */
     static Button activitiesButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
@@ -51,9 +53,12 @@ public class HomeGUI extends Application implements ActionListener {
     static Button vagtplanButton = new Button("Vagtplan");
     static Button vagtplansOverblikbtn = new Button("Vagtplanoverblik");
 
-    static User loggedInUser;
+    public static User loggedInUser;
 
-    //labels for vagtplan er gjort static for at labelens text ikke bliver reset ved scene skift
+    /*
+        Alle labels for vagtplan er blevet gjort static, for at deres tekst ikke bliver fjernet ved scene skift.
+    */
+
     static Label datoFredag2 = new Label();
     static Label datoTorsdag2 = new Label();
     static Label datoOnsdag2 = new Label();
@@ -73,11 +78,9 @@ public class HomeGUI extends Application implements ActionListener {
 
     static Label totalTimer = new Label();
 
-    //Long tids variabler
+    // Long tidsvariabler
     static long diffMinutesStart;
     static long diffMinutesEnd;
-
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -85,14 +88,16 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
-    //Metode lavet for at kunne reset borderfarver på knapperne
+    /*
+        Denne metode nulstiller border color på knapperne i side menuen.
+    */
     public static void buttonReset(){
 
         //Knap lavet til startsiden
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
         homepageButton.setId("buttonsleftside");
 
-        //Knap lavet til aktivitets siden
+        //Knap lavet til aktivitetssiden
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
         activitiesButton.setId("buttonsleftside");
 
@@ -100,9 +105,17 @@ public class HomeGUI extends Application implements ActionListener {
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
         goalsButton.setId("buttonsleftside");
 
-        //Knap lavet til virksomheds siden
+        //Knap lavet til virksomhedssiden
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
         companiesButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplanen
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplansoversigt
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -110,6 +123,13 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
+    /* //////////////////////////////////////////////////////////////////////////////////////////
+                                             HOVEDSCENE
+      ////////////////////////////////////////////////////////////////////////////////////////// */
+
+    /*
+        Denne metode sætter hele Scenen op med menu samt indhold.
+    */
     public static void backgroundTemplate(Stage primaryStage, User foundUser){
 
         loggedInUser = foundUser;
@@ -162,9 +182,6 @@ public class HomeGUI extends Application implements ActionListener {
             buttonReset();
 
             CalendarView(primaryStage);
-
-   /*         aktivitetScreen(primaryStage);
-            LoginGUI.whiteBackground.setCenter(ActivityMethod.hboxAktivitet); */
 
         });
 
@@ -226,9 +243,8 @@ public class HomeGUI extends Application implements ActionListener {
             buttonReset();
             vagtplanOversigtScreen(primaryStage);
 
+
         });
-
-
 
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -244,12 +260,6 @@ public class HomeGUI extends Application implements ActionListener {
             adminScreen(primaryStage);
             LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
 
-            boolean alreadyExecuted = false;
-
-            if(alreadyExecuted = false) {
-
-                alreadyExecuted = true;
-            }
         });
 
         //knap lavet til at logge ud
@@ -261,21 +271,10 @@ public class HomeGUI extends Application implements ActionListener {
             primaryStage.centerOnScreen();
 
         });
-
-        //Setting up the rectangle
-        rectangleEncapsulateMenuButtons.setX(0);
-        rectangleEncapsulateMenuButtons.setY(0);
-        rectangleEncapsulateMenuButtons.setWidth(150);
-        rectangleEncapsulateMenuButtons.setHeight(300);
-        rectangleEncapsulateMenuButtons.setOpacity(0.2);
-        rectangleEncapsulateMenuButtons.setArcHeight(30);
-        rectangleEncapsulateMenuButtons.setArcWidth(30);
-
-
+        menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
                 vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
-        combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -291,7 +290,7 @@ public class HomeGUI extends Application implements ActionListener {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -299,19 +298,30 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.show();
     }
 
-    //postlogin screen
-    public static void homepageScreen(Stage primaryStage){
+    /* //////////////////////////////////////////////////////////////////////////////////////////
+                                          SLUT HOVEDSCENE
+      ////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+    /*
+        Scenen til knappen 'Hjem'
+    */
+    public static void homepageScreen(Stage primaryStage) {
+        // For at få det nuværende klokkeslæt, så brugeren kan se hvad tid personen loggede ind.
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(Calendar.getInstance().getTime());
+
+        // Viser hvilken bruger man er logged ind som samt bliver tilhørende CSS tilføjet.
         Label welcome = new Label("Du er logget ind "+ timeStamp+"\nVelkommen tilbage "+ loggedInUser.getUsername());
         welcome.setId("welcomeLabel");
         welcome.getStylesheets().addAll("gui/assets/login.css");
-
+        buttonReset();
         homepageButton.setId("mActive");
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
 
+        // Alle de forskellige elementer bliver tilføjet til den 'nye' primaryStage.
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI. whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(welcome);
 
@@ -320,6 +330,39 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
+
+    /*
+        Denne metoder bliver tilføjet i knappen 'Aktiviteter'
+        Metode til at få Google Calendar integreret i vores program.
+        Vi har valgt Google Calendar fremfor selv at lave en kalender da,
+        da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
+    */
+
+    public static void CalendarView(Stage primaryStage) {
+        activitiesButton.setId("mActive");
+        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
+
+        /*
+            Vi opretter et WebView objekt, som indeholder en indbygget browser som er WebEngine.
+            På denne måde er det muligt at render HTML direkte i JavaFX.
+        */
+
+        WebView calendar = new WebView();
+        WebEngine webEngine = calendar.getEngine();
+        webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
+
+        /*
+            Herefter bliver diverse Panes tilføjet til scenen sammen med vores WebView.
+        */
+
+        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
+        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
+
+        LoginGUI.whiteBackground.setCenter(calendar);
+        primaryStage.setScene(postLogin);
+        primaryStage.show();
+    }
 
     //Målscreen
     public static void målScreen(Stage primaryStage){
@@ -349,13 +392,15 @@ public class HomeGUI extends Application implements ActionListener {
         Label labelHighestRevenueMonthMessage = new Label("Medarbejder med flest timer:");
         labelHighestRevenueMonthMessage.setId("labelMessage");
 
+        // Vi opretter en ArrayList med den værdi der bliver hentet fra LogicControllers getTopHours() metode.
         ArrayList<ScheduleDays> topHoursList = new ArrayList(LogicController.getTopHours());
         double topHoursDouble = topHoursList.get(0).getTotalHours();
         String topHoursString = String.valueOf(topHoursDouble);
 
         Label labelHighestRevenueMonthCount = new Label(topHoursString + " timer");
         labelHighestRevenueMonthCount.setId("labelCount");
-        //her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
+
+        // her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
         bpHighestRevenueMonth.setTop(labelHighestRevenueMonthMessage);
         bpHighestRevenueMonth.setAlignment(labelHighestRevenueMonthMessage, Pos.TOP_CENTER);
         bpHighestRevenueMonth.setCenter(labelHighestRevenueMonthCount);
@@ -403,7 +448,7 @@ public class HomeGUI extends Application implements ActionListener {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
@@ -414,12 +459,12 @@ public class HomeGUI extends Application implements ActionListener {
     //virksomheds screen
     public static void virksomhedsScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        companiesButton.setId("mActive");
+        companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -430,8 +475,8 @@ public class HomeGUI extends Application implements ActionListener {
 
     public static void vagtplanScreen(Stage primaryStage){
 
-        companiesButton.setId("mActive");
-        companiesButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
 
 
 
@@ -743,7 +788,7 @@ public class HomeGUI extends Application implements ActionListener {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gpvagtplan);
 
@@ -755,6 +800,7 @@ public class HomeGUI extends Application implements ActionListener {
     }
 
     public static void vagtplanOversigtScreen(Stage primaryStage){
+
 
         vagtplanButton.setId("mActive");
         vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
@@ -844,10 +890,12 @@ public class HomeGUI extends Application implements ActionListener {
         gridPaneGoals.add(totalHoursPerson2, 1, 0);
         //gridPaneGoals.add(bpRevenueThisYear, 1, 1);
 
+
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
+
         LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
 
@@ -876,7 +924,7 @@ public class HomeGUI extends Application implements ActionListener {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);

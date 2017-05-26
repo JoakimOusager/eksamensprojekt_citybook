@@ -60,11 +60,10 @@
     -fx-background-position: center;
 }
 
-#leftside{
-    -fx-border-width: 5;
-    -fx-border-color: black;
-    -fx-border-radius: 5%;
-
+#menuVBox {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 10;
+    -fx-max-height: 100;
 }
 
 #fields{
@@ -73,7 +72,7 @@
 
 #whiteBackground{
     -fx-max-width: 1150px;
-    -fx-max-height: 500px;
+    -fx-max-height: 550px;
     -fx-background-color: rgba(255, 255, 255, 0.2);
     -fx-background-radius: 10px;
     -fx-padding: 20;
@@ -92,10 +91,6 @@
     -fx-pref-width: 150px;
     -fx-background-color: red;
     -fx-background-radius: 30;
-}
-
-#white{
-    -fx-min-height: 20;
 }
 
 #mActive{
@@ -186,6 +181,7 @@
 #labelMessage {
     -fx-text-fill: white;
     -fx-font-size: 20;
+    -fx-padding: 10 0 0 0;
 }
 
 #labelCount {

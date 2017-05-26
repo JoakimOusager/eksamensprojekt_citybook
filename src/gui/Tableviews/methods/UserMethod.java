@@ -10,9 +10,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.NumberStringConverter;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -24,6 +26,7 @@ import java.util.Optional;
 /**
  * Created by Daniel on 17-05-2017.
  */
+
 public class UserMethod {
 
     public static HBox hboxUser = new HBox();
@@ -63,7 +66,6 @@ public class UserMethod {
         allUsers = tvUser.getItems();
         userSelected = tvUser.getSelectionModel().getSelectedItems();
         for (User user : userSelected) {
-            System.out.println("skrrt");
             LogicController.deleteUser(user);
         }
 
@@ -78,25 +80,46 @@ public class UserMethod {
         IDCol.setCellValueFactory(new PropertyValueFactory<>("ID")); */
 
         TableColumn<User, String> usernameCol = new TableColumn<>("Username");
-        usernameCol.setMinWidth(120);
+        usernameCol.setMinWidth(150);
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
-        emailCol.setMinWidth(120);
+        emailCol.setMinWidth(185);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         TableColumn<User, String> startDateCol = new TableColumn<>("Start time");
-        startDateCol.setMinWidth(135);
+        startDateCol.setMinWidth(185);
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 
-        TableColumn<User, String> totalRevenueCol = new TableColumn<>("Start time");
-        startDateCol.setMinWidth(135);
-        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        /*TableColumn<User, String> totalRevenueCol = new TableColumn<>("Start time");
+        totalRevenueCol.setMinWidth(150);
+        totalRevenueCol.setCellValueFactory(new PropertyValueFactory<>("startDate")); */
 
-        TableColumn<User, String> userRankCol = new TableColumn<>("User rank");
-        userRankCol.setMinWidth(120);
+        TableColumn<User, Number> userRankCol = new TableColumn<>("User rank");
+        userRankCol.setMinWidth(5);
         userRankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
 
+        /*//Attach Action Listeners
+        emailCol.setCellValueFactory(e -> e.getValue().emailProperty());
+        userRankCol.setCellValueFactory(e -> e.getValue().rankProperty());
+
+        //make cells editable
+        emailCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        userRankCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+
+        //Update the TableView
+        emailCol.setOnEditCommit((TableColumn.CellEditEvent<User, String> event) -> {
+            ((User) event.getTableView().getItems().get(event.getTablePosition().getRow())).setEmail
+                    (event.getNewValue());
+        });
+
+        userRankCol.setOnEditCommit((TableColumn.CellEditEvent<User, Number> event) -> {
+            ((User) event.getTableView().getItems().get(event.getTablePosition().getRow())).setRank
+                    (((Integer)event.getNewValue()));
+        });
+
+        tvUser.setEditable(true);
+        */
 
         // GridPane for the whole adding and deleting employee area
         GridPane gp3 = new GridPane();
@@ -119,8 +142,10 @@ public class UserMethod {
         /*
             Alertbox der meddeler admin at brugeren er blevet oprettet
          */
+
         addUserBtn.setOnAction(successBox ->{
             addUser();
+            tvUser.setItems(FXCollections.observableArrayList(LogicController.getUsers()));
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Citybook");
             alert.setHeaderText("Bekræftelse");
@@ -128,7 +153,6 @@ public class UserMethod {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-
             }
         });
         // Knappen Slet Bruger under fanen "Brugere"
@@ -172,7 +196,7 @@ public class UserMethod {
         userRank.setMaxWidth(100);
 
 
-        tvUser.setEditable(true);
+
 
 
         // adding the TextFields to VBox 1 and VBox 2
@@ -195,6 +219,13 @@ public class UserMethod {
         hboxUser.getChildren().addAll(addUserbox2, tvUser, gp3);
 
     }
+
+    /*public static void updateSelectedRow(String sqlQuery) {
+        Connection conn = new Connection();
+        String query = "UPDATE TABLE sdfsdf WHERE " +
+        stmt.executeUpdate(sqlQuery);
+
+    } */
 
 }
 

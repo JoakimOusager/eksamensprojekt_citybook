@@ -3,6 +3,7 @@ package dao;
 import entities.Company;
 import entities.ContactPerson;
 import entities.User;
+import gui.HomeGUI;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,12 +12,12 @@ import java.util.ArrayList;
  * Created by Joakim on 23/05/2017.
  */
 public class CompanyDAO implements BaseDAO<Company> {
+
     public ArrayList<Company> get() {
         ArrayList<Company> list = new ArrayList<Company>();
 
         Connection conn = null;
         Statement stmt = null;
-        int i = 0;
         try {
             //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
@@ -62,7 +63,7 @@ public class CompanyDAO implements BaseDAO<Company> {
 
                 list.add(new Company(cvr, name, address, zipcode, email, phone,
                         comments, revenue, createdOn, contactPerson, createdBy));
-                i++;
+
             }
 
             //STEP 6: Clean-up environment
@@ -153,16 +154,27 @@ public class CompanyDAO implements BaseDAO<Company> {
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
+
+            // Statement som finder ud af hvilket id brugeren, som har logget ind har
+            String sqlUpdateCreatedBy;
+
+            sqlUpdateCreatedBy = "SELECT user_id FROM user WHERE username = '" + HomeGUI.loggedInUser.getUsername() + "'";
+            ResultSet rs = stmt.executeQuery(sqlUpdateCreatedBy);
+
+            int userId = 0;
+            while (rs.next()) {
+                userId = rs.getInt("user_id");
+            }
+
             String sql;
 
             sql = "INSERT INTO companies (company_name, company_address, company_zipcode, company_cvr," +
-                    " company_email, company_phone, company_revenue, company_comments, company_created_on, company_created_by," +
-                    " company_contact_person)" +
-                    "VALUES ( '"+ company.getName() + "', " + company.getAddress() + ",  '" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
-                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + company.getCreatedOn() + "','" + company.getCreatedBy() + "', '"  +
-                    "'" + company.getContactPerson() + "'')";
+                    " company_email, company_phone, company_revenue, company_comments, company_created_by" +
+                    ")" +
+                    "VALUES ( '" + company.getName() + "', '" + company.getAddress() + "' ,'" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
+                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + userId +  "')";
             System.out.println(sql);
-           // stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
             //STEP 6: Clean-up environment
@@ -190,5 +202,56 @@ public class CompanyDAO implements BaseDAO<Company> {
         }
     }
 
-    public void update(Company company) {}
+    public void update(Company company) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(DAO.JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
+
+            //STEP 4: Execute a query
+            stmt = conn.createStatement();
+            String sql;
+
+            sql = "UPDATE companies" +
+                    "SET company_name = '" + company.getName() + "',  company_address = '" +company.getAddress() +"'," +
+                    "company_zipcode = + '" + company.getZipCode() + "'," +
+                    "company_email =  '" + company.getEmail() + "'," +
+                    "company_phone =  '" + company.getPhoneNumber() + "'," +
+                    "company_revenue = '" + company.getRevenue() + "'," +
+                    "company_comments = '" + company.getComments() + "'" +
+                    "WHERE company_cvr = '" + company.getCvrNumber() + "'";
+            System.out.println(sql);
+            // stmt.executeUpdate(sql);
+
+            //STEP 5: Extract data from result set
+            //STEP 6: Clean-up environment
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+            }// nothing we can do
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
 }
