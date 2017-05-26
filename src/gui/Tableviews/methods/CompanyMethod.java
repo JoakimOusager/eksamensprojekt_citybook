@@ -116,7 +116,6 @@ public class CompanyMethod {
             // Buttons for adding and deleting Companies
             Button addCompanyBtn = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
-           // addCompanyBtn.setOnAction(e2 -> addCompany());
 
             addCompanyBtn.setOnAction(successBox ->{
                 addCompany();

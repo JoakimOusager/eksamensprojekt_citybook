@@ -80,23 +80,23 @@ public class UserMethod {
         IDCol.setCellValueFactory(new PropertyValueFactory<>("ID")); */
 
         TableColumn<User, String> usernameCol = new TableColumn<>("Username");
-        usernameCol.setMinWidth(120);
+        usernameCol.setMinWidth(150);
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         TableColumn<User, String> emailCol = new TableColumn<>("Email");
-        emailCol.setMinWidth(120);
+        emailCol.setMinWidth(185);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         TableColumn<User, String> startDateCol = new TableColumn<>("Start time");
-        startDateCol.setMinWidth(135);
+        startDateCol.setMinWidth(185);
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 
-        TableColumn<User, String> totalRevenueCol = new TableColumn<>("Start time");
-        startDateCol.setMinWidth(135);
-        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        /*TableColumn<User, String> totalRevenueCol = new TableColumn<>("Start time");
+        totalRevenueCol.setMinWidth(150);
+        totalRevenueCol.setCellValueFactory(new PropertyValueFactory<>("startDate")); */
 
         TableColumn<User, Number> userRankCol = new TableColumn<>("User rank");
-        userRankCol.setMinWidth(120);
+        userRankCol.setMinWidth(5);
         userRankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
 
         /*//Attach Action Listeners
