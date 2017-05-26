@@ -35,7 +35,7 @@ import java.util.Calendar;
 public class HomeGUI extends Application implements ActionListener {
 
     /*
-        VBox, HBox, Scene, Rektangel og vores StackPane skulle bruges ofte, derfor er de static.
+        VBox, HBox, Scene skulle bruges ofte, derfor er de static.
     */
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
@@ -145,6 +145,10 @@ public class HomeGUI extends Application implements ActionListener {
         //Citybook logo - new stylesheet
         LoginGUI.citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
         LoginGUI.citybookLogoPane.setId("citybookLogoPane");
+
+        /* //////////////////////////////////////////////////////////////////////////////////////////
+                                             SIDE MENU
+       ////////////////////////////////////////////////////////////////////////////////////////// */
 
         //VBox til alle knapperne der ligger i venstre side
         menuVBox.setSpacing(14.5);
@@ -275,6 +279,10 @@ public class HomeGUI extends Application implements ActionListener {
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
                 scheduleButton, scheduleOverviewButton, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
+
+        /* //////////////////////////////////////////////////////////////////////////////////////////
+                                           SLUT SIDE MENU
+       ////////////////////////////////////////////////////////////////////////////////////////// */
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -517,10 +525,9 @@ public class HomeGUI extends Application implements ActionListener {
         totalTimerLabel.setId("dage");
         totalTimerLabel.getStylesheets().addAll("gui/assets/login.css");
 
-
-
         dateMondayStartTime.setId("datoTextfield");
         dateMondayStartTime.getStylesheets().addAll("gui/assets/login.css");
+
 
         dateThuesdayStartTime.setId("datoTextfield");
         dateThuesdayStartTime.getStylesheets().addAll("gui/assets/login.css");
