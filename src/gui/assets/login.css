@@ -130,6 +130,20 @@
     -fx-font-size: 12px;
 }
 
+#showMoreInformationAboutCompanyButton {
+    -fx-background-color: blue;
+    -fx-pref-width: 100px;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#saveEdits {
+    -fx-background-color: blue;
+    -fx-pref-width: 150px;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
 #welcomeLabel{
     -fx-font-size: 50px;
 }

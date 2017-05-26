@@ -2,6 +2,7 @@ package backend;
 
 import dao.*;
 import entities.Company;
+import entities.ContactPerson;
 import entities.ScheduleDays;
 import entities.User;
 
@@ -55,14 +56,16 @@ public class LogicController {
         return list;
     }
 
-    public static void updateCompanies() {
-        CompanyDAO userDAO = new CompanyDAO();
+    public static void updateCompanies(Company company) {
+        CompanyDAO companyDAO = new CompanyDAO();
+        companyDAO.update(company);
 
 
     }
 
     public static void addCompany(Company company) {
         CompanyDAO companyDAO = new CompanyDAO();
+        addContactPerson(company.getContactPerson());
         companyDAO.insert(company);
 
     }
@@ -121,6 +124,11 @@ public class LogicController {
 
         return list;
 
+    }
+
+    public static void addContactPerson(ContactPerson contactPerson) {
+        ContactPersonDAO contactPersonDAO = new ContactPersonDAO();
+        contactPersonDAO.insert(contactPerson);
     }
 
 
