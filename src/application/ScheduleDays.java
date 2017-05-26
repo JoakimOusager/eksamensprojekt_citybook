@@ -1,4 +1,4 @@
-package entities;
+package application;
 
 /**
  * Created by Daniel on 25-05-2017.
@@ -17,33 +17,33 @@ public class ScheduleDays {
 
     public ScheduleDays(String username, double monday, double tuesday,
                         double wednesday, double thursday, double friday, double totalHours) {
-        this.username = username;
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday = friday;
-        this.totalHours = totalHours;
+        this.username       = username;
+        this.monday         = monday;
+        this.tuesday        = tuesday;
+        this.wednesday      = wednesday;
+        this.thursday       = thursday;
+        this.friday         = friday;
+        this.totalHours     = totalHours;
     }
 
     public ScheduleDays(double totalHours) {
 
-        this.totalHours = totalHours;
+        this.totalHours     = totalHours;
     }
 
     public ScheduleDays( double monday, double tuesday,
                         double wednesday, double thursday, double friday, double totalHours) {
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday = friday;
-        this.totalHours = totalHours;
+        this.monday         = monday;
+        this.tuesday        = tuesday;
+        this.wednesday      = wednesday;
+        this.thursday       = thursday;
+        this.friday         = friday;
+        this.totalHours     = totalHours;
     }
 
     public ScheduleDays(String username, double totalHours) {
-        this.username = username;
-        this.totalHours = totalHours;
+        this.username       = username;
+        this.totalHours     = totalHours;
     }
 
     public ScheduleDays(String username){

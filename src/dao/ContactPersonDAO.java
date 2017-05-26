@@ -1,8 +1,7 @@
 package dao;
 
-import entities.Company;
-import entities.ContactPerson;
-import entities.User;
+import application.Company;
+import application.ContactPerson;
 import gui.HomeGUI;
 
 import java.sql.*;
@@ -31,18 +30,13 @@ public class ContactPersonDAO implements BaseDAO<ContactPerson> {
             stmt = conn.createStatement();
             String sql;
 
-
-
             sql = "SELECT contact_id FROM contact_person WHERE contact_name = '" + company.getContactPerson().getName() + "'";
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 contactID = rs.getInt("contact_id");
-
             }
-
-            //STEP 5: Extract data from result set
 
             //STEP 6: Clean-up environment
             rs.close();

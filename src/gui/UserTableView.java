@@ -1,25 +1,16 @@
-package gui.Tableviews.methods;
+package gui;
 
-import backend.LogicController;
-import entities.Company;
-import entities.User;
+import application.LogicController;
+import application.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.converter.NumberStringConverter;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 
@@ -27,12 +18,12 @@ import java.util.Optional;
  * Created by Daniel on 17-05-2017.
  */
 
-public class UserMethod {
+public class UserTableView {
 
-    public static HBox hboxUser = new HBox();
+    public static HBox hboxUser                     = new HBox();
 
 
-    public static TableView<User> tvUser = new TableView<>();
+    public static TableView<User> tvUser            = new TableView<>();
     public static TextField username, password ,email, startDate, userRank;
 
     /*
@@ -48,7 +39,7 @@ public class UserMethod {
     */
     public static void addUser() {
         // Vi laver et User objekt.
-        User user = new User();
+        User user                                   = new User();
 
         // Vi henter det tekst der er blevet skrevet ind i vores TextFields.
         user.setUsername(username.getText());
@@ -105,63 +96,40 @@ public class UserMethod {
         */
 
         // Kolonne for brugernavn
-        TableColumn<User, String> usernameCol = new TableColumn<>("Username");
+        TableColumn<User, String> usernameCol        = new TableColumn<>("Username");
         usernameCol.setMinWidth(150);
-        usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        usernameCol.setCellValueFactory(               new PropertyValueFactory<>("username"));
 
         // Kolonne for Email
-        TableColumn<User, String> emailCol = new TableColumn<>("Email");
+        TableColumn<User, String> emailCol           = new TableColumn<>("Email");
         emailCol.setMinWidth(185);
-        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        emailCol.setCellValueFactory(                  new PropertyValueFactory<>("email"));
 
         // Kolonne for Start dato // Timestamp
-        TableColumn<User, String> startDateCol = new TableColumn<>("Start time");
+        TableColumn<User, String> startDateCol       = new TableColumn<>("Start time");
         startDateCol.setMinWidth(185);
-        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startDateCol.setCellValueFactory(              new PropertyValueFactory<>("startDate"));
 
         // Bruger rang, 1 for admin, 0 for normal bruger.
-        TableColumn<User, Number> userRankCol = new TableColumn<>("User rank");
+        TableColumn<User, Number> userRankCol        = new TableColumn<>("User rank");
         userRankCol.setMinWidth(5);
-        userRankCol.setCellValueFactory(new PropertyValueFactory<>("rank"));
-
-        /*//Attach Action Listeners
-        emailCol.setCellValueFactory(e -> e.getValue().emailProperty());
-        userRankCol.setCellValueFactory(e -> e.getValue().rankProperty());
-
-        //make cells editable
-        emailCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        userRankCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
-
-        //Update the TableView
-        emailCol.setOnEditCommit((TableColumn.CellEditEvent<User, String> event) -> {
-            ((User) event.getTableView().getItems().get(event.getTablePosition().getRow())).setEmail
-                    (event.getNewValue());
-        });
-
-        userRankCol.setOnEditCommit((TableColumn.CellEditEvent<User, Number> event) -> {
-            ((User) event.getTableView().getItems().get(event.getTablePosition().getRow())).setRank
-                    (((Integer)event.getNewValue()));
-        });
-
-        tvUser.setEditable(true);
-        */
+        userRankCol.setCellValueFactory(               new PropertyValueFactory<>("rank"));
 
         // GridPane der indeholder vores TextFields og knapper.
-        GridPane gp3 = new GridPane();
+        GridPane gp3                                 = new GridPane();
 
         // VBoxes for vores TextFields
-        VBox addUserBox = new VBox();
+        VBox addUserBox                              = new VBox();
         addUserBox.setSpacing(10);
-        addUserBox.setPadding(new Insets(1, 10, 100, 10));
+        addUserBox.setPadding(                         new Insets(1, 10, 100, 10));
         gp3.add(addUserBox, 0, 0);
 
 
-        VBox addUserbox2 = new VBox();
+        VBox addUserbox2                             = new VBox();
         addUserbox2.setSpacing(10);
-        //gp3.add(addUserbox2, 1, 0);
 
         // Knappen Tilføj Bruger under fanen "Brugere"
-        Button addUserBtn = new Button("Tilføj Bruger");
+        Button addUserBtn                            = new Button("Tilføj Bruger");
         addUserBtn.setId("addEmployeeButton");
 
         /*
@@ -183,7 +151,7 @@ public class UserMethod {
             tvUser.setItems(FXCollections.observableArrayList(LogicController.getUsers()));
 
             // Vi opretter et ny 'AlertBox' vindue
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert                              = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Citybook");
             alert.setHeaderText("Bekræftelse");
             alert.setContentText("Brugeren er nu blevet oprettet.");
@@ -193,12 +161,12 @@ public class UserMethod {
                 før at vores lambda bliver kørt. Vi bruger kun AlertBox
                 her for at vise at brugeren er blevet oprettet.
             */
-            Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result              = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
             }
         });
         // Knappen Slet Bruger under fanen "Brugere"
-        Button deleteUserBtn = new Button("Slet Bruger");
+        Button deleteUserBtn                         = new Button("Slet Bruger");
         deleteUserBtn.setId("deleteEmployeeButton");
 
         /*
@@ -206,7 +174,7 @@ public class UserMethod {
         */
         deleteUserBtn.setOnAction(alertBox ->{
                 // Vi opretter et ny 'AlertBox' vindue
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert                          = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
                 alert.setHeaderText("Bekræftelse");
                 alert.setContentText("Er du sikker på at du vil slette denne bruger?");
@@ -217,33 +185,33 @@ public class UserMethod {
                     Hvis brugeren trykker på 'Ok' bliver if-statement kørt,
                     ellers lukker vinduet bare og ingenting sker.
                 */
-                Optional<ButtonType> result = alert.showAndWait();
+                Optional<ButtonType> result          = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     deleteUser();
                 }
         });
 
         // Vores TextFields til brugere view.
-        username = new TextField();
+        username                                     = new TextField();
         username.setPromptText("Username");
         username.setMaxWidth(100);
 
-        password = new TextField();
+        password                                     = new TextField();
         password.setPromptText("Password");
         password.setMaxWidth(100);
 
-        email = new TextField();
+        email                                        = new TextField();
         email.setPromptText("Email");
         email.setMaxWidth(100);
 
-        userRank = new TextField();
+        userRank                                     = new TextField();
         userRank.setPromptText("User rank");
         userRank.setMaxWidth(100);
 
         // Tilføjer TextFields til VBox addUserBox og addUserBox2
         addUserBox.getChildren().addAll(username, password, email, userRank,
                 addUserBtn, deleteUserBtn);
-        Label white = new Label();
+        Label white                                  = new Label();
         white.setId("whiteCompany");
         white.getStylesheets().addAll("gui/assets/login.css");
 

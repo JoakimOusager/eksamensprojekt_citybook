@@ -1,4 +1,4 @@
-package entities;
+package application;
 
 /**
  * Created by Joakim on 23/05/2017.
@@ -9,9 +9,9 @@ public class ContactPerson {
     private String phone;
 
     public ContactPerson(String name, String email, String phone) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
+        this.name       = name;
+        this.email      = email;
+        this.phone      = phone;
     }
 
     public String getName() {

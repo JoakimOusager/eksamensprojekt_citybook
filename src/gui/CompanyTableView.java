@@ -1,35 +1,29 @@
-package gui.Tableviews.methods;
+package gui;
 
-import backend.LogicController;
-import entities.Company;
-import entities.ContactPerson;
-import gui.HomeGUI;
+import application.LogicController;
+import application.Company;
+import application.ContactPerson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import static gui.ShowMoreInformationCompany.showMoreButtonClicked;
+import static gui.ShowMoreCompany.showMoreButtonClicked;
 
 /**
  * Created by Daniel on 17-05-2017.
  */
-public class CompanyMethod {
+public class CompanyTableView {
 
-    public static HBox hboxCompany = new HBox();
+    public static HBox hboxCompany                         = new HBox();
 
-        public static TableView<Company> tvCompany = new TableView<>();
+        public static TableView<Company> tvCompany         = new TableView<>();
         public static TextField cvrNumber, name, address, email, zipCode, phoneNumber, contactPersonName, contactPersonEmail,
         contactPersonPhone;
 
@@ -44,10 +38,17 @@ public class CompanyMethod {
             return company;
         }
 
-        // Add children method
+        /*
+               Dette er vores metode til at tilføje en virksomhed.
+        */
         public static void addCompany() {
-            Company company = new Company();
-            ContactPerson contactPerson = new ContactPerson(contactPersonName.getText(), contactPersonEmail.getText(), contactPersonPhone.getText());
+            // Vi laver et Company objekt.
+            Company company                                 = new Company();
+
+            // Vi laver et ContactPerson objekt der indeholder de værdier som er i vores TextFields.
+            ContactPerson contactPerson                     = new ContactPerson(contactPersonName.getText(), contactPersonEmail.getText(), contactPersonPhone.getText());
+
+            // Vi smider vores ContactPerson objekt ind i Company objektet.
             company.setContactPerson(contactPerson);
             company.setName(name.getText());
             company.setCvrNumber(cvrNumber.getText());
@@ -71,7 +72,9 @@ public class CompanyMethod {
 
             LogicController.addCompany(company);
         }
-        // Delete company method
+        /*
+            Dette er vores metode til at slette en virksomhed.
+        */
         public static void deleteCompany() {
             ObservableList<Company> companySelected, allCompanies;
             allCompanies = tvCompany.getItems();
@@ -84,127 +87,128 @@ public class CompanyMethod {
 
         }
 
-        // The button 'Indregistrede børn' has been pressed in the menu.
+        /*
+            Knappen 'Virksomheder' generer dette TableView.
+        */
         public static void companyTableviewStart() {
 
-            TableColumn<Company, String> nameCompanyCol = new TableColumn<>("Navn");
+            TableColumn<Company, String> nameCompanyCol    = new TableColumn<>("Navn");
             nameCompanyCol.setMinWidth(120);
             nameCompanyCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-            TableColumn<Company, String> phoneCompanyCol = new TableColumn<>("Telefon");
+            TableColumn<Company, String> phoneCompanyCol   = new TableColumn<>("Telefon");
             phoneCompanyCol.setMinWidth(120);
             phoneCompanyCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-            TableColumn<Company, String> emailCol = new TableColumn<>("Email");
+            TableColumn<Company, String> emailCol          = new TableColumn<>("Email");
             emailCol.setMinWidth(120);
-            emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+            emailCol.setCellValueFactory(                    new PropertyValueFactory<>("email"));
 
             TableColumn<Company, String> companyRevenueCol = new TableColumn<>("Omsætning");
             companyRevenueCol.setMinWidth(120);
-            companyRevenueCol.setCellValueFactory(new PropertyValueFactory<>("revenue"));
+            companyRevenueCol.setCellValueFactory(         new PropertyValueFactory<>("revenue"));
 
             // GridPane for the whole adding and deleting employee area
-            GridPane gp3 = new GridPane();
+            GridPane gp3                                   = new GridPane();
 
             // VBoxes for TextFields
-            VBox addCompanyBox = new VBox();
+            VBox addCompanyBox                             = new VBox();
             addCompanyBox.setSpacing(10);
-            addCompanyBox.setPadding(new Insets(1, 10, 100, 10));
+            addCompanyBox.setPadding(                        new Insets(1, 10, 100, 10));
             gp3.add(addCompanyBox, 0, 0);
 
-            VBox addContactPersonBox = new VBox();
+            VBox addContactPersonBox                       = new VBox();
             addContactPersonBox.setSpacing(10);
-            addContactPersonBox.setPadding(new Insets(1, 10, 100, 10));
+            addContactPersonBox.setPadding(                  new Insets(1, 10, 100, 10));
             gp3.add(addContactPersonBox,1,0);
 
 
-            VBox addCompanyBox2 = new VBox();
+            VBox addCompanyBox2                            = new VBox();
             addCompanyBox2.setSpacing(10);
-            //gp3.add(addCompanyBox2, 1, 0);
 
             // Buttons for adding and deleting Companies
-            Button addCompanyBtn = new Button("Tilføj firma");
+            Button addCompanyBtn                           = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
 
             addCompanyBtn.setOnAction(successBox ->{
                 addCompany();
                 tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert                                = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
                 alert.setHeaderText("Bekræftelse");
                 alert.setContentText("Firmaet er nu blevet oprettet.");
 
-                Optional<ButtonType> result = alert.showAndWait();
+                Optional<ButtonType> result                = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
 
                 }
             });
 
-            Button deleteCompanyBtn = new Button("Slet firma");
+            Button deleteCompanyBtn                        = new Button("Slet firma");
             deleteCompanyBtn.setId("deleteEmployeeButton");
 
             deleteCompanyBtn.setOnAction(alertBox ->{
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert                                = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
                 alert.setHeaderText("Bekræftelse");
                 alert.setContentText("Er du sikker på at du vil slette dette firma?");
 
-                Optional<ButtonType> result = alert.showAndWait();
+                Optional<ButtonType> result                = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
                     deleteCompany();
                 }
             });
 
-            showMoreInformationAboutCompanyButton = new Button("Vis mere");
+            showMoreInformationAboutCompanyButton          = new Button("Vis mere");
             showMoreInformationAboutCompanyButton.setId("showMoreInformationAboutCompanyButton");
             showMoreInformationAboutCompanyButton.setOnAction(e-> {
-                ObservableList<Company> selectedCompany = tvCompany.getSelectionModel().getSelectedItems();
+                ObservableList<Company> selectedCompany    = tvCompany.getSelectionModel().getSelectedItems();
                 showMoreButtonClicked(selectedCompany.get(0));
             });
 
-            Label companyLbl = new Label("Virksomhed");
-            Label contactPersonLbl = new Label("Kontaktperson");
+            Label companyLbl                               = new Label("Virksomhed");
+            Label contactPersonLbl                         = new Label("Kontaktperson");
             // TextFields for adding a child
-            cvrNumber = new TextField();
+            cvrNumber                                      = new TextField();
             cvrNumber.setPromptText("CVR-nummer");
             cvrNumber.setMaxWidth(100);
 
-            name = new TextField();
+            name                                           = new TextField();
             name.setPromptText("Navn");
             name.setMaxWidth(100);
 
-            address = new TextField();
+            address                                        = new TextField();
             address.setPromptText("Adresse");
             address.setMaxWidth(100);
 
-            email = new TextField();
+            email                                          = new TextField();
             email.setPromptText("Email");
             email.setMaxWidth(100);
 
-            zipCode = new TextField();
+            zipCode                                        = new TextField();
             zipCode.setPromptText("Post nummer");
             zipCode.setMaxWidth(100);
 
-            phoneNumber = new TextField();
+            phoneNumber                                    = new TextField();
             phoneNumber.setPromptText("Telefon nummer");
             phoneNumber.setMaxWidth(100);
 
-            contactPersonName = new TextField();
+            contactPersonName                              = new TextField();
             contactPersonName.setPromptText("Navn");
             contactPersonName.setMaxWidth(100);
 
-            contactPersonEmail = new TextField();
+            contactPersonEmail                             = new TextField();
             contactPersonEmail.setPromptText("Email");
             contactPersonEmail.setMaxWidth(100);
 
-            contactPersonPhone = new TextField();
+            contactPersonPhone                             = new TextField();
             contactPersonPhone.setPromptText("Tlf. nummer");
             contactPersonPhone.setMaxWidth(100);
 
             // adding the TextFields to VBox 1 and VBox 2
             addCompanyBox.getChildren().addAll(companyLbl, cvrNumber, name, address, email, zipCode, phoneNumber,
                     addCompanyBtn, deleteCompanyBtn, showMoreInformationAboutCompanyButton);
-            Label white = new Label();
+            Label white                                    = new Label();
             white.setId("whiteCompany");
             white.getStylesheets().addAll("gui/assets/login.css");
 

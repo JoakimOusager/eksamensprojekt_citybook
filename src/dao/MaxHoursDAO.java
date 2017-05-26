@@ -1,7 +1,6 @@
 package dao;
 
-import entities.Company;
-import entities.ScheduleDays;
+import application.ScheduleDays;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class MaxHoursDAO {
 
                 // Company detaljer
                 double hours = rs.getDouble("total_hours");
-                System.out.println(hours);
                 list.add(new ScheduleDays(hours));
             }
 

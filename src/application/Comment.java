@@ -1,4 +1,4 @@
-package entities;
+package application;
 
 /**
  * Created by Daniel on 26-05-2017.
@@ -11,7 +11,7 @@ public class Comment {
 
 
     public Comment(int id, String comment) {
-        id = id;
+        id           = id;
         this.comment = comment;
     }
 
