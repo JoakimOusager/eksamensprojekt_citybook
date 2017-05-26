@@ -135,11 +135,13 @@
 }
 
 #dage{
-    -fx-font-size: 22px;
+    -fx-font-size: 15px;
     -fx-pref-height: 35px;
     -fx-pref-width: 120px;
-    -fx-border-width: 1 1 1 1;
-    -fx-border-color: black;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-radius: 5;
     -fx-background-position: center;
 }
 
@@ -196,10 +198,13 @@
 
 #personlabelCombobox{
     -fx-font-size: 20px;
-    -fx-border-color: black;
-    -fx-border-width: 3;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-background-color: rgba(255, 255, 255, 0.2);;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
     -fx-alignment: baseline-center;
-    -fx-background-position: bottom;
     -fx-min-height: 20px;
     -fx-min-width: 200px;
+    -fx-text-fill: white;
 }
