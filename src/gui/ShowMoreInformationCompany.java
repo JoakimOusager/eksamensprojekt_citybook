@@ -116,15 +116,26 @@ public class ShowMoreInformationCompany extends Application {
         Button updateShowMoreInformationCompaniesWindows = new Button("Gem ændringer");
         updateShowMoreInformationCompaniesWindows.setId("saveEdits");
         showMoreGridPane.add(updateShowMoreInformationCompaniesWindows,1,12);
+
+        /*
+            Dette er vores lambda til at opdatere alle fields når man trykker på 'Gem ændringer'.
+            I princippet henter vi alle værdier fra vores TextFields og opretter et nyt Company objekt og ContactPerson
+            objekt og smider det ind i databasen.
+        */
         updateShowMoreInformationCompaniesWindows.setOnAction(event -> {
 
             ContactPerson contactPerson = new ContactPerson(contactPersonName.getText(), contactPersonEmail.getText(), contactPersonPhone.getText());
             Company newCompany = new Company(cvrNumber.getText(), name.getText(), address.getText(), zipCode.getText(), email.getText(), phoneNumber.getText(), Double.parseDouble(revenue.getText()), comments.getText(), contactPerson);
             LogicController.updateCompanies(newCompany);
+
+            /*
+             Til at opdatere TableView når man trykker på 'Gem ændringer' med de angivede værdier.
+            */
             tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
 
         });
 
+        // Tilføjer CSS samt opretter en ny scene.
         showMoreGridPane.getStylesheets().addAll("gui/assets/login.css");
         Scene showMoreInformationScene = new Scene(showMoreGridPane);
         showMoreInformationStage.centerOnScreen();
@@ -133,6 +144,9 @@ public class ShowMoreInformationCompany extends Application {
 
     }
 
+    /*
+        Denne metode viser vores pop-up vindue når man trykker på 'Vis mere'
+    */
     public static void showMoreButtonClicked(Company company)  {
                 try {
                     showMoreInformationCompanyWindow(company);
@@ -140,6 +154,7 @@ public class ShowMoreInformationCompany extends Application {
                     showMoreInformationStage.setY(200);
                     showMoreInformationStage.setResizable(false);
                 } catch (NullPointerException e) {
+                        // Viser en Fejl meddelelse hvis man ikke har en virksomhed i TableView
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Citybook");
                         alert.setHeaderText("ADVARSEL");

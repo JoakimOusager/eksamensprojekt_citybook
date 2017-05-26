@@ -1,22 +1,20 @@
 package dao;
 
-import entities.ScheduleDays;
-import entities.User;
+import entities.Comment;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel on 25-05-2017.
+ * Created by Daniel on 26-05-2017.
  */
-public class ScheduleDAO{
-
-    public ArrayList<ScheduleDays> get(User user) {
-        ArrayList<ScheduleDays> list = new ArrayList<ScheduleDays>();
+public class CommentDAO {
+    public ArrayList<Comment> get(){
+        ArrayList<Comment> list = new ArrayList<>();
 
         Connection conn = null;
         Statement stmt = null;
-        int i = 0;
+
         try {
             //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
@@ -26,25 +24,16 @@ public class ScheduleDAO{
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
-            String sql;
 
-                sql = "SELECT * FROM cbcrm.schedule WHERE username = '" + user.getUsername() + "' ";
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery("SELECT comment FROM cbcrm.comment WHERE idcomment=(SELECT MAX(idcomment) FROM cbcrm.comment);");
 
             //STEP 5: Extract data from result set
-            while (rs.next()) {
+            if (rs.next()) {
 
                 // Company detaljer
-                double monday = rs.getDouble("monday");
-                double tuesday = rs.getDouble("tuesday");
-                double wednesday = rs.getDouble("wednesday");
-                double thursday = rs.getDouble("thursday");
-                double friday = rs.getDouble("friday");
-                double totalHours = rs.getDouble("total_hours");
-
-                list.add(new ScheduleDays(monday, tuesday, wednesday, thursday, friday,
-                        totalHours));
-                i++;
+                String comment = rs.getString("comment");
+                list.add(new Comment(comment));
+                System.out.println(comment);
             }
 
             //STEP 6: Clean-up environment
@@ -76,7 +65,7 @@ public class ScheduleDAO{
         return list;
     }
 
-    public void update(ScheduleDays scheduleDays, User user) {
+    public void insert(Comment comment) {
         Connection conn = null;
         Statement stmt = null;
 
@@ -89,16 +78,15 @@ public class ScheduleDAO{
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
+
+            // Statement som finder ud af hvilket id brugeren, som har logget ind har
+            String sqlUpdateCreatedBy;
+
+
             String sql;
 
-            sql = "UPDATE schedule " +
-                    " SET monday = '" + scheduleDays.getMonday() + "',"+
-                    " tuesday = '" +scheduleDays.getTuesday() +"'," +
-                    " wednesday = '" + scheduleDays.getWednesday() + "'," +
-                    " thursday =  '" + scheduleDays.getThursday() + "'," +
-                    " friday =  '" + scheduleDays.getFriday() + "'," +
-                    " total_hours = '" + scheduleDays.getTotalHours() + "'" +
-                    " WHERE username = '" + user.getUsername() + "'";
+            sql = "INSERT INTO comment (comment)" +
+                    "VALUES ( '" + comment.getComment()+"')";
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
