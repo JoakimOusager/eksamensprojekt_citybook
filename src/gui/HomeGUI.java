@@ -20,10 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
+import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -127,7 +125,7 @@ public class HomeGUI extends Application implements ActionListener {
 
     /* //////////////////////////////////////////////////////////////////////////////////////////
                                              HOVEDSCENE
-      ////////////////////////////////////////////////////////////////////////////////////////// */
+       ////////////////////////////////////////////////////////////////////////////////////////// */
 
     /*
         Denne metode sætter hele Scenen op med menu samt indhold.
@@ -198,7 +196,7 @@ public class HomeGUI extends Application implements ActionListener {
         });
         goalsButton.setOnAction((ActionEvent event2) -> {
             buttonReset();
-            målScreen(primaryStage);
+            goalsScreen(primaryStage);
         });
 
         //Knap lavet til virksomheds siden
@@ -212,7 +210,7 @@ public class HomeGUI extends Application implements ActionListener {
         });
         companiesButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            virksomhedsScreen(primaryStage);
+            companiesScreen(primaryStage);
 
             LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
         });
@@ -228,7 +226,7 @@ public class HomeGUI extends Application implements ActionListener {
         });
         vagtplanButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            vagtplanScreen(primaryStage);
+            scheduleScreen(primaryStage);
 
         });
 
@@ -243,7 +241,7 @@ public class HomeGUI extends Application implements ActionListener {
         });
         vagtplansOverblikbtn.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            vagtplanOversigtScreen(primaryStage);
+            scheduleOverviewScreen(primaryStage);
 
 
         });
@@ -259,7 +257,7 @@ public class HomeGUI extends Application implements ActionListener {
         });
         userButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
-            adminScreen(primaryStage);
+            usersScreen(primaryStage);
             LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
 
         });
@@ -367,7 +365,7 @@ public class HomeGUI extends Application implements ActionListener {
     }
 
     //Målscreen
-    public static void målScreen(Stage primaryStage){
+    public static void goalsScreen(Stage primaryStage){
 
         //total omsætning
         BorderPane bpRevenueTotal = new BorderPane();
@@ -385,8 +383,6 @@ public class HomeGUI extends Application implements ActionListener {
         bpRevenueTotal.setTop(labelRevenueTotalMessage);
         bpRevenueTotal.setAlignment(labelRevenueTotalMessage, Pos.TOP_CENTER);
         bpRevenueTotal.setCenter(labelRevenueTotalCount);
-
-
 
         //højest omsætning på en måned
         BorderPane bpHighestRevenueMonth = new BorderPane();
@@ -459,7 +455,7 @@ public class HomeGUI extends Application implements ActionListener {
     }
 
     //virksomheds screen
-    public static void virksomhedsScreen(Stage primaryStage){
+    public static void companiesScreen(Stage primaryStage){
 
         companiesButton.setId("mActive");
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
@@ -475,7 +471,7 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
-    public static void vagtplanScreen(Stage primaryStage){
+    public static void scheduleScreen(Stage primaryStage){
 
         vagtplanButton.setId("mActive");
         vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
@@ -678,7 +674,7 @@ public class HomeGUI extends Application implements ActionListener {
 
             //Variabler til brug af totalTid fra databasen
             ArrayList<ScheduleDays> arraylistSchedule =
-                    new ArrayList<ScheduleDays>(LogicController.getSchedule(loggedInUser));
+                    new ArrayList<>(LogicController.getSchedule(loggedInUser));
             double mondayDB = arraylistSchedule.get(0).getMonday();
             double tuesdayDB = arraylistSchedule.get(0).getTuesday();
             double wednesdayDB = arraylistSchedule.get(0).getWednesday();
@@ -801,13 +797,13 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
-    public static void vagtplanOversigtScreen(Stage primaryStage){
+    public static void scheduleOverviewScreen(Stage primaryStage){
 
 
         vagtplanButton.setId("mActive");
         vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
-        ArrayList<ScheduleDays> maxHoursList = new ArrayList<ScheduleDays>(LogicController.getUsernameHours());
-        ArrayList<ScheduleDays> maxHoursList1 = new ArrayList<ScheduleDays>(LogicController.getHoursUsername());
+        ArrayList<ScheduleDays> maxHoursList = new ArrayList<>(LogicController.getUsernameHours());
+        ArrayList<ScheduleDays> maxHoursList1 = new ArrayList<>(LogicController.getHoursUsername());
         ArrayList<Double> comboBoxArray1 = new ArrayList<>();
         ArrayList<String> comboBoxArray2 = new ArrayList<>();
 
@@ -911,7 +907,7 @@ public class HomeGUI extends Application implements ActionListener {
     }
 
     //Adminscreen
-    public static void adminScreen(Stage primaryStage){
+    public static void usersScreen(Stage primaryStage){
 
         userButton.setId("mActive");
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -932,13 +928,5 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.setScene(postLogin);
         primaryStage.show();
     }
-
-    /*
-        Metode til at få Google Calendar integreret i vores program.
-        Vi har valgt Google Calendar fremfor selv at lave en kalender da,
-        da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
-    */
-
-
 
 }

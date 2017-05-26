@@ -205,7 +205,7 @@ public class GUI extends Application {
         goalsButton.setId("buttonsleftside");
         goalsButton.setOnAction((ActionEvent event2) -> {
             buttonReset();
-            målScreen(primaryStage);
+            goalsScreen(primaryStage);
         });
 
         //Knap lavet til virksomheds siden
@@ -213,7 +213,7 @@ public class GUI extends Application {
         companiesButton.setId("buttonsleftside");
         companiesButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
-            virksomhedsScreen(primaryStage);
+            companiesScreen(primaryStage);
         });
 
         //Knap lavet specifikt til admins
@@ -221,7 +221,7 @@ public class GUI extends Application {
         userButton.setId("buttonsleftside");
         userButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
-            adminScreen(primaryStage);
+            usersScreen(primaryStage);
         });
 
         //knap lavet til at logge ud
@@ -295,7 +295,7 @@ public class GUI extends Application {
     }
 
     //Målscreen
-    public static void målScreen(Stage primaryStage){
+    public static void goalsScreen(Stage primaryStage){
 
 
         goalsButton.setId("mActive");
@@ -311,7 +311,7 @@ public class GUI extends Application {
     }
 
     //virksomheds screen
-    public static void virksomhedsScreen(Stage primaryStage){
+    public static void companiesScreen(Stage primaryStage){
 
         companiesButton.setId("mActive");
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
@@ -327,7 +327,7 @@ public class GUI extends Application {
     }
 
     //Adminscreen
-    public static void adminScreen(Stage primaryStage){
+    public static void usersScreen(Stage primaryStage){
 
         userButton.setId("mActive");
         userButton.getStylesheets().addAll("gui/assets/login.css");
