@@ -2,6 +2,7 @@ package gui.Tableviews.methods;
 
 import backend.LogicController;
 import entities.Company;
+import entities.ContactPerson;
 import gui.HomeGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +14,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static gui.ShowMoreInformationCompany.showMoreButtonClicked;
+
 /**
  * Created by Daniel on 17-05-2017.
  */
@@ -25,7 +30,10 @@ public class CompanyMethod {
     public static HBox hboxCompany = new HBox();
 
         public static TableView<Company> tvCompany = new TableView<>();
-        public static TextField cvrNumber, name, address, email, zipCode, phoneNumber;
+        public static TextField cvrNumber, name, address, email, zipCode, phoneNumber, contactPersonName, contactPersonEmail,
+        contactPersonPhone;
+
+        public static Button showMoreInformationAboutCompanyButton;
 
         // Get all the children
         public static ObservableList<Company> getCompany() {
@@ -39,6 +47,8 @@ public class CompanyMethod {
         // Add children method
         public static void addCompany() {
             Company company = new Company();
+            ContactPerson contactPerson = new ContactPerson(contactPersonName.getText(), contactPersonEmail.getText(), contactPersonPhone.getText());
+            company.setContactPerson(contactPerson);
             company.setName(name.getText());
             company.setCvrNumber(cvrNumber.getText());
             company.setAddress(address.getText());
@@ -46,6 +56,7 @@ public class CompanyMethod {
             company.setZipCode(zipCode.getText());
             company.setPhoneNumber(phoneNumber.getText());
             company.setCreatedBy(HomeGUI.loggedInUser);
+
             tvCompany.getItems().add(company);
             cvrNumber.clear();
             name.clear();
@@ -63,43 +74,31 @@ public class CompanyMethod {
             allCompanies = tvCompany.getItems();
             companySelected = tvCompany.getSelectionModel().getSelectedItems();
             for (Company com : companySelected) {
-                System.out.println("skrrt");
                 LogicController.deleteCompany(com);
             }
 
             companySelected.forEach(allCompanies::remove);
 
         }
+
         // The button 'Indregistrede børn' has been pressed in the menu.
         public static void companyTableviewStart() {
 
-            TableColumn<Company, String> cvrNumberCol = new TableColumn<>("CVR-nummer");
-            cvrNumberCol.setMinWidth(120);
-            cvrNumberCol.setCellValueFactory(new PropertyValueFactory<>("cvrNumber"));
+            TableColumn<Company, String> nameCompanyCol = new TableColumn<>("Navn");
+            nameCompanyCol.setMinWidth(120);
+            nameCompanyCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-          /*  TableColumn<ContactPerson, String> contactPersonCol = new TableColumn<>("Kontaktperson");
-            contactPersonCol.setMinWidth(120);
-            contactPersonCol.setCellValueFactory(new PropertyValueFactory<>("name")); */
-
-            TableColumn<Company, String> namePersonCol = new TableColumn<>("Navn");
-            namePersonCol.setMinWidth(120);
-            namePersonCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-            TableColumn<Company, String> adressCol = new TableColumn<>("Adresse");
-            adressCol.setMinWidth(120);
-            adressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+            TableColumn<Company, String> phoneCompanyCol = new TableColumn<>("Telefon");
+            phoneCompanyCol.setMinWidth(120);
+            phoneCompanyCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
             TableColumn<Company, String> emailCol = new TableColumn<>("Email");
             emailCol.setMinWidth(120);
             emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-            TableColumn<Company, String> zipCodeCol = new TableColumn<>("Postnummer");
-            zipCodeCol.setMinWidth(120);
-            zipCodeCol.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
-
-            TableColumn<Company, String> phoneNumberCol = new TableColumn<>("Telefonnummer");
-            phoneNumberCol.setMinWidth(120);
-            phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+            TableColumn<Company, String> companyRevenueCol = new TableColumn<>("Omsætning");
+            companyRevenueCol.setMinWidth(120);
+            companyRevenueCol.setCellValueFactory(new PropertyValueFactory<>("revenue"));
 
             // GridPane for the whole adding and deleting employee area
             GridPane gp3 = new GridPane();
@@ -109,6 +108,11 @@ public class CompanyMethod {
             addCompanyBox.setSpacing(10);
             addCompanyBox.setPadding(new Insets(1, 10, 100, 10));
             gp3.add(addCompanyBox, 0, 0);
+
+            VBox addContactPersonBox = new VBox();
+            addContactPersonBox.setSpacing(10);
+            addContactPersonBox.setPadding(new Insets(1, 10, 100, 10));
+            gp3.add(addContactPersonBox,1,0);
 
 
             VBox addCompanyBox2 = new VBox();
@@ -137,17 +141,26 @@ public class CompanyMethod {
             deleteCompanyBtn.setId("deleteEmployeeButton");
 
             deleteCompanyBtn.setOnAction(alertBox ->{
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Citybook");
-                    alert.setHeaderText("Bekræftelse");
-                    alert.setContentText("Er du sikker på at du vil slette dette firma?");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Citybook");
+                alert.setHeaderText("Bekræftelse");
+                alert.setContentText("Er du sikker på at du vil slette dette firma?");
 
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK){
-                        deleteCompany();
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    deleteCompany();
                 }
             });
 
+            showMoreInformationAboutCompanyButton = new Button("Vis mere");
+            showMoreInformationAboutCompanyButton.setId("showMoreInformationAboutCompanyButton");
+            showMoreInformationAboutCompanyButton.setOnAction(e-> {
+                ObservableList<Company> selectedCompany = tvCompany.getSelectionModel().getSelectedItems();
+                showMoreButtonClicked(selectedCompany.get(0));
+            });
+
+            Label companyLbl = new Label("Virksomhed");
+            Label contactPersonLbl = new Label("Kontaktperson");
             // TextFields for adding a child
             cvrNumber = new TextField();
             cvrNumber.setPromptText("CVR-nummer");
@@ -173,24 +186,35 @@ public class CompanyMethod {
             phoneNumber.setPromptText("Telefon nummer");
             phoneNumber.setMaxWidth(100);
 
-            tvCompany.setEditable(true);
+            contactPersonName = new TextField();
+            contactPersonName.setPromptText("Navn");
+            contactPersonName.setMaxWidth(100);
 
+            contactPersonEmail = new TextField();
+            contactPersonEmail.setPromptText("Email");
+            contactPersonEmail.setMaxWidth(100);
+
+            contactPersonPhone = new TextField();
+            contactPersonPhone.setPromptText("Tlf. nummer");
+            contactPersonPhone.setMaxWidth(100);
 
             // adding the TextFields to VBox 1 and VBox 2
-            addCompanyBox.getChildren().addAll(cvrNumber, name, address, email, zipCode, phoneNumber,
-                    addCompanyBtn, deleteCompanyBtn);
+            addCompanyBox.getChildren().addAll(companyLbl, cvrNumber, name, address, email, zipCode, phoneNumber,
+                    addCompanyBtn, deleteCompanyBtn, showMoreInformationAboutCompanyButton);
             Label white = new Label();
             white.setId("whiteCompany");
             white.getStylesheets().addAll("gui/assets/login.css");
 
             addCompanyBox2.getChildren().addAll(white);
 
+            addContactPersonBox.getChildren().addAll(contactPersonLbl, contactPersonName, contactPersonEmail, contactPersonPhone);
+
             // Setting the values stores in the getEmployees method to the tableview.
             tvCompany.setItems(getCompany());
             tvCompany.setId("tvAktivitet");
             tvCompany.getStylesheets().addAll("gui/assets/login.css");
 
-            tvCompany.getColumns().addAll(cvrNumberCol, namePersonCol, adressCol, emailCol, zipCodeCol, phoneNumberCol);
+            tvCompany.getColumns().addAll(nameCompanyCol, phoneCompanyCol, emailCol, companyRevenueCol);
             hboxCompany.setId("hboxAktivitet");
             hboxCompany.getStylesheets().addAll("gui/assets/login.css");
             hboxCompany.getChildren().addAll(addCompanyBox2,tvCompany, gp3);

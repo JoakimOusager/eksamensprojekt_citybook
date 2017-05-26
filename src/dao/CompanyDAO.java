@@ -165,14 +165,16 @@ public class CompanyDAO implements BaseDAO<Company> {
             while (rs.next()) {
                 userId = rs.getInt("user_id");
             }
+            ContactPersonDAO contactPersonDAO = new ContactPersonDAO();
+            int contactPersonID = contactPersonDAO.getContactIDForCompany(company);
 
             String sql;
 
             sql = "INSERT INTO companies (company_name, company_address, company_zipcode, company_cvr," +
-                    " company_email, company_phone, company_revenue, company_comments, company_created_by" +
+                    " company_email, company_phone, company_revenue, company_comments, company_created_by, company_contact_person" +
                     ")" +
                     "VALUES ( '" + company.getName() + "', '" + company.getAddress() + "' ,'" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
-                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + userId +  "')";
+                    " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + userId + "', '" + contactPersonID +  "')";
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
@@ -217,16 +219,16 @@ public class CompanyDAO implements BaseDAO<Company> {
             stmt = conn.createStatement();
             String sql;
 
-            sql = "UPDATE companies" +
+            sql = "UPDATE companies " +
                     "SET company_name = '" + company.getName() + "',  company_address = '" +company.getAddress() +"'," +
-                    "company_zipcode = + '" + company.getZipCode() + "'," +
+                    "company_zipcode =  '" + company.getZipCode() + "'," +
                     "company_email =  '" + company.getEmail() + "'," +
                     "company_phone =  '" + company.getPhoneNumber() + "'," +
                     "company_revenue = '" + company.getRevenue() + "'," +
-                    "company_comments = '" + company.getComments() + "'" +
+                    "company_comments = '" + company.getComments() + "' " +
                     "WHERE company_cvr = '" + company.getCvrNumber() + "'";
             System.out.println(sql);
-            // stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
             //STEP 6: Clean-up environment

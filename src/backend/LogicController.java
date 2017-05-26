@@ -3,6 +3,7 @@ package backend;
 import dao.*;
 import entities.Comment;
 import entities.Company;
+import entities.ContactPerson;
 import entities.ScheduleDays;
 import entities.User;
 import javafx.scene.control.ComboBox;
@@ -61,8 +62,9 @@ public class LogicController {
         return list;
     }
 
-    public static void updateCompanies() {
-        CompanyDAO userDAO = new CompanyDAO();
+    public static void updateCompanies(Company company) {
+        CompanyDAO companyDAO = new CompanyDAO();
+        companyDAO.update(company);
 
 
     }
@@ -75,6 +77,7 @@ public class LogicController {
 
     public static void addCompany(Company company) {
         CompanyDAO companyDAO = new CompanyDAO();
+        addContactPerson(company.getContactPerson());
         companyDAO.insert(company);
 
     }
@@ -140,6 +143,11 @@ public class LogicController {
 
     }
 
+
+    public static void addContactPerson(ContactPerson contactPerson) {
+        ContactPersonDAO contactPersonDAO = new ContactPersonDAO();
+        contactPersonDAO.insert(contactPerson);
+}
     public static ArrayList<Comment> getComment() {
         CommentDAO commentDAO = new CommentDAO();
         ArrayList<Comment> list = new ArrayList<>(commentDAO.get());

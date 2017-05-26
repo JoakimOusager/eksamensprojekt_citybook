@@ -24,7 +24,7 @@ public class GUI extends Application {
     static BorderPane citybookLogoPane = new BorderPane();
 
     static VBox menuVBox = new VBox();
-    static HBox bottom = new HBox();
+    static HBox bottomHBox = new HBox();
     static Label white = new Label();
     public static BorderPane BPBackground = new BorderPane();
     static BorderPane whiteBackground = new BorderPane();
@@ -35,7 +35,7 @@ public class GUI extends Application {
     public static Scene loginScene = new Scene(loginBP);
 
     //Buttons
-    static Button activitiesButton = new Button("Aktiviteter");
+    static Button calendarButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
     static Button userButton = new Button("Admin");
@@ -149,8 +149,8 @@ public class GUI extends Application {
             homepageButton.setId("buttonReset");
 
             //Knap lavet til aktivitets siden
-            activitiesButton.getStylesheets().addAll("gui/assets/login.css");
-            activitiesButton.setId("buttonReset");
+            calendarButton.getStylesheets().addAll("gui/assets/login.css");
+            calendarButton.setId("buttonReset");
 
             //Knap lavet til "goalsButton" siden
             goalsButton.getStylesheets().addAll("gui/assets/login.css");
@@ -193,9 +193,9 @@ public class GUI extends Application {
         });
 
         //Knap lavet til aktivitets siden
-        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
-        activitiesButton.setId("buttonsleftside");
-        activitiesButton.setOnAction((ActionEvent event1) -> {
+        calendarButton.getStylesheets().addAll("gui/assets/login.css");
+        calendarButton.setId("buttonsleftside");
+        calendarButton.setOnAction((ActionEvent event1) -> {
             buttonReset();
             aktivitetScreen(primaryStage);
         });
@@ -241,21 +241,21 @@ public class GUI extends Application {
         });
 
 
-        menuVBox.getChildren().addAll(homepageButton,activitiesButton, goalsButton, companiesButton, userButton, logoutButton);
+        menuVBox.getChildren().addAll(homepageButton,calendarButton, goalsButton, companiesButton, userButton, logoutButton);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         white.getStylesheets().addAll("gui/assets/login.css");
         white.setId("white");
-        bottom.setSpacing(10);
-        bottom.getStylesheets().addAll("gui/assets/login.css");
-        bottom.setId("bottom");
-        bottom.getChildren().addAll(white);
+        bottomHBox.setSpacing(10);
+        bottomHBox.getStylesheets().addAll("gui/assets/login.css");
+        bottomHBox.setId("bottomHBox");
+        bottomHBox.getChildren().addAll(white);
 
 
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(menuVBox);
-        whiteBackground.setBottom(bottom);
+        whiteBackground.setBottom(bottomHBox);
 
 
         primaryStage.setScene(postLogin);
@@ -271,7 +271,7 @@ public class GUI extends Application {
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(menuVBox);
-        whiteBackground.setBottom(bottom);
+        whiteBackground.setBottom(bottomHBox);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
@@ -281,13 +281,13 @@ public class GUI extends Application {
     //Aktivitetsscreen
     public static void aktivitetScreen(Stage primaryStage){
 
-        activitiesButton.setId("mActive");
-        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
+        calendarButton.setId("mActive");
+        calendarButton.getStylesheets().addAll("gui/assets/login.css");
 
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(menuVBox);
-        whiteBackground.setBottom(bottom);
+        whiteBackground.setBottom(bottomHBox);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
@@ -304,7 +304,7 @@ public class GUI extends Application {
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(menuVBox);
-        whiteBackground.setBottom(bottom);
+        whiteBackground.setBottom(bottomHBox);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
@@ -319,7 +319,7 @@ public class GUI extends Application {
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(menuVBox);
-        whiteBackground.setBottom(bottom);
+        whiteBackground.setBottom(bottomHBox);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
@@ -335,7 +335,7 @@ public class GUI extends Application {
         BPBackground.setCenter(whiteBackground);
         whiteBackground.setTop(citybookLogoPane);
         whiteBackground.setLeft(menuVBox);
-        whiteBackground.setBottom(bottom);
+        whiteBackground.setBottom(bottomHBox);
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
