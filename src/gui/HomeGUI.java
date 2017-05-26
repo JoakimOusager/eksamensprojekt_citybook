@@ -32,14 +32,18 @@ import java.util.Calendar;
 
 public class HomeGUI extends Application {
 
-    // De skulle bruges ofte, så de er static
+    /*
+        VBox, HBox, Scene, Rektangel og vores StackPane skulle bruges ofte, derfor er de static.
+    */
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
     static Rectangle rectangleEncapsulateMenuButtons = new Rectangle();
     static StackPane combineMenu = new StackPane();
 
-    //Buttons
+    /*
+
+    */
     static Button activitiesButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
