@@ -38,8 +38,6 @@ public class HomeGUI extends Application {
     static VBox menuVBox = new VBox();
     static HBox bottom = new HBox();
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
-    static Rectangle rectangleEncapsulateMenuButtons = new Rectangle();
-    static StackPane combineMenu = new StackPane();
 
     /*
 
@@ -94,7 +92,7 @@ public class HomeGUI extends Application {
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
         homepageButton.setId("buttonsleftside");
 
-        //Knap lavet til aktivitets siden
+        //Knap lavet til aktivitetssiden
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
         activitiesButton.setId("buttonsleftside");
 
@@ -102,9 +100,17 @@ public class HomeGUI extends Application {
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
         goalsButton.setId("buttonsleftside");
 
-        //Knap lavet til virksomheds siden
+        //Knap lavet til virksomhedssiden
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
         companiesButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplanen
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplansoversigt
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -263,21 +269,10 @@ public class HomeGUI extends Application {
             primaryStage.centerOnScreen();
 
         });
-
-        //Setting up the rectangle
-        rectangleEncapsulateMenuButtons.setX(0);
-        rectangleEncapsulateMenuButtons.setY(0);
-        rectangleEncapsulateMenuButtons.setWidth(150);
-        rectangleEncapsulateMenuButtons.setHeight(300);
-        rectangleEncapsulateMenuButtons.setOpacity(0.2);
-        rectangleEncapsulateMenuButtons.setArcHeight(30);
-        rectangleEncapsulateMenuButtons.setArcWidth(30);
-
-
+        menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
                 vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
-        combineMenu.getChildren().addAll(rectangleEncapsulateMenuButtons, menuVBox);
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
         VBox white = new VBox();
@@ -293,7 +288,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -307,13 +302,13 @@ public class HomeGUI extends Application {
         Label welcome = new Label("Du er logget ind "+ timeStamp+"\nVelkommen tilbage "+ loggedInUser.getUsername());
         welcome.setId("welcomeLabel");
         welcome.getStylesheets().addAll("gui/assets/login.css");
-
+        buttonReset();
         homepageButton.setId("mActive");
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI. whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(welcome);
 
@@ -420,7 +415,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gridPaneGoals);
 
@@ -431,12 +426,12 @@ public class HomeGUI extends Application {
     //virksomheds screen
     public static void virksomhedsScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        companiesButton.setId("mActive");
+        companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -447,8 +442,8 @@ public class HomeGUI extends Application {
 
     public static void vagtplanScreen(Stage primaryStage){
 
-        companiesButton.setId("mActive");
-        companiesButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
 
 
 
@@ -765,7 +760,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
         LoginGUI.whiteBackground.setCenter(gpvagtplan);
 
@@ -779,12 +774,12 @@ public class HomeGUI extends Application {
     //virksomhedsoverbliks screen
     public static void virksomhedsOverblikScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("mActive");
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
 
@@ -809,7 +804,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
+        LoginGUI.whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottom);
 
         primaryStage.setScene(postLogin);
@@ -841,7 +836,7 @@ public class HomeGUI extends Application {
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(combineMenu);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
 
         LoginGUI.whiteBackground.setCenter(calendar);
         primaryStage.setScene(postLogin);
