@@ -4,7 +4,6 @@ package gui;/**
 
 //import gui.Tableviews.methods.ActivityMethod;
 
-import backend.Datepicker;
 import backend.LogicController;
 import entities.Company;
 import entities.ScheduleDays;
@@ -24,8 +23,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -597,7 +594,12 @@ public class HomeGUI extends Application implements ActionListener {
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
-            switch (day){
+            backend.LogicController.scheduleLogicStart(day, dateFormat, cal, mondayDB,
+                    tuesdayDB, wednesdayDB, thursdayDB, fridayDB, datoMandag, datoTirsdag,
+                    datoOnsdag, datoTorsdag, datoFredag, timerMandag, timerTirsdag, timerOnsdag,
+                    timerTorsdag, timerFredag);
+
+            /*switch (day){
                 case 2:
                 datoMandag.setText(dateFormat.format(cal.getTime()));
 
@@ -664,7 +666,7 @@ public class HomeGUI extends Application implements ActionListener {
                     timerTorsdag.setText(String.valueOf(thursdayDB));
                     timerFredag.setText(String.valueOf(fridayDB));
                 break;
-            }
+            }*/
         });
 
         Button stopTimer = new Button("Stop");
@@ -686,7 +688,13 @@ public class HomeGUI extends Application implements ActionListener {
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
-            switch (day){
+            backend.LogicController.scheduleLogicEnd(day, dateFormat, cal, mondayDB,
+                    tuesdayDB, wednesdayDB, thursdayDB, fridayDB, totalHoursDB,
+                    datoMandag2, datoTirsdag2, datoOnsdag2, datoTorsdag2, datoFredag2,
+                    diffMinutesEnd, diffMinutesStart, totalTimer,
+                    timerMandag, timerTirsdag, timerOnsdag, timerTorsdag, timerFredag);
+
+            /*switch (day){
                 case 2:
                     mondayDB = 0.0;
                     tuesdayDB = 0.0;
@@ -746,7 +754,7 @@ public class HomeGUI extends Application implements ActionListener {
 
             totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
             String totalTimerString = String.valueOf(totalHoursDB);
-            totalTimer.setText(totalTimerString);
+            totalTimer.setText(totalTimerString);*/
 
 
         });
@@ -838,20 +846,13 @@ public class HomeGUI extends Application implements ActionListener {
             person2.getItems().add(comboBoxArray2.get(i));
         }
         person1.setOnAction(event -> {
-            for(int i = 0; i<comboBoxArray2.size();i++){
-                if(person1.getValue().equals(comboBoxArray2.get(i))){
-                    personLabel1.setText(String.valueOf(comboBoxArray1.get(i)));
-                }
-            }
-
+            backend.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
+                    person1, personLabel1);
         });
 
         person2.setOnAction(event -> {
-            for(int i = 0; i<comboBoxArray2.size();i++){
-                if(person2.getValue().equals(comboBoxArray2.get(i))){
-                    personLabel2.setText(String.valueOf(comboBoxArray1.get(i)));
-                }
-            }
+            backend.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
+                    person2, personLabel2);
 
         });
 
