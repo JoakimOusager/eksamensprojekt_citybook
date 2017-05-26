@@ -40,7 +40,7 @@ public class HomeGUI extends Application {
     static Scene postLogin = new Scene(LoginGUI.BPBackground);
 
     /*
-
+        Knapper til vores side menu.
     */
     static Button activitiesButton = new Button("Aktiviteter");
     static Button goalsButton = new Button("Mål");
@@ -53,7 +53,10 @@ public class HomeGUI extends Application {
 
     public static User loggedInUser;
 
-    //labels for vagtplan er gjort static for at labelens text ikke bliver reset ved scene skift
+    /*
+        Alle labels for vagtplan er blevet gjort static, for at deres tekst ikke bliver fjernet ved scene skift.
+    */
+
     static Label datoFredag2 = new Label();
     static Label datoTorsdag2 = new Label();
     static Label datoOnsdag2 = new Label();
@@ -73,11 +76,9 @@ public class HomeGUI extends Application {
 
     static Label totalTimer = new Label();
 
-    //Long tids variabler
+    // Long tidsvariabler
     static long diffMinutesStart;
     static long diffMinutesEnd;
-
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -85,7 +86,9 @@ public class HomeGUI extends Application {
 
     }
 
-    //Metode lavet for at kunne reset borderfarver på knapperne
+    /*
+        Denne metode nulstiller border color på knapperne i side menuen.
+    */
     public static void buttonReset(){
 
         //Knap lavet til startsiden
@@ -118,6 +121,13 @@ public class HomeGUI extends Application {
 
     }
 
+    /* //////////////////////////////////////////////////////////////////////////////////////////
+                                             HOVEDSCENE
+      ////////////////////////////////////////////////////////////////////////////////////////// */
+
+    /*
+        Denne metode sætter hele Scenen op med menu samt indhold.
+    */
     public static void backgroundTemplate(Stage primaryStage, User foundUser){
 
         loggedInUser = foundUser;
@@ -170,9 +180,6 @@ public class HomeGUI extends Application {
             buttonReset();
 
             CalendarView(primaryStage);
-
-   /*         aktivitetScreen(primaryStage);
-            LoginGUI.whiteBackground.setCenter(ActivityMethod.hboxAktivitet); */
 
         });
 
@@ -236,8 +243,6 @@ public class HomeGUI extends Application {
 
         });
 
-
-
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
         userButton.setId("buttonsleftside");
@@ -252,12 +257,6 @@ public class HomeGUI extends Application {
             adminScreen(primaryStage);
             LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
 
-            boolean alreadyExecuted = false;
-
-            if(alreadyExecuted = false) {
-
-                alreadyExecuted = true;
-            }
         });
 
         //knap lavet til at logge ud
@@ -296,9 +295,19 @@ public class HomeGUI extends Application {
         primaryStage.show();
     }
 
-    //postlogin screen
-    public static void homepageScreen(Stage primaryStage){
+    /* //////////////////////////////////////////////////////////////////////////////////////////
+                                          SLUT HOVEDSCENE
+      ////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+    /*
+        Scenen til knappen 'Hjem'
+    */
+    public static void homepageScreen(Stage primaryStage) {
+        // For at få det nuværende klokkeslæt, så brugeren kan se hvad tid personen loggede ind.
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm").format(Calendar.getInstance().getTime());
+
+        // Viser hvilken bruger man er logged ind som samt bliver tilhørende CSS tilføjet.
         Label welcome = new Label("Du er logget ind "+ timeStamp+"\nVelkommen tilbage "+ loggedInUser.getUsername());
         welcome.setId("welcomeLabel");
         welcome.getStylesheets().addAll("gui/assets/login.css");
@@ -306,6 +315,7 @@ public class HomeGUI extends Application {
         homepageButton.setId("mActive");
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
 
+        // Alle de forskellige elementer bliver tilføjet til den 'nye' primaryStage.
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI.whiteBackground.setLeft(menuVBox);
@@ -317,21 +327,38 @@ public class HomeGUI extends Application {
 
     }
 
-    //Aktivitetsscreen
-   /* public static void aktivitetScreen(Stage primaryStage){
+    /*
+        Denne metoder bliver tilføjet i knappen 'Aktiviteter'
+        Metode til at få Google Calendar integreret i vores program.
+        Vi har valgt Google Calendar fremfor selv at lave en kalender da,
+        da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
+    */
 
+    public static void CalendarView(Stage primaryStage) {
         activitiesButton.setId("mActive");
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
 
+        /*
+            Vi opretter et WebView objekt, som indeholder en indbygget browser som er WebEngine.
+            På denne måde er det muligt at render HTML direkte i JavaFX.
+        */
+
+        WebView calendar = new WebView();
+        WebEngine webEngine = calendar.getEngine();
+        webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
+
+        /*
+            Herefter bliver diverse Panes tilføjet til scenen sammen med vores WebView.
+        */
+
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI.whiteBackground.setLeft(combineMenu);
-        LoginGUI.whiteBackground.setBottom(bottom);
+        LoginGUI. whiteBackground.setLeft(menuVBox);
 
+        LoginGUI.whiteBackground.setCenter(calendar);
         primaryStage.setScene(postLogin);
         primaryStage.show();
-
-    } */
+    }
 
     //Målscreen
     public static void målScreen(Stage primaryStage){
@@ -361,13 +388,15 @@ public class HomeGUI extends Application {
         Label labelHighestRevenueMonthMessage = new Label("Medarbejder med flest timer:");
         labelHighestRevenueMonthMessage.setId("labelMessage");
 
+        // Vi opretter en ArrayList med den værdi der bliver hentet fra LogicControllers getTopHours() metode.
         ArrayList<ScheduleDays> topHoursList = new ArrayList(LogicController.getTopHours());
         double topHoursDouble = topHoursList.get(0).getTotalHours();
         String topHoursString = String.valueOf(topHoursDouble);
 
         Label labelHighestRevenueMonthCount = new Label(topHoursString + " timer");
         labelHighestRevenueMonthCount.setId("labelCount");
-        //her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
+
+        // her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
         bpHighestRevenueMonth.setTop(labelHighestRevenueMonthMessage);
         bpHighestRevenueMonth.setAlignment(labelHighestRevenueMonthMessage, Pos.TOP_CENTER);
         bpHighestRevenueMonth.setCenter(labelHighestRevenueMonthCount);
@@ -810,37 +839,4 @@ public class HomeGUI extends Application {
         primaryStage.setScene(postLogin);
         primaryStage.show();
     }
-
-    /*
-        Metode til at få Google Calendar integreret i vores program.
-        Vi har valgt Google Calendar fremfor selv at lave en kalender da,
-        da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
-    */
-
-    public static void CalendarView(Stage primaryStage) {
-        activitiesButton.setId("mActive");
-        activitiesButton.getStylesheets().addAll("gui/assets/login.css");
-
-        /*
-            Vi opretter et WebView objekt, som indeholder en indbygget browser som er WebEngine.
-            På denne måde er det muligt at render HTML direkte i JavaFX.
-        */
-
-        WebView calendar = new WebView();
-        WebEngine webEngine = calendar.getEngine();
-        webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
-
-        /*
-            Herefter bliver diverse Panes tilføjet til scenen sammen med vores WebView.
-        */
-
-        LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
-        LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
-        LoginGUI. whiteBackground.setLeft(menuVBox);
-
-        LoginGUI.whiteBackground.setCenter(calendar);
-        primaryStage.setScene(postLogin);
-        primaryStage.show();
-    }
-
 }

@@ -19,7 +19,6 @@ public class CompanyDAO implements BaseDAO<Company> {
 
         Connection conn = null;
         Statement stmt = null;
-        int i = 0;
         try {
             //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
@@ -65,8 +64,6 @@ public class CompanyDAO implements BaseDAO<Company> {
 
                 list.add(new Company(cvr, name, address, zipcode, email, phone,
                         comments, revenue, createdOn, contactPerson, createdBy));
-                i++;
-                System.out.println(i);
             }
 
             //STEP 6: Clean-up environment
@@ -178,11 +175,6 @@ public class CompanyDAO implements BaseDAO<Company> {
                     " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + userId +  "')";
             System.out.println(sql);
             stmt.executeUpdate(sql);
-
-
-
-
-
 
             //STEP 5: Extract data from result set
             //STEP 6: Clean-up environment

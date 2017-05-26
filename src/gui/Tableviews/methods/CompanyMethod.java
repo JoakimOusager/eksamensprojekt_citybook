@@ -118,9 +118,10 @@ public class CompanyMethod {
             // Buttons for adding and deleting Companies
             Button addCompanyBtn = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
-           // addCompanyBtn.setOnAction(e2 -> addCompany());
 
             addCompanyBtn.setOnAction(successBox ->{
+                addCompany();
+                tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
                 alert.setHeaderText("Bekræftelse");
@@ -128,8 +129,7 @@ public class CompanyMethod {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
-                    addCompany();
-                    tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
+
                 }
             });
 
