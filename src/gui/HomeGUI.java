@@ -88,7 +88,7 @@ public class HomeGUI extends Application {
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
         homepageButton.setId("buttonsleftside");
 
-        //Knap lavet til aktivitets siden
+        //Knap lavet til aktivitetssiden
         activitiesButton.getStylesheets().addAll("gui/assets/login.css");
         activitiesButton.setId("buttonsleftside");
 
@@ -96,9 +96,17 @@ public class HomeGUI extends Application {
         goalsButton.getStylesheets().addAll("gui/assets/login.css");
         goalsButton.setId("buttonsleftside");
 
-        //Knap lavet til virksomheds siden
+        //Knap lavet til virksomhedssiden
         companiesButton.getStylesheets().addAll("gui/assets/login.css");
         companiesButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplanen
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("buttonsleftside");
+
+        //Knap lavet til vagtplansoversigt
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -290,7 +298,7 @@ public class HomeGUI extends Application {
         Label welcome = new Label("Du er logget ind "+ timeStamp+"\nVelkommen tilbage "+ loggedInUser.getUsername());
         welcome.setId("welcomeLabel");
         welcome.getStylesheets().addAll("gui/assets/login.css");
-
+        buttonReset();
         homepageButton.setId("mActive");
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
 
@@ -414,8 +422,8 @@ public class HomeGUI extends Application {
     //virksomheds screen
     public static void virksomhedsScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        companiesButton.setId("mActive");
+        companiesButton.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
@@ -430,8 +438,8 @@ public class HomeGUI extends Application {
 
     public static void vagtplanScreen(Stage primaryStage){
 
-        companiesButton.setId("mActive");
-        companiesButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplanButton.setId("mActive");
+        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
 
 
 
@@ -762,8 +770,8 @@ public class HomeGUI extends Application {
     //virksomhedsoverbliks screen
     public static void virksomhedsOverblikScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        vagtplansOverblikbtn.setId("mActive");
+        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
