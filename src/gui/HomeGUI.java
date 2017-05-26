@@ -44,14 +44,14 @@ public class HomeGUI extends Application implements ActionListener {
     /*
         Knapper til vores side menu.
     */
-    static Button activitiesButton = new Button("Aktiviteter");
+    static Button activitiesButton = new Button("Kalender");
     static Button goalsButton = new Button("Mål");
     static Button companiesButton = new Button("Virksomheder");
     static Button userButton = new Button("Brugere");
     static Button logoutButton = new Button("Log out");
     static Button homepageButton = new Button("Hjem");
-    static Button vagtplanButton = new Button("Vagtplan");
-    static Button vagtplansOverblikbtn = new Button("Vagtplanoverblik");
+    static Button scheduleButton = new Button("Vagtplan");
+    static Button scheduleOverviewButton = new Button("Vagtplanoverblik");
 
     public static User loggedInUser;
 
@@ -59,16 +59,16 @@ public class HomeGUI extends Application implements ActionListener {
         Alle labels for vagtplan er blevet gjort static, for at deres tekst ikke bliver fjernet ved scene skift.
     */
 
-    static Label datoFredag2 = new Label();
-    static Label datoTorsdag2 = new Label();
-    static Label datoOnsdag2 = new Label();
-    static Label datoTirsdag2 = new Label();
-    static Label datoMandag2 = new Label();
-    static Label datoFredag = new Label();
-    static Label datoTorsdag = new Label();
-    static Label datoOnsdag = new Label();
-    static Label datoTirsdag = new Label();
-    static Label datoMandag = new Label();
+    static Label dateFridayStopTime = new Label();
+    static Label dateThursdayStopTime = new Label();
+    static Label dateWednesdayStopTime = new Label();
+    static Label dateThuesdayStopTime = new Label();
+    static Label dateMondayStopTime = new Label();
+    static Label dateFridayStartTime = new Label();
+    static Label dateThursdayStartTime = new Label();
+    static Label dateWednesdayStartTime = new Label();
+    static Label dateThuesdayStartTime = new Label();
+    static Label dateMondayStartTime = new Label();
 
     static Label timerMandag = new Label();
     static Label timerTirsdag = new Label();
@@ -110,12 +110,12 @@ public class HomeGUI extends Application implements ActionListener {
         companiesButton.setId("buttonsleftside");
 
         //Knap lavet til vagtplanen
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
-        vagtplanButton.setId("buttonsleftside");
+        scheduleButton.getStylesheets().addAll("gui/assets/login.css");
+        scheduleButton.setId("buttonsleftside");
 
         //Knap lavet til vagtplansoversigt
-        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
-        vagtplansOverblikbtn.setId("buttonsleftside");
+        scheduleOverviewButton.getStylesheets().addAll("gui/assets/login.css");
+        scheduleOverviewButton.setId("buttonsleftside");
 
         //Knap lavet specifikt til admins
         userButton.getStylesheets().addAll("gui/assets/login.css");
@@ -216,30 +216,30 @@ public class HomeGUI extends Application implements ActionListener {
         });
 
         //Knap lavet specifikt til vagtplan
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
-        vagtplanButton.setId("buttonsleftside");
-        vagtplanButton.setOnMouseEntered((MouseEvent e) -> {
-            vagtplanButton.setUnderline(true);
+        scheduleButton.getStylesheets().addAll("gui/assets/login.css");
+        scheduleButton.setId("buttonsleftside");
+        scheduleButton.setOnMouseEntered((MouseEvent e) -> {
+            scheduleButton.setUnderline(true);
         });
-        vagtplanButton.setOnMouseExited((MouseEvent e) -> {
-            vagtplanButton.setUnderline(false);
+        scheduleButton.setOnMouseExited((MouseEvent e) -> {
+            scheduleButton.setUnderline(false);
         });
-        vagtplanButton.setOnAction((ActionEvent event3) -> {
+        scheduleButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
             scheduleScreen(primaryStage);
 
         });
 
         //Knap lavet specifikt til vagtplansoverblik
-        vagtplansOverblikbtn.getStylesheets().addAll("gui/assets/login.css");
-        vagtplansOverblikbtn.setId("buttonsleftside");
-        vagtplansOverblikbtn.setOnMouseEntered((MouseEvent e) -> {
-            vagtplansOverblikbtn.setUnderline(true);
+        scheduleOverviewButton.getStylesheets().addAll("gui/assets/login.css");
+        scheduleOverviewButton.setId("buttonsleftside");
+        scheduleOverviewButton.setOnMouseEntered((MouseEvent e) -> {
+            scheduleOverviewButton.setUnderline(true);
         });
-        vagtplansOverblikbtn.setOnMouseExited((MouseEvent e) -> {
-            vagtplansOverblikbtn.setUnderline(false);
+        scheduleOverviewButton.setOnMouseExited((MouseEvent e) -> {
+            scheduleOverviewButton.setUnderline(false);
         });
-        vagtplansOverblikbtn.setOnAction((ActionEvent event3) -> {
+        scheduleOverviewButton.setOnAction((ActionEvent event3) -> {
             buttonReset();
             scheduleOverviewScreen(primaryStage);
 
@@ -273,7 +273,7 @@ public class HomeGUI extends Application implements ActionListener {
         });
         menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, activitiesButton, goalsButton, companiesButton,
-                vagtplanButton, vagtplansOverblikbtn, userButton, logoutButton);
+                scheduleButton, scheduleOverviewButton, userButton, logoutButton);
         menuVBox.setPadding(new Insets(10, 10, 10, 10));
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
@@ -473,8 +473,8 @@ public class HomeGUI extends Application implements ActionListener {
 
     public static void scheduleScreen(Stage primaryStage){
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        scheduleButton.setId("mActive");
+        scheduleButton.getStylesheets().addAll("gui/assets/login.css");
 
 
 
@@ -519,37 +519,37 @@ public class HomeGUI extends Application implements ActionListener {
 
 
 
-        datoMandag.setId("datoTextfield");
-        datoMandag.getStylesheets().addAll("gui/assets/login.css");
+        dateMondayStartTime.setId("datoTextfield");
+        dateMondayStartTime.getStylesheets().addAll("gui/assets/login.css");
 
-        datoTirsdag.setId("datoTextfield");
-        datoTirsdag.getStylesheets().addAll("gui/assets/login.css");
+        dateThuesdayStartTime.setId("datoTextfield");
+        dateThuesdayStartTime.getStylesheets().addAll("gui/assets/login.css");
 
-        datoOnsdag.setId("datoTextfield");
-        datoOnsdag.getStylesheets().addAll("gui/assets/login.css");
+        dateWednesdayStartTime.setId("datoTextfield");
+        dateWednesdayStartTime.getStylesheets().addAll("gui/assets/login.css");
 
-        datoTorsdag.setId("datoTextfield");
-        datoTorsdag.getStylesheets().addAll("gui/assets/login.css");
+        dateThursdayStartTime.setId("datoTextfield");
+        dateThursdayStartTime.getStylesheets().addAll("gui/assets/login.css");
 
-        datoFredag.setId("datoTextfield");
-        datoFredag.getStylesheets().addAll("gui/assets/login.css");
-
-
-        datoMandag2.setId("datoTextfield");
-        datoMandag2.getStylesheets().addAll("gui/assets/login.css");
-
-        datoTirsdag2.setId("datoTextfield");
-        datoTirsdag2.getStylesheets().addAll("gui/assets/login.css");
-
-        datoOnsdag2.setId("datoTextfield");
-        datoOnsdag2.getStylesheets().addAll("gui/assets/login.css");
-
-        datoTorsdag2.setId("datoTextfield");
-        datoTorsdag2.getStylesheets().addAll("gui/assets/login.css");
+        dateFridayStartTime.setId("datoTextfield");
+        dateFridayStartTime.getStylesheets().addAll("gui/assets/login.css");
 
 
-        datoFredag2.setId("datoTextfield");
-        datoFredag2.getStylesheets().addAll("gui/assets/login.css");
+        dateMondayStopTime.setId("datoTextfield");
+        dateMondayStopTime.getStylesheets().addAll("gui/assets/login.css");
+
+        dateThuesdayStopTime.setId("datoTextfield");
+        dateThuesdayStopTime.getStylesheets().addAll("gui/assets/login.css");
+
+        dateWednesdayStopTime.setId("datoTextfield");
+        dateWednesdayStopTime.getStylesheets().addAll("gui/assets/login.css");
+
+        dateThursdayStopTime.setId("datoTextfield");
+        dateThursdayStopTime.getStylesheets().addAll("gui/assets/login.css");
+
+
+        dateFridayStopTime.setId("datoTextfield");
+        dateFridayStopTime.getStylesheets().addAll("gui/assets/login.css");
 
 
         timerMandag.setId("datoTextfield");
@@ -595,7 +595,7 @@ public class HomeGUI extends Application implements ActionListener {
 
             switch (day){
                 case 2:
-                datoMandag.setText(dateFormat.format(cal.getTime()));
+                dateMondayStartTime.setText(dateFormat.format(cal.getTime()));
 
                     mondayDB = 0.0;
                     tuesdayDB = 0.0;
@@ -612,7 +612,7 @@ public class HomeGUI extends Application implements ActionListener {
 
                 break;
                 case 3:
-                datoTirsdag.setText(dateFormat.format(cal.getTime()));
+                dateThuesdayStartTime.setText(dateFormat.format(cal.getTime()));
 
                     tuesdayDB = 0.0;
                     wednesdayDB = 0.0;
@@ -627,7 +627,7 @@ public class HomeGUI extends Application implements ActionListener {
 
                 break;
                 case 4:
-                datoOnsdag.setText(dateFormat.format(cal.getTime()));
+                dateWednesdayStartTime.setText(dateFormat.format(cal.getTime()));
 
                     wednesdayDB = 0.0;
                     thursdayDB = 0.0;
@@ -641,7 +641,7 @@ public class HomeGUI extends Application implements ActionListener {
 
                 break;
                 case 5:
-                datoTorsdag.setText(dateFormat.format(cal.getTime()));
+                dateThursdayStartTime.setText(dateFormat.format(cal.getTime()));
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
                     timerMandag.setText(String.valueOf(mondayDB));
@@ -653,7 +653,7 @@ public class HomeGUI extends Application implements ActionListener {
                 break;
                 case 6:
                     fridayDB = 0.0;
-                     datoFredag.setText(dateFormat.format(cal.getTime()));
+                     dateFridayStartTime.setText(dateFormat.format(cal.getTime()));
                     timerMandag.setText(String.valueOf(mondayDB));
                     timerTirsdag.setText(String.valueOf(tuesdayDB));
                     timerOnsdag.setText(String.valueOf(wednesdayDB));
@@ -691,7 +691,7 @@ public class HomeGUI extends Application implements ActionListener {
                     fridayDB = 0.0;
 
                diffMinutesEnd = backend.Datepicker.endDateStamp();
-                datoMandag2.setText(dateFormat.format(cal.getTime()));
+                dateMondayStopTime.setText(dateFormat.format(cal.getTime()));
                     mondayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer2 = String.valueOf(mondayDB);
                     timerMandag.setText(timer2);
@@ -703,7 +703,7 @@ public class HomeGUI extends Application implements ActionListener {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-                datoTirsdag2.setText(dateFormat.format(cal.getTime()));
+                dateThuesdayStopTime.setText(dateFormat.format(cal.getTime()));
                     tuesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer4 = String.valueOf(tuesdayDB);
                     timerTirsdag.setText(timer4);
@@ -715,7 +715,7 @@ public class HomeGUI extends Application implements ActionListener {
                     fridayDB = 0.0;
 
                 diffMinutesEnd = backend.Datepicker.endDateStamp();
-                datoOnsdag2.setText(dateFormat.format(cal.getTime()));
+                dateWednesdayStopTime.setText(dateFormat.format(cal.getTime()));
                 wednesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer6 = String.valueOf(wednesdayDB);
                 timerOnsdag.setText(timer6);
@@ -725,7 +725,7 @@ public class HomeGUI extends Application implements ActionListener {
                     fridayDB = 0.0;
 
                 diffMinutesEnd = backend.Datepicker.endDateStamp();
-                datoTorsdag2.setText(dateFormat.format(cal.getTime()));
+                dateThursdayStopTime.setText(dateFormat.format(cal.getTime()));
                     thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer8 = String.valueOf(thursdayDB);
                     timerTorsdag.setText(timer8);
@@ -734,7 +734,7 @@ public class HomeGUI extends Application implements ActionListener {
 
                     fridayDB = 0.0;
                 diffMinutesEnd = backend.Datepicker.endDateStamp();
-                datoFredag2.setText(dateFormat.format(cal.getTime()));
+                dateFridayStopTime.setText(dateFormat.format(cal.getTime()));
                     thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer10 = String.valueOf(thursdayDB);
                     timerFredag.setText(timer10);
@@ -765,17 +765,17 @@ public class HomeGUI extends Application implements ActionListener {
         gpvagtplan.add(stopTimer,1,7);
 
         //Labels til alle dagene
-        gpvagtplan.add(datoMandag,2,2);
-        gpvagtplan.add(datoTirsdag,3,2);
-        gpvagtplan.add(datoOnsdag,4,2);
-        gpvagtplan.add(datoTorsdag,5,2);
-        gpvagtplan.add(datoFredag,6,2);
+        gpvagtplan.add(dateMondayStartTime,2,2);
+        gpvagtplan.add(dateThuesdayStartTime,3,2);
+        gpvagtplan.add(dateWednesdayStartTime,4,2);
+        gpvagtplan.add(dateThursdayStartTime,5,2);
+        gpvagtplan.add(dateFridayStartTime,6,2);
 
-        gpvagtplan.add(datoMandag2,2,3);
-        gpvagtplan.add(datoTirsdag2,3,3);
-        gpvagtplan.add(datoOnsdag2,4,3);
-        gpvagtplan.add(datoTorsdag2,5,3);
-        gpvagtplan.add(datoFredag2,6,3);
+        gpvagtplan.add(dateMondayStopTime,2,3);
+        gpvagtplan.add(dateThuesdayStopTime,3,3);
+        gpvagtplan.add(dateWednesdayStopTime,4,3);
+        gpvagtplan.add(dateThursdayStopTime,5,3);
+        gpvagtplan.add(dateFridayStopTime,6,3);
 
         gpvagtplan.add(timerMandag,2,4);
         gpvagtplan.add(timerTirsdag,3,4);
@@ -800,8 +800,8 @@ public class HomeGUI extends Application implements ActionListener {
     public static void scheduleOverviewScreen(Stage primaryStage){
 
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
+        scheduleButton.setId("mActive");
+        scheduleButton.getStylesheets().addAll("gui/assets/login.css");
         ArrayList<ScheduleDays> maxHoursList = new ArrayList<>(LogicController.getUsernameHours());
         ArrayList<ScheduleDays> maxHoursList1 = new ArrayList<>(LogicController.getHoursUsername());
         ArrayList<Double> comboBoxArray1 = new ArrayList<>();
