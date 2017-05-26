@@ -109,7 +109,6 @@ public class UserDAO implements BaseDAO<User> {
                 Timestamp startDate = rs.getTimestamp("user_created_on");
 
                 userList.add(new User(username, email, rank, startDate));
-                System.out.println(i);
             }
 
             // Lukker forbindelserne.
