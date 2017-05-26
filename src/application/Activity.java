@@ -1,4 +1,4 @@
-package entities;
+package application;
 
 import java.sql.Date;
 
@@ -9,10 +9,10 @@ public class Activity {
     private String comments;
 
     public Activity(User user, Company company, Date time, String comments) {
-        this.user = user;
-        this.company = company;
-        this.time = time;
-        this.comments = comments;
+        this.user       = user;
+        this.company    = company;
+        this.time       = time;
+        this.comments   = comments;
     }
 
     public User getUser() {

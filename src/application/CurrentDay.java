@@ -1,4 +1,4 @@
-package backend;
+package application;
 
 import java.util.Calendar;
 
@@ -8,8 +8,8 @@ import java.util.Calendar;
 public class CurrentDay {
 
     public static void currentDay() {
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        Calendar calendar   = Calendar.getInstance();
+        int day             = calendar.get(Calendar.DAY_OF_WEEK);
     }
 
 }

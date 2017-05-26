@@ -1,4 +1,4 @@
-package entities;
+package application;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,16 +22,16 @@ public class User {
 
     // Constructoren som vi bruger til at tjekke login med
     public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+        this.username       = username;
+        this.password       = password;
     }
 
     // Constructoren som databasen bruger, når den returnerer en bruger. Der er ingen grund til at have password med
     // Men de andre fields kan bruges, ex. til at skrive "Hej Joakim" på loginskærmen, hvis det er Joakim som logger ind
     public User(String username, String email, int rank) {
-        this.username = username;
-        this.email = email;
-        this.rank = rank;
+        this.username       = username;
+        this.email          = email;
+        this.rank           = rank;
     }
 
     /*
@@ -39,10 +39,10 @@ public class User {
      */
 
     public User(String username, String email, int rank, Timestamp startDate) {
-        this.username = username;
-        this.email = email;
-        this.startDate = startDate;
-        this.rank = rank;
+        this.username       = username;
+        this.email          = email;
+        this.startDate      = startDate;
+        this.rank           = rank;
     }
 
     public String getUsername() {
@@ -82,7 +82,7 @@ public class User {
     }
 
     public void setRank(int rank) {
-        this.rank = rank;
+        this.rank           = rank;
     }
 
 

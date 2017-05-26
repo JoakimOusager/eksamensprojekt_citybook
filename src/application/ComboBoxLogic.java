@@ -1,4 +1,4 @@
-package backend;
+package application;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -12,8 +12,8 @@ public class ComboBoxLogic {
 
     ArrayList<String> comboBoxArray2 = new ArrayList<>();
     ArrayList<Double> comboBoxArray1 = new ArrayList<>();
-    ComboBox person1 = new ComboBox();
-    Label personLabel1 = new Label();
+    ComboBox person1                 = new ComboBox();
+    Label personLabel1               = new Label();
 
         public void comboBoxAction( ArrayList comboBoxArray2, ArrayList comboBoxArray1,
                                     ComboBox person1, Label personLabel1) {

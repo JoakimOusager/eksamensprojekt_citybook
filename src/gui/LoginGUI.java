@@ -4,10 +4,8 @@ package gui;
  */
 
 
-import backend.LogicController;
-import entities.User;
-import gui.Tableviews.methods.CompanyMethod;
-import gui.Tableviews.methods.UserMethod;
+import application.LogicController;
+import application.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -23,19 +21,19 @@ import static gui.HomeGUI.userButton;
 
 public class LoginGUI extends Application {
 
-    static boolean hasRunBefore = false;
+    static boolean hasRunBefore                             = false;
 
     static Scene loginScene;
 
-    static BorderPane BPBackground = new BorderPane();
-    static BorderPane whiteBackground = new BorderPane();
-    static BorderPane citybookLogoPane = new BorderPane();
+    static BorderPane BPBackground                          = new BorderPane();
+    static BorderPane whiteBackground                       = new BorderPane();
+    static BorderPane citybookLogoPane                      = new BorderPane();
 
     //Login fields
-    public static TextField usernamefield = new TextField();
+    public static TextField usernamefield                   = new TextField();
 
 
-    public static boolean saveMe = false;
+    public static boolean saveMe                            = false;
     @Override
     public void start(Stage primaryStage) {
 
@@ -52,7 +50,7 @@ public class LoginGUI extends Application {
 
 
         //Det første pane som alt bliver tilføjet til
-        BorderPane loginBP = new BorderPane();
+        BorderPane loginBP                                  = new BorderPane();
         loginBP.getStylesheets().addAll("gui/assets/login.css");
         loginBP.setId("loginBPBackground");
 
@@ -61,17 +59,17 @@ public class LoginGUI extends Application {
 
 
         //Borderpane til implementering af Citybook logo
-        BorderPane citybookLogoPane = new BorderPane();
+        BorderPane citybookLogoPane                         = new BorderPane();
         citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
         citybookLogoPane.setId("citybookLogoPane");
 
         //Loginboxen som ligger i midten
-        BorderPane loginBox = new BorderPane();
+        BorderPane loginBox                                 = new BorderPane();
         loginBox.getStylesheets().addAll("gui/assets/login.css");
         loginBox.setId("loginBox");
 
         //Textfields til login
-        PasswordField passwordfield = new PasswordField();
+        PasswordField passwordfield                         = new PasswordField();
 
 
         //TextField usernamefield = new TextField();
@@ -83,22 +81,22 @@ public class LoginGUI extends Application {
         passwordfield.setId("creds");
 
         //Borderpane brugt til at implementere billede af lås
-        BorderPane lock = new BorderPane();
+        BorderPane lock                                     = new BorderPane();
         lock.getStylesheets().addAll("gui/assets/login.css");
         lock.setId("lock");
 
         //Borderpane brugt til at implementere billede af et user icon
-        BorderPane key = new BorderPane();
+        BorderPane key                                      = new BorderPane();
         key.getStylesheets().addAll("gui/assets/login.css");
         key.setId("manicon");
 
         //Login knap
-        Button btnlogin = new Button("Login");
+        Button btnlogin                                     = new Button("Login");
         btnlogin.setId("btnlogin");
 
 
         //Remember me checkbox
-        CheckBox checkBoxRememberMe = new CheckBox("Remember Me");
+        CheckBox checkBoxRememberMe                         = new CheckBox("Remember Me");
         checkBoxRememberMe.setId("checkBoxRememberMe");
         checkBoxRememberMe.getStylesheets().addAll("gui/assets/login.css");
         checkBoxRememberMe.setOnAction(event -> {
@@ -110,7 +108,7 @@ public class LoginGUI extends Application {
 
 
         //We wanna keep these to close - therefor we are creating a horizontal box.
-        HBox rememberMePlusLogIn = new HBox();
+        HBox rememberMePlusLogIn                            = new HBox();
         rememberMePlusLogIn.setId("rememberMePlusLogIn");
         rememberMePlusLogIn.getStylesheets().addAll("gui/assets/login.css");
         rememberMePlusLogIn.getChildren().addAll(checkBoxRememberMe, btnlogin);
@@ -119,21 +117,20 @@ public class LoginGUI extends Application {
 
         btnlogin.setOnAction((ActionEvent event1) -> {
                     // Hvis brugeren ikke er admin, bliver adminknappen usynlig
-            User foundUser = LogicController.login(new User(usernamefield.getText(), passwordfield.getText()));
+            User foundUser = LogicController.login(           new User(usernamefield.getText(), passwordfield.getText()));
                     if (foundUser != null) {
                         if (foundUser.getRank() == 0) {
                             userButton.setVisible(false);
-                            HomeGUI getScheduleOverview = new HomeGUI();
+                            HomeGUI getScheduleOverview     = new HomeGUI();
                             getScheduleOverview.scheduleOverviewButton.setVisible(false);
                         }
                             LogicController.setSavedUsername(usernamefield.getText(), saveMe);
                         if (!hasRunBefore) {
-                            CompanyMethod.companyTableviewStart();
-                            UserMethod.userTableviewStart();
-                            //  ActivityMethod.companyTableviewStart();
+                            CompanyTableView.companyTableviewStart();
+                            UserTableView.userTableviewStart();
                             HomeGUI.backgroundTemplate(primaryStage, foundUser);
                             HomeGUI.homepageScreen(primaryStage);
-                            hasRunBefore = true;
+                            hasRunBefore                    = true;
                         } else {
                             primaryStage.setScene(HomeGUI.postLogin);
                         }
@@ -148,10 +145,10 @@ public class LoginGUI extends Application {
 
 
         //Et tomt label brugt til at skabe ekstra plads i bunden
-        Label white = new Label();
+        Label white                                         = new Label();
 
         //Gridpane hvor alle fields bliver smidt ind
-        GridPane fields = new GridPane();
+        GridPane fields                                     = new GridPane();
         fields.setVgap(1);
         fields.setHgap(5);
         fields.setId("fields");
@@ -169,7 +166,7 @@ public class LoginGUI extends Application {
         loginBox.setTop(citybookLogoPane);
         loginBox.setCenter(fields);
 
-        loginScene = new Scene(loginBP);
+        loginScene                                          = new Scene(loginBP);
 
         //primaryStage.initStyle(StageStyle.TRANSPARENT);
         loginScene.setFill(Color.TRANSPARENT);
