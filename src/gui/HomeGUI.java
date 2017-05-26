@@ -4,8 +4,8 @@ package gui;/**
 
 //import gui.Tableviews.methods.ActivityMethod;
 
-import backend.Datepicker;
 import backend.LogicController;
+import entities.Comment;
 import entities.Company;
 import entities.ScheduleDays;
 import entities.User;
@@ -19,9 +19,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -413,10 +416,12 @@ public class HomeGUI extends Application implements ActionListener {
 
         //dagens mål
         BorderPane bpTodaysGoal = new BorderPane();
+        ArrayList<Comment> comment = new ArrayList<Comment>(LogicController.getComment());
+        String commentString = comment.get(0).getComment();
         bpTodaysGoal.setId("bpGoalsScreen");
-        Label labelTodaysGoalMessage = new Label("Dagens mål:");
+        Label labelTodaysGoalMessage = new Label("Dagens kommentar:");
         labelTodaysGoalMessage.setId("labelMessage");
-        Label labelTodaysGoalNumber = new Label("24000 kr");
+        Label labelTodaysGoalNumber = new Label(commentString);
         labelTodaysGoalNumber.setId("labelCount");
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
@@ -599,7 +604,12 @@ public class HomeGUI extends Application implements ActionListener {
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
-            switch (day){
+            backend.LogicController.scheduleLogicStart(day, dateFormat, cal, mondayDB,
+                    tuesdayDB, wednesdayDB, thursdayDB, fridayDB, datoMandag, datoTirsdag,
+                    datoOnsdag, datoTorsdag, datoFredag, timerMandag, timerTirsdag, timerOnsdag,
+                    timerTorsdag, timerFredag);
+
+            /*switch (day){
                 case 2:
                 datoMandag.setText(dateFormat.format(cal.getTime()));
 
@@ -666,7 +676,7 @@ public class HomeGUI extends Application implements ActionListener {
                     timerTorsdag.setText(String.valueOf(thursdayDB));
                     timerFredag.setText(String.valueOf(fridayDB));
                 break;
-            }
+            }*/
         });
 
         Button stopTimer = new Button("Stop");
@@ -688,7 +698,13 @@ public class HomeGUI extends Application implements ActionListener {
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
-            switch (day){
+            backend.LogicController.scheduleLogicEnd(day, dateFormat, cal, mondayDB,
+                    tuesdayDB, wednesdayDB, thursdayDB, fridayDB, totalHoursDB,
+                    datoMandag2, datoTirsdag2, datoOnsdag2, datoTorsdag2, datoFredag2,
+                    diffMinutesEnd, diffMinutesStart, totalTimer,
+                    timerMandag, timerTirsdag, timerOnsdag, timerTorsdag, timerFredag);
+
+            /*switch (day){
                 case 2:
                     mondayDB = 0.0;
                     tuesdayDB = 0.0;
@@ -748,7 +764,7 @@ public class HomeGUI extends Application implements ActionListener {
 
             totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
             String totalTimerString = String.valueOf(totalHoursDB);
-            totalTimer.setText(totalTimerString);
+            totalTimer.setText(totalTimerString);*/
 
 
         });
@@ -806,6 +822,8 @@ public class HomeGUI extends Application implements ActionListener {
     public static void scheduleOverviewScreen(Stage primaryStage){
 
 
+        backend.LogicController.getComment();
+
         vagtplanButton.setId("mActive");
         vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
         ArrayList<ScheduleDays> maxHoursList = new ArrayList<>(LogicController.getUsernameHours());
@@ -840,20 +858,13 @@ public class HomeGUI extends Application implements ActionListener {
             person2.getItems().add(comboBoxArray2.get(i));
         }
         person1.setOnAction(event -> {
-            for(int i = 0; i<comboBoxArray2.size();i++){
-                if(person1.getValue().equals(comboBoxArray2.get(i))){
-                    personLabel1.setText(String.valueOf(comboBoxArray1.get(i)));
-                }
-            }
-
+            backend.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
+                    person1, personLabel1);
         });
 
         person2.setOnAction(event -> {
-            for(int i = 0; i<comboBoxArray2.size();i++){
-                if(person2.getValue().equals(comboBoxArray2.get(i))){
-                    personLabel2.setText(String.valueOf(comboBoxArray1.get(i)));
-                }
-            }
+            backend.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
+                    person2, personLabel2);
 
         });
 
@@ -882,14 +893,38 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursPerson2.setAlignment(personLabel2, Pos.BOTTOM_CENTER);
 
 
+        BorderPane commentBP = new BorderPane();
+        totalHoursPerson1.setId("bpGoalsScreen");
+        Label labelKommentar = new Label("Skriv en kommentar");
+        labelKommentar.setId("labelMessage");
+        TextField kommentar = new TextField();
+        kommentar.setId("kommentarTextfield");
+        kommentar.setPromptText("Skriv din kommentar");
+        //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
+        commentBP.setTop(labelKommentar);
+        commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
+        commentBP.setCenter(kommentar);
+
+
+
+
+        Button commitKommentar = new Button("Commit");
+        commitKommentar.setId("btncommit");
+        commitKommentar.getStylesheets().addAll("gui/assets/login.css");
+        commitKommentar.setOnAction(event -> {
+            backend.LogicController.addComment(new Comment(kommentar.getText()));
+        });
+
+
+
         //nu skal de forskellige views samles
         GridPane gridPaneGoals = new GridPane();
         gridPaneGoals.setId("gridPaneGoals");
         gridPaneGoals.setPadding(new Insets(0, 30, 10, 30));
         gridPaneGoals.add(totalHoursPerson1, 0, 0);
-        //gridPaneGoals.add(bpTodaysGoal, 0, 1);
+        gridPaneGoals.add(commentBP, 0, 1);
         gridPaneGoals.add(totalHoursPerson2, 1, 0);
-        //gridPaneGoals.add(bpRevenueThisYear, 1, 1);
+        gridPaneGoals.add(commitKommentar, 1, 1);
 
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
@@ -931,5 +966,4 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.setScene(postLogin);
         primaryStage.show();
     }
-
 }
