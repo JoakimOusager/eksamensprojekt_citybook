@@ -4,6 +4,7 @@ package gui;/**
 
 //import gui.Tableviews.methods.ActivityMethod;
 
+import backend.Datepicker;
 import backend.LogicController;
 import entities.Comment;
 import entities.Company;
@@ -532,41 +533,41 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursWorkedLabel.setId("dage");
         totalHoursWorkedLabel.getStylesheets().addAll("gui/assets/login.css");
 
-        dateMondayStart.setId("datoTextfield");
-        dateMondayStart.getStylesheets().addAll("gui/assets/login.css");
+        datoMandag.setId("datoTextfield");
+        datoMandag.getStylesheets().addAll("gui/assets/login.css");
 
-        dateThuesdayStart.setId("datoTextfield");
-        dateThuesdayStart.getStylesheets().addAll("gui/assets/login.css");
+        datoTirsdag.setId("datoTextfield");
+        datoTirsdag.getStylesheets().addAll("gui/assets/login.css");
 
-        dateWednesdayStart.setId("datoTextfield");
-        dateWednesdayStart.getStylesheets().addAll("gui/assets/login.css");
+        datoOnsdag.setId("datoTextfield");
+        datoOnsdag.getStylesheets().addAll("gui/assets/login.css");
 
-        dateThursdayStart.setId("datoTextfield");
-        dateThursdayStart.getStylesheets().addAll("gui/assets/login.css");
+        datoTorsdag.setId("datoTextfield");
+        datoTorsdag.getStylesheets().addAll("gui/assets/login.css");
 
-        dateFridayStart.setId("datoTextfield");
-        dateFridayStart.getStylesheets().addAll("gui/assets/login.css");
-
-
-        dateMondayStop.setId("datoTextfield");
-        dateMondayStop.getStylesheets().addAll("gui/assets/login.css");
-
-        dateThuesdayStop.setId("datoTextfield");
-        dateThuesdayStop.getStylesheets().addAll("gui/assets/login.css");
-
-        dateWednesdayStop.setId("datoTextfield");
-        dateWednesdayStop.getStylesheets().addAll("gui/assets/login.css");
-
-        dateThursdayStop.setId("datoTextfield");
-        dateThursdayStop.getStylesheets().addAll("gui/assets/login.css");
+        datoFredag.setId("datoTextfield");
+        datoFredag.getStylesheets().addAll("gui/assets/login.css");
 
 
-        dateFridayStop.setId("datoTextfield");
-        dateFridayStop.getStylesheets().addAll("gui/assets/login.css");
+        datoMandag2.setId("datoTextfield");
+        datoMandag2.getStylesheets().addAll("gui/assets/login.css");
+
+        datoTirsdag2.setId("datoTextfield");
+        datoTirsdag2.getStylesheets().addAll("gui/assets/login.css");
+
+        datoOnsdag2.setId("datoTextfield");
+        datoOnsdag2.getStylesheets().addAll("gui/assets/login.css");
+
+        datoTorsdag2.setId("datoTextfield");
+        datoTorsdag2.getStylesheets().addAll("gui/assets/login.css");
 
 
-        hoursMonday.setId("datoTextfield");
-        hoursMonday.getStylesheets().addAll("gui/assets/login.css");
+        datoFredag2.setId("datoTextfield");
+        datoFredag2.getStylesheets().addAll("gui/assets/login.css");
+
+
+        timerMandag.setId("datoTextfield");
+        timerMandag.getStylesheets().addAll("gui/assets/login.css");
 
         timerMandag.setId("datoTextfield");
         timerMandag.getStylesheets().addAll("gui/assets/login.css");
@@ -618,7 +619,7 @@ public class HomeGUI extends Application implements ActionListener {
         startTimer.setOnAction(event -> {
             Calendar calendar = Calendar.getInstance();
             int day = calendar.get(Calendar.DAY_OF_WEEK);
-            diffMinutesStart = backend.Datepicker.startDateStamp();
+            diffMinutesStart = Datepicker.startDateStamp();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Calendar cal = Calendar.getInstance();
 
@@ -632,7 +633,7 @@ public class HomeGUI extends Application implements ActionListener {
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
-            backend.LogicController.scheduleLogicStart(day, dateFormat, cal, mondayDB,
+            LogicController.scheduleLogicStart(day, dateFormat, cal, mondayDB,
                     tuesdayDB, wednesdayDB, thursdayDB, fridayDB, datoMandag, datoTirsdag,
                     datoOnsdag, datoTorsdag, datoFredag, timerMandag, timerTirsdag, timerOnsdag,
                     timerTorsdag, timerFredag);
@@ -726,7 +727,7 @@ public class HomeGUI extends Application implements ActionListener {
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
 
-            backend.LogicController.scheduleLogicEnd(day, dateFormat, cal, mondayDB,
+            LogicController.scheduleLogicEnd(day, dateFormat, cal, mondayDB,
                     tuesdayDB, wednesdayDB, thursdayDB, fridayDB, totalHoursDB,
                     datoMandag2, datoTirsdag2, datoOnsdag2, datoTorsdag2, datoFredag2,
                     diffMinutesEnd, diffMinutesStart, totalTimer,
@@ -838,24 +839,24 @@ public class HomeGUI extends Application implements ActionListener {
         gpvagtplan.add(updateHours,1,8);
 
         //Labels til alle dagene
-        gpvagtplan.add(dateMondayStart,2,2);
-        gpvagtplan.add(dateThuesdayStart,3,2);
-        gpvagtplan.add(dateWednesdayStart,4,2);
-        gpvagtplan.add(dateThursdayStart,5,2);
-        gpvagtplan.add(dateFridayStart,6,2);
+        gpvagtplan.add(datoMandag,2,2);
+        gpvagtplan.add(datoTirsdag,3,2);
+        gpvagtplan.add(datoOnsdag,4,2);
+        gpvagtplan.add(datoTorsdag,5,2);
+        gpvagtplan.add(datoFredag,6,2);
 
-        gpvagtplan.add(dateMondayStop,2,3);
-        gpvagtplan.add(dateThuesdayStop,3,3);
-        gpvagtplan.add(dateWednesdayStop,4,3);
-        gpvagtplan.add(dateThursdayStop,5,3);
-        gpvagtplan.add(dateFridayStop,6,3);
+        gpvagtplan.add(datoMandag2,2,3);
+        gpvagtplan.add(datoTirsdag2,3,3);
+        gpvagtplan.add(datoOnsdag2,4,3);
+        gpvagtplan.add(datoTorsdag2,5,3);
+        gpvagtplan.add(datoFredag2,6,3);
 
-        gpvagtplan.add(hoursMonday,2,4);
-        gpvagtplan.add(hoursThuesday,3,4);
-        gpvagtplan.add(hoursWednesday,4,4);
-        gpvagtplan.add(hoursThursday,5,4);
-        gpvagtplan.add(hoursFriday,6,4);
-        gpvagtplan.add(totalHoursWorked,6,5);
+        gpvagtplan.add(timerMandag,2,4);
+        gpvagtplan.add(timerTirsdag,3,4);
+        gpvagtplan.add(timerOnsdag,4,4);
+        gpvagtplan.add(timerTorsdag,5,4);
+        gpvagtplan.add(timerFredag,6,4);
+        gpvagtplan.add(totalHoursWorkedLabel,6,5);
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
@@ -876,8 +877,6 @@ public class HomeGUI extends Application implements ActionListener {
 
         backend.LogicController.getComment();
 
-        vagtplanButton.setId("mActive");
-        vagtplanButton.getStylesheets().addAll("gui/assets/login.css");
 
         ArrayList<ScheduleDays> maxHoursList = new ArrayList<>(LogicController.getUsernameHours());
         ArrayList<ScheduleDays> maxHoursList1 = new ArrayList<>(LogicController.getHoursUsername());
