@@ -135,6 +135,20 @@ public class ShowMoreCompany extends Application {
             tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
             showMoreStage.close();
 
+            Alert alert                              = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Citybook");
+            alert.setHeaderText("Bekræftelse");
+            alert.setContentText("Virksomheden er nu blevet ændret.");
+
+            /*
+                Vinduet venter ikke på at brugeren trykker på noget
+                før at vores lambda bliver kørt. Vi bruger kun AlertBox
+                her for at vise at virksomheden er blevet ændret.
+            */
+            Optional<ButtonType> result              = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+            }
+
         });
 
         // Tilføjer CSS samt opretter en ny scene.

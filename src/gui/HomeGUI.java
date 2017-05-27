@@ -835,10 +835,6 @@ public class HomeGUI extends Application {
 
         });
 
-
-
-
-
         //Label af dagenen
         gpvagtplan.add(white,1,1);
         gpvagtplan.add(monday,2,1);
@@ -888,12 +884,8 @@ public class HomeGUI extends Application {
 
     }
 
-
     //////////////////////////////////////////Anders og Daniel/////////////////////////////////////////////////
     public static void scheduleOverviewScreen(Stage primaryStage){
-
-
-
         application.LogicController.getComment();
 
 
@@ -976,16 +968,12 @@ public class HomeGUI extends Application {
         commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
         commentBP.setCenter(kommentar);
 
-
-
-
         Button commitKommentar                   = new Button("Commit");
         commitKommentar.setId("btncommit");
         commitKommentar.getStylesheets().addAll("gui/assets/login.css");
         commitKommentar.setOnAction(event -> {
             application.LogicController.addComment(new Comment(kommentar.getText()));
         });
-
 
 
         //nu skal de forskellige views samles
