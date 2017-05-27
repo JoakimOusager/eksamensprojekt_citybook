@@ -5,9 +5,9 @@ import application.Comment;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Daniel on 26-05-2017.
- */
+
+////////////////////////////////////////////////////Daniel og Anders//////////////////////////////////////////
+
 public class CommentDAO implements BaseDAO<Comment> {
     public ArrayList<Comment> get(){
         ArrayList<Comment> list = new ArrayList<>();

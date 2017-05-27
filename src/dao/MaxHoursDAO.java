@@ -5,6 +5,8 @@ import application.ScheduleDays;
 import java.sql.*;
 import java.util.ArrayList;
 
+//////////////////////////////////////////////////Daniel og Jarl//////////////////////////////////////////////
+
 public class MaxHoursDAO implements BaseDAO<ScheduleDays>{
     public ArrayList<ScheduleDays> get() {
         ArrayList<ScheduleDays> list = new ArrayList<>();

@@ -16,9 +16,8 @@ import java.util.Optional;
 
 import static gui.ShowMoreCompany.showMoreButtonClicked;
 
-/**
- * Created by Daniel on 17-05-2017.
- */
+////////////////////////////////////////////////////Daniel og Jarl//////////////////////////////////////
+
 public class CompanyTableView {
 
     public static HBox hboxCompany                         = new HBox();
@@ -108,6 +107,9 @@ public class CompanyTableView {
             companyRevenueCol.setMinWidth(120);
             companyRevenueCol.setCellValueFactory(         new PropertyValueFactory<>("revenue"));
 
+
+////////////////////////////////////////Jarl og Joakim//////////////////////////////////////////////////
+
             // GridPane for the whole adding and deleting employee area
             GridPane gp3                                   = new GridPane();
 
@@ -143,6 +145,7 @@ public class CompanyTableView {
 
                 }
             });
+
 
             Button deleteCompanyBtn                        = new Button("Slet firma");
             deleteCompanyBtn.setId("deleteEmployeeButton");

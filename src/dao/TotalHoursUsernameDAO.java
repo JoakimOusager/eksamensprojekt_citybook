@@ -5,9 +5,9 @@ import application.ScheduleDays;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Daniel on 26-05-2017.
- */
+
+/////////////////////////////////////////////////Daniel og Anders///////////////////////////////////////
+
 public class TotalHoursUsernameDAO implements BaseDAO<ScheduleDays>{
 
         public ArrayList<ScheduleDays> get() {

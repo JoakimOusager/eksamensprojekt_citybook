@@ -5,6 +5,8 @@ import application.User;
 import java.sql.*;
 import java.util.ArrayList;
 
+///////////////////////////////////////////////Jarl og Joakim///////////////////////////////////////////
+
  /*
         Klassen som håndterer alt database interaktion fra User table i databasen til programmet.
  */
