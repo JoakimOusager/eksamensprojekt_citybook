@@ -14,9 +14,7 @@ import javafx.scene.layout.VBox;
 import java.util.Optional;
 
 
-/**
- * Created by Daniel on 17-05-2017.
- */
+//////////////////////////////////////////////Joakim og Jarl/////////////////////////////////////////////
 
 public class UserTableView {
 

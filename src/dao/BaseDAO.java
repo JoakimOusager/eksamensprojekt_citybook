@@ -2,9 +2,9 @@ package dao;
 
 import java.util.List;
 
-/**
- * Created by Joakim on 25/05/2017.
- */
+
+/////////////////////////////////////////Joakim//////////////////////////////////////
+
 public interface BaseDAO<T> {
 
     public List<T> get();

@@ -5,9 +5,8 @@ import application.ScheduleDays;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Daniel on 26-05-2017.
- */
+//////////////////////////////////////////////Anders og Daniel/////////////////////////////////////////
+
 public class ComboboxDAO {
     static public ArrayList<ScheduleDays> get() {
         ArrayList<ScheduleDays> list = new ArrayList<>();

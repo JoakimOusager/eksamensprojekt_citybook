@@ -9,6 +9,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+////////////////////////////////////////////Joakim, Daniel, Jarl og Anders///////////////////////////////
+
 public class LogicController {
     public static User login (User loginUser) {
         UserDAO userDAO                             = new UserDAO();

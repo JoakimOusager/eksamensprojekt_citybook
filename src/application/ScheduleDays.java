@@ -1,8 +1,8 @@
 package application;
 
-/**
- * Created by Daniel on 25-05-2017.
- */
+
+/////////////////////////////////////////////Daniel////////////////////////////////////////
+
 public class ScheduleDays {
 
 

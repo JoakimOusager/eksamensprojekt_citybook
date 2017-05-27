@@ -2,6 +2,8 @@ package application;
 
 import java.sql.Timestamp;
 
+///////////////////////////////////////////////Jarl og Joakim//////////////////////////////////////////////////
+
 public class Company {
 
     private String cvrNumber;

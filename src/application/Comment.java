@@ -1,8 +1,8 @@
 package application;
 
-/**
- * Created by Daniel on 26-05-2017.
- */
+//////////////////////////////////////////Lavet af Daniel og Anders//////////////////////////
+
+
 public class Comment {
 
 
