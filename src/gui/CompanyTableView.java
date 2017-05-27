@@ -16,7 +16,7 @@ import java.util.Optional;
 
 import static gui.ShowMoreCompany.showMoreButtonClicked;
 
-////////////////////////////////////////////////////Daniel og Jarl//////////////////////////////////////
+//////////////////////////////////////////////////// Daniel og Jarl //////////////////////////////////////
 
 public class CompanyTableView {
 
@@ -28,12 +28,11 @@ public class CompanyTableView {
 
         public static Button showMoreInformationAboutCompanyButton;
 
-        // Get all the children
+        /*
+			Returnerer alle virksomheder.
+		*/
         public static ObservableList<Company> getCompany() {
-
             ObservableList<Company> company = FXCollections.observableArrayList(LogicController.getCompanies());
-
-            System.out.println(company);
             return company;
         }
 
@@ -41,7 +40,7 @@ public class CompanyTableView {
                Dette er vores metode til at tilføje en virksomhed.
         */
         public static void addCompany() {
-            // Vi laver et Company objekt.
+            // Vi laver et nyt Company objekt.
             Company company                                 = new Company();
 
             // Vi laver et ContactPerson objekt der indeholder de værdier som er i vores TextFields.
@@ -49,6 +48,8 @@ public class CompanyTableView {
 
             // Vi smider vores ContactPerson objekt ind i Company objektet.
             company.setContactPerson(contactPerson);
+
+            // Vi henter data fra TextFields og sætter deres værdier ind i vores objekt vha. Getters & Setters
             company.setName(name.getText());
             company.setCvrNumber(cvrNumber.getText());
             company.setAddress(address.getText());
@@ -57,7 +58,10 @@ public class CompanyTableView {
             company.setPhoneNumber(phoneNumber.getText());
             company.setCreatedBy(HomeGUI.loggedInUser);
 
+            // Vi tilføjer alt data fra  TableView til vores objekt
             tvCompany.getItems().add(company);
+
+            // Herefter bruger vi Clear() metoden til at nulstille vores TextFields.
             contactPersonName.clear();
             contactPersonEmail.clear();
             contactPersonPhone.clear();
@@ -69,19 +73,34 @@ public class CompanyTableView {
             phoneNumber.clear();
             tvCompany.refresh();
 
+            // Vi overfører objektet til LogicControllers addCompany() metode.
             LogicController.addCompany(company);
         }
+
         /*
             Dette er vores metode til at slette en virksomhed.
         */
         public static void deleteCompany() {
+            // Vi laver en ObservableList der indeholder et Company objekt
+            // der kommer til at indeholde hvilken virksomhed der er valgt.
             ObservableList<Company> companySelected, allCompanies;
             allCompanies = tvCompany.getItems();
+
+            /*
+                getSelectionModel henter den værdi der er i det valgte row.
+                getSelectedItems returnere den valgte row med den værdi hentet fra getSelectionModel.
+                Dette bliver lagt ind i companySelected.
+            */
             companySelected = tvCompany.getSelectionModel().getSelectedItems();
+
+            /*
+                 Vi har et for-loop der finder den valgte bruger i vores objekt
+                 for derefter at kalde på vores deleteCompany() metode i LogicController.
+             */
             for (Company com : companySelected) {
                 LogicController.deleteCompany(com);
             }
-
+            // Fjerner den valgte virksomhed.
             companySelected.forEach(allCompanies::remove);
 
         }
@@ -91,24 +110,32 @@ public class CompanyTableView {
         */
         public static void companyTableviewStart() {
 
+            /*
+                 Vi opretter de kolonner som bliver vist i vores TableView for brugere.
+            */
+
+            // Kolonne for virksomhedsnavn
             TableColumn<Company, String> nameCompanyCol    = new TableColumn<>("Navn");
             nameCompanyCol.setMinWidth(120);
             nameCompanyCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+            // Kolonne for Virksomhedens telefon nummer
             TableColumn<Company, String> phoneCompanyCol   = new TableColumn<>("Telefon");
             phoneCompanyCol.setMinWidth(120);
             phoneCompanyCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
+            // Kolonne for virksomhedens Email
             TableColumn<Company, String> emailCol          = new TableColumn<>("Email");
             emailCol.setMinWidth(120);
             emailCol.setCellValueFactory(                    new PropertyValueFactory<>("email"));
 
+            // Kolonne for omsætning på virksomheden
             TableColumn<Company, String> companyRevenueCol = new TableColumn<>("Omsætning");
             companyRevenueCol.setMinWidth(120);
             companyRevenueCol.setCellValueFactory(         new PropertyValueFactory<>("revenue"));
 
 
-////////////////////////////////////////Jarl og Joakim//////////////////////////////////////////////////
+//////////////////////////////////////// Jarl og Joakim //////////////////////////////////////////////////
 
             // GridPane for the whole adding and deleting employee area
             GridPane gp3                                   = new GridPane();
@@ -132,6 +159,13 @@ public class CompanyTableView {
             Button addCompanyBtn                           = new Button("Tilføj firma");
             addCompanyBtn.setId("addEmployeeButton");
 
+//////////////////////////////////////// Jarl //////////////////////////////////////////////////
+
+            /*
+                Denne setOnAction kalder på addCompany() metoden samt
+                henter den nye data som er blevet smidt i databasen fra addCompany() metoden
+                så TableView bliver opdateret. Derudover bliver der vist en bekræftelse på dette.
+            */
             addCompanyBtn.setOnAction(successBox ->{
                 addCompany();
                 tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
@@ -150,6 +184,10 @@ public class CompanyTableView {
             Button deleteCompanyBtn                        = new Button("Slet firma");
             deleteCompanyBtn.setId("deleteEmployeeButton");
 
+            /*
+                Primært det samme som ovenover, her bliver deleteCompany() dog kaldt hvis
+                brugeren vælger at trykke 'Ok' i vores AlertBox.
+            */
             deleteCompanyBtn.setOnAction(alertBox ->{
                 Alert alert                                = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
@@ -161,7 +199,12 @@ public class CompanyTableView {
                     deleteCompany();
                 }
             });
-
+//////////////////////////////////////// Jarl  & Joakim //////////////////////////////////////////////////
+            /*
+                  Når man trykker på ShowMoreInformationAboutCompanyButton
+                  overfører den hvilken virksomhed man har valgt til metoden
+                  showMoreButtonClicked() fra ShowMoreCompany klassen
+             */
             showMoreInformationAboutCompanyButton          = new Button("Vis mere");
             showMoreInformationAboutCompanyButton.setId("showMoreInformationAboutCompanyButton");
             showMoreInformationAboutCompanyButton.setOnAction(e-> {

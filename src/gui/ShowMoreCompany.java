@@ -17,7 +17,7 @@ import java.util.Optional;
 
 import static gui.CompanyTableView.tvCompany;
 
-//////////////////////////////////////////Joakim og Jarl/////////////////////////////////////
+////////////////////////////////////////// Joakim og Jarl /////////////////////////////////////
 
 public class ShowMoreCompany extends Application {
 
@@ -29,7 +29,9 @@ public class ShowMoreCompany extends Application {
     public void start(Stage primaryStage) {
 
     }
-
+    /*
+        Metoden der sørger for alt der har med Pop-up vinduet at gøre.
+    */
     public static void showMoreCompanyWindow(Company company) {
         GridPane showMoreGridPane         = new GridPane();
         showMoreGridPane.setHgap(10);
