@@ -50,6 +50,9 @@ public class ScheduleDays {
         this.username = username;
     }
 
+    public ScheduleDays() {
+
+    }
 
 
     public String getUsername() {

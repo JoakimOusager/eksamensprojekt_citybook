@@ -158,7 +158,9 @@ public class UserDAO implements BaseDAO<User> {
             stmt.close();
             conn.close();
         } catch (SQLException se) {
+
             error = true;
+
             se.printStackTrace();
         } catch (Exception e) {
 

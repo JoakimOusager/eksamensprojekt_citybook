@@ -23,7 +23,6 @@ public class ScheduleLogic {
         //Den kalender starter om søndagen, så case 1 er søndag og 2 er mandag osv.
         switch (day){
             case 1:
-                datoFredag.setText(dateFormat.format(cal.getTime()));
                 timerMandag.setText(String.valueOf(mondayDB));
                 timerTirsdag.setText(String.valueOf(tuesdayDB));
                 timerOnsdag.setText(String.valueOf(wednesdayDB));
@@ -102,7 +101,6 @@ public class ScheduleLogic {
                 break;
 
             case 7:
-                datoFredag.setText(dateFormat.format(cal.getTime()));
                 timerMandag.setText(String.valueOf(mondayDB));
                 timerTirsdag.setText(String.valueOf(tuesdayDB));
                 timerOnsdag.setText(String.valueOf(wednesdayDB));
@@ -177,6 +175,7 @@ public class ScheduleLogic {
             case 6:
 
                 fridayDB = 0.0;
+
                 diffMinutesEnd = application.Datepicker.endDateStamp();
                 datoFredag2.setText(dateFormat.format(cal.getTime()));
                 fridayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
