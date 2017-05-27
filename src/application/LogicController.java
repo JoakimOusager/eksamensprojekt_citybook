@@ -116,8 +116,8 @@ public class LogicController {
     }
 
     public static ArrayList<ScheduleDays> getTopHours() {
-        TopHoursDAO topHoursDAO                     = new TopHoursDAO();
-        ArrayList<ScheduleDays> list                = new ArrayList<>(topHoursDAO.get());
+        TotalHoursDAO totalHoursDAO                    = new TotalHoursDAO();
+        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursDAO.get());
 
         return list;
 
@@ -133,8 +133,8 @@ public class LogicController {
     }
 
     public static ArrayList<ScheduleDays> getHoursUsername() {
-        TotalHoursUsernameDAO totalHoursUsernameDAO = new TotalHoursUsernameDAO();
-        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursUsernameDAO.get());
+        TotalHoursDAO totalHoursDAO = new TotalHoursDAO();
+        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursDAO.get());
 
         return list;
 
