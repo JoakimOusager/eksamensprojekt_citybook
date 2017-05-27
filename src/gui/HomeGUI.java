@@ -884,7 +884,6 @@ public class HomeGUI extends Application {
 
     }
 
-
     //////////////////////////////////////////Anders og Daniel/////////////////////////////////////////////////
     public static void scheduleOverviewScreen(Stage primaryStage){
         application.LogicController.getComment();

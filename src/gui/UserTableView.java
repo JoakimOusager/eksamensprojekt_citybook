@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import static gui.EditUser.showMoreUserButtonClicked;
 
-
 //////////////////////////////////////////////Joakim og Jarl/////////////////////////////////////////////
 
 public class UserTableView {
