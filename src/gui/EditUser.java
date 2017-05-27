@@ -15,17 +15,19 @@ import java.util.Optional;
 
 public class EditUser {
 
-	static Stage editUser            = new Stage();
+	//////////////////////////////////////////////////// Jarl ////////////////////////////////////////////////
+
+	static Stage editUser                       = new Stage();
 
 	public static void editUserWindow(User user) {
-		GridPane editUserGridPane          = new GridPane();
+		GridPane editUserGridPane               = new GridPane();
 		editUserGridPane.setHgap(10);
 		editUserGridPane.setVgap(10);
-		editUserGridPane.setPadding(         new Insets(25, 50, 25,50));
+		editUserGridPane.setPadding(              new Insets(25, 50, 25,50));
 
-		editUserGridPane.add(                new Label("Brugere"),1,0);
-		editUserGridPane.add(                new Label("Brugernavn"),0,1);
-		TextField usernameTF               = new TextField(user.getUsername());
+		editUserGridPane.add(                     new Label("Brugere"),1,0);
+		editUserGridPane.add(                     new Label("Brugernavn"),0,1);
+		TextField usernameTF                    = new TextField(user.getUsername());
 		usernameTF.setDisable(true);
 		usernameTF.setPromptText("Brugernavn");
 		usernameTF.setMaxWidth(150);
@@ -57,12 +59,11 @@ public class EditUser {
 
         /*
             Dette er vores lambda til at opdatere alle fields når man trykker på 'Gem ændringer'.
-            I princippet henter vi alle værdier fra vores TextFields og opretter et nyt Company objekt og ContactPerson
-            objekt og smider det ind i databasen.
+            I princippet henter vi alle værdier fra vores TextFields og opretter et nyt User objekt og smider det ind i databasen.
         */
 		editUserBtn.setOnAction(event -> {
 
-			User newUser           = new User(usernameTF.getText(), userPassword.getText(), userEmail.getText(), Integer.parseInt(userRank.getText()));
+			User newUser                         = new User(usernameTF.getText(), userPassword.getText(), userEmail.getText(), Integer.parseInt(userRank.getText()));
 			LogicController.updateUser(newUser);
 
             /*
@@ -71,7 +72,7 @@ public class EditUser {
 			tvUser.setItems(FXCollections.observableArrayList(LogicController.getUsers()));
 			editUser.close();
 
-			Alert alert                              = new Alert(Alert.AlertType.CONFIRMATION);
+			Alert alert                          = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Citybook");
 			alert.setHeaderText("Bekræftelse");
 			alert.setContentText("Brugeren er nu blevet ændret.");

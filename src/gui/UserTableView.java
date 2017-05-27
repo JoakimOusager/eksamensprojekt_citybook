@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import static gui.EditUser.showMoreUserButtonClicked;
 
-//////////////////////////////////////////////Joakim og Jarl/////////////////////////////////////////////
+////////////////////////////////////////////// Joakim og Jarl /////////////////////////////////////////////
 
 public class UserTableView {
 
@@ -42,13 +42,13 @@ public class UserTableView {
         // Vi laver et User objekt.
         User user                                   = new User();
 
-        // Vi henter det tekst der er blevet skrevet ind i vores TextFields.
+        // Vi henter data fra TextFields og sætter deres værdier ind i vores objekt vha. Getters & Setters
         user.setUsername(username.getText());
         user.setPassword(password.getText());
         user.setEmail(email.getText());
         user.setRank(Integer.parseInt(userRank.getText()));
 
-        // Vi tilføjer alt teksten til vores TableView
+        // Vi tilføjer alt data fra TableView til vores objekt
         tvUser.getItems().add(user);
 
         // Herefter bruger vi Clear() metoden til at nulstille vores TextFields.
@@ -133,6 +133,7 @@ public class UserTableView {
         Button addUserBtn                            = new Button("Tilføj Bruger");
         addUserBtn.setId("addEmployeeButton");
 
+        //////////////////////////// Jarl ////////////////////////////
         /*
             Alertbox der meddeler admin at brugeren er blevet oprettet
          */
@@ -191,12 +192,16 @@ public class UserTableView {
                     deleteUser();
                 }
         });
-
-        // Jarl
-        showMoreUserBtn = new Button("Redigér");
+        //////////////////////////////////////// Jarl  & Joakim //////////////////////////////////////////////////
+        /*
+            Når man trykker på ShowMoreUserBtn
+            overfører den hvilken virksomhed man har valgt til metoden
+            showMoreUserButtonClicked() fra EditUser klassen
+        */
+        showMoreUserBtn                              = new Button("Redigér");
         showMoreUserBtn.setId("showMoreInformationAboutCompanyButton");
         showMoreUserBtn.setOnAction(e-> {
-            ObservableList<User> selectedUser    = tvUser.getSelectionModel().getSelectedItems();
+            ObservableList<User> selectedUser        = tvUser.getSelectionModel().getSelectedItems();
             showMoreUserButtonClicked(selectedUser.get(0));
         });
 

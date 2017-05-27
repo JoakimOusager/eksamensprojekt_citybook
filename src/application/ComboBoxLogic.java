@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 
-////////////////////////////////////Lavet af Daniel/////////////////////////////
+//////////////////////////////////// Daniel /////////////////////////////
 
 //Metode til at få fat i de forskellige fields der skal bruges til comboboxen
 public class ComboBoxLogic {

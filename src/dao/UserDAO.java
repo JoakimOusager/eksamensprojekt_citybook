@@ -5,7 +5,7 @@ import application.User;
 import java.sql.*;
 import java.util.ArrayList;
 
-///////////////////////////////////////////////Jarl og Joakim///////////////////////////////////////////
+/////////////////////////////////////////////// Jarl og Joakim ///////////////////////////////////////////
 
  /*
         Klassen som håndterer alt database interaktion fra User table i databasen til programmet.
@@ -28,13 +28,10 @@ public class UserDAO implements BaseDAO<User> {
         Statement stmt = null;
 
         try {
-            //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
 
-            //STEP 3: Open a connection
             conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
 
-            //STEP 4: Execute a query
             stmt = conn.createStatement();
             String sql;
 
@@ -43,7 +40,6 @@ public class UserDAO implements BaseDAO<User> {
                     +  "\"";
             ResultSet rs = stmt.executeQuery(sql);
 
-            //STEP 5: Extract data from result set
             if (rs.next()) {
                 String username = rs.getString("username");
                 String email = rs.getString("user_email");
@@ -51,23 +47,19 @@ public class UserDAO implements BaseDAO<User> {
                 foundUser = new User(username, email, rank);
             }
 
-            //STEP 6: Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
@@ -79,9 +71,6 @@ public class UserDAO implements BaseDAO<User> {
         return foundUser;
     }
 
-    /*
-        Dette er vores metode til at hente brugere fra databasen.
-    */
     public ArrayList<User> get() {
         ArrayList<User> userList = new ArrayList<>();
 
@@ -149,13 +138,10 @@ public class UserDAO implements BaseDAO<User> {
         Statement stmt = null;
 
         try {
-            //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
 
-            //STEP 3: Open a connection
             conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
 
-            //STEP 4: Execute a query
             stmt = conn.createStatement();
             String sql;
 
@@ -165,25 +151,23 @@ public class UserDAO implements BaseDAO<User> {
                     "user_rank = '" + user.getRank() + "'" +
                     "WHERE username = '" + user.getUsername() + "'";
             System.out.println(sql);
-             stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
 
-            //STEP 5: Extract data from result set
-            //STEP 6: Clean-up environment
             stmt.close();
             conn.close();
         } catch (SQLException se) {
-            //Handle errors for JDBC
+            /
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
+
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
+
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
@@ -198,13 +182,10 @@ public class UserDAO implements BaseDAO<User> {
         Statement stmt = null;
 
         try {
-            //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
 
-            //STEP 3: Open a connection
             conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
 
-            //STEP 4: Execute a query
             stmt = conn.createStatement();
             String sql;
 
@@ -213,23 +194,18 @@ public class UserDAO implements BaseDAO<User> {
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
-            //STEP 5: Extract data from result set
-            //STEP 6: Clean-up environment
             stmt.close();
             conn.close();
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();

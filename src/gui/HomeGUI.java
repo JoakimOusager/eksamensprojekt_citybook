@@ -344,6 +344,7 @@ public class HomeGUI extends Application {
 
     }
 
+    ////////////////////////////////////////// Jarl ///////////////////////////////////////
 
     /*
         Denne metoder bliver tilføjet i knappen 'Aktiviteter'
@@ -351,9 +352,6 @@ public class HomeGUI extends Application {
         Vi har valgt Google Calendar fremfor selv at lave en kalender da,
         da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
     */
-
-    //////////////////////////////////////////Jarl///////////////////////////////////////
-
      public static void CalendarView(Stage primaryStage) {
         calendarButton.setId("mActive");
         calendarButton.getStylesheets().addAll("gui/assets/login.css");
@@ -382,7 +380,7 @@ public class HomeGUI extends Application {
 
     //Målscreen
 
-    //////////////////////////////////////////Daniel, Jarl og Anders//////////////////////////////////////
+    ////////////////////////////////////////// Daniel, Jarl og Anders //////////////////////////////////////
     public static void goalsScreen(Stage primaryStage){
 
         //total omsætning
@@ -474,7 +472,7 @@ public class HomeGUI extends Application {
         primaryStage.show();
     }
 
-    ////////////////////////////////////////////////Daniel//////////////////////////////////////////
+    //////////////////////////////////////////////// Daniel //////////////////////////////////////////
 
     //virksomheds screen
     public static void companiesScreen(Stage primaryStage){
@@ -494,7 +492,7 @@ public class HomeGUI extends Application {
     }
 
 
-    ////////////////////////////////////////////Daniel///////////////////////////////////////////////
+    //////////////////////////////////////////// Daniel ///////////////////////////////////////////////
     public static void scheduleScreen(Stage primaryStage){
 
         scheduleButton.setId("mActive");
