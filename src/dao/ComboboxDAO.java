@@ -4,11 +4,12 @@ import application.ScheduleDays;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
-//////////////////////////////////////////////Anders og Daniel/////////////////////////////////////////
+//&/
 
-public class ComboboxDAO {
-    static public ArrayList<ScheduleDays> get() {
+public class ComboboxDAO implements GetDAO<ScheduleDays> {
+    public List<ScheduleDays> get() {
         ArrayList<ScheduleDays> list = new ArrayList<>();
 
         Connection conn = null;

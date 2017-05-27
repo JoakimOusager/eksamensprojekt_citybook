@@ -4,13 +4,14 @@ import application.Comment;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 ////////////////////////////////////////////////////Daniel og Anders//////////////////////////////////////////
 
 public class CommentDAO implements BaseDAO<Comment> {
-    public ArrayList<Comment> get(){
-        ArrayList<Comment> list = new ArrayList<>();
+    public List<Comment> get(){
+        List<Comment> list = new ArrayList<>();
 
         Connection conn = null;
         Statement stmt = null;

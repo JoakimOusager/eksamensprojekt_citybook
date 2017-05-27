@@ -391,8 +391,7 @@ public class HomeGUI extends Application {
         Label labelRevenueTotalMessage          = new Label("Totalomsætning:");
         labelRevenueTotalMessage.setId("labelMessage");
         labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
-        ArrayList<Company> totalRevenueList     = new ArrayList(LogicController.getTotalRevenue());
-        double totalRevenue = totalRevenueList.get(0).getRevenue();
+        double totalRevenue = LogicController.getRevenue();
         String totalRevenueString = String.valueOf(totalRevenue);
 
         Label labelRevenueTotalCount            = new Label(totalRevenueString + " kr");
@@ -409,8 +408,7 @@ public class HomeGUI extends Application {
         labelHighestRevenueMonthMessage.setId("labelMessage");
 
         // Vi opretter en ArrayList med den værdi der bliver hentet fra LogicControllers getTopHours() metode.
-        ArrayList<ScheduleDays> topHoursList    = new ArrayList(LogicController.getTopHours());
-        double topHoursDouble = topHoursList.get(0).getTotalHours();
+        double topHoursDouble = LogicController.getTopHours();
         String topHoursString = String.valueOf(topHoursDouble);
 
         Label labelHighestRevenueMonthCount     = new Label(topHoursString + " timer");
@@ -440,8 +438,7 @@ public class HomeGUI extends Application {
         //årets resultat for sælgeren
         BorderPane bpRevenueThisYear            = new BorderPane();
         bpRevenueThisYear.setId("bpGoalsScreen");
-        ArrayList<ScheduleDays> maxHoursList    = new ArrayList(LogicController.getMaxHours());
-        double maxHoursDouble = maxHoursList.get(0).getTotalHours();
+        double maxHoursDouble = LogicController.getMaxHours();
         String maxHoursString = String.valueOf(maxHoursDouble);
 
         Label labelRevenueThisYearMessage       = new Label("Total arbejdstimer:");
@@ -633,7 +630,7 @@ public class HomeGUI extends Application {
 
             //Variabler til brug af totalTid fra databasen
             ArrayList<ScheduleDays> arraylistSchedule =
-                    new ArrayList<ScheduleDays>(LogicController.getSchedule(loggedInUser));
+                    new ArrayList<ScheduleDays>(LogicController.getSchedule());
 
             double mondayDB                 = arraylistSchedule.get(0).getMonday();
             double tuesdayDB                = arraylistSchedule.get(0).getTuesday();
@@ -717,7 +714,7 @@ public class HomeGUI extends Application {
             }*/
         });
 
-        ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule(loggedInUser));
+        ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule());
 
         Button stopTimer                          = new Button("Stop");
         stopTimer.setId("stopCountinghours");

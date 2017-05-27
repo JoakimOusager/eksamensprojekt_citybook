@@ -1,0 +1,10 @@
+package dao;
+
+import java.util.List;
+
+/////////////////////////////////////////////////Daniel og Joakim////////////////////////////////////////
+public interface GetDAO<A> {
+
+        List<A> get();
+
+}

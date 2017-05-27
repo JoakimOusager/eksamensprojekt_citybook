@@ -5,14 +5,14 @@ import java.util.List;
 
 /////////////////////////////////////////Joakim//////////////////////////////////////
 
-public interface BaseDAO<T> {
+public interface BaseDAO<A> extends GetDAO<A> {
 
-    public List<T> get();
+    public List<A> get();
 
-    public void update(T element);
+    public void update(A element);
 
-    public void insert(T element);
+    public void insert(A element);
 
-    public void delete(T element);
+    public void delete(A element);
 
 }

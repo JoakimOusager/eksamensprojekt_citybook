@@ -2,16 +2,18 @@ package dao;
 
 import application.ScheduleDays;
 import application.User;
+import gui.HomeGUI;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 ////////////////////////////////////////////////Daniel///////////////////////////////////////////
 
-public class ScheduleDAO {
+public class ScheduleDAO implements GetDAO<ScheduleDays>{
 
-    public ArrayList<ScheduleDays> get(User user) {
-        ArrayList<ScheduleDays> list = new ArrayList<ScheduleDays>();
+    public List<ScheduleDays> get() {
+        List<ScheduleDays> list = new ArrayList<ScheduleDays>();
 
         Connection conn = null;
         Statement stmt = null;
@@ -26,7 +28,7 @@ public class ScheduleDAO {
             stmt = conn.createStatement();
             String sql;
 
-                sql = "SELECT * FROM cbcrm.schedule WHERE username = '" + user.getUsername() + "' ";
+                sql = "SELECT * FROM cbcrm.schedule WHERE username = '" + HomeGUI.loggedInUser.getUsername() + "' ";
             ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
