@@ -91,35 +91,35 @@ public class LogicController {
 
     }
 
-    public static ArrayList<ScheduleDays> getSchedule(User user) {
+    public static ArrayList<ScheduleDays> getSchedule() {
         ScheduleDAO scheduleDAO                     = new ScheduleDAO();
-        ArrayList<ScheduleDays> schedule            = new ArrayList<>(scheduleDAO.get(user));
+        ArrayList<ScheduleDays> schedule            = new ArrayList<>(scheduleDAO.get());
 
         return schedule;
 
     }
 
-    public static ArrayList<Company> getTotalRevenue() {
-        GoalDAO goalDAO                             = new GoalDAO();
-        ArrayList<Company> list                     = new ArrayList<>(goalDAO.get());
+    public static double getRevenue() {
+        CompanyDAO companyDAO                             = new CompanyDAO();
+        double revenue = companyDAO.getRevenue();
 
-        return list;
-
-    }
-
-    public static ArrayList<ScheduleDays> getMaxHours() {
-        MaxHoursDAO maxHoursDAO                     = new MaxHoursDAO();
-        ArrayList<ScheduleDays> list                = new ArrayList<>(maxHoursDAO.get());
-
-        return list;
+        return revenue;
 
     }
 
-    public static ArrayList<ScheduleDays> getTopHours() {
+    public static double getMaxHours() {
         TotalHoursDAO totalHoursDAO                    = new TotalHoursDAO();
-        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursDAO.get());
+        double totalHours = totalHoursDAO.getMaxHours();
 
-        return list;
+        return totalHours;
+
+    }
+
+    public static double getTopHours() {
+        TotalHoursDAO totalHoursDAO                    = new TotalHoursDAO();
+        double topHours = totalHoursDAO.getTopHours();
+
+        return topHours;
 
     }
 
