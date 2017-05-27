@@ -1,8 +1,7 @@
 package application;
 
-/**
- * Created by Joakim on 23/05/2017.
- */
+////////////////////////////////////////////////Joakim og Jarl/////////////////////////////////////
+
 public class ContactPerson {
     private String name;
     private String email;

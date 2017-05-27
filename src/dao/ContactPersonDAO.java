@@ -7,6 +7,8 @@ import gui.HomeGUI;
 import java.sql.*;
 import java.util.List;
 
+//////////////////////////////////////Joakim og Jarl//////////////////////////////////////////
+
 public class ContactPersonDAO implements BaseDAO<ContactPerson> {
     @Override
     public List<ContactPerson> get() {

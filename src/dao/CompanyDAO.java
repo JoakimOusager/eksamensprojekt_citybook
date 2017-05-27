@@ -8,9 +8,9 @@ import gui.HomeGUI;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Joakim on 23/05/2017.
- */
+
+//////////////////////////////////////////////Joakim og Jarl/////////////////////////////////////////////////////
+
 public class CompanyDAO implements BaseDAO<Company> {
 
     public ArrayList<Company> get() {

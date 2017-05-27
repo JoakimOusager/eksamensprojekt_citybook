@@ -1,7 +1,5 @@
 package gui;
-/**
- * Created by jarl on 16/05/2017.
- */
+
 
 
 import application.LogicController;
@@ -25,14 +23,19 @@ public class LoginGUI extends Application {
 
     static Scene loginScene;
 
+    //borderpane der er fundamentet til det hele, BPbackground er det bagerste pane
+    // i programmet og bliver genbrugt mange stedet
     static BorderPane BPBackground                          = new BorderPane();
+    //den hvide gennemsigtige bagrund
     static BorderPane whiteBackground                       = new BorderPane();
+    //Pane brugt til at holde citybooklogoet
     static BorderPane citybookLogoPane                      = new BorderPane();
 
     //Login fields
     public static TextField usernamefield                   = new TextField();
 
 
+    //Boolean brugt til at holde styr på om man har trykket på "Save me" checkboxen
     public static boolean saveMe                            = false;
     @Override
     public void start(Stage primaryStage) {
@@ -40,11 +43,13 @@ public class LoginGUI extends Application {
     }
     public static void login(Stage primaryStage){
 
+//////////////////////////////////////////////Anders og Daniel/////////////////////////////////////////////
+
+
         LoginGUI.usernamefield.setText(LogicController.getSavedUsername());
         LogicController.setSavedUsername(usernamefield.getText(), saveMe);
 
         //Hvid background som ligger i midten
-
         whiteBackground.getStylesheets().addAll("gui/assets/login.css");
         whiteBackground.setId("whiteBackground");
 
@@ -117,6 +122,7 @@ public class LoginGUI extends Application {
 
         btnlogin.setOnAction((ActionEvent event1) -> {
                     // Hvis brugeren ikke er admin, bliver adminknappen usynlig
+                    //Tjekker og brugeren eksistere
             User foundUser = LogicController.login(           new User(usernamefield.getText(), passwordfield.getText()));
                     if (foundUser != null) {
                         if (foundUser.getRank() == 0) {
@@ -124,7 +130,9 @@ public class LoginGUI extends Application {
                             HomeGUI getScheduleOverview     = new HomeGUI();
                             getScheduleOverview.scheduleOverviewButton.setVisible(false);
                         }
+                            //Gemmer usernamet hvis man klikker på saveMe
                             LogicController.setSavedUsername(usernamefield.getText(), saveMe);
+                        //Tjekker om metoderne har kørt før
                         if (!hasRunBefore) {
                             CompanyTableView.companyTableviewStart();
                             UserTableView.userTableviewStart();
@@ -174,6 +182,8 @@ public class LoginGUI extends Application {
         primaryStage.show();
 
     }
+
+    //metode til hvis man skriver forkerte credentials
 
     public static void wrongCreds(TextField usernamefield, PasswordField passwordfield){
         usernamefield.setPromptText("Wrong username");
