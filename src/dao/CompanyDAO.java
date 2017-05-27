@@ -4,6 +4,7 @@ import application.Company;
 import application.ContactPerson;
 import application.User;
 import gui.HomeGUI;
+import gui.GUIController;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 ////////////////////////////////////////////// Joakim og Jarl /////////////////////////////////////////////////////
 
 public class CompanyDAO implements BaseDAO<Company> {
+    boolean error = false;
 
     public ArrayList<Company> get() {
         ArrayList<Company> list = new ArrayList<Company>();
@@ -120,6 +122,7 @@ public class CompanyDAO implements BaseDAO<Company> {
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
+            error = true;
         } catch (Exception e) {
             //Handle errors for Class.forName
             e.printStackTrace();
@@ -137,6 +140,7 @@ public class CompanyDAO implements BaseDAO<Company> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
 
 
     }
@@ -175,7 +179,6 @@ public class CompanyDAO implements BaseDAO<Company> {
                     ")" +
                     "VALUES ( '" + company.getName() + "', '" + company.getAddress() + "' ,'" + company.getZipCode() + "', '" +  company.getCvrNumber() + "', '" + company.getEmail()+ "', " +
                     " '" + company.getPhoneNumber() + "', '" + company.getRevenue() + "','" + company.getComments() + "','" + userId + "', '" + contactPersonID +  "')";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -185,6 +188,7 @@ public class CompanyDAO implements BaseDAO<Company> {
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
+            error = true;
         } catch (Exception e) {
             //Handle errors for Class.forName
             e.printStackTrace();
@@ -202,6 +206,7 @@ public class CompanyDAO implements BaseDAO<Company> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
     public void update(Company company) {
@@ -227,7 +232,6 @@ public class CompanyDAO implements BaseDAO<Company> {
                     "company_revenue = '" + company.getRevenue() + "'," +
                     "company_comments = '" + company.getComments() + "' " +
                     "WHERE company_cvr = '" + company.getCvrNumber() + "'";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -236,6 +240,7 @@ public class CompanyDAO implements BaseDAO<Company> {
             conn.close();
         } catch (SQLException se) {
             //Handle errors for JDBC
+            error = true;
             se.printStackTrace();
         } catch (Exception e) {
             //Handle errors for Class.forName
@@ -254,6 +259,7 @@ public class CompanyDAO implements BaseDAO<Company> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
     public double getRevenue() {

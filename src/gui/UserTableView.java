@@ -27,59 +27,50 @@ public class UserTableView {
     public static PasswordField password;
     public static Button showMoreUserBtn;
 
-    /*
-        Returnerer alle brugere.
-    */
+
+    //  Returnerer alle brugere.
     public static ObservableList<User> getUser() {
         ObservableList<User> user = FXCollections.observableArrayList(LogicController.getUsers());
         return user;
     }
 
-    /*
-        Dette er vores metode til at tilføje en bruger.
-    */
+     // Dette er vores metode til at tilføje en bruger.
+
     public static void addUser() {
-        // Vi laver et User objekt.
-        User user                                   = new User();
+            // Vi laver et User objekt.
 
-        // Vi henter data fra TextFields og sætter deres værdier ind i vores objekt vha. Getters & Setters
-        user.setUsername(username.getText());
-        user.setPassword(password.getText());
-        user.setEmail(email.getText());
-        user.setRank(Integer.parseInt(userRank.getText()));
+            User user = new User();
 
-        // Vi tilføjer alt data fra TableView til vores objekt
-        tvUser.getItems().add(user);
 
-        // Herefter bruger vi Clear() metoden til at nulstille vores TextFields.
-        username.clear();
-        password.clear();
-        email.clear();
-        userRank.clear();
+            // Vi henter data fra TextFields og sætter deres værdier ind i vores objekt vha. Getters & Setters
+            user.setUsername(username.getText());
+            user.setPassword(password.getText());
+            user.setEmail(email.getText());
+            user.setRank(Integer.parseInt(userRank.getText()));
 
-        // Vi overfører objektet til LogicControllers addUser() metode.
-        LogicController.addUser(user);
+            // Vi tilføjer alt data fra TableView til vores objekt
+            tvUser.getItems().add(user);
+
+            // Herefter bruger vi Clear() metoden til at nulstille vores TextFields.
+            username.clear();
+            password.clear();
+            email.clear();
+            userRank.clear();
+
+            // Vi overfører objektet til LogicControllers addUser() metode.
+            LogicController.addUser(user);
+            tvUser.setItems(FXCollections.observableArrayList(LogicController.getUsers()));
     }
 
-    /*
-        Dette er vores metode til at slette en bruger.
-    */
+     //   Dette er vores metode til at slette en bruger. Vi laver en ObservableList
+     //   der indeholder det User objekt som bliver valgt med userSelected.
+     //   Herefter bliver den valgte bruger slettet.
+
     public static void deleteUser() {
-        // Vi laver en ObservableList der indeholder et User objekt
-        // der kommer til at indeholde hvilken bruger der er valgt.
         ObservableList<User> userSelected, allUsers;
         allUsers = tvUser.getItems();
-
-      /* getSelectionModel henter den værdi der er i det valgte row.
-         getSelectedItems returnere den valgte row med den værdi hentet fra getSelectionModel.
-         Dette bliver lagt ind i userSelected.
-      */
         userSelected = tvUser.getSelectionModel().getSelectedItems();
 
-        /*
-            Vi har et for-loop der finder den valgte bruger i vores objekt
-            for derefter at kalde på vores deleteUser() metode i LogicController.
-        */
         for (User user : userSelected) {
             LogicController.deleteUser(user);
         }
@@ -87,14 +78,11 @@ public class UserTableView {
         userSelected.forEach(allUsers::remove);
     }
 
-    /*
-        Knappen 'Brugere' generer dette TableView.
-    */
+
+    //   Knappen 'Brugere' generer dette TableView.
     public static void userTableviewStart() {
 
-        /*
-            Vi opretter de kolonner som bliver vist i vores TableView for brugere.
-        */
+        // Vi opretter de kolonner som bliver vist i vores TableView for brugere.
 
         // Kolonne for brugernavn
         TableColumn<User, String> usernameCol        = new TableColumn<>("Username");
@@ -134,70 +122,32 @@ public class UserTableView {
         addUserBtn.setId("addEmployeeButton");
 
         //////////////////////////// Jarl ////////////////////////////
-        /*
-            Alertbox der meddeler admin at brugeren er blevet oprettet
-         */
+        // Vores 'Tilføj bruger' knap der kalder på addUser() metoden.
+        addUserBtn.setOnAction(successBox -> addUser());
 
-        addUserBtn.setOnAction(successBox ->{
-            /*
-                 Vi kalder på metoden addUser() uanset hvad brugeren trykker
-                 inde i vores AlertBox vindue.
-            */
-            addUser();
-
-            /*
-                Vi henter data fra databasen igen, for at få tidspunktet direkte frem i TableView fremfor
-                at skulle lukke programmet igen for at få det vist. Dette er dog ikke en særlig optimal måde
-                at gøre det på, da LogicController skal kontakte databasen igen for at få alt data frem igen.
-            */
-            tvUser.setItems(FXCollections.observableArrayList(LogicController.getUsers()));
-
-            // Vi opretter et ny 'AlertBox' vindue
-            Alert alert                              = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Citybook");
-            alert.setHeaderText("Bekræftelse");
-            alert.setContentText("Brugeren er nu blevet oprettet.");
-
-            /*
-                Vinduet venter ikke på at brugeren trykker på noget
-                før at vores lambda bliver kørt. Vi bruger kun AlertBox
-                her for at vise at brugeren er blevet oprettet.
-            */
-            Optional<ButtonType> result              = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-            }
-        });
         // Knappen Slet Bruger under fanen "Brugere"
         Button deleteUserBtn                         = new Button("Slet Bruger");
         deleteUserBtn.setId("deleteEmployeeButton");
 
-        /*
-           Alertbox til at sikre os at admin gerne vil slette en bruger.
-        */
+        //   Vores 'Slet bruger' knap, hvor vi har sat en alertbox på
+        //   der spørger om brugeren er sikker på denne handling.
+        //   Hvis brugeren trykker 'Ok' så bliver deleteUser() metoden kaldt
+        //   ellers sker der ingenting.
         deleteUserBtn.setOnAction(alertBox ->{
-                // Vi opretter et ny 'AlertBox' vindue
                 Alert alert                          = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Citybook");
                 alert.setHeaderText("Bekræftelse");
                 alert.setContentText("Er du sikker på at du vil slette denne bruger?");
-
-                /*
-                    Vinduet venter på, at der bliver smidt noget ind i result,
-                    den værdi som er i result afgører hvad der bliver udført.
-                    Hvis brugeren trykker på 'Ok' bliver if-statement kørt,
-                    ellers lukker vinduet bare og ingenting sker.
-                */
                 Optional<ButtonType> result          = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     deleteUser();
                 }
         });
+
         //////////////////////////////////////// Jarl  & Joakim //////////////////////////////////////////////////
-        /*
-            Når man trykker på ShowMoreUserBtn
-            overfører den hvilken virksomhed man har valgt til metoden
-            showMoreUserButtonClicked() fra EditUser klassen
-        */
+        //   Når man trykker på ShowMoreUserBtn
+        //   overfører den hvilken virksomhed man har valgt til metoden
+        //   showMoreUserButtonClicked() fra EditUser klassen
         showMoreUserBtn                              = new Button("Redigér");
         showMoreUserBtn.setId("showMoreInformationAboutCompanyButton");
         showMoreUserBtn.setOnAction(e-> {
@@ -242,5 +192,6 @@ public class UserTableView {
         hboxUser.getChildren().addAll(addUserbox2, tvUser, gp3);
 
     }
+
 }
 

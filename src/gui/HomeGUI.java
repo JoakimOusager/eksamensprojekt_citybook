@@ -10,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Optional;
 
 public class HomeGUI extends Application {
 
@@ -81,7 +79,9 @@ public class HomeGUI extends Application {
     static long diffMinutesStart;
     static long diffMinutesEnd;
 
-    @Override
+
+
+	@Override
     public void start(Stage primaryStage) {
 
 
@@ -921,16 +921,16 @@ public class HomeGUI extends Application {
             person1.getItems().add(comboBoxArray2.get(i));
             person2.getItems().add(comboBoxArray2.get(i));
         }
-        person1.setOnAction(event -> {
+        person1.setOnAction(event ->
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person1, personLabel1);
-        });
+        );
 
-        person2.setOnAction(event -> {
+        person2.setOnAction(event ->
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person2, personLabel2);
 
-        });
+        );
 
 
         BorderPane totalHoursPerson1               = new BorderPane();
@@ -1029,5 +1029,35 @@ public class HomeGUI extends Application {
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
+    }
+    ////////////////////////////////////////// Joakim & Jarl ////////////////////////////////////////
+    /*
+        Dette er vores metode til at vise fejlmeddelelser i forbindelse med SQL Queries.
+        Vi har oprettet en boolean error i de pågældende DAO metoder som vi mente at dette var relevant.
+        Til at starte med er vores boolean sat til false, men hvis vores query returnerer en
+        SQLException bliver vores boolean sat til true og derfor bliver vores AlertBox med Fejl! kørt.
+        Hvis vores query ikke returnerer en Exception bliver vores Alertbox med Succes! kørt.
+    */
+    public static void invalidSQLQuery(boolean error) {
+        if (error) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Citybook");
+            alert.setHeaderText("ADVARSEL");
+            alert.setContentText("Fejl i indtastede oplysninger.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Citybook");
+            alert.setHeaderText("Bekræftelse");
+            alert.setContentText("Succes!");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+            }
+        }
     }
 }
