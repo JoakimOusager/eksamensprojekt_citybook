@@ -196,14 +196,6 @@ public class LogicController {
         return totalHoursDB;
     }
 
-    public static ArrayList<ScheduleDays> getTotalHoursFromUsername(User user) {
-        TotalHoursFromUsernameDAO totalHoursFromUsernameDAO = new TotalHoursFromUsernameDAO();
-        ArrayList<ScheduleDays> list = new ArrayList<>(totalHoursFromUsernameDAO.get(user));
-
-        return list;
-
-    }
-
 
 }
 

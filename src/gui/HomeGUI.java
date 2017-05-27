@@ -819,11 +819,7 @@ public class HomeGUI extends Application implements ActionListener {
 
             LogicController.updateSchedule(timerUpdate, loggedInUser);
 
-            ArrayList<ScheduleDays> listTotalHours =
-                    new ArrayList<ScheduleDays>(LogicController.getTotalHoursFromUsername(loggedInUser));
-            double totalTimerDouble2 = listTotalHours.get(0).getTotalHours();
-            System.out.println(totalTimerDouble2+"Virker det?");
-            totalTimer.setText(String.valueOf(totalTimerDouble2));
+            totalTimer.setText(String.valueOf(totalTimerDouble));
 
 
         });
