@@ -218,7 +218,7 @@ public class CompanyTableView {
 
             // Setting the values stores in the getEmployees method to the tableview.
             tvCompany.setItems(getCompany());
-            tvCompany.setId("tvAktivitet");
+            tvCompany.setId("tvCompany");
             tvCompany.getStylesheets().addAll("gui/assets/login.css");
 
             tvCompany.getColumns().addAll(nameCompanyCol, phoneCompanyCol, emailCol, companyRevenueCol);

@@ -219,7 +219,7 @@ public class UserTableView {
 
         // Vi sætter data i vores TableView til hvad metoden getUser() henter.
         tvUser.setItems(getUser());
-        tvUser.setId("tvAktivitet");
+        tvUser.setId("tvUser");
         tvUser.getStylesheets().addAll("gui/assets/login.css");
 
         tvUser.getColumns().addAll(usernameCol, emailCol, startDateCol, userRankCol);

@@ -158,6 +158,7 @@ public class HomeGUI extends Application implements ActionListener {
         menuVBox.getStylesheets().addAll("gui/assets/login.css");
         menuVBox.setId("menuVBox");
 
+
         //Knap lavet til startsiden
         homepageButton.getStylesheets().addAll("gui/assets/login.css");
         homepageButton.setId("buttonsleftside");
@@ -281,7 +282,7 @@ public class HomeGUI extends Application implements ActionListener {
         menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, calendarButton, goalsButton, companiesButton,
                 scheduleButton, scheduleOverviewButton, userButton, logoutButton);
-        menuVBox.setPadding(                            new Insets(10, 25, 10, 10));
+        menuVBox.setPadding(new Insets(10, 10, 10, 10));
 
         /* //////////////////////////////////////////////////////////////////////////////////////////
                                            SLUT SIDE MENU
@@ -420,10 +421,12 @@ public class HomeGUI extends Application implements ActionListener {
         ArrayList<Comment> comment              = new ArrayList<Comment>(LogicController.getComment());
         String commentString = comment.get(0).getComment();
         bpTodaysGoal.setId("bpGoalsScreen");
-        Label labelTodaysGoalMessage            = new Label("Dagens kommentar:");
+        Label labelTodaysGoalMessage            = new Label("Besked fra ledelsen");
         labelTodaysGoalMessage.setId("labelMessage");
         Label labelTodaysGoalNumber             = new Label(commentString);
         labelTodaysGoalNumber.setId("labelCount");
+        labelTodaysGoalNumber.setMaxWidth(350);
+        labelTodaysGoalNumber.setWrapText(true);
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
         bpTodaysGoal.setAlignment(labelTodaysGoalMessage, Pos.TOP_CENTER);
@@ -883,7 +886,7 @@ public class HomeGUI extends Application implements ActionListener {
     public static void scheduleOverviewScreen(Stage primaryStage){
 
 
-
+        scheduleOverviewButton.setId("mActive");
         application.LogicController.getComment();
 
 
@@ -955,37 +958,33 @@ public class HomeGUI extends Application implements ActionListener {
 
 
         BorderPane commentBP                     = new BorderPane();
+        commentBP.setId("commentBP");
         totalHoursPerson1.setId("bpGoalsScreen");
-        Label labelKommentar                     = new Label("Skriv en kommentar");
+        Label labelKommentar                     = new Label("Skriv opslag");
         labelKommentar.setId("labelMessage");
         TextField kommentar                      = new TextField();
         kommentar.setId("kommentarTextfield");
-        kommentar.setPromptText("Skriv dit opslag");
-        //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
-        commentBP.setTop(labelKommentar);
-        commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
-        commentBP.setCenter(kommentar);
-
-
-
-
-        Button commitKommentar                   = new Button("Commit");
+        kommentar.setPromptText("\"Dagens mål\"");
+        Button commitKommentar                   = new Button("Slå op");
         commitKommentar.setId("btncommit");
         commitKommentar.getStylesheets().addAll("gui/assets/login.css");
         commitKommentar.setOnAction(event -> {
             application.LogicController.addComment(new Comment(kommentar.getText()));
         });
-
-
+        commentBP.setTop(labelKommentar);
+        commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
+        commentBP.setCenter(kommentar);
+        commentBP.setBottom(commitKommentar);
+        commentBP.setAlignment(commitKommentar,Pos.BOTTOM_CENTER);
 
         //nu skal de forskellige views samles
         GridPane gridPaneGoals                  = new GridPane();
         gridPaneGoals.setId("gridPaneGoals");
         gridPaneGoals.setPadding(                 new Insets(0, 30, 10, 30));
-        gridPaneGoals.add(totalHoursPerson1, 0, 0);
-        gridPaneGoals.add(commentBP, 0, 1);
-        gridPaneGoals.add(totalHoursPerson2, 1, 0);
-        gridPaneGoals.add(commitKommentar, 1, 1);
+        gridPaneGoals.add(totalHoursPerson1, 0, 0, 1, 1);
+        gridPaneGoals.add(totalHoursPerson2, 1, 0, 1, 1);
+        gridPaneGoals.add(commentBP, 0, 1, 2, 1);
+
 
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
@@ -1000,7 +999,10 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.show();
 
     }
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e) {
 
+    }
 
     //Adminscreen
     public static void usersScreen(Stage primaryStage){
