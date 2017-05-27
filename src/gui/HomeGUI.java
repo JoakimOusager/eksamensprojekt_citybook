@@ -617,7 +617,7 @@ public class HomeGUI extends Application {
 
 
         Button updateHours                  = new Button("Update");
-
+        updateHours.setId("updateHoursButton");
 
         Button startTimer                   = new Button("Start");
         startTimer.setId("gemTimer");
@@ -720,7 +720,7 @@ public class HomeGUI extends Application {
         ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule(loggedInUser));
 
         Button stopTimer                          = new Button("Stop");
-        stopTimer.setId("gemTimer");
+        stopTimer.setId("stopCountinghours");
         stopTimer.getStylesheets().addAll("gui/assets/login.css");
         stopTimer.setOnAction(event -> {
             Calendar calendar                     = Calendar.getInstance();
@@ -980,6 +980,8 @@ public class HomeGUI extends Application {
         commitKommentar.getStylesheets().addAll("gui/assets/login.css");
         commitKommentar.setOnAction(event -> {
             application.LogicController.addComment(new Comment(kommentar.getText()));
+            kommentar.clear();
+            kommentar.setPromptText("Opslaget er blevet delt.");
         });
         commentBP.setTop(labelKommentar);
         commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);

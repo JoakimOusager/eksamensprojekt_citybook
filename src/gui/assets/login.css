@@ -131,14 +131,14 @@
 }
 
 #showMoreInformationAboutCompanyButton {
-    -fx-background-color: dodgerblue;
+    -fx-background-color: cornflowerblue;
     -fx-pref-width: 100px;
     -fx-text-fill: white;
     -fx-font-size: 12px;
 }
 
 #saveEdits {
-    -fx-background-color: dodgerblue;
+    -fx-background-color: cornflowerblue;
     -fx-pref-width: 150px;
     -fx-text-fill: white;
     -fx-font-size: 12px;
@@ -168,9 +168,24 @@
     -fx-text-fill: white;
     -fx-pref-width: 120px;
     -fx-pref-height: 35px;
-    -fx-border-radius: 30;
+    -fx-background-radius: 10;
 }
 
+#stopCountinghours {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 10;
+}
+
+#updateHoursButton {
+    -fx-background-color: cornflowerblue;
+    -fx-text-fill: white;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 10;
+}
 #datoTextfield{
     -fx-font-size: 13px;
     -fx-pref-width: 120px;
