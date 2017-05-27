@@ -6,10 +6,10 @@ import application.Company;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class GoalDAO {
+public class GoalDAO implements BaseDAO<Company> {
 
-    //@Override
-    static public ArrayList<Company> get() {
+
+    public ArrayList<Company> get() {
         ArrayList<Company> list = new ArrayList<>();
 
         Connection conn = null;
@@ -65,18 +65,15 @@ public class GoalDAO {
         return list;
     }
 
-    /*@Override
-    public void update(Object element) {
+    public void update(Company company) {
 
     }
 
-    @Override
-    public void insert(Object element) {
+    public void insert(Company company) {
 
     }
 
-    @Override
-    public void delete(Object element) {
+    public void delete(Company company) {
 
-    }*/
+    }
 }
