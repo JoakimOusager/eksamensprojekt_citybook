@@ -17,6 +17,8 @@ public class User {
     private Timestamp startDate;
     private int rank;
 
+
+
     public User() {
     }
 
@@ -43,6 +45,13 @@ public class User {
         this.email          = email;
         this.startDate      = startDate;
         this.rank           = rank;
+    }
+
+    public User(String username, String password, String email, int rank) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.rank = rank;
     }
 
     public String getUsername() {

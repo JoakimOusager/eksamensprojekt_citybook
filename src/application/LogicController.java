@@ -33,6 +33,13 @@ public class LogicController {
         userDAO.delete(user);
     }
 
+    public static void updateUser(User user) {
+        UserDAO userDAO                       = new UserDAO();
+        userDAO.update(user);
+
+
+    }
+
     public static String getSavedUsername() {
         String username                             = "";
         try {

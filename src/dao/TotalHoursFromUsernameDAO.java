@@ -1,7 +1,8 @@
 package dao;
 
-import entities.ScheduleDays;
-import entities.User;
+
+import application.ScheduleDays;
+import application.User;
 
 import java.sql.*;
 import java.util.ArrayList;

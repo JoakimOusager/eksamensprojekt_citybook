@@ -160,7 +160,7 @@ public class ScheduleLogic {
 
     }
 
-    public double totalHoursMeth(double mondayDB, double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB){
+    public double totalHoursMeth(double mondayDB, double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB) {
         totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
         return totalHoursDB;
     }
