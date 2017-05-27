@@ -8,9 +8,9 @@ import java.util.ArrayList;
 /**
  * Created by Daniel on 26-05-2017.
  */
-public class TotalHoursUsernameDAO {
+public class TotalHoursUsernameDAO implements BaseDAO<ScheduleDays>{
 
-        static public ArrayList<ScheduleDays> get() {
+        public ArrayList<ScheduleDays> get() {
             ArrayList<ScheduleDays> list = new ArrayList<>();
 
             Connection conn = null;
@@ -64,7 +64,19 @@ public class TotalHoursUsernameDAO {
             // System.out.println(i);
             return list;
         }
+
+    public void update(ScheduleDays scheduleDays) {
+
     }
+
+    public void insert(ScheduleDays scheduleDays) {
+
+    }
+
+    public void delete(ScheduleDays scheduleDays) {
+
+    }
+}
 
 
 

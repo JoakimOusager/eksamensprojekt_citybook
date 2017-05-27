@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Daniel on 25-05-2017.
  */
-public class ScheduleDAO{
+public class ScheduleDAO {
 
     public ArrayList<ScheduleDays> get(User user) {
         ArrayList<ScheduleDays> list = new ArrayList<ScheduleDays>();
@@ -125,4 +125,6 @@ public class ScheduleDAO{
             }
         }
     }
+
+
 }

@@ -5,9 +5,9 @@ import application.ScheduleDays;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class TopHoursDAO {
+public class TopHoursDAO implements BaseDAO<ScheduleDays> {
 
-    public static ArrayList<ScheduleDays> get() {
+    public ArrayList<ScheduleDays> get() {
         ArrayList<ScheduleDays> list = new ArrayList<>();
 
         Connection conn = null;
@@ -64,6 +64,18 @@ public class TopHoursDAO {
         }
         // System.out.println(i);
         return list;
+    }
+
+    public void update(ScheduleDays scheduleDays) {
+
+    }
+
+    public void insert(ScheduleDays scheduleDays) {
+
+    }
+
+    public void delete(ScheduleDays scheduleDays) {
+
     }
 
 }

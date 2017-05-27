@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Daniel on 26-05-2017.
  */
-public class CommentDAO {
+public class CommentDAO implements BaseDAO<Comment> {
     public ArrayList<Comment> get(){
         ArrayList<Comment> list = new ArrayList<>();
 
@@ -114,5 +114,13 @@ public class CommentDAO {
                 se.printStackTrace();
             }
         }
+    }
+
+    public void update(Comment comment) {
+
+    }
+
+    public void delete(Comment comment) {
+
     }
 }
