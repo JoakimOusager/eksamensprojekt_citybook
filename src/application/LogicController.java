@@ -9,6 +9,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+////////////////////////////////////////////Joakim, Daniel, Jarl og Anders///////////////////////////////
+
 public class LogicController {
     public static User login (User loginUser) {
         UserDAO userDAO                             = new UserDAO();
@@ -121,8 +123,8 @@ public class LogicController {
     }
 
     public static ArrayList<ScheduleDays> getTopHours() {
-        TopHoursDAO topHoursDAO                     = new TopHoursDAO();
-        ArrayList<ScheduleDays> list                = new ArrayList<>(topHoursDAO.get());
+        TotalHoursDAO totalHoursDAO                    = new TotalHoursDAO();
+        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursDAO.get());
 
         return list;
 
@@ -138,8 +140,8 @@ public class LogicController {
     }
 
     public static ArrayList<ScheduleDays> getHoursUsername() {
-        TotalHoursUsernameDAO totalHoursUsernameDAO = new TotalHoursUsernameDAO();
-        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursUsernameDAO.get());
+        TotalHoursDAO totalHoursDAO = new TotalHoursDAO();
+        ArrayList<ScheduleDays> list                = new ArrayList<>(totalHoursDAO.get());
 
         return list;
 
@@ -201,14 +203,6 @@ public class LogicController {
         ScheduleLogic scheduleDays = new ScheduleLogic();
         scheduleDays.totalHoursMeth(mondayDB,tuesdayDB,wednesdayDB,thursdayDB,fridayDB,totalHoursDB);
         return totalHoursDB;
-    }
-
-    public static ArrayList<ScheduleDays> getTotalHoursFromUsername(User user) {
-        TotalHoursFromUsernameDAO totalHoursFromUsernameDAO = new TotalHoursFromUsernameDAO();
-        ArrayList<ScheduleDays> list = new ArrayList<>(totalHoursFromUsernameDAO.get(user));
-
-        return list;
-
     }
 
 

@@ -6,9 +6,8 @@ import application.User;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * Created by Daniel on 25-05-2017.
- */
+////////////////////////////////////////////////Daniel///////////////////////////////////////////
+
 public class ScheduleDAO {
 
     public ArrayList<ScheduleDays> get(User user) {
@@ -74,6 +73,7 @@ public class ScheduleDAO {
         return list;
     }
 
+    ///////////////////////////////////////////////Daniel og Anders///////////////////////////////////////
     public void update(ScheduleDays scheduleDays, User user) {
         Connection conn = null;
         Statement stmt = null;

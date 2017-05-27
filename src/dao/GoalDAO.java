@@ -6,6 +6,10 @@ import application.Company;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+////////////////////////////////////////////////////Daniel og Jarl////////////////////////////////////////////////
+
+
 public class GoalDAO implements BaseDAO<Company> {
 
 

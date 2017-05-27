@@ -4,12 +4,7 @@ package gui;/**
 
 //import gui.Tableviews.methods.ActivityMethod;
 
-import application.Datepicker;
-import application.LogicController;
-import application.Comment;
-import application.Company;
-import application.ScheduleDays;
-import application.User;
+import application.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -28,13 +23,12 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class HomeGUI extends Application implements ActionListener {
+public class HomeGUI extends Application {
 
     /*
         VBox, HBox, Scene, Rektangel og vores StackPane skulle bruges ofte, derfor er de static.
@@ -46,6 +40,8 @@ public class HomeGUI extends Application implements ActionListener {
     /*
         Knapper til vores side menu.
     */
+
+    //Knapperne bliver gjort static da vi skal genbruge dem ekstra mange gang da vi har en template metode
     static Button calendarButton                        = new Button("Kalender");
     static Button goalsButton                           = new Button("Mål");
     static Button companiesButton                       = new Button("Virksomheder");
@@ -94,6 +90,7 @@ public class HomeGUI extends Application implements ActionListener {
     /*
         Denne metode nulstiller border color på knapperne i side menuen.
     */
+    ////////////////////////////////////Daniel/////////////////////////////////////////
     public static void buttonReset(){
 
         //Knap lavet til startsiden
@@ -133,6 +130,8 @@ public class HomeGUI extends Application implements ActionListener {
     /*
         Denne metode sætter hele Scenen op med menu samt indhold.
     */
+
+    ////////////////////////////////////////Anders og Daniel//////////////////////////////////////
     public static void backgroundTemplate(Stage primaryStage, User foundUser){
 
         loggedInUser                                    = foundUser;
@@ -317,6 +316,8 @@ public class HomeGUI extends Application implements ActionListener {
     /*
         Scenen til knappen 'Hjem'
     */
+
+    ///////////////////////////////////////////Daniel og Anders/////////////////////////////////////
     public static void homepageScreen(Stage primaryStage) {
         // For at få det nuværende klokkeslæt, så brugeren kan se hvad tid personen loggede ind.
         String dateStamp = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
@@ -350,6 +351,8 @@ public class HomeGUI extends Application implements ActionListener {
         da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
     */
 
+    //////////////////////////////////////////Jarl///////////////////////////////////////
+
      public static void CalendarView(Stage primaryStage) {
         calendarButton.setId("mActive");
         calendarButton.getStylesheets().addAll("gui/assets/login.css");
@@ -377,6 +380,8 @@ public class HomeGUI extends Application implements ActionListener {
     }
 
     //Målscreen
+
+    //////////////////////////////////////////Daniel, Jarl og Anders//////////////////////////////////////
     public static void goalsScreen(Stage primaryStage){
 
         //total omsætning
@@ -468,6 +473,8 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.show();
     }
 
+    ////////////////////////////////////////////////Daniel//////////////////////////////////////////
+
     //virksomheds screen
     public static void companiesScreen(Stage primaryStage){
 
@@ -485,6 +492,8 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
+
+    ////////////////////////////////////////////Daniel///////////////////////////////////////////////
     public static void scheduleScreen(Stage primaryStage){
 
         scheduleButton.setId("mActive");
@@ -802,12 +811,14 @@ public class HomeGUI extends Application implements ActionListener {
         });
 
         updateHours.setOnAction(event -> {
-            double totalTimerDouble =
-                     Double.parseDouble(timerMandag.getText())
-                    + Double.parseDouble(timerTirsdag.getText())
-                    + Double.parseDouble(timerOnsdag.getText())
-                    + Double.parseDouble(timerTorsdag.getText())
-                    + Double.parseDouble(timerFredag.getText());
+            double totalTimerMandag = Double.parseDouble(timerMandag.getText());
+            double totalTimerTirsdag =  Double.parseDouble(timerTirsdag.getText());
+            double totalTimerOnsdag = Double.parseDouble(timerOnsdag.getText());
+            double totalTimerTorsdag = Double.parseDouble(timerTorsdag.getText());
+            double totalTimerFreadg = Double.parseDouble(timerFredag.getText());
+
+            double totalHoursDB = Datepicker.ugentligeTimer(totalTimerMandag, totalTimerTirsdag, totalTimerOnsdag,
+                    totalTimerTorsdag, totalTimerFreadg);
 
             ScheduleDays timerUpdate            = new ScheduleDays((Double.parseDouble(timerMandag.getText())),
 
@@ -815,15 +826,11 @@ public class HomeGUI extends Application implements ActionListener {
                     (Double.parseDouble(timerOnsdag.getText())),
                     (Double.parseDouble(timerTorsdag.getText())),
                     (Double.parseDouble(timerFredag.getText())),
-                    (totalTimerDouble));
+                    (totalHoursDB));
 
             LogicController.updateSchedule(timerUpdate, loggedInUser);
 
-            ArrayList<ScheduleDays> listTotalHours =
-                    new ArrayList<ScheduleDays>(LogicController.getTotalHoursFromUsername(loggedInUser));
-            double totalTimerDouble2 = listTotalHours.get(0).getTotalHours();
-            System.out.println(totalTimerDouble2+"Virker det?");
-            totalTimer.setText(String.valueOf(totalTimerDouble2));
+            totalTimer.setText(String.valueOf(totalHoursDB));
 
 
         });
@@ -858,6 +865,7 @@ public class HomeGUI extends Application implements ActionListener {
         gpvagtplan.add(datoTorsdag2,5,3);
         gpvagtplan.add(datoFredag2,6,3);
 
+        //Labels til totalTimerne
         gpvagtplan.add(timerMandag,2,4);
         gpvagtplan.add(timerTirsdag,3,4);
         gpvagtplan.add(timerOnsdag,4,4);
@@ -876,6 +884,8 @@ public class HomeGUI extends Application implements ActionListener {
 
     }
 
+
+    //////////////////////////////////////////Anders og Daniel/////////////////////////////////////////////////
     public static void scheduleOverviewScreen(Stage primaryStage){
         application.LogicController.getComment();
 
@@ -989,11 +999,8 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.show();
 
     }
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
 
-    }
-
+    //////////////////////////////////////////Daniel og Anders////////////////////////////////////////
     //Adminscreen
     public static void usersScreen(Stage primaryStage){
 
@@ -1002,6 +1009,8 @@ public class HomeGUI extends Application implements ActionListener {
 
         boolean alreadyExecuted             = false;
 
+        //Dette blev gjort fordi vi havde problemer med at den blev ved med at oprette nye tableviews hver gang vi
+        //klikkede på knappen
         if(alreadyExecuted = false) {
             UserTableView.userTableviewStart();
             LoginGUI.whiteBackground.setCenter(UserTableView.hboxUser);

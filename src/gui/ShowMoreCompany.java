@@ -17,6 +17,8 @@ import java.util.Optional;
 
 import static gui.CompanyTableView.tvCompany;
 
+//////////////////////////////////////////Joakim og Jarl/////////////////////////////////////
+
 public class ShowMoreCompany extends Application {
 
     static Stage showMoreStage            = new Stage();

@@ -6,12 +6,13 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-/**
- * Created by Daniel on 22-05-2017.
- */
+
+////////////////////////////////////////////////////Daniel//////////////////////////////////////////////
+
 public class CheckBoxDAO {
     static String fileName = "src/dao/usernameSave";
 
+    //Metode til at hente en string fra en fil
     public static String getSavedUsername()throws Exception{
 
         String username = "";
@@ -23,6 +24,7 @@ public class CheckBoxDAO {
     return username;
     }
 
+    //Metode til at gemme usernamet i en fil
     public static void setSavedUsername(String username, boolean saveMe)throws Exception{
         /*String username;
         username = LoginGUI.usernamefield.getText(); */

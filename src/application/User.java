@@ -1,13 +1,8 @@
 package application;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.input.DataFormat;
-
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
+///////////////////////////////////////////////////Joakim og Jarl//////////////////////////////////////
 
 public class User {
 
