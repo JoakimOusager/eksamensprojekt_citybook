@@ -1,7 +1,7 @@
 package dao;
 
 
-import entities.ScheduleDay
+import entities.ScheduleDay;
 import entities.User;
 
 import java.sql.*;
