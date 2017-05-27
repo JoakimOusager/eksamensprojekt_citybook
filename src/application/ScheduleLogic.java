@@ -21,7 +21,6 @@ public class ScheduleLogic {
         switch (day){
             case 2:
                 datoMandag.setText(dateFormat.format(cal.getTime()));
-
                 mondayDB = 0.0;
                 tuesdayDB = 0.0;
                 wednesdayDB = 0.0;
@@ -76,7 +75,7 @@ public class ScheduleLogic {
                 timerFredag.setText(String.valueOf(fridayDB));
 
                 break;
-            case 6:
+            case 7:
                 fridayDB = 0.0;
                 datoFredag.setText(dateFormat.format(cal.getTime()));
                 timerMandag.setText(String.valueOf(mondayDB));
@@ -145,7 +144,7 @@ public class ScheduleLogic {
                 String timer8 = String.valueOf(thursdayDB);
                 timerTorsdag.setText(timer8);
                 break;
-            case 6:
+            case 7:
 
                 fridayDB = 0.0;
                 diffMinutesEnd = application.Datepicker.endDateStamp();
@@ -159,6 +158,11 @@ public class ScheduleLogic {
         String totalTimerString = String.valueOf(totalHoursDB);
         totalTimer.setText(totalTimerString);
 
+    }
+
+    public double totalHoursMeth(double mondayDB, double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB){
+        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
+        return totalHoursDB;
     }
 
 }
