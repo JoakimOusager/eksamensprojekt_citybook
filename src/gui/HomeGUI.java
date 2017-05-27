@@ -232,9 +232,21 @@ public class HomeGUI extends Application {
             scheduleButton.setUnderline(false);
         });
         scheduleButton.setOnAction((ActionEvent event3) -> {
-            buttonReset();
-            scheduleScreen(primaryStage);
+            ArrayList<ScheduleDays> arraylistSchedule =
+                    new ArrayList<ScheduleDays>(LogicController.getSchedule());
 
+            boolean isEmpty = false;
+            if(LogicController.getSchedule().isEmpty() == isEmpty){
+                buttonReset();
+                scheduleScreen(primaryStage);
+                System.out.println("Is not empty");
+            }else {
+                System.out.println("Is empty");
+                ScheduleDays scheduleDays = new ScheduleDays();
+                LogicController.insertSchedule(scheduleDays);
+                buttonReset();
+                scheduleScreen(primaryStage);
+            }
         });
 
         //Knap lavet specifikt til vagtplansoverblik
@@ -627,6 +639,7 @@ public class HomeGUI extends Application {
             Calendar cal = Calendar.getInstance();
 
             //Variabler til brug af totalTid fra databasen
+
             ArrayList<ScheduleDays> arraylistSchedule =
                     new ArrayList<ScheduleDays>(LogicController.getSchedule());
 
@@ -826,11 +839,7 @@ public class HomeGUI extends Application {
 
             LogicController.updateSchedule(timerUpdate, loggedInUser);
 
-            ArrayList<ScheduleDays> listTotalHours =
-                    new ArrayList<ScheduleDays>(LogicController.getTotalHoursFromUsername(loggedInUser));
-            double totalTimerDouble2 = listTotalHours.get(0).getTotalHours();
-            System.out.println(totalTimerDouble2+"Virker det?");
-            totalTimer.setText(String.valueOf(totalTimerDouble2));
+            totalTimer.setText(String.valueOf(totalHoursDB));
         });
 
         //Label af dagenen
