@@ -2,6 +2,7 @@ package dao;
 
 import application.Company;
 import application.ContactPerson;
+import gui.GUIController;
 import gui.HomeGUI;
 
 import java.sql.*;
@@ -10,6 +11,8 @@ import java.util.List;
 ////////////////////////////////////// Joakim og Jarl/ /////////////////////////////////////////
 
 public class ContactPersonDAO implements BaseDAO<ContactPerson> {
+    boolean error = false;
+
     @Override
     public List<ContactPerson> get() {
       return null;
@@ -33,7 +36,6 @@ public class ContactPersonDAO implements BaseDAO<ContactPerson> {
             String sql;
 
             sql = "SELECT contact_id FROM contact_person WHERE contact_name = '" + company.getContactPerson().getName() + "'";
-            System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -104,7 +106,6 @@ public class ContactPersonDAO implements BaseDAO<ContactPerson> {
 
             sql = "INSERT INTO contact_person (contact_name, contact_email, contact_phone) " +
                     "VALUES ('" + contactPerson.getName() + "', '" + contactPerson.getEmail() +  "', '" + contactPerson.getPhone() + "')";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -113,6 +114,7 @@ public class ContactPersonDAO implements BaseDAO<ContactPerson> {
             conn.close();
         } catch (SQLException se) {
             //Handle errors for JDBC
+            error = true;
             se.printStackTrace();
         } catch (Exception e) {
             //Handle errors for Class.forName
@@ -131,6 +133,7 @@ public class ContactPersonDAO implements BaseDAO<ContactPerson> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
 

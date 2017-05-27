@@ -70,21 +70,6 @@ public class EditUser {
              Til at opdatere TableView når man trykker på 'Gem ændringer' med de angivede værdier.
             */
 			tvUser.setItems(FXCollections.observableArrayList(LogicController.getUsers()));
-			editUser.close();
-
-			Alert alert                          = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.setTitle("Citybook");
-			alert.setHeaderText("Bekræftelse");
-			alert.setContentText("Brugeren er nu blevet ændret.");
-
-            /*
-                Vinduet venter ikke på at brugeren trykker på noget
-                før at vores lambda bliver kørt. Vi bruger kun AlertBox
-                her for at vise at brugeren er blevet ændret.
-            */
-			Optional<ButtonType> result              = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-			}
 
 		});
 

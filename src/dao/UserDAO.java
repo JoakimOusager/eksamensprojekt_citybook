@@ -1,6 +1,7 @@
 package dao;
 
 import application.User;
+import gui.GUIController;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
         Klassen som håndterer alt database interaktion fra User table i databasen til programmet.
  */
 public class UserDAO implements BaseDAO<User> {
+    // Boolean til at vise errorbesked, hvis sql ikke er gyldigt.
+    boolean error = false;
 
     /*
         Vores metode der bestemmer om man kan logge ind eller ej
@@ -150,12 +153,13 @@ public class UserDAO implements BaseDAO<User> {
                     "user_email = '" + user.getEmail() + "'," +
                     "user_rank = '" + user.getRank() + "'" +
                     "WHERE username = '" + user.getUsername() + "'";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             stmt.close();
             conn.close();
         } catch (SQLException se) {
+
+            error = true;
 
             se.printStackTrace();
         } catch (Exception e) {
@@ -175,6 +179,7 @@ public class UserDAO implements BaseDAO<User> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
     public void insert(User user) {
@@ -191,13 +196,14 @@ public class UserDAO implements BaseDAO<User> {
 
             sql = "INSERT INTO user (username, user_password, user_email, user_rank)" +
                     "VALUES ('"+ user.getUsername() + "', '" + user.getPassword() + "', '" + user.getEmail() + "', " +  user.getRank()+ ")";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             stmt.close();
             conn.close();
         } catch (SQLException se) {
             se.printStackTrace();
+            error = true;
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -213,6 +219,7 @@ public class UserDAO implements BaseDAO<User> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
     public void delete(User user) {
@@ -231,7 +238,6 @@ public class UserDAO implements BaseDAO<User> {
             String sql;
 
             sql = "DELETE FROM cbcrm.user WHERE username = '" + user.getUsername() + "'";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
 
@@ -242,6 +248,7 @@ public class UserDAO implements BaseDAO<User> {
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
+            error = true;
         } catch (Exception e) {
             //Handle errors for Class.forName
             e.printStackTrace();
@@ -259,7 +266,7 @@ public class UserDAO implements BaseDAO<User> {
                 se.printStackTrace();
             }
         }
-
+        GUIController.showErrorMessage(error);
 
     }
 

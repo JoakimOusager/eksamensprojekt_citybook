@@ -2,6 +2,7 @@ package dao;
 
 import application.ScheduleDays;
 import application.User;
+import gui.GUIController;
 import gui.HomeGUI;
 
 import java.sql.*;
@@ -11,6 +12,7 @@ import java.util.List;
 //////////////////////////////////////////////// Daniel ///////////////////////////////////////////
 
 public class ScheduleDAO implements GetDAO<ScheduleDays>{
+    boolean error = false;
 
     public List<ScheduleDays> get() {
         List<ScheduleDays> list = new ArrayList<ScheduleDays>();
@@ -108,6 +110,7 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
             conn.close();
         } catch (SQLException se) {
             //Handle errors for JDBC
+            error = true;
             se.printStackTrace();
         } catch (Exception e) {
             //Handle errors for Class.forName
@@ -126,6 +129,7 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
     public void insert(ScheduleDays scheduleDays) {

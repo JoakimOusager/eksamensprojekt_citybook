@@ -1,6 +1,7 @@
 package dao;
 
 import application.Comment;
+import gui.GUIController;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
 //////////////////////////////////////////////////// Daniel og Anders //////////////////////////////////////////
 
 public class CommentDAO implements BaseDAO<Comment> {
+    boolean error;
+
     public List<Comment> get(){
         List<Comment> list = new ArrayList<>();
 
@@ -62,7 +65,6 @@ public class CommentDAO implements BaseDAO<Comment> {
             }
 
         }
-        // System.out.println(i);
         return list;
     }
 
@@ -88,7 +90,6 @@ public class CommentDAO implements BaseDAO<Comment> {
 
             sql = "INSERT INTO comment (comment)" +
                     "VALUES ( '" + comment.getComment()+"')";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -98,6 +99,7 @@ public class CommentDAO implements BaseDAO<Comment> {
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
+            error = true;
         } catch (Exception e) {
             //Handle errors for Class.forName
             e.printStackTrace();
@@ -115,6 +117,7 @@ public class CommentDAO implements BaseDAO<Comment> {
                 se.printStackTrace();
             }
         }
+        GUIController.showErrorMessage(error);
     }
 
     public void update(Comment comment) {
