@@ -838,10 +838,6 @@ public class HomeGUI extends Application {
             totalTimer.setText(String.valueOf(totalTimerDouble2));
         });
 
-
-
-
-
         //Label af dagenen
         gpvagtplan.add(white,1,1);
         gpvagtplan.add(monday,2,1);
@@ -891,12 +887,11 @@ public class HomeGUI extends Application {
 
     }
 
-
     //////////////////////////////////////////Anders og Daniel/////////////////////////////////////////////////
     public static void scheduleOverviewScreen(Stage primaryStage){
 
-
         scheduleOverviewButton.setId("mActive");
+
         application.LogicController.getComment();
 
 
@@ -976,6 +971,8 @@ public class HomeGUI extends Application {
         kommentar.setId("kommentarTextfield");
         kommentar.setPromptText("\"Dagens mål\"");
         Button commitKommentar                   = new Button("Slå op");
+        kommentar.setPromptText("Skriv din kommentar");
+
         commitKommentar.setId("btncommit");
         commitKommentar.getStylesheets().addAll("gui/assets/login.css");
         commitKommentar.setOnAction(event -> {
@@ -988,6 +985,7 @@ public class HomeGUI extends Application {
         commentBP.setCenter(kommentar);
         commentBP.setBottom(commitKommentar);
         commentBP.setAlignment(commitKommentar,Pos.BOTTOM_CENTER);
+
 
         //nu skal de forskellige views samles
         GridPane gridPaneGoals                  = new GridPane();

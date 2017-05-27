@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Optional;
 
+import static gui.EditUser.showMoreUserButtonClicked;
 
 //////////////////////////////////////////////Joakim og Jarl/////////////////////////////////////////////
 
@@ -22,7 +23,9 @@ public class UserTableView {
 
 
     public static TableView<User> tvUser            = new TableView<>();
-    public static TextField username, password ,email, startDate, userRank;
+    public static TextField username ,email, startDate, userRank;
+    public static PasswordField password;
+    public static Button showMoreUserBtn;
 
     /*
         Returnerer alle brugere.
@@ -189,13 +192,21 @@ public class UserTableView {
                 }
         });
 
+        // Jarl
+        showMoreUserBtn = new Button("Redigér");
+        showMoreUserBtn.setId("showMoreInformationAboutCompanyButton");
+        showMoreUserBtn.setOnAction(e-> {
+            ObservableList<User> selectedUser    = tvUser.getSelectionModel().getSelectedItems();
+            showMoreUserButtonClicked(selectedUser.get(0));
+        });
+
         // Vores TextFields til brugere view.
         username                                     = new TextField();
-        username.setPromptText("Username");
+        username.setPromptText("Brugernavn");
         username.setMaxWidth(100);
 
-        password                                     = new TextField();
-        password.setPromptText("Password");
+        password                                     = new PasswordField();
+        password.setPromptText("Kodeord");
         password.setMaxWidth(100);
 
         email                                        = new TextField();
@@ -203,12 +214,12 @@ public class UserTableView {
         email.setMaxWidth(100);
 
         userRank                                     = new TextField();
-        userRank.setPromptText("User rank");
+        userRank.setPromptText("Rang");
         userRank.setMaxWidth(100);
 
         // Tilføjer TextFields til VBox addUserBox og addUserBox2
         addUserBox.getChildren().addAll(username, password, email, userRank,
-                addUserBtn, deleteUserBtn);
+                addUserBtn, deleteUserBtn, showMoreUserBtn);
         Label white                                  = new Label();
         white.setId("whiteCompany");
         white.getStylesheets().addAll("gui/assets/login.css");
