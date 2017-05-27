@@ -195,6 +195,20 @@ public class LogicController {
                 timerMandag, timerTirsdag, timerOnsdag, timerTorsdag, timerFredag);
     }
 
+    public static double scheduleTotalHours(double mondayDB, double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB){
+        ScheduleLogic scheduleDays = new ScheduleLogic();
+        scheduleDays.totalHoursMeth(mondayDB,tuesdayDB,wednesdayDB,thursdayDB,fridayDB,totalHoursDB);
+        return totalHoursDB;
+    }
+
+    public static ArrayList<ScheduleDays> getTotalHoursFromUsername(User user) {
+        TotalHoursFromUsernameDAO totalHoursFromUsernameDAO = new TotalHoursFromUsernameDAO();
+        ArrayList<ScheduleDays> list = new ArrayList<>(totalHoursFromUsernameDAO.get(user));
+
+        return list;
+
+    }
+
 
 }
 

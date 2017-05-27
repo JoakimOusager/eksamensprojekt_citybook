@@ -571,9 +571,9 @@ public class HomeGUI extends Application implements ActionListener {
 
         timerMandag.setId("datoTextfield");
         timerMandag.getStylesheets().addAll("gui/assets/login.css");
-        timerMandag.textProperty().addListener((observable, oldValue, newValue) -> {
+        /*timerMandag.textProperty().addListener((observable, oldValue, newValue) -> {
             timerMandag.setText(timerMandag.getText());
-        });
+        });*/
 
 
         timerTirsdag.setId("datoTextfield");
@@ -632,6 +632,7 @@ public class HomeGUI extends Application implements ActionListener {
             double thursdayDB = arraylistSchedule.get(0).getThursday();
             double fridayDB = arraylistSchedule.get(0).getFriday();
             double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
+            System.out.println(mondayDB);
 
             LogicController.scheduleLogicStart(day, dateFormat, cal, mondayDB,
                     tuesdayDB, wednesdayDB, thursdayDB, fridayDB, datoMandag, datoTirsdag,
@@ -732,6 +733,8 @@ public class HomeGUI extends Application implements ActionListener {
                     datoMandag2, datoTirsdag2, datoOnsdag2, datoTorsdag2, datoFredag2,
                     diffMinutesEnd, diffMinutesStart, totalTimer,
                     timerMandag, timerTirsdag, timerOnsdag, timerTorsdag, timerFredag);
+            LogicController.scheduleTotalHours(mondayDB,tuesdayDB,wednesdayDB,thursdayDB,fridayDB,totalHoursDB);
+
 
 
             /*switch (day){
@@ -799,6 +802,7 @@ public class HomeGUI extends Application implements ActionListener {
 
 
         });
+
         updateHours.setOnAction(event -> {
             double totalTimerDouble =
                      Double.parseDouble(timerMandag.getText())
@@ -806,18 +810,26 @@ public class HomeGUI extends Application implements ActionListener {
                     + Double.parseDouble(timerOnsdag.getText())
                     + Double.parseDouble(timerTorsdag.getText())
                     + Double.parseDouble(timerFredag.getText());
-            ScheduleDays timerUpdate = new ScheduleDays((Double.parseDouble(timerMandag.getText())),
+            ScheduleDays timerUpdate = new ScheduleDays(
+                    (Double.parseDouble(timerMandag.getText())),
                     (Double.parseDouble(timerTirsdag.getText())),
                     (Double.parseDouble(timerOnsdag.getText())),
                     (Double.parseDouble(timerTorsdag.getText())),
                     (Double.parseDouble(timerFredag.getText())),
                     (totalTimerDouble));
+
             LogicController.updateSchedule(timerUpdate, loggedInUser);
-            totalTimer.setText(String.valueOf(totalTimerDouble));
-            /*totalTimer.textProperty().addListener((observable, oldValue, newValue) -> {
-                totalTimer.setText(String.valueOf(totalTimerDouble));
-            });*/
+
+            ArrayList<ScheduleDays> listTotalHours =
+                    new ArrayList<ScheduleDays>(LogicController.getTotalHoursFromUsername(loggedInUser));
+            double totalTimerDouble2 = listTotalHours.get(0).getTotalHours();
+            System.out.println(totalTimerDouble2+"Virker det?");
+            totalTimer.setText(String.valueOf(totalTimerDouble2));
+
+
         });
+
+
 
 
 
@@ -856,15 +868,13 @@ public class HomeGUI extends Application implements ActionListener {
         gpvagtplan.add(timerOnsdag,4,4);
         gpvagtplan.add(timerTorsdag,5,4);
         gpvagtplan.add(timerFredag,6,4);
-        gpvagtplan.add(totalHoursWorkedLabel,6,5);
+        gpvagtplan.add(totalTimer,6,5);
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);
         LoginGUI.whiteBackground.setTop(LoginGUI.citybookLogoPane);
         LoginGUI. whiteBackground.setLeft(menuVBox);
         LoginGUI.whiteBackground.setBottom(bottomHBox);
         LoginGUI.whiteBackground.setCenter(gpvagtplan);
-
-
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
