@@ -131,6 +131,7 @@ public class ShowMoreCompany extends Application {
              Til at opdatere TableView når man trykker på 'Gem ændringer' med de angivede værdier.
             */
             tvCompany.setItems(FXCollections.observableArrayList(LogicController.getCompanies()));
+            showMoreStage.close();
 
         });
 
