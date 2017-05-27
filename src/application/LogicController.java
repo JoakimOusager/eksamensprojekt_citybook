@@ -213,6 +213,11 @@ public class LogicController {
 
     }
 
+    public static void insertSchedule(ScheduleDays scheduleDays){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        scheduleDAO.insert(scheduleDays);
+    }
+
 
 }
 

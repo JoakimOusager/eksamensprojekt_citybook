@@ -44,7 +44,7 @@ public class Datepicker {
 
         //Her henter vi den lokale tid igen og omregner til minutter og timer
         long diff                       = start.getTime();
-        long diffHoursStart           = diff / (60 * 60 * 1000);
+        long diffHoursStart           = diff / (60 * 1000);
 
         return diffHoursStart;
     }
@@ -70,7 +70,7 @@ public class Datepicker {
         //Variabel til at finde sluttiden
         long diff = end.getTime();
         //Her omregnes den til timer
-        long diffHoursEnd             = diff / (60 * 60 * 1000);
+        long diffHoursEnd             = diff / (60 * 1000);
 
 
         return diffHoursEnd;
