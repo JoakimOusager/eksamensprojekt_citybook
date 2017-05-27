@@ -1,7 +1,7 @@
 package dao;
 
-import entities.ScheduleDays;
-import entities.User;
+import application.ScheduleDays;
+import application.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ public class ScheduleDAO{
 
         Connection conn = null;
         Statement stmt = null;
-        int i = 0;
         try {
             //STEP 2: Register JDBC driver
             Class.forName(DAO.JDBC_DRIVER);
@@ -44,7 +43,6 @@ public class ScheduleDAO{
 
                 list.add(new ScheduleDays(monday, tuesday, wednesday, thursday, friday,
                         totalHours));
-                i++;
             }
 
             //STEP 6: Clean-up environment

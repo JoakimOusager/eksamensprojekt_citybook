@@ -1,8 +1,8 @@
 package dao;
 
-import entities.Company;
-import entities.ContactPerson;
-import entities.User;
+import application.Company;
+import application.ContactPerson;
+import application.User;
 import gui.HomeGUI;
 
 import java.sql.*;

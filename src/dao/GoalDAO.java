@@ -1,11 +1,10 @@
 package dao;
 
 
-import entities.Company;
+import application.Company;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GoalDAO {
 

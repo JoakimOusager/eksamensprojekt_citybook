@@ -4,14 +4,12 @@ package gui;/**
 
 //import gui.Tableviews.methods.ActivityMethod;
 
-import backend.Datepicker;
-import backend.LogicController;
-import entities.Comment;
-import entities.Company;
-import entities.ScheduleDays;
-import entities.User;
-import gui.Tableviews.methods.CompanyMethod;
-import gui.Tableviews.methods.UserMethod;
+import application.Datepicker;
+import application.LogicController;
+import application.Comment;
+import application.Company;
+import application.ScheduleDays;
+import application.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -41,21 +39,21 @@ public class HomeGUI extends Application implements ActionListener {
     /*
         VBox, HBox, Scene, Rektangel og vores StackPane skulle bruges ofte, derfor er de static.
     */
-    static VBox menuVBox = new VBox();
-    static HBox bottomHBox = new HBox();
-    static Scene postLogin = new Scene(LoginGUI.BPBackground);
+    static VBox menuVBox                                = new VBox();
+    static HBox bottomHBox                              = new HBox();
+    static Scene postLogin                              = new Scene(LoginGUI.BPBackground);
 
     /*
         Knapper til vores side menu.
     */
-    static Button calendarButton = new Button("Kalender");
-    static Button goalsButton = new Button("Mål");
-    static Button companiesButton = new Button("Virksomheder");
-    static Button userButton = new Button("Brugere");
-    static Button logoutButton = new Button("Log out");
-    static Button homepageButton = new Button("Hjem");
-    static Button scheduleButton = new Button("Vagtplan");
-    static Button scheduleOverviewButton = new Button("Vagtplanoverblik");
+    static Button calendarButton                        = new Button("Kalender");
+    static Button goalsButton                           = new Button("Mål");
+    static Button companiesButton                       = new Button("Virksomheder");
+    static Button userButton                            = new Button("Brugere");
+    static Button logoutButton                          = new Button("Log out");
+    static Button homepageButton                        = new Button("Hjem");
+    static Button scheduleButton                        = new Button("Vagtplan");
+    static Button scheduleOverviewButton                = new Button("Vagtplanoverblik");
 
     public static User loggedInUser;
 
@@ -63,24 +61,24 @@ public class HomeGUI extends Application implements ActionListener {
         Alle labels for vagtplan er blevet gjort static, for at deres tekst ikke bliver fjernet ved scene skift.
     */
 
-    static Label datoFredag2 = new Label();
-    static Label datoTorsdag2 = new Label();
-    static Label datoOnsdag2 = new Label();
-    static Label datoTirsdag2 = new Label();
-    static Label datoMandag2 = new Label();
-    static Label datoFredag = new Label();
-    static Label datoTorsdag = new Label();
-    static Label datoOnsdag = new Label();
-    static Label datoTirsdag = new Label();
-    static Label datoMandag = new Label();
+    static Label datoFredag2                            = new Label();
+    static Label datoTorsdag2                           = new Label();
+    static Label datoOnsdag2                            = new Label();
+    static Label datoTirsdag2                           = new Label();
+    static Label datoMandag2                            = new Label();
+    static Label datoFredag                             = new Label();
+    static Label datoTorsdag                            = new Label();
+    static Label datoOnsdag                             = new Label();
+    static Label datoTirsdag                            = new Label();
+    static Label datoMandag                             = new Label();
 
-    static TextField timerMandag = new TextField();
-    static TextField timerTirsdag = new TextField();
-    static TextField timerOnsdag = new TextField();
-    static TextField timerTorsdag = new TextField();
-    static TextField timerFredag = new TextField();
+    static TextField timerMandag                        = new TextField();
+    static TextField timerTirsdag                       = new TextField();
+    static TextField timerOnsdag                        = new TextField();
+    static TextField timerTorsdag                       = new TextField();
+    static TextField timerFredag                        = new TextField();
 
-    static TextField totalTimer = new TextField();
+    static TextField totalTimer                         = new TextField();
 
 
     // Long tidsvariabler
@@ -137,7 +135,7 @@ public class HomeGUI extends Application implements ActionListener {
     */
     public static void backgroundTemplate(Stage primaryStage, User foundUser){
 
-        loggedInUser = foundUser;
+        loggedInUser                                    = foundUser;
 
         //Skyline bagrund
         LoginGUI.BPBackground.getStylesheets().addAll("gui/assets/login.css");
@@ -221,7 +219,7 @@ public class HomeGUI extends Application implements ActionListener {
             buttonReset();
             companiesScreen(primaryStage);
 
-            LoginGUI.whiteBackground.setCenter(CompanyMethod.hboxCompany);
+            LoginGUI.whiteBackground.setCenter(CompanyTableView.hboxCompany);
         });
 
         //Knap lavet specifikt til vagtplan
@@ -267,7 +265,7 @@ public class HomeGUI extends Application implements ActionListener {
         userButton.setOnAction((ActionEvent event4) -> {
             buttonReset();
             usersScreen(primaryStage);
-            LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
+            LoginGUI.whiteBackground.setCenter(UserTableView.hboxUser);
 
         });
 
@@ -283,14 +281,14 @@ public class HomeGUI extends Application implements ActionListener {
         menuVBox.setId("menuVBox");
         menuVBox.getChildren().addAll(homepageButton, calendarButton, goalsButton, companiesButton,
                 scheduleButton, scheduleOverviewButton, userButton, logoutButton);
-        menuVBox.setPadding(new Insets(10, 25, 10, 10));
+        menuVBox.setPadding(                            new Insets(10, 25, 10, 10));
 
         /* //////////////////////////////////////////////////////////////////////////////////////////
                                            SLUT SIDE MENU
        ////////////////////////////////////////////////////////////////////////////////////////// */
 
         //Brugt til at skabe plads i bunden, og skubbe den hvide bund op så den passer med knapperne
-        VBox white = new VBox();
+        VBox white                                      = new VBox();
         white.getStylesheets().addAll("gui/assets/login.css");
         white.setId("white");
 
@@ -361,7 +359,7 @@ public class HomeGUI extends Application implements ActionListener {
             På denne måde er det muligt at render HTML direkte i JavaFX.
         */
 
-        WebView calendar = new WebView();
+        WebView calendar                            = new WebView();
         WebEngine webEngine = calendar.getEngine();
         webEngine.load("https://calendar.google.com/calendar/embed?src=0iu5ro8h5f9sv38l0ip2ima0sg%40group.calendar.google.com&ctz=Europe/Copenhagen");
 
@@ -382,16 +380,16 @@ public class HomeGUI extends Application implements ActionListener {
     public static void goalsScreen(Stage primaryStage){
 
         //total omsætning
-        BorderPane bpRevenueTotal = new BorderPane();
+        BorderPane bpRevenueTotal               = new BorderPane();
         bpRevenueTotal.setId("bpGoalsScreen");
-        Label labelRevenueTotalMessage = new Label("Totalomsætning:");
+        Label labelRevenueTotalMessage          = new Label("Totalomsætning:");
         labelRevenueTotalMessage.setId("labelMessage");
         labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
-        ArrayList<Company> totalRevenueList = new ArrayList(LogicController.getTotalRevenue());
+        ArrayList<Company> totalRevenueList     = new ArrayList(LogicController.getTotalRevenue());
         double totalRevenue = totalRevenueList.get(0).getRevenue();
         String totalRevenueString = String.valueOf(totalRevenue);
 
-        Label labelRevenueTotalCount = new Label(totalRevenueString + " kr");
+        Label labelRevenueTotalCount            = new Label(totalRevenueString + " kr");
         labelRevenueTotalCount.setId("labelCount");
         //her skal der kaldes til en metode, der finder den totale omsætning frem.
         bpRevenueTotal.setTop(labelRevenueTotalMessage);
@@ -399,17 +397,17 @@ public class HomeGUI extends Application implements ActionListener {
         bpRevenueTotal.setCenter(labelRevenueTotalCount);
 
         //højest omsætning på en måned
-        BorderPane bpHighestRevenueMonth = new BorderPane();
+        BorderPane bpHighestRevenueMonth        = new BorderPane();
         bpHighestRevenueMonth.setId("bpGoalsScreen");
-        Label labelHighestRevenueMonthMessage = new Label("Medarbejder med flest timer:");
+        Label labelHighestRevenueMonthMessage   = new Label("Medarbejder med flest timer:");
         labelHighestRevenueMonthMessage.setId("labelMessage");
 
         // Vi opretter en ArrayList med den værdi der bliver hentet fra LogicControllers getTopHours() metode.
-        ArrayList<ScheduleDays> topHoursList = new ArrayList(LogicController.getTopHours());
+        ArrayList<ScheduleDays> topHoursList    = new ArrayList(LogicController.getTopHours());
         double topHoursDouble = topHoursList.get(0).getTotalHours();
         String topHoursString = String.valueOf(topHoursDouble);
 
-        Label labelHighestRevenueMonthCount = new Label(topHoursString + " timer");
+        Label labelHighestRevenueMonthCount     = new Label(topHoursString + " timer");
         labelHighestRevenueMonthCount.setId("labelCount");
 
         // her skal der kaldes til en metode, der finder den bedste måned målt på omsætning frem
@@ -418,13 +416,13 @@ public class HomeGUI extends Application implements ActionListener {
         bpHighestRevenueMonth.setCenter(labelHighestRevenueMonthCount);
 
         //dagens mål
-        BorderPane bpTodaysGoal = new BorderPane();
-        ArrayList<Comment> comment = new ArrayList<Comment>(LogicController.getComment());
+        BorderPane bpTodaysGoal                 = new BorderPane();
+        ArrayList<Comment> comment              = new ArrayList<Comment>(LogicController.getComment());
         String commentString = comment.get(0).getComment();
         bpTodaysGoal.setId("bpGoalsScreen");
-        Label labelTodaysGoalMessage = new Label("Dagens kommentar:");
+        Label labelTodaysGoalMessage            = new Label("Dagens kommentar:");
         labelTodaysGoalMessage.setId("labelMessage");
-        Label labelTodaysGoalNumber = new Label(commentString);
+        Label labelTodaysGoalNumber             = new Label(commentString);
         labelTodaysGoalNumber.setId("labelCount");
         //her skal der kaldes til en metode, der finder top fem frem.
         bpTodaysGoal.setTop(labelTodaysGoalMessage);
@@ -433,15 +431,15 @@ public class HomeGUI extends Application implements ActionListener {
 
 
         //årets resultat for sælgeren
-        BorderPane bpRevenueThisYear = new BorderPane();
+        BorderPane bpRevenueThisYear            = new BorderPane();
         bpRevenueThisYear.setId("bpGoalsScreen");
-        ArrayList<ScheduleDays> maxHoursList = new ArrayList(LogicController.getMaxHours());
+        ArrayList<ScheduleDays> maxHoursList    = new ArrayList(LogicController.getMaxHours());
         double maxHoursDouble = maxHoursList.get(0).getTotalHours();
         String maxHoursString = String.valueOf(maxHoursDouble);
 
-        Label labelRevenueThisYearMessage = new Label("Total arbejdstimer:");
+        Label labelRevenueThisYearMessage       = new Label("Total arbejdstimer:");
         labelRevenueThisYearMessage.setId("labelMessage");
-        Label labelRevenueThisYearCount = new Label(maxHoursString + " timer");
+        Label labelRevenueThisYearCount         = new Label(maxHoursString + " timer");
         labelRevenueThisYearCount.setId("labelCount");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         bpRevenueThisYear.setTop(labelRevenueThisYearMessage);
@@ -449,9 +447,9 @@ public class HomeGUI extends Application implements ActionListener {
         bpRevenueThisYear.setCenter(labelRevenueThisYearCount);
 
         //nu skal de forskellige views samles
-        GridPane gridPaneGoals = new GridPane();
+        GridPane gridPaneGoals                  = new GridPane();
         gridPaneGoals.setId("gridPaneGoals");
-        gridPaneGoals.setPadding(new Insets(0, 30, 10, 30));
+        gridPaneGoals.setPadding(                 new Insets(0, 30, 10, 30));
         gridPaneGoals.add(bpRevenueTotal, 0, 0);
         gridPaneGoals.add(bpTodaysGoal, 0, 1);
         gridPaneGoals.add(bpHighestRevenueMonth, 1, 0);
@@ -495,41 +493,41 @@ public class HomeGUI extends Application implements ActionListener {
 
 
         //Bagrund for vagtplanen
-        GridPane gpvagtplan = new GridPane();
+        GridPane gpvagtplan                 = new GridPane();
         gpvagtplan.setHgap(15);
         gpvagtplan.setVgap(15);
 
-        Label white = new Label();
+        Label white                         = new Label();
         white.setId("emptyLabel");
         white.getStylesheets().addAll("gui/assets/login.css");
 
-        Label monday = new Label("Mandag");
+        Label monday                        = new Label("Mandag");
         monday.setId("dage");
 
         monday.getStylesheets().addAll("gui/assets/login.css");
-        Label thuesday = new Label("Tirsdag");
+        Label thuesday                      = new Label("Tirsdag");
         thuesday.setId("dage");
         thuesday.getStylesheets().addAll("gui/assets/login.css");
-        Label wednesday = new Label("Onsdag");
+        Label wednesday                     = new Label("Onsdag");
         wednesday.setId("dage");
         wednesday.getStylesheets().addAll("gui/assets/login.css");
-        Label thursday = new Label("Torsdag");
+        Label thursday                      = new Label("Torsdag");
         thursday.setId("dage");
         thursday.getStylesheets().addAll("gui/assets/login.css");
-        Label friday = new Label("Fredag");
+        Label friday                        = new Label("Fredag");
         friday.setId("dage");
         friday.getStylesheets().addAll("gui/assets/login.css");
 
-        Label checkIn = new Label("Ankomst");
+        Label checkIn                       = new Label("Ankomst");
         checkIn.setId("dage");
         checkIn.getStylesheets().addAll("gui/assets/login.css");
-        Label checkOut = new Label("Afgang");
+        Label checkOut                      = new Label("Afgang");
         checkOut.setId("dage");
         checkOut.getStylesheets().addAll("gui/assets/login.css");
-        Label timer = new Label("Timer");
+        Label timer                         = new Label("Timer");
         timer.setId("dage");
         timer.getStylesheets().addAll("gui/assets/login.css");
-        Label totalHoursWorkedLabel = new Label("Total Timer");
+        Label totalHoursWorkedLabel         = new Label("Total Timer");
         totalHoursWorkedLabel.setId("dage");
         totalHoursWorkedLabel.getStylesheets().addAll("gui/assets/login.css");
 
@@ -608,31 +606,31 @@ public class HomeGUI extends Application implements ActionListener {
 
 
 
-        Button updateHours = new Button("Update");
+        Button updateHours                  = new Button("Update");
 
 
-        Button startTimer = new Button("Start");
+        Button startTimer                   = new Button("Start");
         startTimer.setId("gemTimer");
         startTimer.getStylesheets().addAll("gui/assets/login.css");
 
 
         startTimer.setOnAction(event -> {
             Calendar calendar = Calendar.getInstance();
-            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            int day                         = calendar.get(Calendar.DAY_OF_WEEK);
             diffMinutesStart = Datepicker.startDateStamp();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            DateFormat dateFormat           = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Calendar cal = Calendar.getInstance();
 
             //Variabler til brug af totalTid fra databasen
             ArrayList<ScheduleDays> arraylistSchedule =
                     new ArrayList<ScheduleDays>(LogicController.getSchedule(loggedInUser));
-            double mondayDB = arraylistSchedule.get(0).getMonday();
-            double tuesdayDB = arraylistSchedule.get(0).getTuesday();
-            double wednesdayDB = arraylistSchedule.get(0).getWednesday();
-            double thursdayDB = arraylistSchedule.get(0).getThursday();
-            double fridayDB = arraylistSchedule.get(0).getFriday();
-            double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
-            System.out.println(mondayDB);
+
+            double mondayDB                 = arraylistSchedule.get(0).getMonday();
+            double tuesdayDB                = arraylistSchedule.get(0).getTuesday();
+            double wednesdayDB              = arraylistSchedule.get(0).getWednesday();
+            double thursdayDB               = arraylistSchedule.get(0).getThursday();
+            double fridayDB                 = arraylistSchedule.get(0).getFriday();
+            double totalHoursDB             = arraylistSchedule.get(0).getTotalHours();
 
             LogicController.scheduleLogicStart(day, dateFormat, cal, mondayDB,
                     tuesdayDB, wednesdayDB, thursdayDB, fridayDB, datoMandag, datoTirsdag,
@@ -711,22 +709,22 @@ public class HomeGUI extends Application implements ActionListener {
 
         ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule(loggedInUser));
 
-        Button stopTimer = new Button("Stop");
+        Button stopTimer                          = new Button("Stop");
         stopTimer.setId("gemTimer");
         stopTimer.getStylesheets().addAll("gui/assets/login.css");
         stopTimer.setOnAction(event -> {
-            Calendar calendar = Calendar.getInstance();
-            int day = calendar.get(Calendar.DAY_OF_WEEK);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            Calendar calendar                     = Calendar.getInstance();
+            int day                               = calendar.get(Calendar.DAY_OF_WEEK);
+            DateFormat dateFormat                 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Calendar cal = Calendar.getInstance();
 
             //Variabler til brug af totalTid fra databasen
-            double mondayDB = arraylistSchedule.get(0).getMonday();
-            double tuesdayDB = arraylistSchedule.get(0).getTuesday();
-            double wednesdayDB = arraylistSchedule.get(0).getWednesday();
-            double thursdayDB = arraylistSchedule.get(0).getThursday();
-            double fridayDB = arraylistSchedule.get(0).getFriday();
-            double totalHoursDB = arraylistSchedule.get(0).getTotalHours();
+            double mondayDB                       = arraylistSchedule.get(0).getMonday();
+            double tuesdayDB                      = arraylistSchedule.get(0).getTuesday();
+            double wednesdayDB                    = arraylistSchedule.get(0).getWednesday();
+            double thursdayDB                     = arraylistSchedule.get(0).getThursday();
+            double fridayDB                       = arraylistSchedule.get(0).getFriday();
+            double totalHoursDB                   = arraylistSchedule.get(0).getTotalHours();
 
             LogicController.scheduleLogicEnd(day, dateFormat, cal, mondayDB,
                     tuesdayDB, wednesdayDB, thursdayDB, fridayDB, totalHoursDB,
@@ -745,9 +743,9 @@ public class HomeGUI extends Application implements ActionListener {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-               diffMinutesEnd = backend.Datepicker.endDateStamp();
+               diffMinutesEnd = application.Datepicker.endDateStamp();
                 dateMondayStop.setText(dateFormat.format(cal.getTime()));
-                    mondayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    mondayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer2 = String.valueOf(mondayDB);
                     hoursMonday.setText(timer2);
                 break;
@@ -759,7 +757,7 @@ public class HomeGUI extends Application implements ActionListener {
                     fridayDB = 0.0;
 
                 dateThuesdayStop.setText(dateFormat.format(cal.getTime()));
-                    tuesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    tuesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer4 = String.valueOf(tuesdayDB);
                     hoursThuesday.setText(timer4);
                 break;
@@ -769,9 +767,9 @@ public class HomeGUI extends Application implements ActionListener {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 dateWednesdayStop.setText(dateFormat.format(cal.getTime()));
-                wednesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                wednesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer6 = String.valueOf(wednesdayDB);
                 hoursWednesday.setText(timer6);
                 break;
@@ -779,18 +777,18 @@ public class HomeGUI extends Application implements ActionListener {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 dateThursdayStop.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    thursdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer8 = String.valueOf(thursdayDB);
                     hoursThursday.setText(timer8);
                 break;
                 case 6:
 
                     fridayDB = 0.0;
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 dateFridayStop.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    thursdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                     String timer10 = String.valueOf(thursdayDB);
                     hoursFriday.setText(timer10);
             }
@@ -810,8 +808,9 @@ public class HomeGUI extends Application implements ActionListener {
                     + Double.parseDouble(timerOnsdag.getText())
                     + Double.parseDouble(timerTorsdag.getText())
                     + Double.parseDouble(timerFredag.getText());
-            ScheduleDays timerUpdate = new ScheduleDays(
-                    (Double.parseDouble(timerMandag.getText())),
+
+            ScheduleDays timerUpdate            = new ScheduleDays((Double.parseDouble(timerMandag.getText())),
+
                     (Double.parseDouble(timerTirsdag.getText())),
                     (Double.parseDouble(timerOnsdag.getText())),
                     (Double.parseDouble(timerTorsdag.getText())),
@@ -885,30 +884,30 @@ public class HomeGUI extends Application implements ActionListener {
 
 
 
-        backend.LogicController.getComment();
+        application.LogicController.getComment();
 
 
-        ArrayList<ScheduleDays> maxHoursList = new ArrayList<>(LogicController.getUsernameHours());
-        ArrayList<ScheduleDays> maxHoursList1 = new ArrayList<>(LogicController.getHoursUsername());
-        ArrayList<Double> comboBoxArray1 = new ArrayList<>();
-        ArrayList<String> comboBoxArray2 = new ArrayList<>();
+        ArrayList<ScheduleDays> maxHoursList        = new ArrayList<>(LogicController.getUsernameHours());
+        ArrayList<ScheduleDays> maxHoursList1       = new ArrayList<>(LogicController.getHoursUsername());
+        ArrayList<Double> comboBoxArray1            = new ArrayList<>();
+        ArrayList<String> comboBoxArray2            = new ArrayList<>();
 
 
-        ComboBox person1 = new ComboBox();
+        ComboBox person1                            = new ComboBox();
         person1.setId("combobox");
         person1.getStylesheets().addAll("gui/assets/login.css");
         person1.setPromptText("Vælger bruger 1");
 
-        ComboBox person2 = new ComboBox();
+        ComboBox person2                            = new ComboBox();
         person2.setId("combobox");
         person2.getStylesheets().addAll("gui/assets/login.css");
         person2.setPromptText("Vælger bruger 2");
 
 
-        Label personLabel1 = new Label("\"Antal timer person 1\"");
+        Label personLabel1                          = new Label("\"Antal timer person 1\"");
         personLabel1.setId("personlabelCombobox");
         personLabel1.getStylesheets().addAll("gui/assets/login.css");
-        Label personLabel2 = new Label("\"Antal timer person 2\"");
+        Label personLabel2                          = new Label("\"Antal timer person 2\"");
         personLabel2.setId("personlabelCombobox");
         personLabel2.getStylesheets().addAll("gui/assets/login.css");
 
@@ -920,20 +919,20 @@ public class HomeGUI extends Application implements ActionListener {
             person2.getItems().add(comboBoxArray2.get(i));
         }
         person1.setOnAction(event -> {
-            backend.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
+            application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person1, personLabel1);
         });
 
         person2.setOnAction(event -> {
-            backend.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
+            application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person2, personLabel2);
 
         });
 
 
-        BorderPane totalHoursPerson1 = new BorderPane();
+        BorderPane totalHoursPerson1               = new BorderPane();
         totalHoursPerson1.setId("bpGoalsScreen");
-        Label labelTotalHoursMessage = new Label("Total antal timer:");
+        Label labelTotalHoursMessage               = new Label("Total antal timer:");
         labelTotalHoursMessage.setId("labelMessage");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         totalHoursPerson1.setTop(labelTotalHoursMessage);
@@ -942,11 +941,11 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursPerson1.setBottom(personLabel1);
         totalHoursPerson1.setAlignment(personLabel1, Pos.BOTTOM_CENTER);
 
-        BorderPane totalHoursPerson2 = new BorderPane();
+        BorderPane totalHoursPerson2              = new BorderPane();
         totalHoursPerson2.setId("bpGoalsScreen");
-        Label labelTotalHoursMessage2 = new Label("Total antal timer for:");
+        Label labelTotalHoursMessage2             = new Label("Total antal timer for:");
         labelTotalHoursMessage2.setId("labelMessage");
-        Label labelTotalHours2 = new Label("1000000");
+        Label labelTotalHours2                    = new Label("1000000");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         totalHoursPerson2.setTop(labelTotalHoursMessage2);
         totalHoursPerson2.setAlignment(labelTotalHoursMessage2, Pos.TOP_CENTER);
@@ -955,11 +954,11 @@ public class HomeGUI extends Application implements ActionListener {
         totalHoursPerson2.setAlignment(personLabel2, Pos.BOTTOM_CENTER);
 
 
-        BorderPane commentBP = new BorderPane();
+        BorderPane commentBP                     = new BorderPane();
         totalHoursPerson1.setId("bpGoalsScreen");
-        Label labelKommentar = new Label("Skriv en kommentar");
+        Label labelKommentar                     = new Label("Skriv en kommentar");
         labelKommentar.setId("labelMessage");
-        TextField kommentar = new TextField();
+        TextField kommentar                      = new TextField();
         kommentar.setId("kommentarTextfield");
         kommentar.setPromptText("Skriv din kommentar");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
@@ -970,19 +969,19 @@ public class HomeGUI extends Application implements ActionListener {
 
 
 
-        Button commitKommentar = new Button("Commit");
+        Button commitKommentar                   = new Button("Commit");
         commitKommentar.setId("btncommit");
         commitKommentar.getStylesheets().addAll("gui/assets/login.css");
         commitKommentar.setOnAction(event -> {
-            backend.LogicController.addComment(new Comment(kommentar.getText()));
+            application.LogicController.addComment(new Comment(kommentar.getText()));
         });
 
 
 
         //nu skal de forskellige views samles
-        GridPane gridPaneGoals = new GridPane();
+        GridPane gridPaneGoals                  = new GridPane();
         gridPaneGoals.setId("gridPaneGoals");
-        gridPaneGoals.setPadding(new Insets(0, 30, 10, 30));
+        gridPaneGoals.setPadding(                 new Insets(0, 30, 10, 30));
         gridPaneGoals.add(totalHoursPerson1, 0, 0);
         gridPaneGoals.add(commentBP, 0, 1);
         gridPaneGoals.add(totalHoursPerson2, 1, 0);
@@ -1012,12 +1011,12 @@ public class HomeGUI extends Application implements ActionListener {
         userButton.setId("mActive");
         userButton.getStylesheets().addAll("gui/assets/login.css");
 
-        boolean alreadyExecuted = false;
+        boolean alreadyExecuted             = false;
 
         if(alreadyExecuted = false) {
-            gui.Tableviews.methods.UserMethod.userTableviewStart();
-            LoginGUI.whiteBackground.setCenter(UserMethod.hboxUser);
-            alreadyExecuted = true;
+            UserTableView.userTableviewStart();
+            LoginGUI.whiteBackground.setCenter(UserTableView.hboxUser);
+            alreadyExecuted                 = true;
         }
 
         LoginGUI.BPBackground.setCenter(LoginGUI.whiteBackground);

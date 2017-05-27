@@ -1,4 +1,4 @@
-package backend;
+package application;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -104,9 +104,9 @@ public class ScheduleLogic {
                 thursdayDB = 0.0;
                 fridayDB = 0.0;
 
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 datoMandag2.setText(dateFormat.format(cal.getTime()));
-                mondayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                mondayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer2 = String.valueOf(mondayDB);
                 timerMandag.setText(timer2);
                 break;
@@ -118,7 +118,7 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
 
                 datoTirsdag2.setText(dateFormat.format(cal.getTime()));
-                tuesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                tuesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer4 = String.valueOf(tuesdayDB);
                 timerTirsdag.setText(timer4);
                 break;
@@ -128,9 +128,9 @@ public class ScheduleLogic {
                 thursdayDB = 0.0;
                 fridayDB = 0.0;
 
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 datoOnsdag2.setText(dateFormat.format(cal.getTime()));
-                wednesdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                wednesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer6 = String.valueOf(wednesdayDB);
                 timerOnsdag.setText(timer6);
                 break;
@@ -138,18 +138,18 @@ public class ScheduleLogic {
                 thursdayDB = 0.0;
                 fridayDB = 0.0;
 
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 datoTorsdag2.setText(dateFormat.format(cal.getTime()));
-                thursdayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                thursdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer8 = String.valueOf(thursdayDB);
                 timerTorsdag.setText(timer8);
                 break;
             case 7:
 
                 fridayDB = 0.0;
-                diffMinutesEnd = backend.Datepicker.endDateStamp();
+                diffMinutesEnd = application.Datepicker.endDateStamp();
                 datoFredag2.setText(dateFormat.format(cal.getTime()));
-                fridayDB = backend.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                fridayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
                 String timer10 = String.valueOf(fridayDB);
                 timerFredag.setText(timer10);
         }

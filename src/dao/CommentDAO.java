@@ -1,6 +1,6 @@
 package dao;
 
-import entities.Comment;
+import application.Comment;
 
 import java.sql.*;
 import java.util.ArrayList;

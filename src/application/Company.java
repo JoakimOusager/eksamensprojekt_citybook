@@ -1,6 +1,5 @@
-package entities;
+package application;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Company {
@@ -21,17 +20,17 @@ public class Company {
     private User createdBy;
 
     public Company(String cvrNumber, String name, String address, String zipCode, String email, String phoneNumber, String comments, double revenue, Timestamp createdOn, ContactPerson contactPerson, User createdBy) {
-        this.cvrNumber = cvrNumber;
-        this.name = name;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.comments = comments;
-        this.revenue = revenue;
-        this.createdOn = createdOn;
-        this.contactPerson = contactPerson;
-        this.createdBy = createdBy;
+        this.cvrNumber      = cvrNumber;
+        this.name           = name;
+        this.address        = address;
+        this.zipCode        = zipCode;
+        this.email          = email;
+        this.phoneNumber    = phoneNumber;
+        this.comments       = comments;
+        this.revenue        = revenue;
+        this.createdOn      = createdOn;
+        this.contactPerson  = contactPerson;
+        this.createdBy      = createdBy;
     }
 
     public Company(double revenue) {
@@ -42,15 +41,15 @@ public class Company {
     }
 
     public Company(String cvrNumber, String name, String address, String zipCode, String email, String phoneNumber, double revenue, String comments, ContactPerson contactPerson) {
-        this.cvrNumber = cvrNumber;
-        this.name = name;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.revenue = revenue;
-        this.comments = comments;
-        this.contactPerson = contactPerson;
+        this.cvrNumber      = cvrNumber;
+        this.name           = name;
+        this.address        = address;
+        this.zipCode        = zipCode;
+        this.email          = email;
+        this.phoneNumber    = phoneNumber;
+        this.revenue        = revenue;
+        this.comments       = comments;
+        this.contactPerson  = contactPerson;
     }
 
     public String getName() {
