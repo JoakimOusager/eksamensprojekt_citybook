@@ -960,7 +960,7 @@ public class HomeGUI extends Application implements ActionListener {
         labelKommentar.setId("labelMessage");
         TextField kommentar                      = new TextField();
         kommentar.setId("kommentarTextfield");
-        kommentar.setPromptText("Skriv din kommentar");
+        kommentar.setPromptText("Skriv dit opslag");
         //her skal der kaldes til en metode, der regner årets resultatet ud for sælgeren
         commentBP.setTop(labelKommentar);
         commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
@@ -1000,10 +1000,7 @@ public class HomeGUI extends Application implements ActionListener {
         primaryStage.show();
 
     }
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
 
-    }
 
     //Adminscreen
     public static void usersScreen(Stage primaryStage){
