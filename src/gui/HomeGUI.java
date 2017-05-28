@@ -10,7 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -24,7 +27,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Optional;
 
 public class HomeGUI extends Application {
 
@@ -79,9 +81,7 @@ public class HomeGUI extends Application {
     static long diffMinutesStart;
     static long diffMinutesEnd;
 
-
-
-	@Override
+    @Override
     public void start(Stage primaryStage) {
 
 
@@ -232,21 +232,9 @@ public class HomeGUI extends Application {
             scheduleButton.setUnderline(false);
         });
         scheduleButton.setOnAction((ActionEvent event3) -> {
-            ArrayList<ScheduleDays> arraylistSchedule =
-                    new ArrayList<ScheduleDays>(LogicController.getSchedule());
+            buttonReset();
+            scheduleScreen(primaryStage);
 
-            boolean isEmpty = false;
-            if(LogicController.getSchedule().isEmpty() == isEmpty){
-                buttonReset();
-                scheduleScreen(primaryStage);
-                System.out.println("Is not empty");
-            }else {
-                System.out.println("Is empty");
-                ScheduleDays scheduleDays = new ScheduleDays();
-                LogicController.insertSchedule(scheduleDays);
-                buttonReset();
-                scheduleScreen(primaryStage);
-            }
         });
 
         //Knap lavet specifikt til vagtplansoverblik
@@ -356,7 +344,6 @@ public class HomeGUI extends Application {
 
     }
 
-    ////////////////////////////////////////// Jarl ///////////////////////////////////////
 
     /*
         Denne metoder bliver tilføjet i knappen 'Aktiviteter'
@@ -364,6 +351,9 @@ public class HomeGUI extends Application {
         Vi har valgt Google Calendar fremfor selv at lave en kalender da,
         da det gør det muligt for sælgere at kunne se deres møder på mobilen og andetsteds.
     */
+
+    //////////////////////////////////////////Jarl///////////////////////////////////////
+
      public static void CalendarView(Stage primaryStage) {
         calendarButton.setId("mActive");
         calendarButton.getStylesheets().addAll("gui/assets/login.css");
@@ -392,7 +382,7 @@ public class HomeGUI extends Application {
 
     //Målscreen
 
-    ////////////////////////////////////////// Daniel, Jarl og Anders //////////////////////////////////////
+    //////////////////////////////////////////Daniel, Jarl og Anders//////////////////////////////////////
     public static void goalsScreen(Stage primaryStage){
 
         //total omsætning
@@ -401,7 +391,8 @@ public class HomeGUI extends Application {
         Label labelRevenueTotalMessage          = new Label("Totalomsætning:");
         labelRevenueTotalMessage.setId("labelMessage");
         labelRevenueTotalMessage.setAlignment(Pos.TOP_LEFT);
-        double totalRevenue = LogicController.getRevenue();
+        ArrayList<Company> totalRevenueList     = new ArrayList(LogicController.getTotalRevenue());
+        double totalRevenue = totalRevenueList.get(0).getRevenue();
         String totalRevenueString = String.valueOf(totalRevenue);
 
         Label labelRevenueTotalCount            = new Label(totalRevenueString + " kr");
@@ -418,7 +409,8 @@ public class HomeGUI extends Application {
         labelHighestRevenueMonthMessage.setId("labelMessage");
 
         // Vi opretter en ArrayList med den værdi der bliver hentet fra LogicControllers getTopHours() metode.
-        double topHoursDouble = LogicController.getTopHours();
+        ArrayList<ScheduleDays> topHoursList    = new ArrayList(LogicController.getTopHours());
+        double topHoursDouble = topHoursList.get(0).getTotalHours();
         String topHoursString = String.valueOf(topHoursDouble);
 
         Label labelHighestRevenueMonthCount     = new Label(topHoursString + " timer");
@@ -448,7 +440,8 @@ public class HomeGUI extends Application {
         //årets resultat for sælgeren
         BorderPane bpRevenueThisYear            = new BorderPane();
         bpRevenueThisYear.setId("bpGoalsScreen");
-        double maxHoursDouble = LogicController.getMaxHours();
+        ArrayList<ScheduleDays> maxHoursList    = new ArrayList(LogicController.getMaxHours());
+        double maxHoursDouble = maxHoursList.get(0).getTotalHours();
         String maxHoursString = String.valueOf(maxHoursDouble);
 
         Label labelRevenueThisYearMessage       = new Label("Total arbejdstimer:");
@@ -481,7 +474,7 @@ public class HomeGUI extends Application {
         primaryStage.show();
     }
 
-    //////////////////////////////////////////////// Daniel //////////////////////////////////////////
+    ////////////////////////////////////////////////Daniel//////////////////////////////////////////
 
     //virksomheds screen
     public static void companiesScreen(Stage primaryStage){
@@ -501,7 +494,7 @@ public class HomeGUI extends Application {
     }
 
 
-    //////////////////////////////////////////// Daniel ///////////////////////////////////////////////
+    ////////////////////////////////////////////Daniel///////////////////////////////////////////////
     public static void scheduleScreen(Stage primaryStage){
 
         scheduleButton.setId("mActive");
@@ -639,9 +632,8 @@ public class HomeGUI extends Application {
             Calendar cal = Calendar.getInstance();
 
             //Variabler til brug af totalTid fra databasen
-
             ArrayList<ScheduleDays> arraylistSchedule =
-                    new ArrayList<ScheduleDays>(LogicController.getSchedule());
+                    new ArrayList<ScheduleDays>(LogicController.getSchedule(loggedInUser));
 
             double mondayDB                 = arraylistSchedule.get(0).getMonday();
             double tuesdayDB                = arraylistSchedule.get(0).getTuesday();
@@ -725,7 +717,7 @@ public class HomeGUI extends Application {
             }*/
         });
 
-        ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule());
+        ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule(loggedInUser));
 
         Button stopTimer                          = new Button("Stop");
         stopTimer.setId("stopCountinghours");
@@ -813,7 +805,7 @@ public class HomeGUI extends Application {
 
             totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
             String totalTimerString = String.valueOf(totalHoursDB);
-    
+
             totalTimer.setText(totalTimerString);*/
 
 
@@ -839,7 +831,11 @@ public class HomeGUI extends Application {
 
             LogicController.updateSchedule(timerUpdate, loggedInUser);
 
-            totalTimer.setText(String.valueOf(totalHoursDB));
+            ArrayList<ScheduleDays> listTotalHours =
+                    new ArrayList<ScheduleDays>(LogicController.getTotalHoursFromUsername(loggedInUser));
+            double totalTimerDouble2 = listTotalHours.get(0).getTotalHours();
+            System.out.println(totalTimerDouble2+"Virker det?");
+            totalTimer.setText(String.valueOf(totalTimerDouble2));
         });
 
         //Label af dagenen
@@ -930,16 +926,16 @@ public class HomeGUI extends Application {
             person1.getItems().add(comboBoxArray2.get(i));
             person2.getItems().add(comboBoxArray2.get(i));
         }
-        person1.setOnAction(event ->
+        person1.setOnAction(event -> {
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person1, personLabel1);
-        );
+        });
 
-        person2.setOnAction(event ->
+        person2.setOnAction(event -> {
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person2, personLabel2);
 
-        );
+        });
 
 
         BorderPane totalHoursPerson1               = new BorderPane();
@@ -1038,35 +1034,5 @@ public class HomeGUI extends Application {
 
         primaryStage.setScene(postLogin);
         primaryStage.show();
-    }
-    ////////////////////////////////////////// Joakim & Jarl ////////////////////////////////////////
-    /*
-        Dette er vores metode til at vise fejlmeddelelser i forbindelse med SQL Queries.
-        Vi har oprettet en boolean error i de pågældende DAO metoder som vi mente at dette var relevant.
-        Til at starte med er vores boolean sat til false, men hvis vores query returnerer en
-        SQLException bliver vores boolean sat til true og derfor bliver vores AlertBox med Fejl! kørt.
-        Hvis vores query ikke returnerer en Exception bliver vores Alertbox med Succes! kørt.
-    */
-    public static void invalidSQLQuery(boolean error) {
-        if (error) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Citybook");
-            alert.setHeaderText("ADVARSEL");
-            alert.setContentText("Fejl i indtastede oplysninger.");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Citybook");
-            alert.setHeaderText("Bekræftelse");
-            alert.setContentText("Succes!");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-
-            }
-        }
     }
 }
