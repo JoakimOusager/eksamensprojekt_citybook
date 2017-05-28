@@ -33,7 +33,7 @@ public class LoginGUI extends Application {
 
     //Login fields
     public static TextField usernamefield                   = new TextField();
-
+    public static PasswordField passwordfield               = new PasswordField();
 
     //Boolean brugt til at holde styr på om man har trykket på "Save me" checkboxen
     public static boolean saveMe                            = false;
@@ -74,7 +74,7 @@ public class LoginGUI extends Application {
         loginBox.setId("loginBox");
 
         //Textfields til login
-        PasswordField passwordfield                         = new PasswordField();
+
 
 
         //TextField usernamefield = new TextField();

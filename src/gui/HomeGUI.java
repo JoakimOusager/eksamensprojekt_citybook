@@ -285,6 +285,7 @@ public class HomeGUI extends Application {
         logoutButton.getStylesheets().addAll("gui/assets/login.css");
         logoutButton.setId("logoutButton");
         logoutButton.setOnAction((ActionEvent event5) -> {
+            LoginGUI.passwordfield.clear();
             // LoginGUI.BPBackground
             primaryStage.setScene(LoginGUI.loginScene);
             primaryStage.centerOnScreen();
@@ -932,12 +933,12 @@ public class HomeGUI extends Application {
         }
         person1.setOnAction(event ->
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
-                    person1, personLabel1);
+                    person1, personLabel1)
         );
 
         person2.setOnAction(event ->
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
-                    person2, personLabel2);
+                    person2, personLabel2)
 
         );
 

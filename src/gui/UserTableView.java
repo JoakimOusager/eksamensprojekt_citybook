@@ -91,7 +91,7 @@ public class UserTableView {
 
         // Kolonne for Email
         TableColumn<User, String> emailCol           = new TableColumn<>("Email");
-        emailCol.setMinWidth(185);
+        emailCol.setMinWidth(250);
         emailCol.setCellValueFactory(                  new PropertyValueFactory<>("email"));
 
         // Kolonne for Start dato // Timestamp
