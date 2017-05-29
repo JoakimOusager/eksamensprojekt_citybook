@@ -927,7 +927,7 @@ public class HomeGUI extends Application {
 
         for(int i = 0; i < maxHoursList.size();i++) {
             comboBoxArray1.add(maxHoursList1.get(i).getTotalHours());
-            comboBoxArray2.add(maxHoursList.get(i).getUsername());
+            comboBoxArray2.add(maxHoursList.get(i).getUser().getUsername());
             person1.getItems().add(comboBoxArray2.get(i));
             person2.getItems().add(comboBoxArray2.get(i));
         }

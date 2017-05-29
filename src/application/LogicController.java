@@ -27,6 +27,7 @@ public class LogicController {
 
     public static void addUser(User user) {
         UserDAO userDAO                             = new UserDAO();
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
         userDAO.insert(user);
     }
 

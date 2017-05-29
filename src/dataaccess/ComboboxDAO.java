@@ -1,6 +1,7 @@
 package dataaccess;
 
 import application.ScheduleDays;
+import application.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,8 +33,10 @@ public class ComboboxDAO implements GetDAO<ScheduleDays> {
 
                 // Username og hours detaljer
                 String username = rs.getString("username");
+                User user = new User(username);
+                ScheduleDays scheduleDays = new ScheduleDays(user);
                // double hours = rs.getDouble("total_hours");
-                list.add(new ScheduleDays(username));
+                list.add(new ScheduleDays(user));
                 //list.add(new ScheduleDays(hours));
             }
 
