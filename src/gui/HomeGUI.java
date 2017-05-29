@@ -47,7 +47,7 @@ public class HomeGUI extends Application {
     static Button logoutButton                          = new Button("Log out");
     static Button homepageButton                        = new Button("Hjem");
     static Button scheduleButton                        = new Button("Vagtplan");
-    static Button scheduleOverviewButton                = new Button("Vagtplanoverblik");
+    static Button scheduleOverviewButton                = new Button("Adminpanel");
 
     public static User loggedInUser;
 
@@ -148,6 +148,11 @@ public class HomeGUI extends Application {
         LoginGUI.citybookLogoPane.getStylesheets().addAll("gui/assets/login.css");
         LoginGUI.citybookLogoPane.setId("citybookLogoPane");
 
+        //Titel på programmet
+        primaryStage.setTitle("Citybook CRM System");
+
+        //Gør det umuligt at ændre på vinduets størelse
+        primaryStage.setResizable(false);
         /* //////////////////////////////////////////////////////////////////////////////////////////
                                              SIDE MENU
        ////////////////////////////////////////////////////////////////////////////////////////// */
@@ -624,7 +629,7 @@ public class HomeGUI extends Application {
 
 
 
-        Button updateHours                  = new Button("Update");
+        Button updateHours                  = new Button("Opdater");
         updateHours.setId("updateHoursButton");
 
         Button startTimer                   = new Button("Start");
@@ -972,24 +977,24 @@ public class HomeGUI extends Application {
         totalHoursPerson1.setId("bpGoalsScreen");
         Label labelKommentar                     = new Label("Skriv opslag");
         labelKommentar.setId("labelMessage");
-        TextField kommentar                      = new TextField();
-        kommentar.setId("kommentarTextfield");
-        kommentar.setPromptText("\"Dagens mål\"");
-        Button commitKommentar                   = new Button("Slå op");
-        kommentar.setPromptText("Skriv din kommentar");
+        TextField commentTextField                      = new TextField();
+        commentTextField.setId("kommentarTextfield");
+        commentTextField.setPromptText("\"Dagens mål\"");
+        Button submitComment = new Button("Slå op");
+        commentTextField.setPromptText("Skriv opslag");
 
-        commitKommentar.setId("btncommit");
-        commitKommentar.getStylesheets().addAll("gui/assets/login.css");
-        commitKommentar.setOnAction(event -> {
-            application.LogicController.addComment(new Comment(kommentar.getText()));
-            kommentar.clear();
-            kommentar.setPromptText("Opslaget er blevet delt.");
+        submitComment.setId("btncommit");
+        submitComment.getStylesheets().addAll("gui/assets/login.css");
+        submitComment.setOnAction(event -> {
+            application.LogicController.addComment(new Comment(commentTextField.getText()));
+            commentTextField.clear();
+            commentTextField.setPromptText("Opslaget er blevet delt.");
         });
         commentBP.setTop(labelKommentar);
         commentBP.setAlignment(labelKommentar, Pos.TOP_CENTER);
-        commentBP.setCenter(kommentar);
-        commentBP.setBottom(commitKommentar);
-        commentBP.setAlignment(commitKommentar,Pos.BOTTOM_CENTER);
+        commentBP.setCenter(commentTextField);
+        commentBP.setBottom(submitComment);
+        commentBP.setAlignment(submitComment,Pos.BOTTOM_CENTER);
 
 
         //nu skal de forskellige views samles

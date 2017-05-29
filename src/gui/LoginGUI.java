@@ -180,7 +180,8 @@ public class LoginGUI extends Application {
         loginScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loginScene);
         primaryStage.show();
-
+        primaryStage.setTitle("Citybook CRM System");
+        primaryStage.setResizable(false);
     }
 
     //metode til hvis man skriver forkerte credentials
