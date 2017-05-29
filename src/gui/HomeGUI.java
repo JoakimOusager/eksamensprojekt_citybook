@@ -5,6 +5,7 @@ package gui;/**
 //import gui.Tableviews.methods.ActivityMethod;
 
 import application.*;
+import application.DatePicker;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -634,7 +635,7 @@ public class HomeGUI extends Application {
         startTimer.setOnAction(event -> {
             Calendar calendar = Calendar.getInstance();
             int day                         = calendar.get(Calendar.DAY_OF_WEEK);
-            diffMinutesStart = Datepicker.startDateStamp();
+            diffMinutesStart = DatePicker.startDateStamp();
             DateFormat dateFormat           = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             Calendar cal = Calendar.getInstance();
 
@@ -761,9 +762,9 @@ public class HomeGUI extends Application {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-               diffMinutesEnd = application.Datepicker.endDateStamp();
+               diffMinutesEnd = application.DatePicker.endDateStamp();
                 dateMondayStop.setText(dateFormat.format(cal.getTime()));
-                    mondayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    mondayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                     String timer2 = String.valueOf(mondayDB);
                     hoursMonday.setText(timer2);
                 break;
@@ -775,7 +776,7 @@ public class HomeGUI extends Application {
                     fridayDB = 0.0;
 
                 dateThuesdayStop.setText(dateFormat.format(cal.getTime()));
-                    tuesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    tuesdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                     String timer4 = String.valueOf(tuesdayDB);
                     hoursThuesday.setText(timer4);
                 break;
@@ -785,9 +786,9 @@ public class HomeGUI extends Application {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = application.DatePicker.endDateStamp();
                 dateWednesdayStop.setText(dateFormat.format(cal.getTime()));
-                wednesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                wednesdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer6 = String.valueOf(wednesdayDB);
                 hoursWednesday.setText(timer6);
                 break;
@@ -795,23 +796,23 @@ public class HomeGUI extends Application {
                     thursdayDB = 0.0;
                     fridayDB = 0.0;
 
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = application.DatePicker.endDateStamp();
                 dateThursdayStop.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    thursdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                     String timer8 = String.valueOf(thursdayDB);
                     hoursThursday.setText(timer8);
                 break;
                 case 6:
 
                     fridayDB = 0.0;
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = application.DatePicker.endDateStamp();
                 dateFridayStop.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                    thursdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                     String timer10 = String.valueOf(thursdayDB);
                     hoursFriday.setText(timer10);
             }
 
-            totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
+            totalHoursDB = DatePicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
             String totalTimerString = String.valueOf(totalHoursDB);
     
             totalTimer.setText(totalTimerString);*/
@@ -826,7 +827,7 @@ public class HomeGUI extends Application {
             double totalTimerTorsdag = Double.parseDouble(timerTorsdag.getText());
             double totalTimerFreadg = Double.parseDouble(timerFredag.getText());
 
-            double totalHoursDB = Datepicker.ugentligeTimer(totalTimerMandag, totalTimerTirsdag, totalTimerOnsdag,
+            double totalHoursDB = DatePicker.ugentligeTimer(totalTimerMandag, totalTimerTirsdag, totalTimerOnsdag,
                     totalTimerTorsdag, totalTimerFreadg);
 
             ScheduleDays timerUpdate            = new ScheduleDays((Double.parseDouble(timerMandag.getText())),
@@ -930,16 +931,16 @@ public class HomeGUI extends Application {
             person1.getItems().add(comboBoxArray2.get(i));
             person2.getItems().add(comboBoxArray2.get(i));
         }
-        person1.setOnAction(event ->
+        person1.setOnAction(event -> {
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person1, personLabel1);
-        );
+        });
 
-        person2.setOnAction(event ->
+        person2.setOnAction(event -> {
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
                     person2, personLabel2);
 
-        );
+        });
 
 
         BorderPane totalHoursPerson1               = new BorderPane();

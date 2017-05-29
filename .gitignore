@@ -12,6 +12,6 @@ eksamensprojekt_citybook.iml
 <<<<<<< HEAD
 .DS_Store
 =======
-src/dao/usernameSave
+src/dataaccess/usernameSave
 >>>>>>> bc6d47e1f6bc9814d426abac680f88c0f904e5a3
 

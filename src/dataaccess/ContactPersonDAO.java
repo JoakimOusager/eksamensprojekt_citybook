@@ -1,4 +1,4 @@
-package dao;
+package dataaccess;
 
 import application.Company;
 import application.ContactPerson;

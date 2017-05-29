@@ -8,11 +8,10 @@ import java.util.Date;
 
 //////////////////////////////////////// Lavet af Daniel //////////////////////////////////////
 
-public class Datepicker {
+public class DatePicker {
 
     //En måde at formatere tiden tiden på
     static DateFormat dateFormat        = new SimpleDateFormat("HH:mm");
-
 
     //Tiden der bliver sat når man trykker start
     long diffMinutesStart;
@@ -77,7 +76,7 @@ public class Datepicker {
     }
 
     //Metode til at få fat i differencen, altså hvor meget man har arbejdet
-    public static double startTimeMeth(long diffMinutesStart, long diffMinutesEnd) {
+    public static double startTime(long diffMinutesStart, long diffMinutesEnd) {
 
         //her sker udreningen
         double difference               = (diffMinutesEnd) - (diffMinutesStart);

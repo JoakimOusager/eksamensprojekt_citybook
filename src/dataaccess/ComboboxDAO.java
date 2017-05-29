@@ -1,18 +1,15 @@
-package dao;
+package dataaccess;
 
 import application.ScheduleDays;
-import application.User;
-
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Daniel on 27-05-2017.
- */
-public class TotalHoursFromUsernameDAO {
+//&/
 
-    static public ArrayList<ScheduleDays> get(User user) {
+public class ComboboxDAO implements GetDAO<ScheduleDays> {
+    public List<ScheduleDays> get() {
         ArrayList<ScheduleDays> list = new ArrayList<>();
 
         Connection conn = null;
@@ -28,14 +25,16 @@ public class TotalHoursFromUsernameDAO {
             //STEP 4: Execute a query
             stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT total_hours FROM cbcrm.schedule WHERE username = + '" + user.getUsername() + "'");
+            ResultSet rs = stmt.executeQuery("SELECT username, total_hours FROM cbcrm.schedule");
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
 
                 // Username og hours detaljer
-                double hours = rs.getDouble("total_hours");
-                list.add(new ScheduleDays(hours));
+                String username = rs.getString("username");
+               // double hours = rs.getDouble("total_hours");
+                list.add(new ScheduleDays(username));
+                //list.add(new ScheduleDays(hours));
             }
 
             //STEP 6: Clean-up environment
@@ -67,3 +66,4 @@ public class TotalHoursFromUsernameDAO {
         return list;
     }
 }
+
