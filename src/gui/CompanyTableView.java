@@ -105,17 +105,17 @@ public class CompanyTableView {
             // Vi opretter de kolonner som bliver vist i vores TableView for brugere.
             // Kolonne for virksomhedsnavn
             TableColumn<Company, String> nameCompanyCol    = new TableColumn<>("Navn");
-            nameCompanyCol.setMinWidth(120);
+            nameCompanyCol.setMinWidth(160);
             nameCompanyCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
             // Kolonne for Virksomhedens telefon nummer
             TableColumn<Company, String> phoneCompanyCol   = new TableColumn<>("Telefon");
-            phoneCompanyCol.setMinWidth(120);
+            phoneCompanyCol.setMinWidth(100);
             phoneCompanyCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
             // Kolonne for virksomhedens Email
             TableColumn<Company, String> emailCol          = new TableColumn<>("Email");
-            emailCol.setMinWidth(120);
+            emailCol.setMinWidth(160);
             emailCol.setCellValueFactory(                    new PropertyValueFactory<>("email"));
 
             // Kolonne for omsætning på virksomheden

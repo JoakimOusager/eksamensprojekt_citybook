@@ -90,7 +90,7 @@
     -fx-text-fill: white;
     -fx-pref-width: 150px;
     -fx-background-color: red;
-    -fx-background-radius: 30;
+    -fx-background-radius: 10;
 }
 
 #mActive{
