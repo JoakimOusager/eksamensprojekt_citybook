@@ -129,11 +129,11 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
 
                 //Her få vi fat i slut tidspunktet i timer
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = DatePicker.endDateStamp();
                 //Her bliver labelen datoMandag2 sat til sluttiden
                 datoMandag2.setText(dateFormat.format(cal.getTime()));
                 //Her kalder vi en metode som udregner hvor lang tid vi har arbejdet i timer
-                mondayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                mondayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 //Her bliver timerMandag så sat til hvor mange timer vi har arbejdet
                 String timer2 = String.valueOf(mondayDB);
                 timerMandag.setText(timer2);
@@ -146,7 +146,7 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
 
                 datoTirsdag2.setText(dateFormat.format(cal.getTime()));
-                tuesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                tuesdayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer4 = String.valueOf(tuesdayDB);
                 timerTirsdag.setText(timer4);
                 break;
@@ -156,9 +156,9 @@ public class ScheduleLogic {
                 thursdayDB = 0.0;
                 fridayDB = 0.0;
 
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = DatePicker.endDateStamp();
                 datoOnsdag2.setText(dateFormat.format(cal.getTime()));
-                wednesdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                wednesdayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer6 = String.valueOf(wednesdayDB);
                 timerOnsdag.setText(timer6);
                 break;
@@ -166,9 +166,9 @@ public class ScheduleLogic {
                 thursdayDB = 0.0;
                 fridayDB = 0.0;
 
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = DatePicker.endDateStamp();
                 datoTorsdag2.setText(dateFormat.format(cal.getTime()));
-                thursdayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                thursdayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer8 = String.valueOf(thursdayDB);
                 timerTorsdag.setText(timer8);
                 break;
@@ -176,16 +176,16 @@ public class ScheduleLogic {
 
                 fridayDB = 0.0;
 
-                diffMinutesEnd = application.Datepicker.endDateStamp();
+                diffMinutesEnd = DatePicker.endDateStamp();
                 datoFredag2.setText(dateFormat.format(cal.getTime()));
-                fridayDB = application.Datepicker.startTimeMeth(diffMinutesStart, diffMinutesEnd);
+                fridayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer10 = String.valueOf(fridayDB);
                 timerFredag.setText(timer10);
 
         }
 
         //Her udregner vi de totale antal timer for hele ugen
-        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
+        totalHoursDB = DatePicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
         //Her sætter vi totalTimer labelet til de totaltimer
         String totalTimerString = String.valueOf(totalHoursDB);
         totalTimer.setText(totalTimerString);
@@ -194,7 +194,7 @@ public class ScheduleLogic {
 
     //Metode til udregning af de totaltimer
     public double totalHoursMeth(double mondayDB, double tuesdayDB, double wednesdayDB, double thursdayDB, double fridayDB, double totalHoursDB){
-        totalHoursDB = Datepicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
+        totalHoursDB = DatePicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
         return totalHoursDB;
     }
 

@@ -1,7 +1,8 @@
-package dao;
+package dataaccess;
 
 import application.ScheduleDays;
 import application.User;
+import com.mysql.cj.api.x.io.ResultStreamer;
 import gui.GUIController;
 import gui.HomeGUI;
 
@@ -14,7 +15,8 @@ import java.util.List;
 public class ScheduleDAO implements GetDAO<ScheduleDays>{
     boolean error = false;
 
-    public List<ScheduleDays> get() {
+    public int getUserID() {
+        int userID = 0;
         List<ScheduleDays> list = new ArrayList<ScheduleDays>();
 
         Connection conn = null;
@@ -28,10 +30,68 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
-            String sql;
 
-                sql = "SELECT * FROM cbcrm.schedule WHERE username = '" + HomeGUI.loggedInUser.getUsername() + "' ";
+            String sql = "SELECT user_id FROM user WHERE username = '" + HomeGUI.loggedInUser.getUsername() + "' ";
             ResultSet rs = stmt.executeQuery(sql);
+            System.out.println(sql);
+
+            if (rs.next()) {
+                userID = rs.getInt("user_id");
+            }
+
+            //STEP 5: Extract data from result set
+
+            //STEP 6: Clean-up environment
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+            }// nothing we can do
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+
+        }
+        // System.out.println(i);
+        return userID;
+    }
+
+
+
+    public List<ScheduleDays> get() {
+        int userID = 0;
+        List<ScheduleDays> list = new ArrayList<ScheduleDays>();
+
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName(DAO.JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            conn = DriverManager.getConnection(DAO.DB_URL, DAO.USER, DAO.PASS);
+
+            //STEP 4: Execute a query
+            stmt = conn.createStatement();
+
+
+              String sql = "SELECT * FROM cbcrm.schedule WHERE user_id = " + getUserID() + " ";
+             ResultSet rs = stmt.executeQuery(sql);
+            System.out.println(sql);
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
@@ -100,7 +160,7 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
                     " thursday =  '" + scheduleDays.getThursday() + "'," +
                     " friday =  '" + scheduleDays.getFriday() + "'," +
                     " total_hours = '" + scheduleDays.getTotalHours() + "'" +
-                    " WHERE username = '" + user.getUsername() + "'";
+                    " WHERE user_id = '" + getUserID() + "'";
             System.out.println(sql);
             stmt.executeUpdate(sql);
 
@@ -146,14 +206,12 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
             //STEP 4: Execute a query
             stmt = conn.createStatement();
 
-
-            String sql;
-
-            sql = "INSERT INTO schedule (username, monday, tuesday, wednesday, thursday, friday, total_hours)" +
-                    "VALUES ( '" + HomeGUI.loggedInUser.getUsername() + "', '" +scheduleDays.getMonday()+ "', '" +scheduleDays.getTuesday()
+           String sql = "INSERT INTO schedule (user_id, monday, tuesday, wednesday, thursday, friday, total_hours)" +
+                    "VALUES ( '" + getUserID() + "', '" +scheduleDays.getMonday()+ "', '" +scheduleDays.getTuesday()
                     + "', '" +scheduleDays.getWednesday()+ "', '" +scheduleDays.getThursday()+ "', '" +scheduleDays.getFriday()
                     + "', '" +scheduleDays.getTotalHours() +
                     "')";
+
             System.out.println(sql);
             stmt.executeUpdate(sql);
 

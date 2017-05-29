@@ -1,4 +1,4 @@
-package dao;
+package dataaccess;
 
 import gui.LoginGUI;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 //////////////////////////////////////////////////// Daniel //////////////////////////////////////////////
 
 public class CheckBoxDAO {
-    static String fileName = "src/dao/usernameSave";
+    static String fileName = "src/dataaccess/usernameSave";
 
     //Metode til at hente en string fra en fil
     public static String getSavedUsername()throws Exception{

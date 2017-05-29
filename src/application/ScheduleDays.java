@@ -6,7 +6,7 @@ package application;
 public class ScheduleDays {
 
 
-    private String username;
+    private User user;
     private double monday;
     private double tuesday;
     private double wednesday;
@@ -15,9 +15,9 @@ public class ScheduleDays {
 
     private double totalHours;
 
-    public ScheduleDays(String username, double monday, double tuesday,
+    public ScheduleDays(User user, double monday, double tuesday,
                         double wednesday, double thursday, double friday, double totalHours) {
-        this.username       = username;
+        this.user = user;
         this.monday         = monday;
         this.tuesday        = tuesday;
         this.wednesday      = wednesday;
@@ -41,13 +41,13 @@ public class ScheduleDays {
         this.totalHours     = totalHours;
     }
 
-    public ScheduleDays(String username, double totalHours) {
-        this.username       = username;
+    public ScheduleDays(User user, double totalHours) {
+        this.user = user;
         this.totalHours     = totalHours;
     }
 
-    public ScheduleDays(String username){
-        this.username = username;
+    public ScheduleDays(User user){
+        this.user = user;
     }
 
     public ScheduleDays() {
@@ -55,12 +55,12 @@ public class ScheduleDays {
     }
 
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getMonday() {

@@ -17,6 +17,10 @@ public class User {
     public User() {
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     // Constructoren som vi bruger til at tjekke login med
     public User(String username, String password) {
         this.username       = username;
