@@ -33,7 +33,7 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
 
             String sql = "SELECT user_id FROM user WHERE username = '" + HomeGUI.loggedInUser.getUsername() + "' ";
             ResultSet rs = stmt.executeQuery(sql);
-            System.out.println(sql);
+
 
             if (rs.next()) {
                 userID = rs.getInt("user_id");
@@ -66,7 +66,6 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
             }
 
         }
-        // System.out.println(i);
         return userID;
     }
 
@@ -91,7 +90,6 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
 
               String sql = "SELECT * FROM cbcrm.schedule WHERE user_id = " + getUserID() + " ";
              ResultSet rs = stmt.executeQuery(sql);
-            System.out.println(sql);
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
@@ -133,7 +131,7 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
             }
 
         }
-        // System.out.println(i);
+
         return list;
     }
 
@@ -161,7 +159,6 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
                     " friday =  '" + scheduleDays.getFriday() + "'," +
                     " total_hours = '" + scheduleDays.getTotalHours() + "'" +
                     " WHERE user_id = '" + getUserID() + "'";
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -212,7 +209,6 @@ public class ScheduleDAO implements GetDAO<ScheduleDays>{
                     + "', '" +scheduleDays.getTotalHours() +
                     "')";
 
-            System.out.println(sql);
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set

@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//&/
+//////////////////DANIEL/////////////////////
 
 public class ComboboxDAO implements GetDAO<ScheduleDays> {
     public List<ScheduleDays> get() {
@@ -26,15 +26,20 @@ public class ComboboxDAO implements GetDAO<ScheduleDays> {
             //STEP 4: Execute a query
             stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT username, total_hours FROM cbcrm.schedule");
+            String sql = "SELECT * FROM schedule INNER JOIN user ON schedule.user_id = user.user_id";
+
+
+            ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
 
                 // Username og hours detaljer
                 String username = rs.getString("username");
+                double totalHours = rs.getDouble("total_hours");
+
                 User user = new User(username);
-                ScheduleDays scheduleDays = new ScheduleDays(user);
+                ScheduleDays scheduleDays = new ScheduleDays(user, totalHours);
                // double hours = rs.getDouble("total_hours");
                 list.add(new ScheduleDays(user));
                 //list.add(new ScheduleDays(hours));
