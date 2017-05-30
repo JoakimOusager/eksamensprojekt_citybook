@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_eksamen_citybook" default="compile.module.eksamen_citybook">
+  <dirname property="module.eksamen_citybook.basedir" file="${ant.file.module_eksamen_citybook}"/>
+  
+  <property name="module.jdk.home.eksamen_citybook" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.eksamen_citybook" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.eksamen_citybook" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.eksamen_citybook" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="eksamen_citybook.output.dir" value="${module.eksamen_citybook.basedir}/target/classes"/>
+  <property name="eksamen_citybook.testoutput.dir" value="${module.eksamen_citybook.basedir}/target/test-classes"/>
+  
+  <path id="eksamen_citybook.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="eksamen_citybook.module.production.classpath">
+    <path refid="${module.jdk.classpath.eksamen_citybook}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:6.0.6.classpath"/>
+  </path>
+  
+  <path id="eksamen_citybook.runtime.production.module.classpath">
+    <pathelement location="${eksamen_citybook.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:6.0.6.classpath"/>
+  </path>
+  
+  <path id="eksamen_citybook.module.classpath">
+    <path refid="${module.jdk.classpath.eksamen_citybook}"/>
+    <pathelement location="${eksamen_citybook.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:6.0.6.classpath"/>
+  </path>
+  
+  <path id="eksamen_citybook.runtime.module.classpath">
+    <pathelement location="${eksamen_citybook.testoutput.dir}"/>
+    <pathelement location="${eksamen_citybook.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:6.0.6.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.eksamen_citybook">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.eksamen_citybook">
+    <patternset refid="excluded.from.module.eksamen_citybook"/>
+  </patternset>
+  
+  <path id="eksamen_citybook.module.sourcepath">
+    <dirset dir="${module.eksamen_citybook.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.eksamen_citybook" depends="compile.module.eksamen_citybook.production,compile.module.eksamen_citybook.tests" description="Compile module Eksamen_Citybook"/>
+  
+  <target name="compile.module.eksamen_citybook.production" depends="register.custom.compilers" description="Compile module Eksamen_Citybook; production classes">
+    <mkdir dir="${eksamen_citybook.output.dir}"/>
+    <javac2 destdir="${eksamen_citybook.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.eksamen_citybook}/javac">
+      <compilerarg line="${compiler.args.eksamen_citybook}"/>
+      <bootclasspath refid="eksamen_citybook.module.bootclasspath"/>
+      <classpath refid="eksamen_citybook.module.production.classpath"/>
+      <src refid="eksamen_citybook.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.eksamen_citybook"/>
+    </javac2>
+    
+    <copy todir="${eksamen_citybook.output.dir}">
+      <fileset dir="${module.eksamen_citybook.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.eksamen_citybook.tests" depends="register.custom.compilers,compile.module.eksamen_citybook.production" description="compile module Eksamen_Citybook; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.eksamen_citybook" description="cleanup module">
+    <delete dir="${eksamen_citybook.output.dir}"/>
+    <delete dir="${eksamen_citybook.testoutput.dir}"/>
+  </target>
+</project>

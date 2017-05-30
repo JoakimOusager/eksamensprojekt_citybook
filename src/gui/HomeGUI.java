@@ -660,74 +660,7 @@ public class HomeGUI extends Application {
                     datoOnsdag, datoTorsdag, datoFredag, timerMandag, timerTirsdag, timerOnsdag,
                     timerTorsdag, timerFredag);
 
-            /*switch (day){
-                case 2:
-                dateMondayStart.setText(dateFormat.format(cal.getTime()));
 
-                    mondayDB = 0.0;
-                    tuesdayDB = 0.0;
-                    wednesdayDB = 0.0;
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-
-                    hoursMonday.setText(String.valueOf(mondayDB));
-                    hoursThuesday.setText(String.valueOf(tuesdayDB));
-                    hoursWednesday.setText(String.valueOf(wednesdayDB));
-                    hoursThursday.setText(String.valueOf(thursdayDB));
-                    hoursFriday.setText(String.valueOf(fridayDB));
-
-
-                break;
-                case 3:
-                dateThuesdayStart.setText(dateFormat.format(cal.getTime()));
-
-                    tuesdayDB = 0.0;
-                    wednesdayDB = 0.0;
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-                    hoursMonday.setText(String.valueOf(mondayDB));
-                    hoursThuesday.setText(String.valueOf(tuesdayDB));
-                    hoursWednesday.setText(String.valueOf(wednesdayDB));
-                    hoursThursday.setText(String.valueOf(thursdayDB));
-                    hoursFriday.setText(String.valueOf(fridayDB));
-
-
-                break;
-                case 4:
-                dateWednesdayStart.setText(dateFormat.format(cal.getTime()));
-
-                    wednesdayDB = 0.0;
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-                    hoursMonday.setText(String.valueOf(mondayDB));
-                    hoursThuesday.setText(String.valueOf(tuesdayDB));
-                    hoursWednesday.setText(String.valueOf(wednesdayDB));
-                    hoursThursday.setText(String.valueOf(thursdayDB));
-                    hoursFriday.setText(String.valueOf(fridayDB));
-
-
-                break;
-                case 5:
-                dateThursdayStart.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-                    hoursMonday.setText(String.valueOf(mondayDB));
-                    hoursThuesday.setText(String.valueOf(tuesdayDB));
-                    hoursWednesday.setText(String.valueOf(wednesdayDB));
-                    hoursThursday.setText(String.valueOf(thursdayDB));
-                    hoursFriday.setText(String.valueOf(fridayDB));
-
-                break;
-                case 6:
-                    fridayDB = 0.0;
-                     dateFridayStart.setText(dateFormat.format(cal.getTime()));
-                    hoursMonday.setText(String.valueOf(mondayDB));
-                    hoursThuesday.setText(String.valueOf(tuesdayDB));
-                    hoursWednesday.setText(String.valueOf(wednesdayDB));
-                    hoursThursday.setText(String.valueOf(thursdayDB));
-                    hoursFriday.setText(String.valueOf(fridayDB));
-                break;
-            }*/
         });
 
         ArrayList<ScheduleDays> arraylistSchedule = new ArrayList<>(LogicController.getSchedule());
@@ -758,68 +691,6 @@ public class HomeGUI extends Application {
 
 
 
-            /*switch (day){
-                case 2:
-                    mondayDB = 0.0;
-                    tuesdayDB = 0.0;
-                    wednesdayDB = 0.0;
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-
-               diffMinutesEnd = application.DatePicker.endDateStamp();
-                dateMondayStop.setText(dateFormat.format(cal.getTime()));
-                    mondayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
-                    String timer2 = String.valueOf(mondayDB);
-                    hoursMonday.setText(timer2);
-                break;
-                case 3:
-
-                    tuesdayDB = 0.0;
-                    wednesdayDB = 0.0;
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-
-                dateThuesdayStop.setText(dateFormat.format(cal.getTime()));
-                    tuesdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
-                    String timer4 = String.valueOf(tuesdayDB);
-                    hoursThuesday.setText(timer4);
-                break;
-                case 4:
-
-                    wednesdayDB = 0.0;
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-
-                diffMinutesEnd = application.DatePicker.endDateStamp();
-                dateWednesdayStop.setText(dateFormat.format(cal.getTime()));
-                wednesdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
-                String timer6 = String.valueOf(wednesdayDB);
-                hoursWednesday.setText(timer6);
-                break;
-                case 5:
-                    thursdayDB = 0.0;
-                    fridayDB = 0.0;
-
-                diffMinutesEnd = application.DatePicker.endDateStamp();
-                dateThursdayStop.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
-                    String timer8 = String.valueOf(thursdayDB);
-                    hoursThursday.setText(timer8);
-                break;
-                case 6:
-
-                    fridayDB = 0.0;
-                diffMinutesEnd = application.DatePicker.endDateStamp();
-                dateFridayStop.setText(dateFormat.format(cal.getTime()));
-                    thursdayDB = application.DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
-                    String timer10 = String.valueOf(thursdayDB);
-                    hoursFriday.setText(timer10);
-            }
-
-            totalHoursDB = DatePicker.ugentligeTimer(mondayDB, tuesdayDB, wednesdayDB, thursdayDB, fridayDB);
-            String totalTimerString = String.valueOf(totalHoursDB);
-    
-            totalTimer.setText(totalTimerString);*/
 
 
         });
