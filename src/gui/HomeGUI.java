@@ -245,9 +245,7 @@ public class HomeGUI extends Application {
             if(LogicController.getSchedule().isEmpty() == isEmpty){
                 buttonReset();
                 scheduleScreen(primaryStage);
-                System.out.println("Is not empty");
             }else {
-                System.out.println("Is empty");
                 ScheduleDays scheduleDays = new ScheduleDays();
                 LogicController.insertSchedule(scheduleDays);
                 buttonReset();
@@ -945,7 +943,7 @@ public class HomeGUI extends Application {
 
         person2.setOnAction(event -> {
             application.LogicController.comboboxLogic(comboBoxArray2, comboBoxArray1,
-                    person2, personLabel2)
+                    person2, personLabel2);
 
         });
 

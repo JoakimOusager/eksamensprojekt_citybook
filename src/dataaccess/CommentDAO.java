@@ -37,7 +37,7 @@ public class CommentDAO implements BaseDAO<Comment> {
                 // Company detaljer
                 String comment = rs.getString("comment");
                 list.add(new Comment(comment));
-                System.out.println(comment);
+
             }
 
             //STEP 6: Clean-up environment
@@ -81,10 +81,6 @@ public class CommentDAO implements BaseDAO<Comment> {
 
             //STEP 4: Execute a query
             stmt = conn.createStatement();
-
-            // Statement som finder ud af hvilket id brugeren, som har logget ind har
-            String sqlUpdateCreatedBy;
-
 
             String sql;
 

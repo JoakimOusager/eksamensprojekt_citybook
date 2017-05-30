@@ -145,6 +145,9 @@ public class ScheduleLogic {
                 thursdayDB = 0.0;
                 fridayDB = 0.0;
 
+                diffMinutesEnd = DatePicker.endDateStamp();
+
+
                 datoTirsdag2.setText(dateFormat.format(cal.getTime()));
                 tuesdayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer4 = String.valueOf(tuesdayDB);
@@ -157,6 +160,7 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
 
                 diffMinutesEnd = DatePicker.endDateStamp();
+
                 datoOnsdag2.setText(dateFormat.format(cal.getTime()));
                 wednesdayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer6 = String.valueOf(wednesdayDB);
@@ -167,6 +171,7 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
 
                 diffMinutesEnd = DatePicker.endDateStamp();
+
                 datoTorsdag2.setText(dateFormat.format(cal.getTime()));
                 thursdayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer8 = String.valueOf(thursdayDB);
@@ -177,6 +182,7 @@ public class ScheduleLogic {
                 fridayDB = 0.0;
 
                 diffMinutesEnd = DatePicker.endDateStamp();
+
                 datoFredag2.setText(dateFormat.format(cal.getTime()));
                 fridayDB = DatePicker.startTime(diffMinutesStart, diffMinutesEnd);
                 String timer10 = String.valueOf(fridayDB);
